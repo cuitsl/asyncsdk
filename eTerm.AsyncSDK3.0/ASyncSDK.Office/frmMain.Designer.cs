@@ -415,11 +415,11 @@
             this.bar3.CanDockRight = false;
             this.bar3.CanDockTop = false;
             this.bar3.CanUndock = false;
-            this.bar3.Controls.Add(this.panelDockContainer4);
             this.bar3.Controls.Add(this.panelDockContainer5);
             this.bar3.Controls.Add(this.panelDockContainer1);
             this.bar3.Controls.Add(this.panelDockContainer2);
             this.bar3.Controls.Add(this.panelDockContainer3);
+            this.bar3.Controls.Add(this.panelDockContainer4);
             this.bar3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bar3.DockedBorderStyle = DevComponents.DotNetBar.eBorderType.Sunken;
             this.bar3.DockTabAlignment = DevComponents.DotNetBar.eTabStripAlignment.Top;
@@ -434,7 +434,7 @@
             this.bar3.LayoutType = DevComponents.DotNetBar.eLayoutType.DockContainer;
             this.bar3.Location = new System.Drawing.Point(5, 112);
             this.bar3.Name = "bar3";
-            this.bar3.SelectedDockTab = 1;
+            this.bar3.SelectedDockTab = 0;
             this.bar3.Size = new System.Drawing.Size(787, 537);
             this.bar3.Stretch = true;
             this.bar3.Style = DevComponents.DotNetBar.eDotNetBarStyle.Windows7;
