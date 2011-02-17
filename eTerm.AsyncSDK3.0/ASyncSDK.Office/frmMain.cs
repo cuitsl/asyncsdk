@@ -571,5 +571,13 @@ namespace ASyncSDK.Office {
         private delegate void AppendAddInButtonDelegate(ButtonItem PlugInButton);
         #endregion
 
+        private void btnSendMessage_Click(object sender, EventArgs e) {
+            List<eTerm363Session> sessionLst = new List<eTerm363Session>();
+            foreach (ListViewItem item in this.lstSession.SelectedItems) {
+                sessionLst.Add(item.Tag as eTerm363Session);
+            }
+            new frmSender(sessionLst).ShowDialog();
+        }
+
     }
 }
