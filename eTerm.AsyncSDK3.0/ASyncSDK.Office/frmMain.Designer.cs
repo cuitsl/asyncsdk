@@ -46,18 +46,6 @@
             this.buttonItem3 = new DevComponents.DotNetBar.ButtonItem();
             this.qatCustomizeItem1 = new DevComponents.DotNetBar.QatCustomizeItem();
             this.bar3 = new DevComponents.DotNetBar.Bar();
-            this.panelDockContainer5 = new DevComponents.DotNetBar.PanelDockContainer();
-            this.contextMenuBar1 = new DevComponents.DotNetBar.ContextMenuBar();
-            this.btnReally = new DevComponents.DotNetBar.ButtonItem();
-            this.btnDispose = new DevComponents.DotNetBar.ButtonItem();
-            this.itemContainer5 = new DevComponents.DotNetBar.ItemContainer();
-            this.btnRelease = new DevComponents.DotNetBar.ButtonItem();
-            this.lstAsync = new DevComponents.DotNetBar.Controls.ListViewEx();
-            this.columnHeader2 = new System.Windows.Forms.ColumnHeader("Circle_Orange.png");
-            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panelDockContainer4 = new DevComponents.DotNetBar.PanelDockContainer();
             this.contextMenuBar2 = new DevComponents.DotNetBar.ContextMenuBar();
             this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
@@ -69,6 +57,7 @@
             this.columnHeader8 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader9 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panelDockContainer1 = new DevComponents.DotNetBar.PanelDockContainer();
             this.listView2 = new System.Windows.Forms.ListView();
             this.columnHeader16 = new System.Windows.Forms.ColumnHeader();
@@ -86,6 +75,17 @@
             this.columnHeader14 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader15 = new System.Windows.Forms.ColumnHeader();
             this.panelDockContainer3 = new DevComponents.DotNetBar.PanelDockContainer();
+            this.panelDockContainer5 = new DevComponents.DotNetBar.PanelDockContainer();
+            this.contextMenuBar1 = new DevComponents.DotNetBar.ContextMenuBar();
+            this.btnReally = new DevComponents.DotNetBar.ButtonItem();
+            this.btnDispose = new DevComponents.DotNetBar.ButtonItem();
+            this.itemContainer5 = new DevComponents.DotNetBar.ItemContainer();
+            this.btnRelease = new DevComponents.DotNetBar.ButtonItem();
+            this.lstAsync = new DevComponents.DotNetBar.Controls.ListViewEx();
+            this.columnHeader2 = new System.Windows.Forms.ColumnHeader("Circle_Orange.png");
+            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.dockContainerItem6 = new DevComponents.DotNetBar.DockContainerItem();
             this.dockContainerItem5 = new DevComponents.DotNetBar.DockContainerItem();
             this.dockContainerItem1 = new DevComponents.DotNetBar.DockContainerItem();
@@ -96,12 +96,12 @@
             this.ribbonPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bar3)).BeginInit();
             this.bar3.SuspendLayout();
-            this.panelDockContainer5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).BeginInit();
             this.panelDockContainer4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar2)).BeginInit();
             this.panelDockContainer1.SuspendLayout();
             this.panelDockContainer2.SuspendLayout();
+            this.panelDockContainer5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // styleManager1
@@ -415,8 +415,8 @@
             this.bar3.CanDockRight = false;
             this.bar3.CanDockTop = false;
             this.bar3.CanUndock = false;
-            this.bar3.Controls.Add(this.panelDockContainer5);
             this.bar3.Controls.Add(this.panelDockContainer4);
+            this.bar3.Controls.Add(this.panelDockContainer5);
             this.bar3.Controls.Add(this.panelDockContainer1);
             this.bar3.Controls.Add(this.panelDockContainer2);
             this.bar3.Controls.Add(this.panelDockContainer3);
@@ -434,137 +434,12 @@
             this.bar3.LayoutType = DevComponents.DotNetBar.eLayoutType.DockContainer;
             this.bar3.Location = new System.Drawing.Point(5, 112);
             this.bar3.Name = "bar3";
-            this.bar3.SelectedDockTab = 0;
+            this.bar3.SelectedDockTab = 1;
             this.bar3.Size = new System.Drawing.Size(787, 537);
             this.bar3.Stretch = true;
             this.bar3.Style = DevComponents.DotNetBar.eDotNetBarStyle.Windows7;
             this.bar3.TabIndex = 1;
             this.bar3.TabStop = false;
-            // 
-            // panelDockContainer5
-            // 
-            this.panelDockContainer5.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Windows7;
-            this.panelDockContainer5.Controls.Add(this.contextMenuBar1);
-            this.panelDockContainer5.Controls.Add(this.lstAsync);
-            this.panelDockContainer5.Location = new System.Drawing.Point(6, 31);
-            this.panelDockContainer5.Name = "panelDockContainer5";
-            this.panelDockContainer5.Size = new System.Drawing.Size(775, 500);
-            this.panelDockContainer5.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelDockContainer5.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
-            this.panelDockContainer5.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
-            this.panelDockContainer5.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
-            this.panelDockContainer5.Style.GradientAngle = 90;
-            this.panelDockContainer5.TabIndex = 2;
-            // 
-            // contextMenuBar1
-            // 
-            this.contextMenuBar1.AntiAlias = true;
-            this.contextMenuBar1.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnReally});
-            this.contextMenuBar1.Location = new System.Drawing.Point(71, 109);
-            this.contextMenuBar1.Name = "contextMenuBar1";
-            this.contextMenuBar1.Size = new System.Drawing.Size(75, 33);
-            this.contextMenuBar1.Stretch = true;
-            this.contextMenuBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.contextMenuBar1.TabIndex = 1;
-            this.contextMenuBar1.TabStop = false;
-            this.contextMenuBar1.Text = "contextMenuBar1";
-            // 
-            // btnReally
-            // 
-            this.btnReally.AutoExpandOnClick = true;
-            this.btnReally.Image = global::ASyncSDK.Office.Properties.Resources.Car_key;
-            this.btnReally.Name = "btnReally";
-            this.btnReally.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnDispose,
-            this.itemContainer5,
-            this.btnRelease});
-            this.btnReally.Text = "实时控制";
-            // 
-            // btnDispose
-            // 
-            this.btnDispose.Enabled = false;
-            this.btnDispose.Image = global::ASyncSDK.Office.Properties.Resources.Shield_Blue;
-            this.btnDispose.Name = "btnDispose";
-            this.btnDispose.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlD);
-            this.btnDispose.Text = "断开连接（&D）";
-            this.btnDispose.Click += new System.EventHandler(this.btnDispose_Click);
-            // 
-            // itemContainer5
-            // 
-            // 
-            // 
-            // 
-            this.itemContainer5.BackgroundStyle.Class = "";
-            this.itemContainer5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.itemContainer5.Name = "itemContainer5";
-            // 
-            // btnRelease
-            // 
-            this.btnRelease.Enabled = false;
-            this.btnRelease.Image = global::ASyncSDK.Office.Properties.Resources.Shield_Red;
-            this.btnRelease.Name = "btnRelease";
-            this.btnRelease.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlS);
-            this.btnRelease.Text = "释放连接（&R）";
-            this.btnRelease.Click += new System.EventHandler(this.btnRelease_Click);
-            // 
-            // lstAsync
-            // 
-            // 
-            // 
-            // 
-            this.lstAsync.Border.Class = "ListViewBorder";
-            this.lstAsync.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lstAsync.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5});
-            this.contextMenuBar1.SetContextMenuEx(this.lstAsync, this.btnReally);
-            this.lstAsync.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstAsync.FullRowSelect = true;
-            this.lstAsync.LargeImageList = this.imageList1;
-            this.lstAsync.Location = new System.Drawing.Point(0, 0);
-            this.lstAsync.MultiSelect = false;
-            this.lstAsync.Name = "lstAsync";
-            this.lstAsync.Size = new System.Drawing.Size(775, 500);
-            this.lstAsync.SmallImageList = this.imageList1;
-            this.lstAsync.StateImageList = this.imageList1;
-            this.lstAsync.TabIndex = 0;
-            this.lstAsync.UseCompatibleStateImageBehavior = false;
-            this.lstAsync.View = System.Windows.Forms.View.Details;
-            this.lstAsync.SelectedIndexChanged += new System.EventHandler(this.lstAsync_SelectedIndexChanged);
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "IP地址";
-            this.columnHeader2.Width = 155;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "用户名";
-            this.columnHeader3.Width = 128;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "通信量(KBytes)";
-            this.columnHeader4.Width = 134;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "通信次数";
-            this.columnHeader5.Width = 126;
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "Circle_Blue.png");
-            this.imageList1.Images.SetKeyName(1, "Circle_Green.png");
-            this.imageList1.Images.SetKeyName(2, "Circle_Grey.png");
-            this.imageList1.Images.SetKeyName(3, "Circle_Orange.png");
-            this.imageList1.Images.SetKeyName(4, "Circle_Red.png");
-            this.imageList1.Images.SetKeyName(5, "Circle_Yellow.png");
             // 
             // panelDockContainer4
             // 
@@ -631,6 +506,7 @@
             this.btnSendMessage.Name = "btnSendMessage";
             this.btnSendMessage.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlS);
             this.btnSendMessage.Text = "发送消息（&R）";
+            this.btnSendMessage.Click += new System.EventHandler(this.btnSendMessage_Click);
             // 
             // lstSession
             // 
@@ -678,6 +554,17 @@
             // 
             this.columnHeader1.Text = "通信次数";
             this.columnHeader1.Width = 126;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "Circle_Blue.png");
+            this.imageList1.Images.SetKeyName(1, "Circle_Green.png");
+            this.imageList1.Images.SetKeyName(2, "Circle_Grey.png");
+            this.imageList1.Images.SetKeyName(3, "Circle_Orange.png");
+            this.imageList1.Images.SetKeyName(4, "Circle_Red.png");
+            this.imageList1.Images.SetKeyName(5, "Circle_Yellow.png");
             // 
             // panelDockContainer1
             // 
@@ -822,6 +709,120 @@
             this.panelDockContainer3.Style.GradientAngle = 90;
             this.panelDockContainer3.TabIndex = 10;
             // 
+            // panelDockContainer5
+            // 
+            this.panelDockContainer5.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Windows7;
+            this.panelDockContainer5.Controls.Add(this.contextMenuBar1);
+            this.panelDockContainer5.Controls.Add(this.lstAsync);
+            this.panelDockContainer5.Location = new System.Drawing.Point(6, 31);
+            this.panelDockContainer5.Name = "panelDockContainer5";
+            this.panelDockContainer5.Size = new System.Drawing.Size(775, 500);
+            this.panelDockContainer5.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelDockContainer5.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
+            this.panelDockContainer5.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.panelDockContainer5.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
+            this.panelDockContainer5.Style.GradientAngle = 90;
+            this.panelDockContainer5.TabIndex = 2;
+            // 
+            // contextMenuBar1
+            // 
+            this.contextMenuBar1.AntiAlias = true;
+            this.contextMenuBar1.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnReally});
+            this.contextMenuBar1.Location = new System.Drawing.Point(71, 109);
+            this.contextMenuBar1.Name = "contextMenuBar1";
+            this.contextMenuBar1.Size = new System.Drawing.Size(75, 33);
+            this.contextMenuBar1.Stretch = true;
+            this.contextMenuBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.contextMenuBar1.TabIndex = 1;
+            this.contextMenuBar1.TabStop = false;
+            this.contextMenuBar1.Text = "contextMenuBar1";
+            // 
+            // btnReally
+            // 
+            this.btnReally.AutoExpandOnClick = true;
+            this.btnReally.Image = global::ASyncSDK.Office.Properties.Resources.Car_key;
+            this.btnReally.Name = "btnReally";
+            this.btnReally.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnDispose,
+            this.itemContainer5,
+            this.btnRelease});
+            this.btnReally.Text = "实时控制";
+            // 
+            // btnDispose
+            // 
+            this.btnDispose.Enabled = false;
+            this.btnDispose.Image = global::ASyncSDK.Office.Properties.Resources.Shield_Blue;
+            this.btnDispose.Name = "btnDispose";
+            this.btnDispose.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlD);
+            this.btnDispose.Text = "断开连接（&D）";
+            this.btnDispose.Click += new System.EventHandler(this.btnDispose_Click);
+            // 
+            // itemContainer5
+            // 
+            // 
+            // 
+            // 
+            this.itemContainer5.BackgroundStyle.Class = "";
+            this.itemContainer5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemContainer5.Name = "itemContainer5";
+            // 
+            // btnRelease
+            // 
+            this.btnRelease.Enabled = false;
+            this.btnRelease.Image = global::ASyncSDK.Office.Properties.Resources.Shield_Red;
+            this.btnRelease.Name = "btnRelease";
+            this.btnRelease.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlS);
+            this.btnRelease.Text = "释放连接（&R）";
+            this.btnRelease.Click += new System.EventHandler(this.btnRelease_Click);
+            // 
+            // lstAsync
+            // 
+            // 
+            // 
+            // 
+            this.lstAsync.Border.Class = "ListViewBorder";
+            this.lstAsync.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lstAsync.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+            this.contextMenuBar1.SetContextMenuEx(this.lstAsync, this.btnReally);
+            this.lstAsync.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstAsync.FullRowSelect = true;
+            this.lstAsync.LargeImageList = this.imageList1;
+            this.lstAsync.Location = new System.Drawing.Point(0, 0);
+            this.lstAsync.MultiSelect = false;
+            this.lstAsync.Name = "lstAsync";
+            this.lstAsync.Size = new System.Drawing.Size(775, 500);
+            this.lstAsync.SmallImageList = this.imageList1;
+            this.lstAsync.StateImageList = this.imageList1;
+            this.lstAsync.TabIndex = 0;
+            this.lstAsync.UseCompatibleStateImageBehavior = false;
+            this.lstAsync.View = System.Windows.Forms.View.Details;
+            this.lstAsync.SelectedIndexChanged += new System.EventHandler(this.lstAsync_SelectedIndexChanged);
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "IP地址";
+            this.columnHeader2.Width = 155;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "用户名";
+            this.columnHeader3.Width = 128;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "通信量(KBytes)";
+            this.columnHeader4.Width = 134;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "通信次数";
+            this.columnHeader5.Width = 126;
+            // 
             // dockContainerItem6
             // 
             this.dockContainerItem6.Control = this.panelDockContainer5;
@@ -875,12 +876,12 @@
             this.ribbonPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bar3)).EndInit();
             this.bar3.ResumeLayout(false);
-            this.panelDockContainer5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).EndInit();
             this.panelDockContainer4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar2)).EndInit();
             this.panelDockContainer1.ResumeLayout(false);
             this.panelDockContainer2.ResumeLayout(false);
+            this.panelDockContainer5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
