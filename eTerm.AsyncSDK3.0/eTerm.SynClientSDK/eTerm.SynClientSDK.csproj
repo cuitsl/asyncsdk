@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{33BC6184-59FC-4E59-9F5B-58AA6ECC1812}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>eTerm.SynClientSDK</RootNamespace>
+    <AssemblyName>eTerm.SynClientSDK</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SdkConfig.cs" />
+    <Compile Include="Base\ASyncBase.cs" />
+    <Compile Include="Base\ASynCommand.cs" />
+    <Compile Include="Base\ASyncResult.cs" />
+    <Compile Include="CollectionBase.cs" />
+    <Compile Include="Config\ConfigException.cs" />
+    <Compile Include="Config\ConfigHelper.cs" />
+    <Compile Include="Config\ConfigSetting.cs" />
+    <Compile Include="Config\ConfigSettingCollection.cs" />
+    <Compile Include="Config\ConfigSettingOperator.cs" />
+    <Compile Include="Config\DotNetConfig\BaseConfigurationElement.cs" />
+    <Compile Include="Config\DotNetConfig\BaseConfigurationElementCollection.cs" />
+    <Compile Include="Config\DotNetConfig\ConfigCollection.cs" />
+    <Compile Include="Config\DotNetConfig\GroupHandler.cs" />
+    <Compile Include="Config\DotNetConfig\SectionBaseHandler.cs" />
+    <Compile Include="Config\IConfigSetting.cs" />
+    <Compile Include="Config\ISettingProperty.cs" />
+    <Compile Include="Config\ISettingValue.cs" />
+    <Compile Include="Config\SettingProperty.cs" />
+    <Compile Include="Config\SettingValue.cs" />
+    <Compile Include="Config\SettingValueCollection.cs" />
+    <Compile Include="Config\XmlConfig\XmlConfigSetting.cs" />
+    <Compile Include="Config\XmlConfig\XmlSettingProperty.cs" />
+    <Compile Include="Config\XmlConfig\XmlSettingValue.cs" />
+    <Compile Include="MessageStream.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SdkSyncClient.cs" />
+    <Compile Include="SocketResponseCode.cs" />
+    <Compile Include="Utils\Cn2PyUtil.cs" />
+    <Compile Include="Utils\ConvertUtil.cs" />
+    <Compile Include="Utils\FtpUtil.cs" />
+    <Compile Include="Utils\HttpUtil.cs" />
+    <Compile Include="Utils\IConverting.cs" />
+    <Compile Include="Utils\LogUtil.cs" />
+    <Compile Include="Utils\RandomUtil.cs" />
+    <Compile Include="Utils\StringUtil.cs" />
+    <Compile Include="Utils\TEACrypter.cs" />
+    <Compile Include="Utils\TypeUtil.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

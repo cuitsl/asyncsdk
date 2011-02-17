@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D76BBAD6-9E85-4DA1-87E0-4C281546EB63}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ASync.eTermAddIn</RootNamespace>
+    <AssemblyName>ASync.eTermAddIn</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ASync.MiddleWare, Version=2.1.0.87, Culture=neutral, PublicKeyToken=2f6aa6341dc43c29, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference\ASync.MiddleWare.dll</HintPath>
+    </Reference>
+    <Reference Include="DevComponents.DotNetBar2, Version=8.8.0.0, Culture=neutral, PublicKeyToken=e116d99a00eca71b" />
+    <Reference Include="eTerm.AsyncSDK, Version=3.2.0.9201, Culture=neutral, PublicKeyToken=ab9f30c4b7887c28, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference\eTerm.AsyncSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ASyncAbout.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ASyncAbout.Designer.cs">
+      <DependentUpon>ASyncAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ASyncAuthorize.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ASyncAuthorize.Designer.cs">
+      <DependentUpon>ASyncAuthorize.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ASyncGroup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ASyncGroup.Designer.cs">
+      <DependentUpon>ASyncGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ASyncPlugIn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ASyncPlugIn.Designer.cs">
+      <DependentUpon>ASyncPlugIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ASyncSession.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ASyncSession.Designer.cs">
+      <DependentUpon>ASyncSession.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ASynConnect.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ASynConnect.Designer.cs">
+      <DependentUpon>ASynConnect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SinglePlugIn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ASyncAbout.resx">
+      <DependentUpon>ASyncAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ASyncAuthorize.resx">
+      <DependentUpon>ASyncAuthorize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ASyncGroup.resx">
+      <DependentUpon>ASyncGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ASyncPlugIn.resx">
+      <DependentUpon>ASyncPlugIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ASyncSession.resx">
+      <DependentUpon>ASyncSession.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ASynConnect.resx">
+      <DependentUpon>ASynConnect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SinglePlugIn.resx">
+      <DependentUpon>SinglePlugIn.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pencil3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\User1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DeleteRed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shield_Green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Clipboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Compass.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

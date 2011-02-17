@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1947F296-7BBD-4B45-92B1-3E7C141AD0B3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ASyncSDK.Office</RootNamespace>
+    <AssemblyName>ASyncSDK.Office</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ApplicationIcon>Direct Connect XP.ico</ApplicationIcon>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ASync.MiddleWare, Version=2.1.0.87, Culture=neutral, PublicKeyToken=2f6aa6341dc43c29, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference\ASync.MiddleWare.dll</HintPath>
+    </Reference>
+    <Reference Include="DevComponents.DotNetBar2, Version=8.8.0.0, Culture=neutral, PublicKeyToken=e116d99a00eca71b" />
+    <Reference Include="eTerm.AsyncSDK, Version=3.2.0.9201, Culture=neutral, PublicKeyToken=ab9f30c4b7887c28, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference\eTerm.AsyncSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flag1_Green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FTP.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Globe1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Help_Circle_Blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Image1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Info_Box_Blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\My Comp1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PaperClip1_Black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Power__Yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Scissors.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shield_Blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shield_Green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shield_Red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shield_Yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shutdown_Box_Red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sync.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\t.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Template XP.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Toolbar _ Find.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tt.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\User group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\User1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Wizard1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\4.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Binoculars.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Car key.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Checked_Shield_Green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Circle_Blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Circle_Green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Circle_Grey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Circle_Orange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Circle_Red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Circle_Yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Direct Connect XP.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DrawingPin1_Blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DrawingPin2_Blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\List.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Clipboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Clock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Warning_Shield_Grey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Clock4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pencil3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Direct Connect XP.ico" />
+    <None Include="Resources\Flag2_Green.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
