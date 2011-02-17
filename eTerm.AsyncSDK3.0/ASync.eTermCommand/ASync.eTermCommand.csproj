@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{79009B83-260A-4DE9-9251-88A4E9B12250}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ASync.eTermCommand</RootNamespace>
+    <AssemblyName>ASync.eTermCommand</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="eTerm.AsyncSDK, Version=3.2.0.9201, Culture=neutral, PublicKeyToken=ab9f30c4b7887c28, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Reference\eTerm.AsyncSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ASyncResult.cs" />
+    <Compile Include="Base\ASyncBase.cs" />
+    <Compile Include="Base\ASynCommand.cs" />
+    <Compile Include="Base\ASyncPNCommand.cs" />
+    <Compile Include="CollectionBase.cs" />
+    <Compile Include="Exception\AV\AVCityPairException.cs" />
+    <Compile Include="Exception\AV\AVDateException.cs" />
+    <Compile Include="Exception\AV\AVNoRoutingException.cs" />
+    <Compile Include="Exception\FD\FDCityPairException.cs" />
+    <Compile Include="Exception\RT\RTNoPnrExeption.cs" />
+    <Compile Include="Exception\RT\RTPNRCancelledException.cs" />
+    <Compile Include="Exception\SdkException\AccessDenyException.cs" />
+    <Compile Include="Exception\SdkException\DateFormatException.cs" />
+    <Compile Include="Exception\SdkSequenceException.cs" />
+    <Compile Include="Exception\SK\SKCityPairException.cs" />
+    <Compile Include="Exception\SK\SKNoRoutingException.cs" />
+    <Compile Include="Exception\SS\SSActionCodeException.cs" />
+    <Compile Include="Exception\SS\SSAirlineException.cs" />
+    <Compile Include="Exception\SS\SSAuthorityException.cs" />
+    <Compile Include="Exception\SS\SSContactMissingException.cs" />
+    <Compile Include="Exception\SS\SSFltNumberException.cs" />
+    <Compile Include="Exception\SS\SSInvalidCharException.cs" />
+    <Compile Include="Exception\SS\SSNameLengthException.cs" />
+    <Compile Include="Exception\SS\SSNameMissingException.cs" />
+    <Compile Include="Exception\SS\SSOfficeException.cs" />
+    <Compile Include="Exception\SS\SSSeatsNumberException.cs" />
+    <Compile Include="Exception\SS\SSTicketMissingException.cs" />
+    <Compile Include="Exception\SS\SSTktDateException.cs" />
+    <Compile Include="RTCommand\PNRAirSegResult.cs" />
+    <Compile Include="RTCommand\PNRContactResult.cs" />
+    <Compile Include="RTCommand\PNRInfantResult.cs" />
+    <Compile Include="RTCommand\PNRPassengerResult.cs" />
+    <Compile Include="RTCommand\RTCommand.cs" />
+    <Compile Include="RTCommand\RTResult.cs" />
+    <Compile Include="SdkException.cs" />
+    <Compile Include="SMSPnr.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Cn2PyUtil.cs" />
+    <Compile Include="Utils\ConvertUtil.cs" />
+    <Compile Include="Utils\FtpUtil.cs" />
+    <Compile Include="Utils\HttpUtil.cs" />
+    <Compile Include="Utils\IConverting.cs" />
+    <Compile Include="Utils\LogUtil.cs" />
+    <Compile Include="Utils\RandomUtil.cs" />
+    <Compile Include="Utils\StringUtil.cs" />
+    <Compile Include="Utils\TEACrypter.cs" />
+    <Compile Include="Utils\TypeUtil.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

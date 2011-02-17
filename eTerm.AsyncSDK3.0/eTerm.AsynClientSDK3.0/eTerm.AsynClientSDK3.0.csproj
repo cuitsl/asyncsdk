@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{88A7ABE1-8AEB-4E8C-92C9-0FFFB8F70421}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>eTerm.ASynClientSDK</RootNamespace>
+    <AssemblyName>eTerm.ASynClientSDK</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ASyncResult.cs" />
+    <Compile Include="AsyncSDKConfig.cs" />
+    <Compile Include="AVCommand\AVCommand.cs" />
+    <Compile Include="AVCommand\AvItem.cs" />
+    <Compile Include="AVCommand\AVResult.cs" />
+    <Compile Include="Base\ASyncBase.cs" />
+    <Compile Include="Base\ASynCommand.cs" />
+    <Compile Include="Base\ASyncPNCommand.cs" />
+    <Compile Include="CollectionBase.cs" />
+    <Compile Include="Config\ConfigException.cs" />
+    <Compile Include="Config\ConfigHelper.cs" />
+    <Compile Include="Config\ConfigSetting.cs" />
+    <Compile Include="Config\ConfigSettingCollection.cs" />
+    <Compile Include="Config\ConfigSettingOperator.cs" />
+    <Compile Include="Config\DotNetConfig\BaseConfigurationElement.cs" />
+    <Compile Include="Config\DotNetConfig\BaseConfigurationElementCollection.cs" />
+    <Compile Include="Config\DotNetConfig\ConfigCollection.cs" />
+    <Compile Include="Config\DotNetConfig\GroupHandler.cs" />
+    <Compile Include="Config\DotNetConfig\SectionBaseHandler.cs" />
+    <Compile Include="Config\IConfigSetting.cs" />
+    <Compile Include="Config\ISettingProperty.cs" />
+    <Compile Include="Config\ISettingValue.cs" />
+    <Compile Include="Config\SettingProperty.cs" />
+    <Compile Include="Config\SettingValue.cs" />
+    <Compile Include="Config\SettingValueCollection.cs" />
+    <Compile Include="Config\XmlConfig\XmlConfigSetting.cs" />
+    <Compile Include="Config\XmlConfig\XmlSettingProperty.cs" />
+    <Compile Include="Config\XmlConfig\XmlSettingValue.cs" />
+    <Compile Include="CPnrCommand\CPnrCommand.cs" />
+    <Compile Include="CPnrCommand\CPnrResult.cs" />
+    <Compile Include="Exception\AV\AVCityPairException.cs" />
+    <Compile Include="Exception\AV\AVDateException.cs" />
+    <Compile Include="Exception\AV\AVNoRoutingException.cs" />
+    <Compile Include="Exception\FD\FDCityPairException.cs" />
+    <Compile Include="Exception\RT\RTNoPnrExeption.cs" />
+    <Compile Include="Exception\RT\RTPNRCancelledException.cs" />
+    <Compile Include="Exception\SdkException\AccessDenyException.cs" />
+    <Compile Include="Exception\SdkException\DateFormatException.cs" />
+    <Compile Include="Exception\SdkSequenceException.cs" />
+    <Compile Include="Exception\SK\SKCityPairException.cs" />
+    <Compile Include="Exception\SK\SKNoRoutingException.cs" />
+    <Compile Include="Exception\SS\SSActionCodeException.cs" />
+    <Compile Include="Exception\SS\SSAirlineException.cs" />
+    <Compile Include="Exception\SS\SSAuthorityException.cs" />
+    <Compile Include="Exception\SS\SSContactMissingException.cs" />
+    <Compile Include="Exception\SS\SSFltNumberException.cs" />
+    <Compile Include="Exception\SS\SSInvalidCharException.cs" />
+    <Compile Include="Exception\SS\SSNameLengthException.cs" />
+    <Compile Include="Exception\SS\SSNameMissingException.cs" />
+    <Compile Include="Exception\SS\SSOfficeException.cs" />
+    <Compile Include="Exception\SS\SSSeatsNumberException.cs" />
+    <Compile Include="Exception\SS\SSTicketMissingException.cs" />
+    <Compile Include="Exception\SS\SSTktDateException.cs" />
+    <Compile Include="FDCommand\FDCommand.cs" />
+    <Compile Include="FDCommand\FDItem.cs" />
+    <Compile Include="FDCommand\FDResult.cs" />
+    <Compile Include="LicenceManager.cs" />
+    <Compile Include="PATCommand\PATCommand.cs" />
+    <Compile Include="PATCommand\PATFareCommand.cs" />
+    <Compile Include="PATCommand\PATResult.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RTCommand\PNRAirSegResult.cs" />
+    <Compile Include="RTCommand\PNRContactResult.cs" />
+    <Compile Include="RTCommand\PNRInfantResult.cs" />
+    <Compile Include="RTCommand\PNRPassengerResult.cs" />
+    <Compile Include="RTCommand\RTCommand.cs" />
+    <Compile Include="RTCommand\RTResult.cs" />
+    <Compile Include="SdkException.cs" />
+    <Compile Include="SSCommand\BookAirSeg.cs" />
+    <Compile Include="SSCommand\BookContact.cs" />
+    <Compile Include="SSCommand\BookInfant.cs" />
+    <Compile Include="SSCommand\BookPassenger.cs" />
+    <Compile Include="SSCommand\SSCommand.cs" />
+    <Compile Include="SSCommand\SSResult.cs" />
+    <Compile Include="Utils\Cn2PyUtil.cs" />
+    <Compile Include="Utils\ConvertUtil.cs" />
+    <Compile Include="Utils\FtpUtil.cs" />
+    <Compile Include="Utils\HttpUtil.cs" />
+    <Compile Include="Utils\IConverting.cs" />
+    <Compile Include="Utils\LogUtil.cs" />
+    <Compile Include="Utils\RandomUtil.cs" />
+    <Compile Include="Utils\StringUtil.cs" />
+    <Compile Include="Utils\TEACrypter.cs" />
+    <Compile Include="Utils\TypeUtil.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
