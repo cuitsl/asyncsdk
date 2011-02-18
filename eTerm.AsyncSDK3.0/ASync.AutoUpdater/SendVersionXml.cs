@@ -63,6 +63,7 @@ namespace ASync.AutoUpdater {
             byte[] tmpBytes = new byte[bufferCount];
             Buffer.BlockCopy(buffer, 0, tmpBytes, 0, bufferCount);
             bufferSend.AddRange(BitConverter.GetBytes(Encoding.GetEncoding("gb2312").GetByteCount(FileName) + bufferCount+sizeof(long)));
+            bufferSend.AddRange(BitConverter.GetBytes(Encoding.GetEncoding("gb2312").GetByteCount(FileName)));
             bufferSend.AddRange(BitConverter.GetBytes(FileSize));
             bufferSend.AddRange(Encoding.GetEncoding("gb2312").GetBytes(FileName));
             bufferSend.AddRange(tmpBytes);
