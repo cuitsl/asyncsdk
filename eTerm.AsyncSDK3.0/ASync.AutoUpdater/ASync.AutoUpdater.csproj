@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="GetVersionXml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sender\FileSenderSocket.cs" />
     <Compile Include="SendVersionXml.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
