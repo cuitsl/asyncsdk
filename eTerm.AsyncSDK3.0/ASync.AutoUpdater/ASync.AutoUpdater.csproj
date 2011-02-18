@@ -49,10 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GetVersionXml.cs" />
+    <Compile Include="GetUpdateBin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sender\FileSenderSocket.cs" />
-    <Compile Include="SendVersionXml.cs" />
+    <Compile Include="GetVersionXml.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

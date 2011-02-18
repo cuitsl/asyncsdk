@@ -50,7 +50,7 @@ namespace ASync.AutoUpdater {
     #endregion
 
     #region Version Session
-    internal class VersionSession : eTerm443Async {
+    public class VersionSession : eTerm443Async {
 
     }
     #endregion
