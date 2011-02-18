@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using eTerm.AsyncSDK.Base;
 using System.IO;
+using eTerm.AsyncSDK.Net;
 
 namespace ASync.AutoUpdater {
     #region Version Packet
@@ -49,11 +50,8 @@ namespace ASync.AutoUpdater {
     #endregion
 
     #region Version Session
-    internal class VersionSession : AsyncBase<VersionSession, VersionPacket> {
+    internal class VersionSession : eTerm443Async {
 
-        public override void SendPacket(string Packet) {
-            throw new NotImplementedException();
-        }
     }
     #endregion
 }
