@@ -43,7 +43,7 @@ namespace ASync.AutoUpdater {
         }
 
         public override bool ValidatePacket() {
-            throw new NotImplementedException();
+            return true;
         }
     }
     
