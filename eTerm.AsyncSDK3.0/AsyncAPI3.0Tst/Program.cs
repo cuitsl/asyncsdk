@@ -12,11 +12,39 @@ using System.Runtime.Remoting.Contexts;
 using ASync.eTermPlugIn;
 using System.Transactions;
 using eTerm.ASynClientSDK.Utils;
+using eTerm.AsyncSDK;
 
 
 namespace AsyncAPI3._0Tst {
     class Program {
         static void Main(string[] args) {
+            //BFEBFBFF000006FB
+
+            TEACrypter Crypter = new TEACrypter();
+            byte[] keys = TEACrypter.MD5(Encoding.Default.GetBytes(@"BFEBFBFF000006FB"));
+            byte[] Result = Crypter.Encrypt(Encoding.Default.GetBytes(@"BFEBFBFF000006FB"), keys);
+
+
+
+
+            AsyncLicenceKey Key = new AsyncLicenceKey() {
+                Company = @"胡李俊个人机授权",
+                ExpireDate = DateTime.Now.AddYears(1),
+                Key = Result,
+                MaxAsync = 10,
+                MaxTSession = 10,
+                AllowDatabase = true,
+                MaxCommandPerMonth = 50000,
+                connectionString = @"Data Source=(local);Initial Catalog=Async;User ID=sa;Password=Password01!",
+                providerName = @"System.Data.SqlClient",
+                AllowAfterValidate = true,
+                AllowIntercept = true,
+                RemainingMinutes = ((TimeSpan)(DateTime.Now.AddYears(1) - DateTime.Now)).TotalMinutes
+            };
+
+            byte[] Buffer = Key.XmlSerialize(keys, @"C:\Key.Bin");
+            //MessageBox.Show(string.Format(@"授权文件{0}已经生成！", txtFileName.Text), "授权提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             
             //AVCommand Av = new AVCommand();
             //int i = 0;
