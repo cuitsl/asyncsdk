@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reference", "Reference", "{
 	ProjectSection(SolutionItems) = preProject
 		Reference\ASync.MiddleWare.dll = Reference\ASync.MiddleWare.dll
 		Reference\eTerm.AsyncSDK.dll = Reference\eTerm.AsyncSDK.dll
+		C:\Key.Bin = C:\Key.Bin
 		Reference\SubSonic.Core.dll = Reference\SubSonic.Core.dll
 	EndProjectSection
 EndProject
