@@ -18,6 +18,9 @@ namespace eTerm.ASynClientSDK {
         [XmlIgnore]
         public string ASynCmd { set; get; }
 
+        [XmlIgnore]
+        public string OrgCommand { get; internal set; }
+
 
         /// <summary>
         /// 将对像本身序列化成XML串.

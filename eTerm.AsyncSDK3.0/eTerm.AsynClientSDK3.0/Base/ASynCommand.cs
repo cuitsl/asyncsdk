@@ -29,6 +29,7 @@ namespace eTerm.ASynClientSDK.Base {
         /// </summary>
         /// <value>The asn command sleep.</value>
         public float? AsnCommandSleep { protected get; set; }
+
         #endregion
 
         #region 测试部份
@@ -72,6 +73,14 @@ namespace eTerm.ASynClientSDK.Base {
             buffer = base.GetStream();
             if (buffer[1] != 0xFD) throw new AccessDenyException() ;
             IsAuthorized = true;
+            int IgCount = 5;
+            bool flag = true;
+            while (IgCount-- > 0&&flag) {
+                SendStream(@"IG");
+                flag = !Regex.IsMatch(ConvertResult(GetStream()), @"NO\s+PNR"); ;
+            }
+            //SendStream(@"IG");
+            //base.GetStream();
         }
 
         /// <summary>
@@ -266,7 +275,9 @@ namespace eTerm.ASynClientSDK.Base {
             if(!IsAuthorized)
                 Connect();
             SendStream( SynCmd);
-            ASyncResult Result = ResultAdapter(ConvertResult(GetStream()));
+            string OrgCommand = ConvertResult(GetStream());
+            ASyncResult Result = ResultAdapter(OrgCommand);
+            Result.OrgCommand = OrgCommand;
             Dispose();
             Result.ASynCmd = SynCmd;
             return Result;
