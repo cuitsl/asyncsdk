@@ -578,7 +578,9 @@ namespace eTerm.AsyncSDK {
                     }
                 }
             }
-            catch { }
+            catch(Exception ex) {
+                throw ex;
+            }
         }
         #endregion
     }
