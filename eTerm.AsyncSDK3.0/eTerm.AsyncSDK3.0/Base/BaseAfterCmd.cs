@@ -174,7 +174,10 @@ MSN:VALON0908@HOTMAIL.COM", "");
         /// <param name="OutPacket">The out packet.</param>
         /// <param name="Key">The key.</param>
         private void InvokeBase(eTerm363Session SESSION, eTerm363Packet InPacket, eTerm363Packet OutPacket, AsyncLicenceKey Key) {
-            if (!ValidatePlugIn(SESSION, InPacket, OutPacket, Key)) return;
+            if (!ValidatePlugIn(SESSION, InPacket, OutPacket, Key)) {
+                SESSION.SendPacket(__eTerm443Packet.BuildSessionPacket(SESSION.SID, SESSION.RID, @"服务器不允许该插件"));
+                return;
+            }
             ExecutePlugIn(SESSION, InPacket, OutPacket, Key);
         }
 
