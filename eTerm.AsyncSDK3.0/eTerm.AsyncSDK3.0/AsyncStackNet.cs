@@ -286,6 +286,7 @@ namespace eTerm.AsyncSDK {
                                         where Command.ToLower().StartsWith(entry.PlugInName.ToLower())
                                         orderby entry.PlugInName ascending
                                         select entry) {
+                                    if (PlugIn.ASyncInstance == null) continue;
                                     PlugIn.ASyncInstance.BeginExecute(new AsyncCallback(delegate(IAsyncResult iar)
                                     {
                                         PlugIn.ASyncInstance.EndExecute(iar);
@@ -415,6 +416,7 @@ namespace eTerm.AsyncSDK {
                                         where Command.ToLower().StartsWith(entry.PlugInName.ToLower())
                                         orderby entry.PlugInName ascending
                                         select entry) {
+                                    if (PlugIn.ClientSessionInstance == null) continue;
                                     PlugIn.ClientSessionInstance.BeginExecute(new AsyncCallback(delegate(IAsyncResult iar)
                                     {
                                         PlugIn.ClientSessionInstance.EndExecute(iar);
