@@ -67,6 +67,9 @@
     <Compile Include="ASync\TSessionSetup.cs" />
     <Compile Include="Base\AsyncBase.cs" />
     <Compile Include="Base\AsyncBaseServer.cs" />
+    <Compile Include="Base\BaseAfterCmd.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Base\BaseBinary.cs" />
     <Compile Include="Base\_Packet.cs" />
     <Compile Include="Base\_Session.cs" />
