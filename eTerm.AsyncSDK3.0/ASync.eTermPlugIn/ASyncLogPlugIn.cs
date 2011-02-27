@@ -33,11 +33,13 @@ namespace ASync.eTermPlugIn {
         protected override void ExecutePlugIn(eTerm.AsyncSDK.Net.eTerm443Async SESSION, eTerm.AsyncSDK.Net.eTerm443Packet InPacket, eTerm.AsyncSDK.Net.eTerm443Packet OutPacket, eTerm.AsyncSDK.AsyncLicenceKey Key) {
             ContextInstance.Instance.providerName = Key.providerName;
             ContextInstance.Instance.connectionString = Key.connectionString;
+            string ClientSession=SESSION.TSession.userName;
+            string eTermSession=SESSION.userName;
             new Async_Log() {
                 ASynCommand = Encoding.GetEncoding("gb2312").GetString(SESSION.UnInPakcet(OutPacket)),
                 ASyncResult = Encoding.GetEncoding("gb2312").GetString(SESSION.UnOutPakcet(InPacket)),
-                 ClientSession=SESSION.TSession.userName,
-                  eTermSession=SESSION.userName,
+                 ClientSession=ClientSession,
+                eTermSession = eTermSession,
                    LogDate=DateTime.Now
             }.Add();
         }
