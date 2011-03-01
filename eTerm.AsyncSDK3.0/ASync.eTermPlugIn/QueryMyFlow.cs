@@ -22,7 +22,7 @@ namespace ASync.eTermPlugIn {
             ContextInstance.Instance.providerName = Key.providerName;
             ContextInstance.Instance.connectionString = Key.connectionString;
             DateTime? start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            DateTime? end = start.Value.AddMonths(1).AddDays(-1);
+            DateTime? end = start.Value.AddMonths(1);//.AddDays(-1);
             SESSION.SendPacket(__eTerm443Packet.BuildSessionPacket(SESSION.SID, SESSION.RID, string.Format(@"{0}  至  {1}   流量为:{2} 条有效指令", start, end, Async_Log.Find(Log => Log.LogDate >= start && Log.LogDate <= end && Log.ClientSession == SESSION.userName).Count)));
         }
 
