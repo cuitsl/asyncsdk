@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 namespace eTerm.ASynClient {
-    public partial class frmMain : Form {
+    public partial class frmMain : BaseForm {
         public frmMain() {
             InitializeComponent();
         }
