@@ -36,8 +36,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASyncSDK.Office", "ASyncSDK
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASync.AutoUpdater", "ASync.AutoUpdater\ASync.AutoUpdater.csproj", "{CA1364A8-23EF-4721-8AA6-89F73C271AB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASync.eTermPNR", "ASync.eTermPNR\ASync.eTermPNR.csproj", "{0A269BDC-9809-4CCB-B316-1279D2D4C696}"
-EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -100,10 +98,6 @@ Global
 		{CA1364A8-23EF-4721-8AA6-89F73C271AB8}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{CA1364A8-23EF-4721-8AA6-89F73C271AB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA1364A8-23EF-4721-8AA6-89F73C271AB8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0A269BDC-9809-4CCB-B316-1279D2D4C696}.Debug|Any CPU.ActiveCfg = Release|Any CPU
-		{0A269BDC-9809-4CCB-B316-1279D2D4C696}.Debug|Any CPU.Build.0 = Release|Any CPU
-		{0A269BDC-9809-4CCB-B316-1279D2D4C696}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0A269BDC-9809-4CCB-B316-1279D2D4C696}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
