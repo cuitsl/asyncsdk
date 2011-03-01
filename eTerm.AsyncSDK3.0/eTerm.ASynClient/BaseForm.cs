@@ -6,9 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using DevComponents.DotNetBar;
 
 namespace eTerm.ASynClient {
-    public partial class BaseForm : Form {
+    public partial class BaseForm : Office2007RibbonForm {
         public BaseForm() {
             InitializeComponent();
         }
