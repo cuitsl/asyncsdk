@@ -46,7 +46,7 @@ namespace ASync.eTermPlugIn {
             if (PnrResult != null) {
                 IEnumerator<Async_PNR> Enumerator = PnrResult.GetEnumerator();
                 while (Enumerator.MoveNext()) {
-                    sb.AppendFormat("{0}    ", Enumerator.Current.PnrCode, Enumerator.Current.UpdateDate.Value.ToString("yyyy-MM-dd"));
+                    sb.AppendFormat("{0}   \r", Enumerator.Current.PnrCode, Enumerator.Current.UpdateDate.Value.ToString("yyyy-MM-dd"));
                 }
             }
             SESSION.SendPacket(__eTerm443Packet.BuildSessionPacket(SESSION.SID, SESSION.RID, sb.ToString()));
