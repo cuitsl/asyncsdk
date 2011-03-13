@@ -103,7 +103,8 @@ namespace ASync.eTermAddIn {
                 chkIsSsl.Checked = Setup.IsSsl;
                 this.txtSessionName.Text = Setup.userName;
                 this.txtSIText.Text = Setup.SiText;
-
+                this.integerInput1.Value =(int) Setup.SID;
+                this.integerInput2.Value = (int)Setup.RID;
 
                 comboBoxEx1.Items.Clear();
                 if (AsyncStackNet.Instance.ASyncSetup.GroupCollection == null) return;
@@ -140,6 +141,13 @@ namespace ASync.eTermAddIn {
             PanelSession.Enabled = true;
             txtSIText.Text = string.Empty;
             PanelSession.Show();
+            comboBoxEx1.Items.Clear();
+            if (AsyncStackNet.Instance.ASyncSetup.GroupCollection == null) return;
+            foreach (SDKGroup group in AsyncStackNet.Instance.ASyncSetup.GroupCollection) {
+                comboBoxEx1.Items.Add(new { Text = group.groupName, Value = group.groupCode });
+            }
+
+
         }
 
         /// <summary>
@@ -163,7 +171,9 @@ namespace ASync.eTermAddIn {
                        SiText=txtSIText.Text,
                  GroupCode = groupCode,
                         OfficeCode=txtOfficeCode.Text,
-                         userPass=txtPassword.Text
+                         userPass=txtPassword.Text,
+                         SID=(byte)integerInput1.Value,
+                          RID=(byte)integerInput2.Value
             };
             if (this.PanelSession.Tag == null)
                 AsyncStackNet.Instance.ASyncSetup.AsynCollection.Add(Setup);

@@ -179,8 +179,10 @@ namespace eTerm.AsyncSDK.Net {
             }
             else if (base.InPacket.Sequence == 2) {
                 //协议改进版本（自动读取SID、RID）
-                this.SID = base.InPacket.OriginalBytes[8];
-                this.RID = base.InPacket.OriginalBytes[9];
+                if(this.SID==0)
+                    this.SID = base.InPacket.OriginalBytes[8];
+                if(this.RID==0)
+                    this.RID = base.InPacket.OriginalBytes[9];
                 __DefendStatement = this.SiText;
                                     __IgAsync = new Timer(
                                     new TimerCallback(

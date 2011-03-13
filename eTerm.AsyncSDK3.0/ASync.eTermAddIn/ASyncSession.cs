@@ -148,6 +148,11 @@ namespace ASync.eTermAddIn {
             PanelSession.Tag = null;
             PanelSession.Enabled = true;
             PanelSession.Show();
+            comboBoxEx2.Items.Clear();
+            if (AsyncStackNet.Instance.ASyncSetup.GroupCollection == null) return;
+            foreach (SDKGroup group in AsyncStackNet.Instance.ASyncSetup.GroupCollection) {
+                comboBoxEx2.Items.Add(new { Text = group.groupName, Value = group.groupCode });
+            }
         }
 
         /// <summary>
