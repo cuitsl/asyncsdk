@@ -97,7 +97,7 @@ namespace eTerm.AsyncSDK {
                     BinaryReader br = new BinaryReader(fs);
                     byte[] buffer = new byte[fs.Length];
                     br.Read(buffer, 0, buffer.Length);
-                    __Setup = new SystemSetup().DeXmlSerialize(TEACrypter.GetDefaultKey, buffer);
+                    __Setup = new SystemSetup().DeXmlSerialize(CrypterKey, buffer);
                     __SetupFile = value;
                 }
             }

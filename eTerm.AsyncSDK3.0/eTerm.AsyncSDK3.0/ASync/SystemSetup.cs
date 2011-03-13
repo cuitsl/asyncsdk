@@ -52,5 +52,11 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         /// <value>The plug in path.</value>
         public string PlugInPath { get; set; }
+
+        /// <summary>
+        /// 端口号.
+        /// </summary>
+        /// <value>The external port.</value>
+        public int? ExternalPort { get; set; }
     }
 }
