@@ -81,7 +81,7 @@ namespace ASync.eTermAddIn {
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnSave_Click(object sender, EventArgs e) {
             if (MessageBox.Show("操作不可恢复，重启程序后配置将生效！", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
-                AsyncStackNet.Instance.ASyncSetup.XmlSerialize(TEACrypter.GetDefaultKey, AsyncStackNet.Instance.ASyncSetupFile);
+                AsyncStackNet.Instance.ASyncSetup.XmlSerialize(AsyncStackNet.Instance.CrypterKey, AsyncStackNet.Instance.ASyncSetupFile);
             }
         }
 
