@@ -402,6 +402,7 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         public void BeginAsync() {
             if (!LicenceManager.Instance.ValidateResult) throw new OverflowException(__eTerm443Packet.AUTHERROR_MES);
+            StackNetPoint = new IPEndPoint(IPAddress.Any, this.__Setup.ExternalPort??360);
             __asyncServer = new eTermAsyncServer(StackNetPoint, SID, RID);
             __asyncServer.MaxSession = LicenceManager.Instance.LicenceBody.MaxTSession;
             __asyncServer.OnPacketSent += new EventHandler<AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session>>(

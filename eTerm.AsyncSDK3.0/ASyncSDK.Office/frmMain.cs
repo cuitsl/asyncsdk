@@ -201,7 +201,7 @@ namespace ASyncSDK.Office {
                 }), Args.Session, Args.InPacket, Args.OutPacket);
             });
             */
-            AsyncStackNet.Instance.StackNetPoint = new IPEndPoint(IPAddress.Any, 360);
+            //AsyncStackNet.Instance.StackNetPoint = new IPEndPoint(IPAddress.Any, 360);
             AsyncStackNet.Instance.RID = 0x51;
             AsyncStackNet.Instance.SID = 0x27;
 
