@@ -51,7 +51,7 @@ namespace ASync.eTermAddIn {
                     groupCode = Guid.NewGuid().ToString(),
                     groupName = txtGroupName.Text.Trim()
                 });
-                AsyncStackNet.Instance.ASyncSetup.XmlSerialize(TEACrypter.GetDefaultKey, AsyncStackNet.Instance.ASyncSetupFile);
+                AsyncStackNet.Instance.ASyncSetup.XmlSerialize(AsyncStackNet.Instance.CrypterKey, AsyncStackNet.Instance.ASyncSetupFile);
                 MessageBox.Show(string.Format(@"分组已经添加！"), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.OnLoad(EventArgs.Empty);
             }
@@ -65,7 +65,7 @@ namespace ASync.eTermAddIn {
                 if (!item.Checked) continue;
                 AsyncStackNet.Instance.ASyncSetup.GroupCollection.Remove(item.Tag as SDKGroup);
             }
-            AsyncStackNet.Instance.ASyncSetup.XmlSerialize(TEACrypter.GetDefaultKey, AsyncStackNet.Instance.ASyncSetupFile);
+            AsyncStackNet.Instance.ASyncSetup.XmlSerialize(AsyncStackNet.Instance.CrypterKey, AsyncStackNet.Instance.ASyncSetupFile);
             MessageBox.Show(string.Format(@"分组删除成功！"), "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.OnLoad(EventArgs.Empty);
         }
