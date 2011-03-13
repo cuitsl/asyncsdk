@@ -45,7 +45,7 @@ namespace eTerm.AsyncSDK.Base {
             XmlSerializer serializer = new XmlSerializer(this.GetType());
             serializer.Serialize(sw, this);
             //return sb.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n", string.Empty).Replace(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"", string.Empty).Replace(" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"", string.Empty).ToString();
-            return new TEACrypter().Encrypt(Encoding.UTF8.GetBytes(sb.ToString()), Keys);
+            return Keys==null||Keys.Length==0?Encoding.UTF8.GetBytes(sb.ToString()): new TEACrypter().Encrypt(Encoding.UTF8.GetBytes(sb.ToString()), Keys);
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace eTerm.AsyncSDK.Base {
         public T DeXmlSerialize(byte[] Keys, byte[] Buffer) {
             StreamReader sr = null;
             try {
-                using (MemoryStream ms = new MemoryStream(new TEACrypter().Decrypt( Buffer,Keys))) {
+                using (MemoryStream ms = new MemoryStream(Keys==null||Keys.Length==0?Buffer: new TEACrypter().Decrypt( Buffer,Keys))) {
                     sr = new StreamReader(ms);
                     XmlSerializer serializer = new XmlSerializer(typeof(T));
                     object obj = serializer.Deserialize(sr);
