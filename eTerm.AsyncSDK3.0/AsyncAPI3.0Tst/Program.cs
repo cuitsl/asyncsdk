@@ -12,11 +12,19 @@ using System.Runtime.Remoting.Contexts;
 using ASync.eTermPlugIn;
 using System.Transactions;
 using eTerm.ASynClientSDK.Utils;
+using eTerm.AsyncSDK;
 
 
 namespace AsyncAPI3._0Tst {
     class Program {
         static void Main(string[] args) {
+
+            SystemSetup setup = new SystemSetup() {
+                 ExternalPort=360,
+                  PlugInPath=@"",
+
+            };
+            setup.XmlSerialize(null, @"C:\Setup.Bin");
             
             //AVCommand Av = new AVCommand();
             //int i = 0;
