@@ -82,6 +82,12 @@ namespace eTerm.AsyncSDK {
         public byte SID { set; private get; }
 
         /// <summary>
+        /// 配置文件加解密KEY.
+        /// </summary>
+        /// <value>The crypter key.</value>
+        public byte[] CrypterKey { set; private get; }
+
+        /// <summary>
         /// 系统配置文件路径设置.
         /// </summary>
         /// <value>The A sync setup.</value>
