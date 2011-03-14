@@ -22,17 +22,17 @@ namespace ASync.eTermAddIn {
                         dateTimeInput2.Value = DateTime.Now;
                         this.richTextBox1.BackColor = Color.Black;
                         this.richTextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-                        this.richTextBox1.Font = new Font("Consolas", 12.0f);
+                        this.richTextBox1.Font = new Font("新宋体", 11.0f, FontStyle.Regular);
                         this.columnHeader1.Width = 50;
                         this.columnHeader1.Text = @"编号";
                         this.columnHeader2.Width = 80;
-                        this.columnHeader1.Text = @"客户端";
+                        this.columnHeader2.Text = @"客户端";
                         this.columnHeader3.Width = 80;
-                        this.columnHeader1.Text = @"配置帐号";
+                        this.columnHeader3.Text = @"配置帐号";
                         this.columnHeader4.Width = 150;
-                        this.columnHeader1.Text = @"原始指令";
+                        this.columnHeader4.Text = @"原始指令";
                         this.columnHeader5.Width = 120;
-                        this.columnHeader1.Text = @"记录时间";
+                        this.columnHeader5.Text = @"记录时间";
                         this.listViewEx1.DoubleClick += new EventHandler(this.listViewEx1_SelectedIndexChanged);
                         foreach (TSessionSetup session in AsyncStackNet.Instance.ASyncSetup.SessionCollection)
                             this.comboBoxEx1.Items.Add(session.SessionCode);
@@ -119,7 +119,7 @@ namespace ASync.eTermAddIn {
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void listViewEx1_SelectedIndexChanged(object sender, EventArgs e) {
             if (this.listViewEx1.SelectedItems.Count != 1) return;
-            this.richTextBox1.Text = (this.listViewEx1.SelectedItems[0].Tag as Async_Log).ASyncResult.Replace("\r","\r\n");
+            this.richTextBox1.Text = string.Format("☉{0}\r{1}", (this.listViewEx1.SelectedItems[0].Tag as Async_Log).ASynCommand, (this.listViewEx1.SelectedItems[0].Tag as Async_Log).ASyncResult);
             tabControl2.SelectedTab = tabItem3;
         }
 
