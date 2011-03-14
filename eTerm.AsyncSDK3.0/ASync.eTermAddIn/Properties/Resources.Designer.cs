@@ -88,6 +88,13 @@ namespace ASync.eTermAddIn.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Magnifier2 {
+            get {
+                object obj = ResourceManager.GetObject("Magnifier2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Pencil3 {
             get {
                 object obj = ResourceManager.GetObject("Pencil3", resourceCulture);
