@@ -24,8 +24,12 @@ namespace AsyncAPI3._0Tst {
                   PlugInPath=@"",
 
             };
-            setup.XmlSerialize(null, @"C:\Setup.Bin");
-            
+            using(FileStream fs=new FileStream(@"C:\Users\Setup.Bin", FileMode.Open)){
+                BinaryReader br=new BinaryReader(fs);
+                byte[] buffer=new byte[fs.Length];
+                br.Read(buffer,0,buffer.Length);
+                setup=setup.DeXmlSerialize(new byte[] { }, buffer);
+            }
             //AVCommand Av = new AVCommand();
             //int i = 0;
             //foreach (AvItem Item in (Av.getAvailability("SHA", "CSX",new DateTime(2011,01,29)) as AVResult).AvSegment) {
