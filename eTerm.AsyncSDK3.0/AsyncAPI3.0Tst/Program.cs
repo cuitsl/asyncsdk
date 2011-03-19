@@ -24,6 +24,7 @@ namespace AsyncAPI3._0Tst {
                   PlugInPath=@"",
 
             };
+
             using(FileStream fs=new FileStream(@"C:\Users\Setup.Bin", FileMode.Open)){
                 BinaryReader br=new BinaryReader(fs);
                 byte[] buffer=new byte[fs.Length];
