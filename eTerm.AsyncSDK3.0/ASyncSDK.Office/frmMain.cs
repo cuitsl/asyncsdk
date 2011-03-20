@@ -316,7 +316,7 @@ namespace ASyncSDK.Office {
                 delegate(eTerm443Packet Packet, eTerm443Async Async)
                 {
                     UpdateListByThread(lstSession, "Circle_Grey.png", Async.SessionId.ToString(), Async.TotalBytes, Async.TotalCount.ToString());
-                    return Async.ReconnectCount <= 15;
+                    return (AsyncStackNet.Instance.ASyncSetup.AutoReconnect ?? false) && Async.ReconnectCount <= (AsyncStackNet.Instance.ASyncSetup.MaxReconnect??10);
                 });
 
             AsyncStackNet.Instance.OnTSessionAssign += new EventHandler<AsyncEventArgs<eTerm363Session>>(
@@ -386,10 +386,12 @@ namespace ASyncSDK.Office {
                         else {
                             //激活配置
                             AsyncStackNet.Instance.BeginAsync();
-                            AsyncStackNet.Instance.BeginReflectorPlugIn(new AsyncCallback(delegate(IAsyncResult iar1)
-                            {
-                                AsyncStackNet.Instance.EndReflectorPlugIn(iar1);
-                            }));
+                            if (AsyncStackNet.Instance.ASyncSetup.AllowPlugIn ?? false) {
+                                AsyncStackNet.Instance.BeginReflectorPlugIn(new AsyncCallback(delegate(IAsyncResult iar1)
+                                {
+                                    AsyncStackNet.Instance.EndReflectorPlugIn(iar1);
+                                }));
+                            }
                         }
                     }
                     catch (Exception ex) {
