@@ -18,8 +18,8 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         private delegate bool ExecuteValidate(string Identification);
         private ExecuteValidate _Execute;
-        private Timer __KeyAsync;
-        private const long __KeyInterval = 1000 * 60 * 5;
+        //private Timer __KeyAsync;
+        //private const long __KeyInterval = 1000 * 60 * 5;
         private bool __flag = false;
         private string __identification = string.Empty;
         private string __serialNumber = string.Empty;
@@ -35,6 +35,18 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         /// <value>The serial number.</value>
         public string SerialNumber { get { return __serialNumber; } }
+
+        /// <summary>
+        /// Gets the secrete key.
+        /// </summary>
+        /// <value>The secrete key.</value>
+        internal byte[] SecreteKey { get { return __secreteKey; } }
+
+        /// <summary>
+        /// Gets the authorization file.
+        /// </summary>
+        /// <value>The authorization file.</value>
+        internal string AuthorizationFile { get { return __identification; } }
 
         /// <summary>
         /// Gets the cpu SN.
@@ -68,6 +80,7 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         private LicenceManager() {
             _Execute = new ExecuteValidate(ValidateNet);
+            /*
             __KeyAsync = new Timer(
 new TimerCallback(
         delegate(object sender)
@@ -76,6 +89,7 @@ new TimerCallback(
             LicenceBody.XmlSerialize(__secreteKey, __identification);
         }),
     null, __KeyInterval, __KeyInterval);
+           */
         }
 
 

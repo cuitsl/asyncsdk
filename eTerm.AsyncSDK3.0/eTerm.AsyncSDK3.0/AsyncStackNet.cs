@@ -521,7 +521,7 @@ namespace eTerm.AsyncSDK {
                                                 if (OnRateEvent != null)
                                                     OnRateEvent(sender, EventArgs.Empty);
                                             }),
-                                        null, (this.ASyncSetup.StatisticalFrequency ?? 10 * 1000 * 60), (this.ASyncSetup.StatisticalFrequency ?? 10 * 1000 * 60));
+                                        null, (this.ASyncSetup.StatisticalFrequency ?? 10) * 1000 * 60, (this.ASyncSetup.StatisticalFrequency ?? 10) * 1000 * 60);
             AppendAsync();
         }
 
@@ -576,6 +576,8 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         private void RateUpdate() {
             ASyncSetup.XmlSerialize(CrypterKey, ASyncSetupFile);
+            LicenceManager.Instance.LicenceBody.RemainingMinutes -= (this.ASyncSetup.StatisticalFrequency ?? 10) / (1000 * 60);
+            LicenceManager.Instance.LicenceBody.XmlSerialize(LicenceManager.Instance.SecreteKey, LicenceManager.Instance.AuthorizationFile);
         }
 
         /// <summary>
