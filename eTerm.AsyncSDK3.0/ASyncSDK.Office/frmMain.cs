@@ -398,8 +398,8 @@ namespace ASyncSDK.Office {
                         MessageBox.Show(ex.Message, "错误提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }), new FileInfo(@"Key.Bin").FullName);
-
-            loadAddIn(AsyncStackNet.Instance.ASyncSetup.PlugInPath);
+            if(Directory.Exists(AsyncStackNet.Instance.ASyncSetup.PlugInPath))
+                loadAddIn(AsyncStackNet.Instance.ASyncSetup.PlugInPath);
             
             //按钮控制
             this.btnStart.Enabled = false;
