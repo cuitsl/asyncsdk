@@ -93,6 +93,7 @@ namespace ASync.eTermAddIn {
             foreach (ListViewItem item in this.lstSession.Items) {
                 if (!item.Checked) continue;
                 TSessionSetup Setup = item.Tag as TSessionSetup;
+                PanelSession.Tag = Setup;
                 txtDescription.Text = Setup.Description;
                 txtExpire.Value = Setup.SessionExpire;
                 txtPassword.Text = Setup.SessionPass;
@@ -178,6 +179,8 @@ namespace ASync.eTermAddIn {
                       FlowRate=float.Parse(this.txtFlow.Value.ToString()),
                  SpecialIntervalList =string.Empty
             };
+
+            Setup.Traffics = (PanelSession.Tag as TSessionSetup).Traffics;
 
             foreach (TSessionSetup item in this.comboBoxEx3.Items) {
                 Setup.SpecialIntervalList += string.Format(@"^{0}|{1},", item.SessionCode, item.SessionPass);
