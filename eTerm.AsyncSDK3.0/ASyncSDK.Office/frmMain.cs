@@ -205,7 +205,7 @@ namespace ASyncSDK.Office {
             //AsyncStackNet.Instance.StackNetPoint = new IPEndPoint(IPAddress.Any, 360);
             AsyncStackNet.Instance.RID = 0x51;
             AsyncStackNet.Instance.SID = 0x27;
-            AsyncStackNet.Instance.CrypterKey = new byte[]{};
+            AsyncStackNet.Instance.CrypterKey = TEACrypter.GetDefaultKey;
             AsyncStackNet.Instance.OnExecuteException += new EventHandler<ErrorEventArgs>(
                     delegate(object sender, ErrorEventArgs e)
                     {
