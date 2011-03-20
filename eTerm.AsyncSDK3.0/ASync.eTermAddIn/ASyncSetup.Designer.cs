@@ -25,27 +25,12 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new DevComponents.DotNetBar.TabControl();
-            this.tabControlPanel2 = new DevComponents.DotNetBar.TabControlPanel();
-            this.comboTree1 = new DevComponents.DotNetBar.Controls.ComboTree();
-            this.columnHeader1 = new DevComponents.AdvTree.ColumnHeader();
-            this.columnHeader2 = new DevComponents.AdvTree.ColumnHeader();
-            this.columnHeader3 = new DevComponents.AdvTree.ColumnHeader();
-            this.columnHeader4 = new DevComponents.AdvTree.ColumnHeader();
-            this.columnHeader5 = new DevComponents.AdvTree.ColumnHeader();
-            this.columnHeader6 = new DevComponents.AdvTree.ColumnHeader();
-            this.columnHeader7 = new DevComponents.AdvTree.ColumnHeader();
-            this.node1 = new DevComponents.AdvTree.Node();
-            this.node2 = new DevComponents.AdvTree.Node();
-            this.node3 = new DevComponents.AdvTree.Node();
-            this.node4 = new DevComponents.AdvTree.Node();
-            this.node5 = new DevComponents.AdvTree.Node();
-            this.node6 = new DevComponents.AdvTree.Node();
-            this.node7 = new DevComponents.AdvTree.Node();
-            this.node8 = new DevComponents.AdvTree.Node();
-            this.tabItem2 = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabControlPanel3 = new DevComponents.DotNetBar.TabControlPanel();
-            this.tabItem3 = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
+            this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.labelX10 = new DevComponents.DotNetBar.LabelX();
+            this.labelX8 = new DevComponents.DotNetBar.LabelX();
+            this.integerInput2 = new DevComponents.Editors.IntegerInput();
+            this.labelX9 = new DevComponents.DotNetBar.LabelX();
             this.labelX7 = new DevComponents.DotNetBar.LabelX();
             this.integerInput1 = new DevComponents.Editors.IntegerInput();
             this.txtMaxReconnect = new DevComponents.Editors.IntegerInput();
@@ -64,28 +49,20 @@
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.labelX8 = new DevComponents.DotNetBar.LabelX();
-            this.integerInput2 = new DevComponents.Editors.IntegerInput();
-            this.labelX9 = new DevComponents.DotNetBar.LabelX();
-            this.labelX10 = new DevComponents.DotNetBar.LabelX();
-            this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
-            this.tabControlPanel2.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.integerInput2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.integerInput1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMaxReconnect)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.integerInput2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.CanReorderTabs = true;
             this.tabControl1.Controls.Add(this.tabControlPanel1);
-            this.tabControl1.Controls.Add(this.tabControlPanel2);
-            this.tabControl1.Controls.Add(this.tabControlPanel3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -95,161 +72,7 @@
             this.tabControl1.TabIndex = 0;
             this.tabControl1.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
             this.tabControl1.Tabs.Add(this.tabItem1);
-            this.tabControl1.Tabs.Add(this.tabItem2);
-            this.tabControl1.Tabs.Add(this.tabItem3);
             this.tabControl1.Text = "tabControl1";
-            // 
-            // tabControlPanel2
-            // 
-            this.tabControlPanel2.Controls.Add(this.comboTree1);
-            this.tabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlPanel2.Location = new System.Drawing.Point(0, 26);
-            this.tabControlPanel2.Name = "tabControlPanel2";
-            this.tabControlPanel2.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanel2.Size = new System.Drawing.Size(500, 357);
-            this.tabControlPanel2.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabControlPanel2.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabControlPanel2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabControlPanel2.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabControlPanel2.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabControlPanel2.Style.GradientAngle = 90;
-            this.tabControlPanel2.TabIndex = 2;
-            this.tabControlPanel2.TabItem = this.tabItem2;
-            // 
-            // comboTree1
-            // 
-            this.comboTree1.BackColor = System.Drawing.SystemColors.Window;
-            // 
-            // 
-            // 
-            this.comboTree1.BackgroundStyle.Class = "TextBoxBorder";
-            this.comboTree1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.comboTree1.ButtonDropDown.Visible = true;
-            this.comboTree1.Columns.Add(this.columnHeader1);
-            this.comboTree1.Columns.Add(this.columnHeader2);
-            this.comboTree1.Columns.Add(this.columnHeader3);
-            this.comboTree1.Columns.Add(this.columnHeader4);
-            this.comboTree1.Columns.Add(this.columnHeader5);
-            this.comboTree1.Columns.Add(this.columnHeader6);
-            this.comboTree1.Columns.Add(this.columnHeader7);
-            this.comboTree1.Location = new System.Drawing.Point(65, 121);
-            this.comboTree1.Name = "comboTree1";
-            this.comboTree1.Nodes.AddRange(new DevComponents.AdvTree.Node[] {
-            this.node1,
-            this.node2,
-            this.node3,
-            this.node4,
-            this.node5,
-            this.node6,
-            this.node7,
-            this.node8});
-            this.comboTree1.Size = new System.Drawing.Size(286, 43);
-            this.comboTree1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.comboTree1.TabIndex = 0;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Name = "columnHeader1";
-            this.columnHeader1.Text = "Column";
-            this.columnHeader1.Width.Absolute = 150;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Name = "columnHeader2";
-            this.columnHeader2.Text = "Column";
-            this.columnHeader2.Width.Absolute = 150;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Name = "columnHeader3";
-            this.columnHeader3.Text = "Column";
-            this.columnHeader3.Width.Absolute = 150;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Name = "columnHeader4";
-            this.columnHeader4.Text = "Column";
-            this.columnHeader4.Width.Absolute = 150;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Name = "columnHeader5";
-            this.columnHeader5.Text = "Column";
-            this.columnHeader5.Width.Absolute = 150;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Name = "columnHeader6";
-            this.columnHeader6.Text = "Column";
-            this.columnHeader6.Width.Absolute = 150;
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Name = "columnHeader7";
-            this.columnHeader7.Text = "Column";
-            this.columnHeader7.Width.Absolute = 150;
-            // 
-            // node1
-            // 
-            this.node1.Name = "node1";
-            // 
-            // node2
-            // 
-            this.node2.Name = "node2";
-            // 
-            // node3
-            // 
-            this.node3.Name = "node3";
-            // 
-            // node4
-            // 
-            this.node4.Name = "node4";
-            // 
-            // node5
-            // 
-            this.node5.Name = "node5";
-            // 
-            // node6
-            // 
-            this.node6.Name = "node6";
-            // 
-            // node7
-            // 
-            this.node7.Name = "node7";
-            // 
-            // node8
-            // 
-            this.node8.Name = "node8";
-            // 
-            // tabItem2
-            // 
-            this.tabItem2.AttachedControl = this.tabControlPanel2;
-            this.tabItem2.Name = "tabItem2";
-            this.tabItem2.Text = "配置流量";
-            // 
-            // tabControlPanel3
-            // 
-            this.tabControlPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlPanel3.Location = new System.Drawing.Point(0, 26);
-            this.tabControlPanel3.Name = "tabControlPanel3";
-            this.tabControlPanel3.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanel3.Size = new System.Drawing.Size(500, 357);
-            this.tabControlPanel3.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
-            this.tabControlPanel3.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.tabControlPanel3.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabControlPanel3.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
-            this.tabControlPanel3.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabControlPanel3.Style.GradientAngle = 90;
-            this.tabControlPanel3.TabIndex = 3;
-            this.tabControlPanel3.TabItem = this.tabItem3;
-            // 
-            // tabItem3
-            // 
-            this.tabItem3.AttachedControl = this.tabControlPanel3;
-            this.tabItem3.Name = "tabItem3";
-            this.tabItem3.Text = "用户流量";
             // 
             // tabControlPanel1
             // 
@@ -287,6 +110,82 @@
             this.tabControlPanel1.Style.GradientAngle = 90;
             this.tabControlPanel1.TabIndex = 1;
             this.tabControlPanel1.TabItem = this.tabItem1;
+            // 
+            // textBoxX1
+            // 
+            // 
+            // 
+            // 
+            this.textBoxX1.Border.Class = "TextBoxBorder";
+            this.textBoxX1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.textBoxX1.Location = new System.Drawing.Point(151, 289);
+            this.textBoxX1.Name = "textBoxX1";
+            this.textBoxX1.Size = new System.Drawing.Size(118, 20);
+            this.textBoxX1.TabIndex = 18;
+            // 
+            // labelX10
+            // 
+            this.labelX10.AutoSize = true;
+            this.labelX10.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX10.BackgroundStyle.Class = "";
+            this.labelX10.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX10.Location = new System.Drawing.Point(52, 290);
+            this.labelX10.Name = "labelX10";
+            this.labelX10.Size = new System.Drawing.Size(93, 16);
+            this.labelX10.TabIndex = 17;
+            this.labelX10.Text = "连接维护指令：";
+            // 
+            // labelX8
+            // 
+            this.labelX8.AutoSize = true;
+            this.labelX8.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX8.BackgroundStyle.Class = "";
+            this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX8.Location = new System.Drawing.Point(221, 250);
+            this.labelX8.Name = "labelX8";
+            this.labelX8.Size = new System.Drawing.Size(19, 16);
+            this.labelX8.TabIndex = 16;
+            this.labelX8.Text = "分";
+            // 
+            // integerInput2
+            // 
+            this.integerInput2.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.integerInput2.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.integerInput2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.integerInput2.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.integerInput2.Location = new System.Drawing.Point(151, 250);
+            this.integerInput2.MaxValue = 20;
+            this.integerInput2.MinValue = 2;
+            this.integerInput2.Name = "integerInput2";
+            this.integerInput2.ShowUpDown = true;
+            this.integerInput2.Size = new System.Drawing.Size(64, 20);
+            this.integerInput2.TabIndex = 15;
+            this.integerInput2.Value = 5;
+            this.integerInput2.WatermarkText = "端口号";
+            // 
+            // labelX9
+            // 
+            this.labelX9.AutoSize = true;
+            this.labelX9.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX9.BackgroundStyle.Class = "";
+            this.labelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX9.Location = new System.Drawing.Point(52, 254);
+            this.labelX9.Name = "labelX9";
+            this.labelX9.Size = new System.Drawing.Size(93, 16);
+            this.labelX9.TabIndex = 14;
+            this.labelX9.Text = "连接维护频率：";
             // 
             // labelX7
             // 
@@ -533,82 +432,6 @@
             this.tabItem1.Name = "tabItem1";
             this.tabItem1.Text = "系统设置";
             // 
-            // labelX8
-            // 
-            this.labelX8.AutoSize = true;
-            this.labelX8.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX8.BackgroundStyle.Class = "";
-            this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX8.Location = new System.Drawing.Point(221, 250);
-            this.labelX8.Name = "labelX8";
-            this.labelX8.Size = new System.Drawing.Size(19, 16);
-            this.labelX8.TabIndex = 16;
-            this.labelX8.Text = "分";
-            // 
-            // integerInput2
-            // 
-            this.integerInput2.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.integerInput2.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.integerInput2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.integerInput2.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.integerInput2.Location = new System.Drawing.Point(151, 250);
-            this.integerInput2.MaxValue = 20;
-            this.integerInput2.MinValue = 2;
-            this.integerInput2.Name = "integerInput2";
-            this.integerInput2.ShowUpDown = true;
-            this.integerInput2.Size = new System.Drawing.Size(64, 20);
-            this.integerInput2.TabIndex = 15;
-            this.integerInput2.Value = 5;
-            this.integerInput2.WatermarkText = "端口号";
-            // 
-            // labelX9
-            // 
-            this.labelX9.AutoSize = true;
-            this.labelX9.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX9.BackgroundStyle.Class = "";
-            this.labelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX9.Location = new System.Drawing.Point(52, 254);
-            this.labelX9.Name = "labelX9";
-            this.labelX9.Size = new System.Drawing.Size(93, 16);
-            this.labelX9.TabIndex = 14;
-            this.labelX9.Text = "连接维护频率：";
-            // 
-            // labelX10
-            // 
-            this.labelX10.AutoSize = true;
-            this.labelX10.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX10.BackgroundStyle.Class = "";
-            this.labelX10.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX10.Location = new System.Drawing.Point(52, 290);
-            this.labelX10.Name = "labelX10";
-            this.labelX10.Size = new System.Drawing.Size(93, 16);
-            this.labelX10.TabIndex = 17;
-            this.labelX10.Text = "连接维护指令：";
-            // 
-            // textBoxX1
-            // 
-            // 
-            // 
-            // 
-            this.textBoxX1.Border.Class = "TextBoxBorder";
-            this.textBoxX1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.textBoxX1.Location = new System.Drawing.Point(151, 289);
-            this.textBoxX1.Name = "textBoxX1";
-            this.textBoxX1.Size = new System.Drawing.Size(118, 20);
-            this.textBoxX1.TabIndex = 18;
-            // 
             // ASyncSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -618,14 +441,13 @@
             this.Size = new System.Drawing.Size(500, 383);
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).EndInit();
             this.tabControl1.ResumeLayout(false);
-            this.tabControlPanel2.ResumeLayout(false);
             this.tabControlPanel1.ResumeLayout(false);
             this.tabControlPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.integerInput2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.integerInput1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMaxReconnect)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.integerInput2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -652,26 +474,6 @@
         private DevComponents.DotNetBar.LabelX labelX7;
         private DevComponents.Editors.IntegerInput integerInput1;
         private DevComponents.DotNetBar.Controls.CheckBoxX chkReconnect;
-        private DevComponents.DotNetBar.TabControlPanel tabControlPanel2;
-        private DevComponents.DotNetBar.TabItem tabItem2;
-        private DevComponents.DotNetBar.TabControlPanel tabControlPanel3;
-        private DevComponents.DotNetBar.TabItem tabItem3;
-        private DevComponents.DotNetBar.Controls.ComboTree comboTree1;
-        private DevComponents.AdvTree.ColumnHeader columnHeader1;
-        private DevComponents.AdvTree.ColumnHeader columnHeader2;
-        private DevComponents.AdvTree.ColumnHeader columnHeader3;
-        private DevComponents.AdvTree.ColumnHeader columnHeader4;
-        private DevComponents.AdvTree.ColumnHeader columnHeader5;
-        private DevComponents.AdvTree.ColumnHeader columnHeader6;
-        private DevComponents.AdvTree.ColumnHeader columnHeader7;
-        private DevComponents.AdvTree.Node node1;
-        private DevComponents.AdvTree.Node node2;
-        private DevComponents.AdvTree.Node node3;
-        private DevComponents.AdvTree.Node node4;
-        private DevComponents.AdvTree.Node node5;
-        private DevComponents.AdvTree.Node node6;
-        private DevComponents.AdvTree.Node node7;
-        private DevComponents.AdvTree.Node node8;
         private DevComponents.DotNetBar.LabelX labelX8;
         private DevComponents.Editors.IntegerInput integerInput2;
         private DevComponents.DotNetBar.LabelX labelX9;
