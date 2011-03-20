@@ -299,6 +299,7 @@ namespace ASync.eTermAddIn {
             this.comboTree1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.comboTree1.ValueMember = @"MonthString";
             this.comboTree1.DisplayMembers = @"MonthString,Traffic,UpdateDate";
+            if (string.IsNullOrEmpty(Setup.SessionCode) || AsyncStackNet.Instance.ASyncSetup.SessionCollection == null || AsyncStackNet.Instance.ASyncSetup.SessionCollection.Count==0) return;
             if (AsyncStackNet.Instance.ASyncSetup.SessionCollection[
                 AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup(Setup.SessionCode))].Traffics == null)
                 return;
