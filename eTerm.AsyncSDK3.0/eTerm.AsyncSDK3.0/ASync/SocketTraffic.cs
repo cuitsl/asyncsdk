@@ -40,5 +40,25 @@ namespace eTerm.AsyncSDK {
         public override bool Equals(object obj) {
             return (obj as SocketTraffic).MonthString == this.MonthString;
         }
+
+        /// <summary>
+        /// Returns a hash code for this instance.
+        /// </summary>
+        /// <returns>
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// </returns>
+        public override int GetHashCode() {
+            return base.GetHashCode();
+        }
+
+        /// <summary>
+        /// Returns a <see cref="System.String"/> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String"/> that represents this instance.
+        /// </returns>
+        public override string ToString() {
+            return this.MonthString;
+        }
     }
 }
