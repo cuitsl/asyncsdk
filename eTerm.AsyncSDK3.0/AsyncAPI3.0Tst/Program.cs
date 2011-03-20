@@ -18,19 +18,21 @@ using eTerm.AsyncSDK;
 namespace AsyncAPI3._0Tst {
     class Program {
         static void Main(string[] args) {
-
-            SystemSetup setup = new SystemSetup() {
-                 ExternalPort=360,
-                  PlugInPath=@"",
-
-            };
-
-            using(FileStream fs=new FileStream(@"C:\Users\Setup.Bin", FileMode.Open)){
+            byte[] buffer;
+            using(FileStream fs=new FileStream(@"C:\Setup.Bin", FileMode.Open)){
                 BinaryReader br=new BinaryReader(fs);
-                byte[] buffer=new byte[fs.Length];
+                buffer=new byte[fs.Length];
                 br.Read(buffer,0,buffer.Length);
-                setup=setup.DeXmlSerialize(new byte[] { }, buffer);
+                
+                br.Close();
             }
+
+            SystemSetup setup = new SystemSetup().DeXmlSerialize(new byte[] { }, buffer);
+
+            setup.XmlSerialize(eTerm.AsyncSDK.Util.TEACrypter.GetDefaultKey, @"C:\Setup.Bin");
+
+            
+           
             //AVCommand Av = new AVCommand();
             //int i = 0;
             //foreach (AvItem Item in (Av.getAvailability("SHA", "CSX",new DateTime(2011,01,29)) as AVResult).AvSegment) {
