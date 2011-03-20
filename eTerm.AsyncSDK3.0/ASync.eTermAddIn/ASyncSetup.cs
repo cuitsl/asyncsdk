@@ -32,11 +32,18 @@ namespace ASync.eTermAddIn {
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnSave_Click(object sender, EventArgs e) {
-            AsyncStackNet.Instance.ASyncSetup.AllowPlugIn = chkAllowPlugIn.Checked;
-            AsyncStackNet.Instance.ASyncSetup.ExternalPort = txtPort.Value;
-            AsyncStackNet.Instance.ASyncSetup.AutoReconnect = chkReconnect.Checked;
-            AsyncStackNet.Instance.ASyncSetup.MaxReconnect = integerInput1.Value;
-            AsyncStackNet.Instance.ASyncSetup.StatisticalFrequency = txtMaxReconnect.Value;
+            try {
+                AsyncStackNet.Instance.ASyncSetup.AllowPlugIn = chkAllowPlugIn.Checked;
+                AsyncStackNet.Instance.ASyncSetup.ExternalPort = txtPort.Value;
+                AsyncStackNet.Instance.ASyncSetup.AutoReconnect = chkReconnect.Checked;
+                AsyncStackNet.Instance.ASyncSetup.MaxReconnect = integerInput1.Value;
+                AsyncStackNet.Instance.ASyncSetup.StatisticalFrequency = txtMaxReconnect.Value;
+                AsyncStackNet.Instance.ASyncSetup.XmlSerialize(AsyncStackNet.Instance.CrypterKey, AsyncStackNet.Instance.ASyncSetupFile);
+                MessageBox.Show(@"系统配置保存成功，将在下次启动时起效！", @"系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex) {
+                MessageBox.Show(string.Format(@"发生系统错误：{0}",ex.Message), @"系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
