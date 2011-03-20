@@ -239,7 +239,11 @@ namespace ASync.eTermAddIn {
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="DevComponents.DotNetBar.TabStripTabChangedEventArgs"/> instance containing the event data.</param>
         private void tabControl1_SelectedTabChanged(object sender, DevComponents.DotNetBar.TabStripTabChangedEventArgs e) {
+            if (PanelSession.Tag == null) return;
             ConnectSetup Setup = PanelSession.Tag as ConnectSetup;
+            if (AsyncStackNet.Instance.ASyncSetup.AsynCollection[
+                AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup(Setup.Address, Setup.userName))].Traffics == null)
+                return;
             this.comboTree1.DataSource = AsyncStackNet.Instance.ASyncSetup.AsynCollection[
                 AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup(Setup.Address, Setup.userName))].Traffics;
         }
