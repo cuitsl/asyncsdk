@@ -31,7 +31,7 @@ namespace ASync.eTermAddIn {
         /// </summary>
         /// <param name="Attr">The attr.</param>
         public void Append(string Attr) {
-            this.listViewEx1.Items.Add(new ListViewItem() {  Text=Attr});
+            this.listViewEx1.Items.Add(new ListViewItem() {  Text=Attr, ToolTipText=Attr});
         }
 
         /// <summary>
@@ -131,8 +131,10 @@ namespace ASync.eTermAddIn {
             // 
             this.listViewEx1.Border.Class = "ListViewBorder";
             this.listViewEx1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.flowLayoutPanel1.SetFlowBreak(this.listViewEx1, true);
             this.listViewEx1.Location = new System.Drawing.Point(3, 32);
             this.listViewEx1.Name = "listViewEx1";
+            this.listViewEx1.ShowItemToolTips = true;
             this.listViewEx1.Size = new System.Drawing.Size(313, 123);
             this.listViewEx1.TabIndex = 8;
             this.listViewEx1.UseCompatibleStateImageBehavior = false;
