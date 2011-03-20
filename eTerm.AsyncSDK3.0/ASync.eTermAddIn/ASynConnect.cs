@@ -247,6 +247,21 @@ namespace ASync.eTermAddIn {
             this.comboTree1.DataSource = AsyncStackNet.Instance.ASyncSetup.AsynCollection[
                 AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup(Setup.Address, Setup.userName))].Traffics;
         }
+
+        /// <summary>
+        /// Handles the SelectedIndexChanged event of the lstSession control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void lstSession_SelectedIndexChanged(object sender, EventArgs e) {
+            if (lstSession.SelectedItems.Count != 1) return;
+            ConnectSetup Setup = lstSession.SelectedItems[0].Tag as ConnectSetup;
+            if (AsyncStackNet.Instance.ASyncSetup.AsynCollection[
+                AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup(Setup.Address, Setup.userName))].Traffics == null)
+                return;
+            this.comboTree1.DataSource = AsyncStackNet.Instance.ASyncSetup.AsynCollection[
+                AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup(Setup.Address, Setup.userName))].Traffics;
+        }
         
     }
 }

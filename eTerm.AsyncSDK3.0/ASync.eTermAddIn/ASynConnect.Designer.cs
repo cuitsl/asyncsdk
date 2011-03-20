@@ -45,6 +45,8 @@
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
             this.PanelSession = new DevComponents.DotNetBar.TabControlPanel();
+            this.comboTree1 = new DevComponents.DotNetBar.Controls.ComboTree();
+            this.labelX11 = new DevComponents.DotNetBar.LabelX();
             this.comboBoxEx1 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.labelX7 = new DevComponents.DotNetBar.LabelX();
             this.txtOfficeCode = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -68,8 +70,6 @@
             this.txtSessionName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.tabItem2 = new DevComponents.DotNetBar.TabItem(this.components);
-            this.comboTree1 = new DevComponents.DotNetBar.Controls.ComboTree();
-            this.labelX11 = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
@@ -238,6 +238,7 @@
             this.lstSession.UseCompatibleStateImageBehavior = false;
             this.lstSession.View = System.Windows.Forms.View.Details;
             this.lstSession.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lstSession_ItemChecked);
+            this.lstSession.SelectedIndexChanged += new System.EventHandler(this.lstSession_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -325,6 +326,37 @@
             this.PanelSession.Style.GradientAngle = 90;
             this.PanelSession.TabIndex = 2;
             this.PanelSession.TabItem = this.tabItem2;
+            // 
+            // comboTree1
+            // 
+            this.comboTree1.BackColor = System.Drawing.SystemColors.Window;
+            // 
+            // 
+            // 
+            this.comboTree1.BackgroundStyle.Class = "TextBoxBorder";
+            this.comboTree1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.comboTree1.ButtonDropDown.Visible = true;
+            this.comboTree1.Location = new System.Drawing.Point(96, 253);
+            this.comboTree1.Name = "comboTree1";
+            this.comboTree1.Size = new System.Drawing.Size(276, 23);
+            this.comboTree1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.comboTree1.TabIndex = 26;
+            // 
+            // labelX11
+            // 
+            this.labelX11.AutoSize = true;
+            this.labelX11.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX11.BackgroundStyle.Class = "";
+            this.labelX11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX11.Location = new System.Drawing.Point(28, 253);
+            this.labelX11.Name = "labelX11";
+            this.labelX11.Size = new System.Drawing.Size(68, 16);
+            this.labelX11.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX11.TabIndex = 25;
+            this.labelX11.Text = "指令流量：";
             // 
             // comboBoxEx1
             // 
@@ -666,37 +698,6 @@
             this.tabItem2.AttachedControl = this.PanelSession;
             this.tabItem2.Name = "tabItem2";
             this.tabItem2.Text = "配置信息修改";
-            // 
-            // comboTree1
-            // 
-            this.comboTree1.BackColor = System.Drawing.SystemColors.Window;
-            // 
-            // 
-            // 
-            this.comboTree1.BackgroundStyle.Class = "TextBoxBorder";
-            this.comboTree1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.comboTree1.ButtonDropDown.Visible = true;
-            this.comboTree1.Location = new System.Drawing.Point(96, 253);
-            this.comboTree1.Name = "comboTree1";
-            this.comboTree1.Size = new System.Drawing.Size(276, 23);
-            this.comboTree1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.comboTree1.TabIndex = 26;
-            // 
-            // labelX11
-            // 
-            this.labelX11.AutoSize = true;
-            this.labelX11.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX11.BackgroundStyle.Class = "";
-            this.labelX11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX11.Location = new System.Drawing.Point(28, 253);
-            this.labelX11.Name = "labelX11";
-            this.labelX11.Size = new System.Drawing.Size(68, 16);
-            this.labelX11.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.labelX11.TabIndex = 25;
-            this.labelX11.Text = "指令流量：";
             // 
             // ASynConnect
             // 
