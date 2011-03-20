@@ -241,6 +241,7 @@ namespace ASync.eTermAddIn {
         private void tabControl1_SelectedTabChanged(object sender, DevComponents.DotNetBar.TabStripTabChangedEventArgs e) {
             if (PanelSession.Tag == null) return;
             ConnectSetup Setup = PanelSession.Tag as ConnectSetup;
+            if (string.IsNullOrEmpty(Setup.userName) || AsyncStackNet.Instance.ASyncSetup.AsynCollection == null || AsyncStackNet.Instance.ASyncSetup.AsynCollection.Count == 0) return;
             if (AsyncStackNet.Instance.ASyncSetup.AsynCollection[
                 AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup(Setup.Address, Setup.userName))].Traffics == null)
                 return;
@@ -256,6 +257,7 @@ namespace ASync.eTermAddIn {
         private void lstSession_SelectedIndexChanged(object sender, EventArgs e) {
             if (lstSession.SelectedItems.Count != 1) return;
             ConnectSetup Setup = lstSession.SelectedItems[0].Tag as ConnectSetup;
+            if (string.IsNullOrEmpty(Setup.userName) || AsyncStackNet.Instance.ASyncSetup.AsynCollection == null || AsyncStackNet.Instance.ASyncSetup.AsynCollection.Count == 0) return;
             if (AsyncStackNet.Instance.ASyncSetup.AsynCollection[
                 AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup(Setup.Address, Setup.userName))].Traffics == null)
                 return;
