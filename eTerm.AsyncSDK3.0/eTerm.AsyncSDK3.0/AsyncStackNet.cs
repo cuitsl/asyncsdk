@@ -360,18 +360,7 @@ namespace eTerm.AsyncSDK {
             Async.OnAsyncDisconnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
-                        try {
-                            ConnectSetup Setup = this.ASyncSetup.AsynCollection[this.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup() { userName = e.Session.userName, Address = (e.Session.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString() })];
-                            if (!Setup.Traffics.Contains(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") }))
-                                Setup.Traffics.Add(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") });
-
-                            SocketTraffic Traffic = Setup.Traffics[Setup.Traffics.IndexOf(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") })];
-                            Traffic.Traffic = e.Session.TotalCount + (Traffic.Traffic ?? 0);
-                        }
-                        catch { }
-
-
-
+                        UpdateASyncSession(e.Session);
                         this.__asyncList.Remove(sender as eTerm443Async);
                         if (this.OnAsyncDisconnect != null)
                             this.OnAsyncDisconnect(sender, e);
@@ -501,6 +490,7 @@ namespace eTerm.AsyncSDK {
                         e.Session.OnTSessionRelease += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                                 delegate(object Session, AsyncEventArgs<eTerm363Session> ie)
                                 {
+                                    UpdateSession(e.Session);
                                     if (OnTSessionRelease != null)
                                         OnTSessionRelease(Session, ie);
                                     ie.Session.SendPacket(__eTerm443Packet.BuildSessionPacket(ie.Session.SID, ie.Session.RID, "注意,配置已释放,指令上下文可能已经丢失."));
@@ -515,16 +505,7 @@ namespace eTerm.AsyncSDK {
             __asyncServer.OnTSessionClosed += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Session> e)
                     {
-                        try {
-                            TSessionSetup Setup = this.ASyncSetup.SessionCollection[this.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup() { SessionCode = e.Session.userName })];
-                            if (!Setup.Traffics.Contains(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") }))
-                                Setup.Traffics.Add(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") });
-
-                            SocketTraffic Traffic = Setup.Traffics[Setup.Traffics.IndexOf(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") })];
-                            Traffic.Traffic = e.Session.TotalCount + (Traffic.Traffic ?? 0);
-                        }
-                        catch { }
-
+                        UpdateSession(e.Session);
                         if (this.OnTSessionClosed != null)
                             this.OnTSessionClosed(sender, e);
                         if (e.Session.Async443 == null) return;
@@ -594,6 +575,39 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         private void RateUpdate() {
             ASyncSetup.XmlSerialize(CrypterKey, ASyncSetupFile);
+        }
+
+        /// <summary>
+        /// Updates the session.
+        /// </summary>
+        /// <param name="TSession">The T session.</param>
+        private void UpdateSession(eTerm363Session TSession) {
+            try {
+                TSessionSetup Setup = this.ASyncSetup.SessionCollection[this.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup() { SessionCode = TSession.userName })];
+                if (!Setup.Traffics.Contains(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") }))
+                    Setup.Traffics.Add(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") });
+
+                SocketTraffic Traffic = Setup.Traffics[Setup.Traffics.IndexOf(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") })];
+                Traffic.Traffic = TSession.TotalCount + (Traffic.Traffic ?? 0);
+                Traffic.UpdateDate = DateTime.Now;
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Updates the A sync session.
+        /// </summary>
+        /// <param name="ASync">The A sync.</param>
+        private void UpdateASyncSession(eTerm443Async ASync) {
+            try {
+                ConnectSetup Setup = this.ASyncSetup.AsynCollection[this.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup() { userName = ASync.userName, Address = (ASync.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString() })];
+                if (!Setup.Traffics.Contains(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") }))
+                    Setup.Traffics.Add(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") });
+
+                SocketTraffic Traffic = Setup.Traffics[Setup.Traffics.IndexOf(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") })];
+                Traffic.Traffic = ASync.TotalCount + (Traffic.Traffic ?? 0);
+            }
+            catch { }
         }
 
         /// <summary>
