@@ -7,6 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncSDK3.0Tst", "AsyncSDK3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reference", "Reference", "{D451D6F4-34DA-4A49-9B67-9817399A12BA}"
 	ProjectSection(SolutionItems) = preProject
+		Reference\ASync.eTermAddIn.AddIn = Reference\ASync.eTermAddIn.AddIn
 		Reference\ASync.eTermBuilder.AddIn = Reference\ASync.eTermBuilder.AddIn
 		Reference\ASync.eTermPlugIn.PlugIn = Reference\ASync.eTermPlugIn.PlugIn
 		Reference\ASync.MiddleWare.dll = Reference\ASync.MiddleWare.dll
