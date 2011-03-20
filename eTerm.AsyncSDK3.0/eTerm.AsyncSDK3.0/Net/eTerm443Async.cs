@@ -62,6 +62,18 @@ namespace eTerm.AsyncSDK.Net {
 
         #region 属性定义
         /// <summary>
+        /// 配置连接维护频率（分钟）.
+        /// </summary>
+        /// <value>The ig interval.</value>
+        public long IgInterval { set { __IgInterval = value * 1000 * 60; } }
+
+        /// <summary>
+        /// 配置连接维护指令.
+        /// </summary>
+        /// <value>The instruction.</value>
+        public string Instruction { set { __DefendStatement = value; } }
+
+        /// <summary>
         /// 用户名.
         /// </summary>
         /// <value>The name of the user.</value>
@@ -188,7 +200,9 @@ namespace eTerm.AsyncSDK.Net {
                                     new TimerCallback(
                                             delegate(object sender)
                                             {
+                                                string instruction = __DefendStatement;
                                                 this.SendPacket(__DefendStatement);
+                                                __DefendStatement = instruction;
                                             }),
                                         null,500, __IgInterval);
             }
