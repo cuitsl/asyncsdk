@@ -11,6 +11,7 @@ using eTerm.AsyncSDK.Util;
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace eTerm.AsyncSDK {
 
@@ -50,7 +51,9 @@ namespace eTerm.AsyncSDK {
         private eTermAsyncServer __asyncServer;
         private SystemSetup __Setup;
         private InvokePlugInCallback _Execute;
+        private InvokePlugInCallback __RateExecute;
         private string __SetupFile = string.Empty;
+        private Timer __rateAsync;
         #endregion
 
         #region 构造函数
@@ -59,6 +62,7 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         private AsyncStackNet() {
             _Execute = new InvokePlugInCallback(QueryPlugIn);
+            __RateExecute = new InvokePlugInCallback(RateUpdate);
         }
         #endregion
 
@@ -501,6 +505,13 @@ namespace eTerm.AsyncSDK {
                     }
                 );
             __asyncServer.Start();
+            __rateAsync = new Timer(
+                                    new TimerCallback(
+                                            delegate(object sender)
+                                            {
+                                                //this.SendPacket(__DefendStatement);
+                                            }),
+                                        null, (this.ASyncSetup.StatisticalFrequency ?? 10 * 1000 * 60), (this.ASyncSetup.StatisticalFrequency ?? 10 * 1000 * 60));
             AppendAsync();
         }
 
@@ -547,6 +558,44 @@ namespace eTerm.AsyncSDK {
         private void QueryPlugIn() {
             foreach (FileInfo file in new DirectoryInfo(this.ASyncSetup.PlugInPath).GetFiles(@"*.PlugIn", SearchOption.TopDirectoryOnly)) {
                 LoadPlugIn(file);
+            }
+        }
+
+        /// <summary>
+        /// Rates the update.
+        /// </summary>
+        private void RateUpdate() { 
+                
+        }
+
+        /// <summary>
+        /// Begins the rate update.
+        /// </summary>
+        /// <param name="callBack">The call back.</param>
+        public IAsyncResult BeginRateUpdate(AsyncCallback callBack) {
+            try {
+                return __RateExecute.BeginInvoke(callBack, null);
+            }
+            catch (Exception e) {
+                // Hide inside method invoking stack 
+                throw e;
+            }
+        }
+
+        /// <summary>
+        /// Ends the rate update.
+        /// </summary>
+        /// <param name="iar">The iar.</param>
+        public void EndRateUpdate(IAsyncResult iar) {
+            if (iar == null)
+                throw new NullReferenceException();
+            try {
+                __RateExecute.EndInvoke(iar);
+                iar.AsyncWaitHandle.Close();
+            }
+            catch (Exception e) {
+                // Hide inside method invoking stack 
+                throw e;
             }
         }
 
