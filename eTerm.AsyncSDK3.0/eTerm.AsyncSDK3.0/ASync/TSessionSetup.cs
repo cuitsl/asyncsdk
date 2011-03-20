@@ -21,6 +21,14 @@ namespace eTerm.AsyncSDK {
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="TSessionSetup"/> class.
+        /// </summary>
+        /// <param name="sessionCode">The session code.</param>
+        public TSessionSetup(string sessionCode) : this() {
+            this.SessionCode = sessionCode;    
+        }
+
+        /// <summary>
         /// Gets or sets the session code.
         /// </summary>
         /// <value>The session code.</value>

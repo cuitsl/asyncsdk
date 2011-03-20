@@ -69,6 +69,16 @@ namespace eTerm.AsyncSDK {
         public ConnectSetup() { this.Traffics = new List<SocketTraffic>(); }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="ConnectSetup"/> class.
+        /// </summary>
+        /// <param name="address">The address.</param>
+        /// <param name="userName">Name of the user.</param>
+        public ConnectSetup(string address, string userName):this() {
+            this.Address = address;
+            this.userName = userName;
+        }
+
+        /// <summary>
         /// Gets or sets the address.
         /// </summary>
         /// <value>The address.</value>
