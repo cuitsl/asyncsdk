@@ -287,9 +287,9 @@ namespace ASyncSDK.Office {
                         AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup(s.userName))
                         ].Traffics[
                             AsyncStackNet.Instance.ASyncSetup.SessionCollection[
-                        AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup() { SessionCode = s.userName })
+                        AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup(s.userName) )
                         ].Traffics.IndexOf(new SocketTraffic(DateTime.Now.ToString(@"yyyyMM")))].Traffic >= AsyncStackNet.Instance.ASyncSetup.SessionCollection[
-                        AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup() { SessionCode = s.userName })
+                        AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup(s.userName))
                         ].FlowRate
                     ) {
                     return false;
