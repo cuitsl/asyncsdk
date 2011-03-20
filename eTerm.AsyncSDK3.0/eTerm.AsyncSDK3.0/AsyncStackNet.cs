@@ -545,7 +545,7 @@ namespace eTerm.AsyncSDK {
         /// 查询插件.
         /// </summary>
         private void QueryPlugIn() {
-            foreach (FileInfo file in new DirectoryInfo(@".\").GetFiles(@"*.PlugIn", SearchOption.TopDirectoryOnly)) {
+            foreach (FileInfo file in new DirectoryInfo(this.ASyncSetup.PlugInPath).GetFiles(@"*.PlugIn", SearchOption.TopDirectoryOnly)) {
                 LoadPlugIn(file);
             }
         }
