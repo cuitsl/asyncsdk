@@ -491,6 +491,7 @@ namespace eTerm.AsyncSDK {
                                 delegate(object Session, AsyncEventArgs<eTerm363Session> ie)
                                 {
                                     UpdateSession(e.Session);
+                                    UpdateASyncSession(e.Session.Async443);
                                     if (OnTSessionRelease != null)
                                         OnTSessionRelease(Session, ie);
                                     ie.Session.SendPacket(__eTerm443Packet.BuildSessionPacket(ie.Session.SID, ie.Session.RID, "注意,配置已释放,指令上下文可能已经丢失."));
