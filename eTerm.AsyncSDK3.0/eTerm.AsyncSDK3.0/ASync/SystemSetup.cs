@@ -69,7 +69,7 @@ namespace eTerm.AsyncSDK {
         /// Gets or sets a value indicating whether [max reconnect].
         /// </summary>
         /// <value><c>true</c> if [max reconnect]; otherwise, <c>false</c>.</value>
-        public ushort? MaxReconnect { get; set; }
+        public int? MaxReconnect { get; set; }
 
         /// <summary>
         /// 流量统计保存频率(默认为10分钟).
