@@ -207,7 +207,7 @@ namespace eTerm.AsyncSDK.Net {
                                         null,500, __IgInterval);
             }
             else {
-                __DefendStatement = "CP";
+                //__DefendStatement = __DefendStatement;
                 __IgAsync.Change(__IgInterval, 0);
                 base.FireOnPacketReceive();
             }
