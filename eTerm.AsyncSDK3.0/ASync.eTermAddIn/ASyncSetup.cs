@@ -26,11 +26,17 @@ namespace ASync.eTermAddIn {
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btnSave control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnSave_Click(object sender, EventArgs e) {
             AsyncStackNet.Instance.ASyncSetup.AllowPlugIn = chkAllowPlugIn.Checked;
             AsyncStackNet.Instance.ASyncSetup.ExternalPort = txtPort.Value;
             AsyncStackNet.Instance.ASyncSetup.AutoReconnect = chkReconnect.Checked;
             AsyncStackNet.Instance.ASyncSetup.MaxReconnect = integerInput1.Value;
+            AsyncStackNet.Instance.ASyncSetup.StatisticalFrequency = txtMaxReconnect.Value;
         }
     }
 }

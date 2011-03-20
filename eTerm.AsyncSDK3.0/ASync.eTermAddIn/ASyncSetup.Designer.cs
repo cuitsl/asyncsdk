@@ -144,13 +144,13 @@
             this.txtMaxReconnect.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtMaxReconnect.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
             this.txtMaxReconnect.Location = new System.Drawing.Point(156, 163);
-            this.txtMaxReconnect.MaxValue = 4000;
-            this.txtMaxReconnect.MinValue = 300;
+            this.txtMaxReconnect.MaxValue = 100;
+            this.txtMaxReconnect.MinValue = 10;
             this.txtMaxReconnect.Name = "txtMaxReconnect";
             this.txtMaxReconnect.ShowUpDown = true;
             this.txtMaxReconnect.Size = new System.Drawing.Size(64, 20);
             this.txtMaxReconnect.TabIndex = 12;
-            this.txtMaxReconnect.Value = 350;
+            this.txtMaxReconnect.Value = 10;
             this.txtMaxReconnect.WatermarkText = "端口号";
             // 
             // chkReconnect
