@@ -13,6 +13,16 @@ namespace ASync.eTermAddIn {
     public partial class ASyncSetup : BaseAddIn {
         public ASyncSetup() {
             InitializeComponent();
+            this.Load += new EventHandler(
+                    delegate(object sender, EventArgs e) {
+                        chkAllowPlugIn.Checked = AsyncStackNet.Instance.ASyncSetup.AllowPlugIn??true;
+                        txtPort.Value = AsyncStackNet.Instance.ASyncSetup.ExternalPort ?? 350;
+                        chkReconnect.Checked = AsyncStackNet.Instance.ASyncSetup.AutoReconnect??true;
+                        integerInput1.Value = AsyncStackNet.Instance.ASyncSetup.MaxReconnect ?? 10;
+                        txtMaxReconnect.Value = AsyncStackNet.Instance.ASyncSetup.StatisticalFrequency ?? 5;
+                        txtPlugInPath.Text = AsyncStackNet.Instance.ASyncSetup.PlugInPath;
+                    }
+                );
         }
 
         /// <summary>
@@ -22,7 +32,6 @@ namespace ASync.eTermAddIn {
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnPlugInPath_Click(object sender, EventArgs e) {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK) {
-                AsyncStackNet.Instance.ASyncSetup.PlugInPath = folderBrowserDialog1.SelectedPath;
                 txtPlugInPath.Text=folderBrowserDialog1.SelectedPath;
             }
         }
@@ -40,6 +49,7 @@ namespace ASync.eTermAddIn {
                 AsyncStackNet.Instance.ASyncSetup.MaxReconnect = integerInput1.Value;
                 AsyncStackNet.Instance.ASyncSetup.StatisticalFrequency = txtMaxReconnect.Value;
                 AsyncStackNet.Instance.ASyncSetup.XmlSerialize(AsyncStackNet.Instance.CrypterKey, AsyncStackNet.Instance.ASyncSetupFile);
+                AsyncStackNet.Instance.ASyncSetup.PlugInPath = folderBrowserDialog1.SelectedPath;
                 MessageBox.Show(@"系统配置保存成功，将在下次启动时起效！", @"系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex) {
