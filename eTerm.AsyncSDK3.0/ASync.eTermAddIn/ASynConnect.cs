@@ -175,6 +175,7 @@ namespace ASync.eTermAddIn {
                          SID=(byte)integerInput1.Value,
                           RID=(byte)integerInput2.Value
             };
+            Setup.Traffics = (PanelSession.Tag as ConnectSetup).Traffics;
             if (this.PanelSession.Tag == null)
                 AsyncStackNet.Instance.ASyncSetup.AsynCollection.Add(Setup);
             else{
