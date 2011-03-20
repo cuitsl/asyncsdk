@@ -281,14 +281,14 @@ namespace ASyncSDK.Office {
                     &&
                     AsyncStackNet.Instance.ASyncSetup.SessionCollection[
                         AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup(s.userName))
-                        ].Traffics.Contains(new SocketTraffic(){ MonthString=DateTime.Now.ToString(@"yyyyMM")})
+                        ].Traffics.Contains(new SocketTraffic(DateTime.Now.ToString(@"yyyyMM")))
                     &&
                     AsyncStackNet.Instance.ASyncSetup.SessionCollection[
                         AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup(s.userName))
                         ].Traffics[
                             AsyncStackNet.Instance.ASyncSetup.SessionCollection[
                         AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup() { SessionCode = s.userName })
-                        ].Traffics.IndexOf(new SocketTraffic() { MonthString=DateTime.Now.ToString(@"yyyyMM") })].Traffic >= AsyncStackNet.Instance.ASyncSetup.SessionCollection[
+                        ].Traffics.IndexOf(new SocketTraffic(DateTime.Now.ToString(@"yyyyMM")))].Traffic >= AsyncStackNet.Instance.ASyncSetup.SessionCollection[
                         AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup() { SessionCode = s.userName })
                         ].FlowRate
                     ) {
