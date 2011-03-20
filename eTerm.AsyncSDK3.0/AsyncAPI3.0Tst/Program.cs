@@ -29,7 +29,7 @@ namespace AsyncAPI3._0Tst {
 
             SystemSetup setup = new SystemSetup().DeXmlSerialize(eTerm.AsyncSDK.Util.TEACrypter.GetDefaultKey, buffer);
 
-            setup.XmlSerialize(eTerm.AsyncSDK.Util.TEACrypter.GetDefaultKey, @"C:\Setup.Bin");
+            setup.XmlSerialize(new byte[]{}, @"C:\Setup.Bin");
 
             
            
