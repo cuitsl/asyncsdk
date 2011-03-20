@@ -9,6 +9,20 @@ namespace eTerm.AsyncSDK {
     /// 流量记数
     /// </summary>
     public sealed class SocketTraffic : BaseBinary<SocketTraffic> {
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SocketTraffic"/> class.
+        /// </summary>
+        public SocketTraffic() { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SocketTraffic"/> class.
+        /// </summary>
+        /// <param name="monthString">The month string.</param>
+        public SocketTraffic(string monthString) : this() {
+            this.MonthString = monthString;
+        }
+
         /// <summary>
         /// 月份，格式为：201101.
         /// </summary>
