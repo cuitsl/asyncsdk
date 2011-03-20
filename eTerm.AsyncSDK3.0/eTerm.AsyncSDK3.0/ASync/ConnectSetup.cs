@@ -62,6 +62,12 @@ namespace eTerm.AsyncSDK {
     /// </summary>
     [Serializable]
     public sealed class ConnectSetup : BaseBinary<ConnectSetup> {
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConnectSetup"/> class.
+        /// </summary>
+        public ConnectSetup() { this.Traffics = new List<SocketTraffic>(); }
+
         /// <summary>
         /// Gets or sets the address.
         /// </summary>
@@ -127,6 +133,12 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         /// <value><c>true</c> if this instance is open; otherwise, <c>false</c>.</value>
         public bool IsOpen { get; set; }
+
+        /// <summary>
+        /// Gets or sets the traffics.
+        /// </summary>
+        /// <value>The traffics.</value>
+        public List<SocketTraffic> Traffics { get; set; }
 
         /// <summary>
         /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.

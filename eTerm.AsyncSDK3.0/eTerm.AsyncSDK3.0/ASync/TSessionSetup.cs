@@ -17,6 +17,7 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         public TSessionSetup() {
             this.TSessionForbidCmd = new List<string>();
+            this.Traffics = new List<SocketTraffic>();
         }
 
         /// <summary>
@@ -56,10 +57,12 @@ namespace eTerm.AsyncSDK {
         public float FlowRate { get; set; }
 
         /// <summary>
-        /// Gets or sets the current flow rate.
+        /// Gets or sets the traffics.
         /// </summary>
-        /// <value>The current flow rate.</value>
-        public float CurrentFlowRate { get; set; }
+        /// <value>The traffics.</value>
+        public List<SocketTraffic> Traffics { get; set; }
+
+
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance is open.
