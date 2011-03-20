@@ -184,7 +184,8 @@ namespace ASync.eTermAddIn {
                           RID=(byte)integerInput2.Value
             };
             Setup.Traffics = (PanelSession.Tag as ConnectSetup).Traffics;
-            if (this.PanelSession.Tag == null)
+            PanelSession.Tag = Setup;
+            if (!AsyncStackNet.Instance.ASyncSetup.AsynCollection.Contains(Setup))
                 AsyncStackNet.Instance.ASyncSetup.AsynCollection.Add(Setup);
             else{
                 int indexOf = AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(this.PanelSession.Tag as ConnectSetup);
