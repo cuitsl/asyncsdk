@@ -293,10 +293,14 @@ namespace ASync.eTermAddIn {
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="DevComponents.DotNetBar.TabStripTabChangedEventArgs"/> instance containing the event data.</param>
         private void tabControl1_SelectedTabChanged(object sender, DevComponents.DotNetBar.TabStripTabChangedEventArgs e) {
+            if (PanelSession.Tag == null) return;
             TSessionSetup Setup = PanelSession.Tag as TSessionSetup;
             this.comboTree1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.comboTree1.ValueMember = @"MonthString";
             this.comboTree1.DisplayMembers = @"MonthString,Traffic,UpdateDate";
+            if (AsyncStackNet.Instance.ASyncSetup.SessionCollection[
+                AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup(Setup.SessionCode))].Traffics == null)
+                return;
             this.comboTree1.DataSource = AsyncStackNet.Instance.ASyncSetup.SessionCollection[
                 AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup(Setup.SessionCode))].Traffics;
         }
