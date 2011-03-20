@@ -360,6 +360,18 @@ namespace eTerm.AsyncSDK {
             Async.OnAsyncDisconnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
+                        try {
+                            ConnectSetup Setup = this.ASyncSetup.AsynCollection[this.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup() { userName = e.Session.userName, Address = (e.Session.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString() })];
+                            if (!Setup.Traffics.Contains(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") }))
+                                Setup.Traffics.Add(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") });
+
+                            SocketTraffic Traffic = Setup.Traffics[Setup.Traffics.IndexOf(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") })];
+                            Traffic.Traffic = e.Session.TotalCount + (Traffic.Traffic ?? 0);
+                        }
+                        catch { }
+
+
+
                         this.__asyncList.Remove(sender as eTerm443Async);
                         if (this.OnAsyncDisconnect != null)
                             this.OnAsyncDisconnect(sender, e);
@@ -503,12 +515,16 @@ namespace eTerm.AsyncSDK {
             __asyncServer.OnTSessionClosed += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Session> e)
                     {
-                        TSessionSetup Setup= this.ASyncSetup.SessionCollection[this.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup() { SessionCode=e.Session.userName })];
-                        if (!Setup.Traffics.Contains(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") }))
-                            Setup.Traffics.Add(new SocketTraffic() { MonthString=DateTime.Now.ToString(@"yyyyMM") });
+                        try {
+                            TSessionSetup Setup = this.ASyncSetup.SessionCollection[this.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup() { SessionCode = e.Session.userName })];
+                            if (!Setup.Traffics.Contains(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") }))
+                                Setup.Traffics.Add(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") });
 
-                        SocketTraffic Traffic= Setup.Traffics[Setup.Traffics.IndexOf(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") })];
-                        Traffic.Traffic = e.Session.TotalCount + (Traffic.Traffic ?? 0);
+                            SocketTraffic Traffic = Setup.Traffics[Setup.Traffics.IndexOf(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") })];
+                            Traffic.Traffic = e.Session.TotalCount + (Traffic.Traffic ?? 0);
+                        }
+                        catch { }
+
                         if (this.OnTSessionClosed != null)
                             this.OnTSessionClosed(sender, e);
                         if (e.Session.Async443 == null) return;
