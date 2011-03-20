@@ -54,6 +54,24 @@ namespace eTerm.AsyncSDK {
         public string PlugInPath { get; set; }
 
         /// <summary>
+        /// Gets or sets the allow plug in.
+        /// </summary>
+        /// <value>The allow plug in.</value>
+        public bool? AllowPlugIn { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [auto reconnect].
+        /// </summary>
+        /// <value><c>true</c> if [auto reconnect]; otherwise, <c>false</c>.</value>
+        public bool? AutoReconnect { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [max reconnect].
+        /// </summary>
+        /// <value><c>true</c> if [max reconnect]; otherwise, <c>false</c>.</value>
+        public ushort? MaxReconnect { get; set; }
+
+        /// <summary>
         /// 端口号.
         /// </summary>
         /// <value>The external port.</value>
