@@ -1,0 +1,388 @@
+﻿namespace ASync.eTermAddIn {
+    partial class ASyncSetup {
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Component Designer generated code
+
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
+            this.tabControl1 = new DevComponents.DotNetBar.TabControl();
+            this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
+            this.labelX1 = new DevComponents.DotNetBar.LabelX();
+            this.labelX2 = new DevComponents.DotNetBar.LabelX();
+            this.labelX3 = new DevComponents.DotNetBar.LabelX();
+            this.labelX4 = new DevComponents.DotNetBar.LabelX();
+            this.labelX5 = new DevComponents.DotNetBar.LabelX();
+            this.labelX6 = new DevComponents.DotNetBar.LabelX();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
+            this.txtPort = new DevComponents.Editors.IntegerInput();
+            this.chkAllowPlugIn = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.txtPlugInPath = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.btnPlugInPath = new DevComponents.DotNetBar.ButtonX();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.checkBoxX1 = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.txtMaxReconnect = new DevComponents.Editors.IntegerInput();
+            this.integerInput1 = new DevComponents.Editors.IntegerInput();
+            this.labelX7 = new DevComponents.DotNetBar.LabelX();
+            ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabControlPanel1.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPort)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMaxReconnect)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.integerInput1)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.CanReorderTabs = true;
+            this.tabControl1.Controls.Add(this.tabControlPanel1);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedTabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.tabControl1.SelectedTabIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(500, 383);
+            this.tabControl1.TabIndex = 0;
+            this.tabControl1.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
+            this.tabControl1.Tabs.Add(this.tabItem1);
+            this.tabControl1.Text = "tabControl1";
+            // 
+            // tabItem1
+            // 
+            this.tabItem1.AttachedControl = this.tabControlPanel1;
+            this.tabItem1.Name = "tabItem1";
+            this.tabItem1.Text = "系统设置";
+            // 
+            // tabControlPanel1
+            // 
+            this.tabControlPanel1.Controls.Add(this.labelX7);
+            this.tabControlPanel1.Controls.Add(this.integerInput1);
+            this.tabControlPanel1.Controls.Add(this.txtMaxReconnect);
+            this.tabControlPanel1.Controls.Add(this.checkBoxX1);
+            this.tabControlPanel1.Controls.Add(this.btnPlugInPath);
+            this.tabControlPanel1.Controls.Add(this.txtPlugInPath);
+            this.tabControlPanel1.Controls.Add(this.chkAllowPlugIn);
+            this.tabControlPanel1.Controls.Add(this.txtPort);
+            this.tabControlPanel1.Controls.Add(this.flowLayoutPanel1);
+            this.tabControlPanel1.Controls.Add(this.labelX6);
+            this.tabControlPanel1.Controls.Add(this.labelX5);
+            this.tabControlPanel1.Controls.Add(this.labelX4);
+            this.tabControlPanel1.Controls.Add(this.labelX3);
+            this.tabControlPanel1.Controls.Add(this.labelX2);
+            this.tabControlPanel1.Controls.Add(this.labelX1);
+            this.tabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPanel1.Location = new System.Drawing.Point(0, 26);
+            this.tabControlPanel1.Name = "tabControlPanel1";
+            this.tabControlPanel1.Padding = new System.Windows.Forms.Padding(1);
+            this.tabControlPanel1.Size = new System.Drawing.Size(500, 357);
+            this.tabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(179)))), ((int)(((byte)(231)))));
+            this.tabControlPanel1.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.tabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabControlPanel1.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(59)))), ((int)(((byte)(97)))), ((int)(((byte)(156)))));
+            this.tabControlPanel1.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabControlPanel1.Style.GradientAngle = 90;
+            this.tabControlPanel1.TabIndex = 1;
+            this.tabControlPanel1.TabItem = this.tabItem1;
+            // 
+            // labelX1
+            // 
+            this.labelX1.AutoSize = true;
+            this.labelX1.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX1.BackgroundStyle.Class = "";
+            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX1.Location = new System.Drawing.Point(89, 4);
+            this.labelX1.Name = "labelX1";
+            this.labelX1.Size = new System.Drawing.Size(56, 16);
+            this.labelX1.TabIndex = 0;
+            this.labelX1.Text = "端口号：";
+            // 
+            // labelX2
+            // 
+            this.labelX2.AutoSize = true;
+            this.labelX2.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX2.BackgroundStyle.Class = "";
+            this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX2.Location = new System.Drawing.Point(52, 44);
+            this.labelX2.Name = "labelX2";
+            this.labelX2.Size = new System.Drawing.Size(93, 16);
+            this.labelX2.TabIndex = 1;
+            this.labelX2.Text = "是否启用插件：";
+            // 
+            // labelX3
+            // 
+            this.labelX3.AutoSize = true;
+            this.labelX3.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX3.BackgroundStyle.Class = "";
+            this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX3.Location = new System.Drawing.Point(77, 85);
+            this.labelX3.Name = "labelX3";
+            this.labelX3.Size = new System.Drawing.Size(68, 16);
+            this.labelX3.TabIndex = 2;
+            this.labelX3.Text = "插件路径：";
+            // 
+            // labelX4
+            // 
+            this.labelX4.AutoSize = true;
+            this.labelX4.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX4.BackgroundStyle.Class = "";
+            this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX4.Location = new System.Drawing.Point(52, 212);
+            this.labelX4.Name = "labelX4";
+            this.labelX4.Size = new System.Drawing.Size(93, 16);
+            this.labelX4.TabIndex = 3;
+            this.labelX4.Text = "流重统计频率：";
+            // 
+            // labelX5
+            // 
+            this.labelX5.AutoSize = true;
+            this.labelX5.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX5.BackgroundStyle.Class = "";
+            this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX5.Location = new System.Drawing.Point(39, 167);
+            this.labelX5.Name = "labelX5";
+            this.labelX5.Size = new System.Drawing.Size(106, 16);
+            this.labelX5.TabIndex = 4;
+            this.labelX5.Text = "配置重连最次数：";
+            // 
+            // labelX6
+            // 
+            this.labelX6.AutoSize = true;
+            this.labelX6.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX6.BackgroundStyle.Class = "";
+            this.labelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX6.Location = new System.Drawing.Point(27, 127);
+            this.labelX6.Name = "labelX6";
+            this.labelX6.Size = new System.Drawing.Size(118, 16);
+            this.labelX6.TabIndex = 5;
+            this.labelX6.Text = "是否启用配置重连：";
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel1.Controls.Add(this.buttonX1);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(1, 326);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(498, 30);
+            this.flowLayoutPanel1.TabIndex = 6;
+            // 
+            // buttonX1
+            // 
+            this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX1.Location = new System.Drawing.Point(420, 3);
+            this.buttonX1.Name = "buttonX1";
+            this.buttonX1.Size = new System.Drawing.Size(75, 23);
+            this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX1.TabIndex = 0;
+            this.buttonX1.Text = "保存(&S)";
+            // 
+            // txtPort
+            // 
+            this.txtPort.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.txtPort.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.txtPort.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtPort.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.txtPort.Location = new System.Drawing.Point(156, 5);
+            this.txtPort.MaxValue = 4000;
+            this.txtPort.MinValue = 300;
+            this.txtPort.Name = "txtPort";
+            this.txtPort.ShowUpDown = true;
+            this.txtPort.Size = new System.Drawing.Size(64, 20);
+            this.txtPort.TabIndex = 7;
+            this.txtPort.Value = 350;
+            this.txtPort.WatermarkText = "端口号";
+            // 
+            // chkAllowPlugIn
+            // 
+            this.chkAllowPlugIn.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.checkBoxX1.BackgroundStyle.Class = "";
+            this.checkBoxX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkAllowPlugIn.Location = new System.Drawing.Point(156, 43);
+            this.chkAllowPlugIn.Name = "chkAllowPlugIn";
+            this.chkAllowPlugIn.Size = new System.Drawing.Size(64, 23);
+            this.chkAllowPlugIn.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkAllowPlugIn.TabIndex = 8;
+            this.chkAllowPlugIn.Text = "是/否";
+            // 
+            // txtPlugInPath
+            // 
+            // 
+            // 
+            // 
+            this.txtPlugInPath.Border.Class = "TextBoxBorder";
+            this.txtPlugInPath.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtPlugInPath.Location = new System.Drawing.Point(156, 85);
+            this.txtPlugInPath.Name = "txtPlugInPath";
+            this.txtPlugInPath.Size = new System.Drawing.Size(254, 20);
+            this.txtPlugInPath.TabIndex = 9;
+            // 
+            // btnPlugInPath
+            // 
+            this.btnPlugInPath.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnPlugInPath.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnPlugInPath.Location = new System.Drawing.Point(416, 82);
+            this.btnPlugInPath.Name = "btnPlugInPath";
+            this.btnPlugInPath.Size = new System.Drawing.Size(75, 23);
+            this.btnPlugInPath.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnPlugInPath.TabIndex = 10;
+            this.btnPlugInPath.Text = "选取(&C)";
+            // 
+            // checkBoxX1
+            // 
+            this.checkBoxX1.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.checkBoxX1.BackgroundStyle.Class = "";
+            this.checkBoxX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.checkBoxX1.Location = new System.Drawing.Point(156, 120);
+            this.checkBoxX1.Name = "checkBoxX1";
+            this.checkBoxX1.Size = new System.Drawing.Size(64, 23);
+            this.checkBoxX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.checkBoxX1.TabIndex = 11;
+            this.checkBoxX1.Text = "是/否";
+            // 
+            // txtMaxReconnect
+            // 
+            this.txtMaxReconnect.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.txtMaxReconnect.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.txtMaxReconnect.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtMaxReconnect.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.txtMaxReconnect.Location = new System.Drawing.Point(156, 163);
+            this.txtMaxReconnect.MaxValue = 4000;
+            this.txtMaxReconnect.MinValue = 300;
+            this.txtMaxReconnect.Name = "txtMaxReconnect";
+            this.txtMaxReconnect.ShowUpDown = true;
+            this.txtMaxReconnect.Size = new System.Drawing.Size(64, 20);
+            this.txtMaxReconnect.TabIndex = 12;
+            this.txtMaxReconnect.Value = 350;
+            this.txtMaxReconnect.WatermarkText = "端口号";
+            // 
+            // integerInput1
+            // 
+            this.integerInput1.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.integerInput1.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.integerInput1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.integerInput1.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.integerInput1.Location = new System.Drawing.Point(151, 208);
+            this.integerInput1.MaxValue = 20;
+            this.integerInput1.MinValue = 5;
+            this.integerInput1.Name = "integerInput1";
+            this.integerInput1.ShowUpDown = true;
+            this.integerInput1.Size = new System.Drawing.Size(64, 20);
+            this.integerInput1.TabIndex = 12;
+            this.integerInput1.Value = 20;
+            this.integerInput1.WatermarkText = "端口号";
+            // 
+            // labelX7
+            // 
+            this.labelX7.AutoSize = true;
+            this.labelX7.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX7.BackgroundStyle.Class = "";
+            this.labelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX7.Location = new System.Drawing.Point(221, 208);
+            this.labelX7.Name = "labelX7";
+            this.labelX7.Size = new System.Drawing.Size(19, 16);
+            this.labelX7.TabIndex = 13;
+            this.labelX7.Text = "分";
+            // 
+            // ASyncSetup
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tabControl1);
+            this.Name = "ASyncSetup";
+            this.Size = new System.Drawing.Size(500, 383);
+            ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabControlPanel1.ResumeLayout(false);
+            this.tabControlPanel1.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtPort)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMaxReconnect)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.integerInput1)).EndInit();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private DevComponents.DotNetBar.TabControl tabControl1;
+        private DevComponents.DotNetBar.TabControlPanel tabControlPanel1;
+        private DevComponents.DotNetBar.TabItem tabItem1;
+        private DevComponents.DotNetBar.LabelX labelX1;
+        private DevComponents.DotNetBar.LabelX labelX2;
+        private DevComponents.DotNetBar.LabelX labelX3;
+        private DevComponents.DotNetBar.LabelX labelX6;
+        private DevComponents.DotNetBar.LabelX labelX5;
+        private DevComponents.DotNetBar.LabelX labelX4;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private DevComponents.DotNetBar.ButtonX buttonX1;
+        private DevComponents.Editors.IntegerInput txtPort;
+        private DevComponents.DotNetBar.Controls.CheckBoxX chkAllowPlugIn;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtPlugInPath;
+        private DevComponents.DotNetBar.ButtonX btnPlugInPath;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private DevComponents.DotNetBar.Controls.CheckBoxX checkBoxX1;
+        private DevComponents.Editors.IntegerInput txtMaxReconnect;
+        private DevComponents.DotNetBar.LabelX labelX7;
+        private DevComponents.Editors.IntegerInput integerInput1;
+    }
+}
