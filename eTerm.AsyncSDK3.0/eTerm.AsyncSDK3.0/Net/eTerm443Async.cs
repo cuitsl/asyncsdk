@@ -195,16 +195,17 @@ namespace eTerm.AsyncSDK.Net {
                     this.SID = base.InPacket.OriginalBytes[8];
                 if(this.RID==0)
                     this.RID = base.InPacket.OriginalBytes[9];
-                __DefendStatement = this.SiText;
+                if(!string.IsNullOrEmpty(this.SiText))
+                    this.SendPacket(this.SiText);
+
                                     __IgAsync = new Timer(
                                     new TimerCallback(
                                             delegate(object sender)
                                             {
-                                                string instruction = __DefendStatement;
                                                 this.SendPacket(__DefendStatement);
-                                                __DefendStatement = instruction;
                                             }),
-                                        null,500, __IgInterval);
+                                        null, __IgInterval, __IgInterval);
+               
             }
             else {
                 //__DefendStatement = __DefendStatement;
