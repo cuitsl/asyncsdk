@@ -10,7 +10,7 @@ using eTerm.AsyncSDK;
 using ASync.MiddleWare;
 
 namespace ASync.eTermAddIn {
-    public partial class ASyncSetup : BaseAddIn {
+    public partial class ASyncSetup : UserControl {
         public ASyncSetup() {
             InitializeComponent();
             this.Load += new EventHandler(
@@ -49,6 +49,7 @@ namespace ASync.eTermAddIn {
                 AsyncStackNet.Instance.ASyncSetup.MaxReconnect = integerInput1.Value;
                 AsyncStackNet.Instance.ASyncSetup.StatisticalFrequency = txtMaxReconnect.Value;
                 AsyncStackNet.Instance.ASyncSetup.PlugInPath = folderBrowserDialog1.SelectedPath;
+                //AsyncStackNet.Instance.ASyncSetup.
                 AsyncStackNet.Instance.ASyncSetup.XmlSerialize(AsyncStackNet.Instance.CrypterKey, AsyncStackNet.Instance.ASyncSetupFile);
                 MessageBox.Show(@"系统配置保存成功，将在下次启动时起效！", @"系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
