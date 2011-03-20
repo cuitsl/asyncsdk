@@ -72,6 +72,12 @@ namespace eTerm.AsyncSDK {
         public ushort? MaxReconnect { get; set; }
 
         /// <summary>
+        /// 流量统计保存频率(默认为10分钟).
+        /// </summary>
+        /// <value>The statistical frequency.</value>
+        public int? StatisticalFrequency { get; set; }
+
+        /// <summary>
         /// 端口号.
         /// </summary>
         /// <value>The external port.</value>
