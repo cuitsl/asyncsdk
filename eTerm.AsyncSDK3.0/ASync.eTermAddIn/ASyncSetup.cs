@@ -10,7 +10,7 @@ using eTerm.AsyncSDK;
 using ASync.MiddleWare;
 
 namespace ASync.eTermAddIn {
-    public partial class ASyncSetup : UserControl {
+    public partial class ASyncSetup : BaseAddIn {
         public ASyncSetup() {
             InitializeComponent();
             this.Load += new EventHandler(
