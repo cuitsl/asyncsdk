@@ -369,7 +369,7 @@ namespace ASyncSDK.Office {
                         else {
                             //激活配置
                             AsyncStackNet.Instance.BeginAsync();
-                            //loadAddIn(AsyncStackNet.Instance.ASyncSetup.PlugInPath);
+                            loadAddIn(AsyncStackNet.Instance.ASyncSetup.PlugInPath);
                             AsyncStackNet.Instance.BeginReflectorPlugIn(new AsyncCallback(delegate(IAsyncResult iar1)
                             {
                                 AsyncStackNet.Instance.EndReflectorPlugIn(iar1);
@@ -382,7 +382,7 @@ namespace ASyncSDK.Office {
                 }), new FileInfo(@"Key.Bin").FullName);
 
 
-            loadAddIn(@".\");
+            
             //按钮控制
             this.btnStart.Enabled = false;
             this.btnStop.Enabled = true;
