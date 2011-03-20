@@ -148,7 +148,7 @@ namespace ASync.eTermAddIn {
             PanelSession.Tag = null;
             PanelSession.Enabled = true;
             txtSIText.Text = string.Empty;
-            PanelSession.Show();
+            PanelSession.Tag = new ConnectSetup();
             comboBoxEx1.Items.Clear();
             if (AsyncStackNet.Instance.ASyncSetup.GroupCollection == null) return;
             foreach (SDKGroup group in AsyncStackNet.Instance.ASyncSetup.GroupCollection) {
