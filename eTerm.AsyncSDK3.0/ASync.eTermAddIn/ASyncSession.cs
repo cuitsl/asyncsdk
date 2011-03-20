@@ -10,6 +10,7 @@ using ASync.MiddleWare;
 using eTerm.AsyncSDK;
 using eTerm.AsyncSDK.Util;
 using System.Text.RegularExpressions;
+using System.Collections;
 
 namespace ASync.eTermAddIn {
     public partial class ASyncSession : BaseAddIn {
@@ -19,11 +20,12 @@ namespace ASync.eTermAddIn {
         public ASyncSession() {
             InitializeComponent();
             this.Load += new EventHandler(
-                    delegate(object sender, EventArgs e) {
+                    delegate(object sender, EventArgs e)
+                    {
                         this.lstSession.Items.Clear();
                         foreach (TSessionSetup Setup in AsyncStackNet.Instance.ASyncSetup.SessionCollection) {
                             SDKGroup group = null;
-                            if (AsyncStackNet.Instance.ASyncSetup.GroupCollection!=null&&!string.IsNullOrEmpty(Setup.GroupCode) && AsyncStackNet.Instance.ASyncSetup.GroupCollection.Contains(new SDKGroup() { groupCode = Setup.GroupCode }))
+                            if (AsyncStackNet.Instance.ASyncSetup.GroupCollection != null && !string.IsNullOrEmpty(Setup.GroupCode) && AsyncStackNet.Instance.ASyncSetup.GroupCollection.Contains(new SDKGroup() { groupCode = Setup.GroupCode }))
                                 group = AsyncStackNet.Instance.ASyncSetup.GroupCollection[
                                     AsyncStackNet.Instance.ASyncSetup.GroupCollection.IndexOf(new SDKGroup() { groupCode = Setup.GroupCode })];
                             ListViewItem Item = new ListViewItem(new string[] {
@@ -36,10 +38,10 @@ namespace ASync.eTermAddIn {
                             Item.Name = Setup.SessionCode;
                             Item.Tag = Setup;
                             this.lstSession.Items.Add(Item);
+                            this.comboTree1.Nodes.Clear();
+                            comboBoxEx3.Items.Clear();
                         }
-                        comboBoxEx3.Items.Clear();
-                    }
-                );
+                    });
         }
 
         /// <summary>
@@ -128,9 +130,15 @@ namespace ASync.eTermAddIn {
                         if (GValue == Setup.GroupCode)
                             comboBoxEx2.SelectedItem = group;
                     }
-
                 PanelSession.Enabled = true;
-                PanelSession.Show();
+                if (!AsyncStackNet.Instance.ASyncSetup.SessionCollection.Contains(new TSessionSetup(Setup.SessionCode)))
+                    return;
+                this.comboTree1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+                this.comboTree1.ValueMember = @"MonthString";
+                this.comboTree1.DisplayMembers = @"MonthString,Traffic,UpdateDate";
+                this.comboTree1.DataSource = AsyncStackNet.Instance.ASyncSetup.SessionCollection[
+                    AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup(Setup.SessionCode))].Traffics;
+                //PanelSession.act
                 break;
             }
         }
@@ -277,6 +285,20 @@ namespace ASync.eTermAddIn {
             Match m = Regex.Match(this.comboBoxEx3.Text, @"^([A-Z0-9]+)\|(\d+)", RegexOptions.Multiline | RegexOptions.IgnoreCase);
             this.comboBoxEx3.Items.Add(new TSessionSetup() { SessionCode = m.Groups[1].Value, Description = string.Format(@"{1} {0}", m.Groups[2].Value, m.Groups[1].Value), SessionPass = m.Groups[2].Value });
             
+        }
+
+        /// <summary>
+        /// Handles the SelectedTabChanged event of the tabControl1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="DevComponents.DotNetBar.TabStripTabChangedEventArgs"/> instance containing the event data.</param>
+        private void tabControl1_SelectedTabChanged(object sender, DevComponents.DotNetBar.TabStripTabChangedEventArgs e) {
+            TSessionSetup Setup = PanelSession.Tag as TSessionSetup;
+            this.comboTree1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.comboTree1.ValueMember = @"MonthString";
+            this.comboTree1.DisplayMembers = @"MonthString,Traffic,UpdateDate";
+            this.comboTree1.DataSource = AsyncStackNet.Instance.ASyncSetup.SessionCollection[
+                AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup(Setup.SessionCode))].Traffics;
         }
         
     }

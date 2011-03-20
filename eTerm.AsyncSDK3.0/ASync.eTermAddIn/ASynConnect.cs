@@ -122,7 +122,15 @@ namespace ASync.eTermAddIn {
                     }
 
                 PanelSession.Enabled = true;
-                PanelSession.Show();
+                if (!AsyncStackNet.Instance.ASyncSetup.AsynCollection.Contains(new ConnectSetup(Setup.Address,Setup.userName)))
+                    return;
+                this.comboTree1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+                this.comboTree1.ValueMember = @"MonthString";
+                this.comboTree1.DisplayMembers = @"MonthString,Traffic,UpdateDate";
+                this.comboTree1.DataSource = AsyncStackNet.Instance.ASyncSetup.AsynCollection[
+                    AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup(Setup.Address, Setup.userName))].Traffics;
+
+                //PanelSession.Show();
                 break;
             }
         }
@@ -223,6 +231,17 @@ namespace ASync.eTermAddIn {
         /// <value>The image icon.</value>
         public override string ImageIcon {
             get { return "Hourglass.png"; }
+        }
+
+        /// <summary>
+        /// Handles the SelectedTabChanged event of the tabControl1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="DevComponents.DotNetBar.TabStripTabChangedEventArgs"/> instance containing the event data.</param>
+        private void tabControl1_SelectedTabChanged(object sender, DevComponents.DotNetBar.TabStripTabChangedEventArgs e) {
+            ConnectSetup Setup = PanelSession.Tag as ConnectSetup;
+            this.comboTree1.DataSource = AsyncStackNet.Instance.ASyncSetup.AsynCollection[
+                AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup(Setup.Address, Setup.userName))].Traffics;
         }
         
     }

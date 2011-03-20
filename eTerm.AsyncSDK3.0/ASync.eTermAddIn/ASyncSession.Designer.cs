@@ -75,6 +75,12 @@
             this.itemContainer4 = new DevComponents.DotNetBar.ItemContainer();
             this.itemContainer7 = new DevComponents.DotNetBar.ItemContainer();
             this.buttonItem5 = new DevComponents.DotNetBar.ButtonItem();
+            this.labelX10 = new DevComponents.DotNetBar.LabelX();
+            this.comboTree1 = new DevComponents.DotNetBar.Controls.ComboTree();
+            this.columnHeader8 = new DevComponents.AdvTree.ColumnHeader();
+            this.columnHeader9 = new DevComponents.AdvTree.ColumnHeader();
+            this.columnHeader10 = new DevComponents.AdvTree.ColumnHeader();
+            this.columnHeader11 = new DevComponents.AdvTree.ColumnHeader();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
@@ -88,19 +94,20 @@
             // tabControl1
             // 
             this.tabControl1.CanReorderTabs = true;
-            this.tabControl1.Controls.Add(this.tabControlPanel1);
             this.tabControl1.Controls.Add(this.PanelSession);
+            this.tabControl1.Controls.Add(this.tabControlPanel1);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedTabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.tabControl1.SelectedTabIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(620, 350);
+            this.tabControl1.Size = new System.Drawing.Size(636, 438);
             this.tabControl1.Style = DevComponents.DotNetBar.eTabStripStyle.Office2007Document;
             this.tabControl1.TabIndex = 1;
             this.tabControl1.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
             this.tabControl1.Tabs.Add(this.tabItem1);
             this.tabControl1.Tabs.Add(this.tabItem2);
+            this.tabControl1.SelectedTabChanged += new DevComponents.DotNetBar.TabStrip.SelectedTabChangedEventHandler(this.tabControl1_SelectedTabChanged);
             // 
             // tabControlPanel1
             // 
@@ -110,7 +117,7 @@
             this.tabControlPanel1.Location = new System.Drawing.Point(0, 23);
             this.tabControlPanel1.Name = "tabControlPanel1";
             this.tabControlPanel1.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanel1.Size = new System.Drawing.Size(620, 327);
+            this.tabControlPanel1.Size = new System.Drawing.Size(636, 415);
             this.tabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(254)))));
             this.tabControlPanel1.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(188)))), ((int)(((byte)(227)))));
             this.tabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -214,7 +221,7 @@
             this.lstSession.FullRowSelect = true;
             this.lstSession.Location = new System.Drawing.Point(1, 1);
             this.lstSession.Name = "lstSession";
-            this.lstSession.Size = new System.Drawing.Size(618, 325);
+            this.lstSession.Size = new System.Drawing.Size(634, 413);
             this.lstSession.TabIndex = 0;
             this.lstSession.UseCompatibleStateImageBehavior = false;
             this.lstSession.View = System.Windows.Forms.View.Details;
@@ -258,6 +265,8 @@
             // PanelSession
             // 
             this.PanelSession.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.PanelSession.Controls.Add(this.comboTree1);
+            this.PanelSession.Controls.Add(this.labelX10);
             this.PanelSession.Controls.Add(this.contextMenuBar2);
             this.PanelSession.Controls.Add(this.comboBoxEx3);
             this.PanelSession.Controls.Add(this.labelX9);
@@ -284,7 +293,7 @@
             this.PanelSession.Location = new System.Drawing.Point(0, 23);
             this.PanelSession.Name = "PanelSession";
             this.PanelSession.Padding = new System.Windows.Forms.Padding(1);
-            this.PanelSession.Size = new System.Drawing.Size(620, 327);
+            this.PanelSession.Size = new System.Drawing.Size(636, 415);
             this.PanelSession.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(254)))));
             this.PanelSession.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(188)))), ((int)(((byte)(227)))));
             this.PanelSession.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -408,6 +417,7 @@
             // labelX8
             // 
             this.labelX8.AutoSize = true;
+            this.labelX8.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
@@ -478,6 +488,7 @@
             // labelX7
             // 
             this.labelX7.AutoSize = true;
+            this.labelX7.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
@@ -510,6 +521,7 @@
             // labelX6
             // 
             this.labelX6.AutoSize = true;
+            this.labelX6.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
@@ -527,9 +539,9 @@
             this.btnSingleSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSingleSave.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
             this.btnSingleSave.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnSingleSave.Location = new System.Drawing.Point(1, 303);
+            this.btnSingleSave.Location = new System.Drawing.Point(1, 391);
             this.btnSingleSave.Name = "btnSingleSave";
-            this.btnSingleSave.Size = new System.Drawing.Size(618, 23);
+            this.btnSingleSave.Size = new System.Drawing.Size(634, 23);
             this.btnSingleSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnSingleSave.TabIndex = 10;
             this.btnSingleSave.Text = "保存用户（&U）";
@@ -542,7 +554,7 @@
             // 
             this.txtDescription.Border.Class = "TextBoxBorder";
             this.txtDescription.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtDescription.Location = new System.Drawing.Point(88, 243);
+            this.txtDescription.Location = new System.Drawing.Point(88, 276);
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(528, 40);
@@ -552,12 +564,13 @@
             // labelX5
             // 
             this.labelX5.AutoSize = true;
+            this.labelX5.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
             this.labelX5.BackgroundStyle.Class = "";
             this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX5.Location = new System.Drawing.Point(18, 243);
+            this.labelX5.Location = new System.Drawing.Point(18, 276);
             this.labelX5.Name = "labelX5";
             this.labelX5.Size = new System.Drawing.Size(68, 16);
             this.labelX5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -581,6 +594,7 @@
             // labelX4
             // 
             this.labelX4.AutoSize = true;
+            this.labelX4.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
@@ -613,6 +627,7 @@
             // labelX3
             // 
             this.labelX3.AutoSize = true;
+            this.labelX3.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
@@ -642,6 +657,7 @@
             // labelX2
             // 
             this.labelX2.AutoSize = true;
+            this.labelX2.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
@@ -670,6 +686,7 @@
             // labelX1
             // 
             this.labelX1.AutoSize = true;
+            this.labelX1.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
@@ -715,13 +732,68 @@
             this.buttonItem5.SplitButton = true;
             this.buttonItem5.Text = "-";
             // 
+            // labelX10
+            // 
+            this.labelX10.AutoSize = true;
+            this.labelX10.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX10.BackgroundStyle.Class = "";
+            this.labelX10.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX10.Location = new System.Drawing.Point(19, 237);
+            this.labelX10.Name = "labelX10";
+            this.labelX10.Size = new System.Drawing.Size(68, 16);
+            this.labelX10.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX10.TabIndex = 21;
+            this.labelX10.Text = "指令流量：";
+            // 
+            // comboTree1
+            // 
+            this.comboTree1.BackColor = System.Drawing.SystemColors.Window;
+            // 
+            // 
+            // 
+            this.comboTree1.BackgroundStyle.Class = "TextBoxBorder";
+            this.comboTree1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.comboTree1.ButtonDropDown.Visible = true;
+            this.comboTree1.Location = new System.Drawing.Point(87, 237);
+            this.comboTree1.Name = "comboTree1";
+            this.comboTree1.Size = new System.Drawing.Size(276, 23);
+            this.comboTree1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.comboTree1.TabIndex = 22;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Name = "columnHeader8";
+            this.columnHeader8.Text = "1";
+            this.columnHeader8.Width.Absolute = 150;
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Name = "columnHeader9";
+            this.columnHeader9.Text = "2";
+            this.columnHeader9.Width.Absolute = 150;
+            // 
+            // columnHeader10
+            // 
+            this.columnHeader10.Name = "columnHeader10";
+            this.columnHeader10.Text = "3";
+            this.columnHeader10.Width.Absolute = 150;
+            // 
+            // columnHeader11
+            // 
+            this.columnHeader11.Name = "columnHeader11";
+            this.columnHeader11.Text = "4";
+            this.columnHeader11.Width.Absolute = 150;
+            // 
             // ASyncSession
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl1);
             this.Name = "ASyncSession";
-            this.Size = new System.Drawing.Size(620, 350);
+            this.Size = new System.Drawing.Size(636, 438);
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabControlPanel1.ResumeLayout(false);
@@ -788,6 +860,12 @@
         private DevComponents.DotNetBar.ButtonItem btnNewSpecial;
         private DevComponents.DotNetBar.ItemContainer itemContainer7;
         private DevComponents.DotNetBar.ButtonItem buttonItem5;
+        private DevComponents.DotNetBar.LabelX labelX10;
+        private DevComponents.DotNetBar.Controls.ComboTree comboTree1;
+        private DevComponents.AdvTree.ColumnHeader columnHeader8;
+        private DevComponents.AdvTree.ColumnHeader columnHeader9;
+        private DevComponents.AdvTree.ColumnHeader columnHeader10;
+        private DevComponents.AdvTree.ColumnHeader columnHeader11;
 
     }
 }
