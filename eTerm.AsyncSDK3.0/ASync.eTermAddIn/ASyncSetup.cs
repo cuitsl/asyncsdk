@@ -10,7 +10,7 @@ using eTerm.AsyncSDK;
 using ASync.MiddleWare;
 
 namespace ASync.eTermAddIn {
-    public partial class ASyncSetup : BaseAddIn {
+    public partial class ASyncSetup : UserControl {
         public ASyncSetup() {
             InitializeComponent();
             this.Load += new EventHandler(
@@ -50,7 +50,7 @@ namespace ASync.eTermAddIn {
                 AsyncStackNet.Instance.ASyncSetup.AutoReconnect = chkReconnect.Checked;
                 AsyncStackNet.Instance.ASyncSetup.MaxReconnect = integerInput1.Value;
                 AsyncStackNet.Instance.ASyncSetup.StatisticalFrequency = txtMaxReconnect.Value;
-                AsyncStackNet.Instance.ASyncSetup.PlugInPath = textBoxX1.Text;
+                AsyncStackNet.Instance.ASyncSetup.PlugInPath = txtPlugInPath.Text;
                 AsyncStackNet.Instance.ASyncSetup.SequenceRate = integerInput2.Value;
                 AsyncStackNet.Instance.ASyncSetup.SequenceDirective = textBoxX1.Text.Trim();
                 AsyncStackNet.Instance.ASyncSetup.SequenceRate = integerInput2.Value;
