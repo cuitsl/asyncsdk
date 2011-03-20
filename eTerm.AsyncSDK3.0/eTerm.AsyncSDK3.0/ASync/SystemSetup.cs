@@ -82,5 +82,23 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         /// <value>The external port.</value>
         public int? ExternalPort { get; set; }
+
+        /// <summary>
+        /// 配置连接维护频率(分钟).
+        /// </summary>
+        /// <value>The sequence rate.</value>
+        public int? SequenceRate { get; set; }
+
+        /// <summary>
+        /// 配置连接维护指令.
+        /// </summary>
+        /// <value>The sequence directive.</value>
+        public string SequenceDirective { get; set; }
+
+        /// <summary>
+        /// 维护类型(true:字符串方式;false:字节方式).
+        /// </summary>
+        /// <value>The type of the sequence.</value>
+        public bool? SequenceType { get; set; }
     }
 }
