@@ -158,7 +158,7 @@ namespace ASync.eTermAddIn {
             PanelSession.Enabled = true;
             //PanelSession.Show();
             comboBoxEx2.Items.Clear();
-            PanelSession.Tag = new TSessionSetup();
+            PanelSession.Tag = new TSessionSetup() { Traffics=new List<SocketTraffic>() };
             if (AsyncStackNet.Instance.ASyncSetup.GroupCollection == null) return;
             foreach (SDKGroup group in AsyncStackNet.Instance.ASyncSetup.GroupCollection) {
                 comboBoxEx2.Items.Add(new { Text = group.groupName, Value = group.groupCode });
@@ -198,7 +198,7 @@ namespace ASync.eTermAddIn {
             foreach (string Cmd in this.comboBoxEx1.Items) {
                 Setup.TSessionForbidCmd.Add(Cmd);
             }
-            if (this.PanelSession.Tag == null)
+            if (!AsyncStackNet.Instance.ASyncSetup.SessionCollection.Contains(Setup))
                 AsyncStackNet.Instance.ASyncSetup.SessionCollection.Add(Setup);
             else{
                 int indexOf = AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(this.PanelSession.Tag as TSessionSetup);
