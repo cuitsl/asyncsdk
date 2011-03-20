@@ -54,6 +54,11 @@ namespace eTerm.AsyncSDK {
         private InvokePlugInCallback __RateExecute;
         private string __SetupFile = string.Empty;
         private Timer __rateAsync;
+
+        /// <summary>
+        /// Occurs when [on rate event].
+        /// </summary>
+        public event EventHandler OnRateEvent;
         #endregion
 
         #region 构造函数
@@ -509,7 +514,8 @@ namespace eTerm.AsyncSDK {
                                     new TimerCallback(
                                             delegate(object sender)
                                             {
-                                                //this.SendPacket(__DefendStatement);
+                                                if (OnRateEvent != null)
+                                                    OnRateEvent(sender, EventArgs.Empty);
                                             }),
                                         null, (this.ASyncSetup.StatisticalFrequency ?? 10 * 1000 * 60), (this.ASyncSetup.StatisticalFrequency ?? 10 * 1000 * 60));
             AppendAsync();
@@ -564,8 +570,8 @@ namespace eTerm.AsyncSDK {
         /// <summary>
         /// Rates the update.
         /// </summary>
-        private void RateUpdate() { 
-                
+        private void RateUpdate() {
+            ASyncSetup.XmlSerialize(CrypterKey, ASyncSetupFile);
         }
 
         /// <summary>
