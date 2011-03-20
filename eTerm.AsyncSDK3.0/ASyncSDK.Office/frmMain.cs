@@ -213,6 +213,14 @@ namespace ASyncSDK.Office {
                     }
                 );
 
+            AsyncStackNet.Instance.OnRateEvent += new EventHandler(
+                    delegate(object sender, EventArgs e) {
+                        AsyncStackNet.Instance.BeginRateUpdate(new AsyncCallback(delegate(IAsyncResult iar) {
+                            AsyncStackNet.Instance.EndRateUpdate(iar);
+                        }));
+                    }
+                );
+
             AsyncStackNet.Instance.OnAsyncDisconnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
