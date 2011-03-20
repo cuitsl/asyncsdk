@@ -607,6 +607,7 @@ namespace eTerm.AsyncSDK {
 
                 SocketTraffic Traffic = Setup.Traffics[Setup.Traffics.IndexOf(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") })];
                 Traffic.Traffic = ASync.TotalCount + (Traffic.Traffic ?? 0);
+                Traffic.UpdateDate = DateTime.Now;
             }
             catch { }
         }
