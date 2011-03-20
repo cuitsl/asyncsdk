@@ -500,7 +500,7 @@
             this.txtFlow.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
             this.txtFlow.Location = new System.Drawing.Point(88, 162);
             this.txtFlow.MaxValue = 100000;
-            this.txtFlow.MinValue = 500;
+            this.txtFlow.MinValue = 10;
             this.txtFlow.Name = "txtFlow";
             this.txtFlow.ShowUpDown = true;
             this.txtFlow.Size = new System.Drawing.Size(58, 20);
