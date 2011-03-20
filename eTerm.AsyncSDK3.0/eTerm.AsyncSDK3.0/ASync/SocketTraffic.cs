@@ -25,7 +25,7 @@ namespace eTerm.AsyncSDK {
         /// Gets or sets the traffic.
         /// </summary>
         /// <value>The traffic.</value>
-        public long? Traffic { get; set; }
+        public double? Traffic { get; set; }
 
         /// <summary>
         /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.

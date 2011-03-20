@@ -503,6 +503,12 @@ namespace eTerm.AsyncSDK {
             __asyncServer.OnTSessionClosed += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Session> e)
                     {
+                        TSessionSetup Setup= this.ASyncSetup.SessionCollection[this.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup() { SessionCode=e.Session.userName })];
+                        if (!Setup.Traffics.Contains(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") }))
+                            Setup.Traffics.Add(new SocketTraffic() { MonthString=DateTime.Now.ToString(@"yyyyMM") });
+
+                        SocketTraffic Traffic= Setup.Traffics[Setup.Traffics.IndexOf(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") })];
+                        Traffic.Traffic = e.Session.TotalCount + (Traffic.Traffic ?? 0);
                         if (this.OnTSessionClosed != null)
                             this.OnTSessionClosed(sender, e);
                         if (e.Session.Async443 == null) return;
