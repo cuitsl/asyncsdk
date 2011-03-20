@@ -185,7 +185,7 @@ namespace ASyncSDK.Office {
             //Key = Key.DeXmlSerialize(keys, Buffer);
 
             AsyncStackNet.Instance.CrypterKey = TEACrypter.GetDefaultKey; 
-            AsyncStackNet.Instance.ASyncSetupFile = new FileInfo(@"SETUP.BIN").FullName;
+            AsyncStackNet.Instance.ASyncSetupFile = new FileInfo(@"Setup.BIN").FullName;
 
             AsyncStackNet.Instance.AfterIntercept = new InterceptCallback(delegate(AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session> e)
             {
