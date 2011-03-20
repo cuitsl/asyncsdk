@@ -276,6 +276,24 @@ namespace ASyncSDK.Office {
                 s.UnpakcetSession(p);
                 TSessionSetup TSession = AsyncStackNet.Instance.ASyncSetup.SessionCollection.Single<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
                 if (TSession == null) return false;
+                if (
+                    AsyncStackNet.Instance.ASyncSetup.SessionCollection.Contains(new TSessionSetup() { SessionCode=s.userName })
+                    &&
+                    AsyncStackNet.Instance.ASyncSetup.SessionCollection[
+                        AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup() { SessionCode=s.userName })
+                        ].Traffics.Contains(new SocketTraffic(){ MonthString=DateTime.Now.ToString(@"yyyyMM")})
+                    &&
+                    AsyncStackNet.Instance.ASyncSetup.SessionCollection[
+                        AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup() { SessionCode = s.userName })
+                        ].Traffics[
+                            AsyncStackNet.Instance.ASyncSetup.SessionCollection[
+                        AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup() { SessionCode = s.userName })
+                        ].Traffics.IndexOf(new SocketTraffic() { })].Traffic >= AsyncStackNet.Instance.ASyncSetup.SessionCollection[
+                        AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup() { SessionCode = s.userName })
+                        ].FlowRate
+                    ) {
+                    return false;
+                }
                 s.TSessionInterval = TSession.SessionExpire;
                 s.UnallowableReg = TSession.ForbidCmdReg;
                 s.SpecialIntervalList = TSession.SpecialIntervalList;
