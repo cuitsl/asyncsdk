@@ -63,6 +63,7 @@
     <Compile Include="AsyncStackNet.cs" />
     <Compile Include="ASync\ConnectSetup.cs" />
     <Compile Include="ASync\PlugInSetup.cs" />
+    <Compile Include="ASync\SocketTraffic.cs" />
     <Compile Include="ASync\SystemSetup.cs" />
     <Compile Include="ASync\TSessionSetup.cs" />
     <Compile Include="Base\AsyncBase.cs" />
