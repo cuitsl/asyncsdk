@@ -15,9 +15,9 @@ namespace ASync.eTermAddIn {
             InitializeComponent();
             this.Load += new EventHandler(
                     delegate(object sender, EventArgs e) {
-                        chkAllowPlugIn.Checked = AsyncStackNet.Instance.ASyncSetup.AllowPlugIn??true;
+                        chkAllowPlugIn.Checked = AsyncStackNet.Instance.ASyncSetup.AllowPlugIn??false;
                         txtPort.Value = AsyncStackNet.Instance.ASyncSetup.ExternalPort ?? 350;
-                        chkReconnect.Checked = AsyncStackNet.Instance.ASyncSetup.AutoReconnect??true;
+                        chkReconnect.Checked = AsyncStackNet.Instance.ASyncSetup.AutoReconnect??false;
                         integerInput1.Value = AsyncStackNet.Instance.ASyncSetup.MaxReconnect ?? 10;
                         txtMaxReconnect.Value = AsyncStackNet.Instance.ASyncSetup.StatisticalFrequency ?? 5;
                         txtPlugInPath.Text = AsyncStackNet.Instance.ASyncSetup.PlugInPath;

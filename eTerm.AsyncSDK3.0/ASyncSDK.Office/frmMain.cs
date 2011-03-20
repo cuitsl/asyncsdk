@@ -386,7 +386,7 @@ namespace ASyncSDK.Office {
                         else {
                             //激活配置
                             AsyncStackNet.Instance.BeginAsync();
-                            if (AsyncStackNet.Instance.ASyncSetup.AllowPlugIn ?? false) {
+                            if ((AsyncStackNet.Instance.ASyncSetup.AllowPlugIn ?? false)) {
                                 AsyncStackNet.Instance.BeginReflectorPlugIn(new AsyncCallback(delegate(IAsyncResult iar1)
                                 {
                                     AsyncStackNet.Instance.EndReflectorPlugIn(iar1);
