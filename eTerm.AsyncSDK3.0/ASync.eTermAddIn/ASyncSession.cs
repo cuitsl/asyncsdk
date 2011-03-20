@@ -156,8 +156,9 @@ namespace ASync.eTermAddIn {
             txtSessionName.Text = string.Empty;
             PanelSession.Tag = null;
             PanelSession.Enabled = true;
-            PanelSession.Show();
+            //PanelSession.Show();
             comboBoxEx2.Items.Clear();
+            PanelSession.Tag = new TSessionSetup();
             if (AsyncStackNet.Instance.ASyncSetup.GroupCollection == null) return;
             foreach (SDKGroup group in AsyncStackNet.Instance.ASyncSetup.GroupCollection) {
                 comboBoxEx2.Items.Add(new { Text = group.groupName, Value = group.groupCode });
