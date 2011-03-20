@@ -7,9 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using eTerm.AsyncSDK;
+using ASync.MiddleWare;
 
 namespace ASync.eTermAddIn {
-    public partial class ASyncSetup : UserControl {
+    public partial class ASyncSetup : BaseAddIn {
         public ASyncSetup() {
             InitializeComponent();
         }
@@ -44,6 +45,22 @@ namespace ASync.eTermAddIn {
             catch (Exception ex) {
                 MessageBox.Show(string.Format(@"发生系统错误：{0}",ex.Message), @"系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        /// <summary>
+        /// Gets the name of the button.
+        /// </summary>
+        /// <value>The name of the button.</value>
+        public override string ButtonName {
+            get { return "系统配置管理"; }
+        }
+
+        /// <summary>
+        /// Gets the image icon.
+        /// </summary>
+        /// <value>The image icon.</value>
+        public override string ImageIcon {
+            get { return "Hourglass.png"; }
         }
     }
 }

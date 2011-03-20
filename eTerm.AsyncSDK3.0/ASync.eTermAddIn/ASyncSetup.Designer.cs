@@ -48,6 +48,22 @@
             this.tabControlPanel2 = new DevComponents.DotNetBar.TabControlPanel();
             this.tabItem3 = new DevComponents.DotNetBar.TabItem(this.components);
             this.tabControlPanel3 = new DevComponents.DotNetBar.TabControlPanel();
+            this.comboTree1 = new DevComponents.DotNetBar.Controls.ComboTree();
+            this.columnHeader1 = new DevComponents.AdvTree.ColumnHeader();
+            this.columnHeader2 = new DevComponents.AdvTree.ColumnHeader();
+            this.columnHeader3 = new DevComponents.AdvTree.ColumnHeader();
+            this.columnHeader4 = new DevComponents.AdvTree.ColumnHeader();
+            this.columnHeader5 = new DevComponents.AdvTree.ColumnHeader();
+            this.columnHeader6 = new DevComponents.AdvTree.ColumnHeader();
+            this.columnHeader7 = new DevComponents.AdvTree.ColumnHeader();
+            this.node1 = new DevComponents.AdvTree.Node();
+            this.node2 = new DevComponents.AdvTree.Node();
+            this.node3 = new DevComponents.AdvTree.Node();
+            this.node4 = new DevComponents.AdvTree.Node();
+            this.node5 = new DevComponents.AdvTree.Node();
+            this.node6 = new DevComponents.AdvTree.Node();
+            this.node7 = new DevComponents.AdvTree.Node();
+            this.node8 = new DevComponents.AdvTree.Node();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
@@ -55,13 +71,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtMaxReconnect)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
+            this.tabControlPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.CanReorderTabs = true;
-            this.tabControl1.Controls.Add(this.tabControlPanel3);
             this.tabControl1.Controls.Add(this.tabControlPanel2);
+            this.tabControl1.Controls.Add(this.tabControlPanel3);
             this.tabControl1.Controls.Add(this.tabControlPanel1);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -361,6 +378,7 @@
             // 
             // tabControlPanel2
             // 
+            this.tabControlPanel2.Controls.Add(this.comboTree1);
             this.tabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlPanel2.Location = new System.Drawing.Point(0, 26);
             this.tabControlPanel2.Name = "tabControlPanel2";
@@ -399,6 +417,111 @@
             this.tabControlPanel3.TabIndex = 3;
             this.tabControlPanel3.TabItem = this.tabItem3;
             // 
+            // comboTree1
+            // 
+            this.comboTree1.BackColor = System.Drawing.SystemColors.Window;
+            // 
+            // 
+            // 
+            this.comboTree1.BackgroundStyle.Class = "TextBoxBorder";
+            this.comboTree1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.comboTree1.ButtonDropDown.Visible = true;
+            this.comboTree1.Columns.Add(this.columnHeader1);
+            this.comboTree1.Columns.Add(this.columnHeader2);
+            this.comboTree1.Columns.Add(this.columnHeader3);
+            this.comboTree1.Columns.Add(this.columnHeader4);
+            this.comboTree1.Columns.Add(this.columnHeader5);
+            this.comboTree1.Columns.Add(this.columnHeader6);
+            this.comboTree1.Columns.Add(this.columnHeader7);
+            this.comboTree1.Location = new System.Drawing.Point(65, 121);
+            this.comboTree1.Name = "comboTree1";
+            this.comboTree1.Nodes.AddRange(new DevComponents.AdvTree.Node[] {
+            this.node1,
+            this.node2,
+            this.node3,
+            this.node4,
+            this.node5,
+            this.node6,
+            this.node7,
+            this.node8});
+            this.comboTree1.Size = new System.Drawing.Size(286, 43);
+            this.comboTree1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.comboTree1.TabIndex = 0;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Name = "columnHeader1";
+            this.columnHeader1.Text = "Column";
+            this.columnHeader1.Width.Absolute = 150;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Name = "columnHeader2";
+            this.columnHeader2.Text = "Column";
+            this.columnHeader2.Width.Absolute = 150;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Name = "columnHeader3";
+            this.columnHeader3.Text = "Column";
+            this.columnHeader3.Width.Absolute = 150;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Name = "columnHeader4";
+            this.columnHeader4.Text = "Column";
+            this.columnHeader4.Width.Absolute = 150;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Name = "columnHeader5";
+            this.columnHeader5.Text = "Column";
+            this.columnHeader5.Width.Absolute = 150;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Name = "columnHeader6";
+            this.columnHeader6.Text = "Column";
+            this.columnHeader6.Width.Absolute = 150;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Name = "columnHeader7";
+            this.columnHeader7.Text = "Column";
+            this.columnHeader7.Width.Absolute = 150;
+            // 
+            // node1
+            // 
+            this.node1.Name = "node1";
+            // 
+            // node2
+            // 
+            this.node2.Name = "node2";
+            // 
+            // node3
+            // 
+            this.node3.Name = "node3";
+            // 
+            // node4
+            // 
+            this.node4.Name = "node4";
+            // 
+            // node5
+            // 
+            this.node5.Name = "node5";
+            // 
+            // node6
+            // 
+            this.node6.Name = "node6";
+            // 
+            // node7
+            // 
+            this.node7.Name = "node7";
+            // 
+            // node8
+            // 
+            this.node8.Name = "node8";
+            // 
             // ASyncSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -414,6 +537,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtMaxReconnect)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.tabControlPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -444,5 +568,21 @@
         private DevComponents.DotNetBar.TabItem tabItem2;
         private DevComponents.DotNetBar.TabControlPanel tabControlPanel3;
         private DevComponents.DotNetBar.TabItem tabItem3;
+        private DevComponents.DotNetBar.Controls.ComboTree comboTree1;
+        private DevComponents.AdvTree.ColumnHeader columnHeader1;
+        private DevComponents.AdvTree.ColumnHeader columnHeader2;
+        private DevComponents.AdvTree.ColumnHeader columnHeader3;
+        private DevComponents.AdvTree.ColumnHeader columnHeader4;
+        private DevComponents.AdvTree.ColumnHeader columnHeader5;
+        private DevComponents.AdvTree.ColumnHeader columnHeader6;
+        private DevComponents.AdvTree.ColumnHeader columnHeader7;
+        private DevComponents.AdvTree.Node node1;
+        private DevComponents.AdvTree.Node node2;
+        private DevComponents.AdvTree.Node node3;
+        private DevComponents.AdvTree.Node node4;
+        private DevComponents.AdvTree.Node node5;
+        private DevComponents.AdvTree.Node node6;
+        private DevComponents.AdvTree.Node node7;
+        private DevComponents.AdvTree.Node node8;
     }
 }
