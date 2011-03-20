@@ -21,6 +21,8 @@ namespace ASync.eTermAddIn {
                         integerInput1.Value = AsyncStackNet.Instance.ASyncSetup.MaxReconnect ?? 10;
                         txtMaxReconnect.Value = AsyncStackNet.Instance.ASyncSetup.StatisticalFrequency ?? 5;
                         txtPlugInPath.Text = AsyncStackNet.Instance.ASyncSetup.PlugInPath;
+                        textBoxX1.Text = AsyncStackNet.Instance.ASyncSetup.SequenceDirective;
+                        integerInput2.Value = AsyncStackNet.Instance.ASyncSetup.SequenceRate ?? 5;
                     }
                 );
         }
@@ -51,6 +53,7 @@ namespace ASync.eTermAddIn {
                 AsyncStackNet.Instance.ASyncSetup.PlugInPath = folderBrowserDialog1.SelectedPath;
                 AsyncStackNet.Instance.ASyncSetup.SequenceRate = integerInput2.Value;
                 AsyncStackNet.Instance.ASyncSetup.SequenceDirective = textBoxX1.Text.Trim();
+                AsyncStackNet.Instance.ASyncSetup.SequenceRate = integerInput2.Value;
                 AsyncStackNet.Instance.ASyncSetup.XmlSerialize(AsyncStackNet.Instance.CrypterKey, AsyncStackNet.Instance.ASyncSetupFile);
                 MessageBox.Show(@"系统配置保存成功，将在下次启动时起效！", @"系统提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

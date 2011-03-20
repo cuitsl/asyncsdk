@@ -282,6 +282,9 @@ namespace eTerm.AsyncSDK {
             if (__asyncList.Count >= LicenceManager.Instance.LicenceBody.MaxAsync) return;
             #endregion
 
+            Async.Instruction =string.IsNullOrEmpty( AsyncStackNet.Instance.ASyncSetup.SequenceDirective)?"CP":AsyncStackNet.Instance.ASyncSetup.SequenceDirective;
+            Async.IgInterval = AsyncStackNet.Instance.ASyncSetup.SequenceRate ?? 5;
+
             #region OnReadPacket
             Async.OnReadPacket += new EventHandler<eTerm.AsyncSDK.AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> e)
