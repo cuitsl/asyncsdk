@@ -94,11 +94,5 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         /// <value>The sequence directive.</value>
         public string SequenceDirective { get; set; }
-
-        /// <summary>
-        /// 维护类型(true:字符串方式;false:字节方式).
-        /// </summary>
-        /// <value>The type of the sequence.</value>
-        public bool? SequenceType { get; set; }
     }
 }
