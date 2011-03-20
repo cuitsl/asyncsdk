@@ -27,7 +27,7 @@ namespace AsyncAPI3._0Tst {
                 br.Close();
             }
 
-            SystemSetup setup = new SystemSetup().DeXmlSerialize(new byte[] { }, buffer);
+            SystemSetup setup = new SystemSetup().DeXmlSerialize(eTerm.AsyncSDK.Util.TEACrypter.GetDefaultKey, buffer);
 
             setup.XmlSerialize(eTerm.AsyncSDK.Util.TEACrypter.GetDefaultKey, @"C:\Setup.Bin");
 

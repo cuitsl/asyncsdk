@@ -184,7 +184,7 @@ namespace ASyncSDK.Office {
             //byte[] Buffer = new AsyncLicenceKey().XmlSerialize(keys, @"C:\XIAOFANG.Bin");
             //Key = Key.DeXmlSerialize(keys, Buffer);
 
-
+            AsyncStackNet.Instance.CrypterKey = TEACrypter.GetDefaultKey;
             AsyncStackNet.Instance.ASyncSetupFile = new FileInfo(@"SETUP.BIN").FullName;
 
             AsyncStackNet.Instance.AfterIntercept = new InterceptCallback(delegate(AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session> e)
@@ -205,7 +205,6 @@ namespace ASyncSDK.Office {
             //AsyncStackNet.Instance.StackNetPoint = new IPEndPoint(IPAddress.Any, 360);
             AsyncStackNet.Instance.RID = 0x51;
             AsyncStackNet.Instance.SID = 0x27;
-            AsyncStackNet.Instance.CrypterKey = TEACrypter.GetDefaultKey;
             AsyncStackNet.Instance.OnExecuteException += new EventHandler<ErrorEventArgs>(
                     delegate(object sender, ErrorEventArgs e)
                     {
