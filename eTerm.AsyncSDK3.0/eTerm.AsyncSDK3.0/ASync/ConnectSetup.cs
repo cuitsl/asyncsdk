@@ -151,7 +151,11 @@ namespace eTerm.AsyncSDK {
         /// The <paramref name="obj"/> parameter is null.
         /// </exception>
         public override bool Equals(object obj) {
-            return (obj as ConnectSetup).userName == this.userName;
+            return 
+                (obj as ConnectSetup).userName == this.userName
+                &&
+                (obj as ConnectSetup).Address==this.Address
+                ;
         }
 
         /// <summary>
