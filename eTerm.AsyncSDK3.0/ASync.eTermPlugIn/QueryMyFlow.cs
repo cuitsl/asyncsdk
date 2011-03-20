@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using eTerm.AsyncSDK.Base;
 using eTerm.AsyncSDK.Net;
+using eTerm.AsyncSDK;
 
 namespace ASync.eTermPlugIn {
     /// <summary>
@@ -19,11 +20,23 @@ namespace ASync.eTermPlugIn {
         /// <param name="OutPacket">出口数据包.</param>
         /// <param name="Key">The key.</param>
         protected override void ExecutePlugIn(eTerm.AsyncSDK.Core.eTerm363Session SESSION, eTerm.AsyncSDK.Core.eTerm363Packet InPacket, eTerm.AsyncSDK.Core.eTerm363Packet OutPacket, eTerm.AsyncSDK.AsyncLicenceKey Key) {
-            ContextInstance.Instance.providerName = Key.providerName;
-            ContextInstance.Instance.connectionString = Key.connectionString;
-            DateTime? start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            DateTime? end = start.Value.AddMonths(1);//.AddDays(-1);
-            SESSION.SendPacket(__eTerm443Packet.BuildSessionPacket(SESSION.SID, SESSION.RID, string.Format(@"{0}  至  {1}   流量为:{2} 条有效指令", start, end, Async_Log.Find(Log => Log.LogDate >= start && Log.LogDate <= end && Log.ClientSession == SESSION.userName).Count)));
+            SocketTraffic Traffic=new SocketTraffic(DateTime.Now.ToString("yyyyMM")){ Traffic=0};
+            if (
+                AsyncStackNet.Instance.ASyncSetup.SessionCollection.Contains(new TSessionSetup(SESSION.userName))
+                &&
+                AsyncStackNet.Instance.ASyncSetup.SessionCollection[
+                    AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup(SESSION.userName))
+                    ].Traffics.Contains(new SocketTraffic(DateTime.Now.ToString(@"yyyyMM")))
+                ) {
+               
+                Traffic=AsyncStackNet.Instance.ASyncSetup.SessionCollection[
+                    AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup(SESSION.userName))
+                    ].Traffics[
+                        AsyncStackNet.Instance.ASyncSetup.SessionCollection[
+                    AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup(SESSION.userName))
+                    ].Traffics.IndexOf(new SocketTraffic(DateTime.Now.ToString(@"yyyyMM")))];
+            }
+            SESSION.SendPacket(__eTerm443Packet.BuildSessionPacket(SESSION.SID, SESSION.RID, string.Format(@"{0}  总流量为:{1} 条 最后更新 {2}",Traffic.MonthString,Traffic.Traffic,Traffic.UpdateDate )));
         }
 
         /// <summary>
