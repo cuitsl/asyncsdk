@@ -54,7 +54,6 @@ namespace eTerm.AsyncSDK {
         private InvokePlugInCallback __RateExecute;
         private string __SetupFile = string.Empty;
         private Timer __rateAsync;
-
         private eTerm443Async __CoreASync = null;
 
         /// <summary>
@@ -421,11 +420,12 @@ namespace eTerm.AsyncSDK {
                 (AsyncStackNet.Instance.ASyncSetup.CoreServerPort??0)==0
             )
                 throw new NotImplementedException(@"系统缺少中心指令服务器相关设置,请联系发开商!");
+            ///TODO:初始化认证连接，认证频率计时器为：30分钟
             __CoreASync = new eTerm443Async(
                                 ASyncSetup.CoreServer,
                                 ASyncSetup.CoreServerPort.Value,
                                 ASyncSetup.CoreAccount,
-                                ASyncSetup.CorePass, 0x00, 0x00) { IsSsl = false, Instruction = @"!UpdateDate", IgInterval=ASyncSetup.SequenceRate??30 };
+                                ASyncSetup.CorePass, 0x00, 0x00) { IsSsl = false, Instruction = @"!UpdateDate", IgInterval=30 };
             __CoreASync.OnAsyncDisconnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e) {
                         if (this.OnCoreDisconnect != null)
@@ -620,6 +620,9 @@ namespace eTerm.AsyncSDK {
                                                     OnRateEvent(sender, EventArgs.Empty);
                                             }),
                                         null, (this.ASyncSetup.StatisticalFrequency ?? 10) * 1000 * 60, (this.ASyncSetup.StatisticalFrequency ?? 10) * 1000 * 60);
+
+            ConnectCore();
+            
             AppendAsync();
         }
 
