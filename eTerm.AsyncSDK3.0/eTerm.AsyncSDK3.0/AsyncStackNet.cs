@@ -55,7 +55,7 @@ namespace eTerm.AsyncSDK {
         private string __SetupFile = string.Empty;
         private Timer __rateAsync;
 
-        private eTerm363Session __CoreASync = null;
+        private eTerm443Async __CoreASync = null;
 
         /// <summary>
         /// Occurs when [on rate event].
@@ -199,6 +199,17 @@ namespace eTerm.AsyncSDK {
         /// 导常通知 .
         /// </summary>
         public event EventHandler<ErrorEventArgs> OnExecuteException;
+
+        /// <summary>
+        /// 与中心服务器断开连接事件通知.
+        /// </summary>
+        public event EventHandler<AsyncEventArgs<eTerm443Async>> OnCoreDisconnect;
+
+        /// <summary>
+        /// 与中心服务器断开连接事件通知.
+        /// </summary>
+        public event EventHandler<AsyncEventArgs<eTerm443Async>> OnCoreConnect;
+
 
         /// <summary>
         /// Fires the excetion.
@@ -399,10 +410,25 @@ namespace eTerm.AsyncSDK {
                 (AsyncStackNet.Instance.ASyncSetup.CoreServerPort??0)==0
             )
                 throw new NotImplementedException(@"系统缺少中心指令服务器相关设置,请联系发开商!");
-            __CoreASync = new eTerm363Session(AsyncStackNet.Instance.ASyncSetup.CoreAccount,AsyncStackNet.Instance.ASyncSetup.CorePass){
-                                 IsSsl=false,
-                                 RemoteEP=new IPEndPoint(IPAddress.Parse(AsyncStackNet.Instance.ASyncSetup.CoreServer),AsyncStackNet.Instance.ASyncSetup.CoreServerPort.Value),
-                            };
+            __CoreASync = new eTerm443Async(
+                                ASyncSetup.CoreServer,
+                                ASyncSetup.CoreServerPort.Value,
+                                ASyncSetup.CoreAccount,
+                                ASyncSetup.CorePass, 0x00, 0x00) { IsSsl = false, Instruction = @"!UpdateDate", IgInterval=ASyncSetup.SequenceRate??30 };
+            __CoreASync.OnAsyncDisconnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
+                    delegate(object sender, AsyncEventArgs<eTerm443Async> e) {
+                        if (this.OnCoreDisconnect != null)
+                            this.OnCoreDisconnect(sender, e);
+                    }
+                );
+            __CoreASync.OnAsynConnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
+                    delegate(object sender, AsyncEventArgs<eTerm443Async> e)
+                    {
+                        if (this.OnCoreConnect != null)
+                            this.OnCoreConnect(sender, e);
+                    }
+                );
+            __CoreASync.Connect();
         }
         #endregion
 
