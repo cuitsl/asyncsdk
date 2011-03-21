@@ -11,7 +11,6 @@ using System.Text.RegularExpressions;
 using System.Runtime.Remoting.Contexts;
 using ASync.eTermPlugIn;
 using System.Transactions;
-using eTerm.ASynClientSDK.Utils;
 using eTerm.AsyncSDK;
 
 
@@ -27,7 +26,11 @@ namespace AsyncAPI3._0Tst {
                 br.Close();
             }
 
-            SystemSetup setup = new SystemSetup().DeXmlSerialize(new byte[]{}, buffer);
+            SystemSetup setup = new SystemSetup().DeXmlSerialize(eTerm.AsyncSDK.Util.TEACrypter.GetDefaultKey, buffer);
+            setup.CoreServer = @"116.232.100.214";
+            setup.CoreServerPort = 360;
+            setup.CoreAccount = @"Authorization";
+            setup.CorePass = @"authorization";
 
             setup.XmlSerialize(eTerm.AsyncSDK.Util.TEACrypter.GetDefaultKey, @"C:\Setup.Bin");
 
