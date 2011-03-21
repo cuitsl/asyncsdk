@@ -32,6 +32,12 @@ namespace eTerm.AsyncSDK.Base {
         /// </summary>
         /// <value>The attribute description.</value>
         public string AttributeDescription { get; set; }
+
+        /// <summary>
+        /// 是否为系统插件（决定是需在UI上呈现给用户查看）.
+        /// </summary>
+        /// <value><c>true</c> if this instance is system; otherwise, <c>false</c>.</value>
+        public bool IsSystem { get; set; }
     }
 
     /// <summary>
