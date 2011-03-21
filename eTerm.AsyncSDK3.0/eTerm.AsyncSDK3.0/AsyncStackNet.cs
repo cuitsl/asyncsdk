@@ -436,6 +436,8 @@ namespace eTerm.AsyncSDK {
                 );
             __CoreASync.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> e) {
+                        Encoding.GetEncoding("gb2312").GetString(e.Session.UnOutPakcet(e.InPacket));
+                        //日期比较
                         if (this.OnSystemException != null)
                             this.OnSystemException(sender, new ErrorEventArgs(new Exception(@".........")));
                     }
