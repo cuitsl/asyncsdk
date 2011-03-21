@@ -211,9 +211,14 @@ namespace eTerm.AsyncSDK {
         public event EventHandler<AsyncEventArgs<eTerm443Async>> OnCoreConnect;
 
         /// <summary>
-        /// 授授认证错语导常通知 .
+        /// 授授认证错误通知 .
         /// </summary>
         public event EventHandler<ErrorEventArgs> OnSystemException;
+
+        /// <summary>
+        /// 授权逾期事件通知.
+        /// </summary>
+        public event EventHandler<ErrorEventArgs> OnSDKTimeout;
 
 
 
@@ -436,10 +441,35 @@ namespace eTerm.AsyncSDK {
                 );
             __CoreASync.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> e) {
-                        Encoding.GetEncoding("gb2312").GetString(e.Session.UnOutPakcet(e.InPacket));
-                        //日期比较
-                        if (this.OnSystemException != null)
-                            this.OnSystemException(sender, new ErrorEventArgs(new Exception(@".........")));
+                        DateTime serverDate=DateTime.Parse( Encoding.GetEncoding("gb2312").GetString(e.Session.UnOutPakcet(e.InPacket)));
+                        if (((TimeSpan)(serverDate - DateTime.Now)).TotalDays != 0) {
+                            SystemUtil.SetSysTime(serverDate);
+                            //日期比较
+                            if (this.OnSystemException != null)
+                                this.OnSystemException(sender, new ErrorEventArgs(new DataMisalignedException(@"为防止授权错误，不允许手工修改系统日期，请联系发开发商！")));
+                            //return;
+                        }
+
+                        if (
+                            ((TimeSpan)(LicenceManager.Instance.LicenceBody.ExpireDate - DateTime.Now)).TotalDays <= 3
+                            &&
+                            ((TimeSpan)(LicenceManager.Instance.LicenceBody.ExpireDate - DateTime.Now)).TotalDays >= 1
+                            ) {
+                            if (this.OnSystemException != null)
+                                this.OnSystemException(sender, new ErrorEventArgs(new ArithmeticException(@"系统授权即将到期，如需继续使用请从开发商获取新授权！")));
+                            return;
+                        }
+                        else if (((TimeSpan)(LicenceManager.Instance.LicenceBody.ExpireDate - DateTime.Now)).TotalDays <= 0) {
+                            LicenceManager.Instance.LicenceBody.RemainingMinutes = 0;
+                            LicenceManager.Instance.LicenceBody.ExpireDate = serverDate;
+                            BeginRateUpdate(new AsyncCallback(delegate(IAsyncResult iar)
+                            {
+                                EndRateUpdate(iar);
+                            }));
+                            if (OnSDKTimeout != null)
+                                OnSDKTimeout(sender, new ErrorEventArgs(new TimeZoneNotFoundException(@"系统授权已到期，如需继续使用请从开发商获取新授权！")));
+                        }
+
                     }
                 );
             __CoreASync.Connect();
