@@ -20,6 +20,7 @@ namespace eTerm.AsyncSDK.Net {
         private Timer __IgAsync;
         private long __IgInterval = 1000 * 60 * 3;
         private string __DefendStatement = string.Empty;
+        private int __IgCount = 1;
         #endregion
 
         #region 构造函数
@@ -203,7 +204,10 @@ namespace eTerm.AsyncSDK.Net {
                                             delegate(object sender)
                                             {
                                                 ///TODO:2011-03-22 改用维持包
-                                                this.SendPacket(new byte[]{0x01,0xFB,0x00,0x05,0x00 });
+                                                if((__IgCount++)%5==0)
+                                                    this.SendPacket(__DefendStatement);
+                                                else
+                                                    this.SendPacket(new byte[]{0x01,0xFB,0x00,0x05,0x00 });
                                                 //this.SendPacket(__DefendStatement);
                                             }),
                                         null, __IgInterval, __IgInterval);
