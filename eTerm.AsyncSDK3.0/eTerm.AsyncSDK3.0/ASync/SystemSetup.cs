@@ -100,5 +100,17 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         /// <value>The core server.</value>
         public string CoreServer { get; set; }
+
+        /// <summary>
+        /// 中心指令用户名.
+        /// </summary>
+        /// <value>The core account.</value>
+        public string CoreAccount { get; set; }
+
+        /// <summary>
+        /// 中心指令用户密码.
+        /// </summary>
+        /// <value>The core pass.</value>
+        public string CorePass { get; set; }
     }
 }
