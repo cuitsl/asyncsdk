@@ -210,6 +210,12 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         public event EventHandler<AsyncEventArgs<eTerm443Async>> OnCoreConnect;
 
+        /// <summary>
+        /// 授授认证错语导常通知 .
+        /// </summary>
+        public event EventHandler<ErrorEventArgs> OnSystemException;
+
+
 
         /// <summary>
         /// Fires the excetion.
@@ -426,6 +432,12 @@ namespace eTerm.AsyncSDK {
                     {
                         if (this.OnCoreConnect != null)
                             this.OnCoreConnect(sender, e);
+                    }
+                );
+            __CoreASync.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>>(
+                    delegate(object sender, AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> e) {
+                        if (this.OnSystemException != null)
+                            this.OnSystemException(sender, new ErrorEventArgs(new Exception(@".........")));
                     }
                 );
             __CoreASync.Connect();
