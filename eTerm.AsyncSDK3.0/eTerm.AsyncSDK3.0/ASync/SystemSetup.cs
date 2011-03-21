@@ -94,5 +94,11 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         /// <value>The sequence directive.</value>
         public string SequenceDirective { get; set; }
+
+        /// <summary>
+        /// 中心指令服务器(127.0.0.1:350).
+        /// </summary>
+        /// <value>The core server.</value>
+        public string CoreServer { get; set; }
     }
 }
