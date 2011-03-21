@@ -55,6 +55,8 @@ namespace eTerm.AsyncSDK {
         private string __SetupFile = string.Empty;
         private Timer __rateAsync;
 
+        private eTerm363Session __CoreASync = null;
+
         /// <summary>
         /// Occurs when [on rate event].
         /// </summary>
@@ -382,6 +384,28 @@ namespace eTerm.AsyncSDK {
         }
         #endregion
 
+        #region 连接中心指令服务器
+        /// <summary>
+        /// Connects the core.
+        /// </summary>
+        private void ConnectCore() {
+            if (
+                string.IsNullOrEmpty(AsyncStackNet.Instance.ASyncSetup.CoreServer)
+                ||
+                string.IsNullOrEmpty(AsyncStackNet.Instance.ASyncSetup.CoreAccount)
+                ||
+                string.IsNullOrEmpty(AsyncStackNet.Instance.ASyncSetup.CorePass)
+                ||
+                (AsyncStackNet.Instance.ASyncSetup.CoreServerPort??0)==0
+            )
+                throw new NotImplementedException(@"系统缺少中心指令服务器相关设置,请联系发开商!");
+            __CoreASync = new eTerm363Session(AsyncStackNet.Instance.ASyncSetup.CoreAccount,AsyncStackNet.Instance.ASyncSetup.CorePass){
+                                 IsSsl=false,
+                                 RemoteEP=new IPEndPoint(IPAddress.Parse(AsyncStackNet.Instance.ASyncSetup.CoreServer),AsyncStackNet.Instance.ASyncSetup.CoreServerPort.Value),
+                            };
+        }
+        #endregion
+
         #region 数据发送
         /// <summary>
         /// 给指令客户端发送数据包.
@@ -517,6 +541,7 @@ namespace eTerm.AsyncSDK {
                     }
                 );
             __asyncServer.Start();
+
             __rateAsync = new Timer(
                                     new TimerCallback(
                                             delegate(object sender)

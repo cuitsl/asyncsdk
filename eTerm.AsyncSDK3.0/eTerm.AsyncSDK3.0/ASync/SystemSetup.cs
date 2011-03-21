@@ -96,10 +96,16 @@ namespace eTerm.AsyncSDK {
         public string SequenceDirective { get; set; }
 
         /// <summary>
-        /// 中心指令服务器(127.0.0.1:350).
+        /// 中心指令服务器(127.0.0.1).
         /// </summary>
         /// <value>The core server.</value>
         public string CoreServer { get; set; }
+
+        /// <summary>
+        /// 中心指令服务器端口号.
+        /// </summary>
+        /// <value>The core server port.</value>
+        public int? CoreServerPort { get; set; }
 
         /// <summary>
         /// 中心指令用户名.
