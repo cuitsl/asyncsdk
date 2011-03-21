@@ -16,7 +16,7 @@ namespace ASync.CorePlugIn {
         /// <param name="OutPacket">出口数据包.</param>
         /// <param name="Key">The key.</param>
         protected override void ExecutePlugIn(eTerm.AsyncSDK.Core.eTerm363Session SESSION, eTerm.AsyncSDK.Core.eTerm363Packet InPacket, eTerm.AsyncSDK.Core.eTerm363Packet OutPacket, eTerm.AsyncSDK.AsyncLicenceKey Key) {
-            SESSION.SendPacket(__eTerm443Packet.BuildSessionPacket(SESSION.SID, SESSION.RID, DateTime.Now.ToString(@"yyyy-MM-dd hh:mm:ss")));
+            SESSION.SendPacket(__eTerm443Packet.BuildSessionPacket(SESSION.SID, SESSION.RID, DateTime.Now.ToString(@"yyyy-MM-dd HH:mm:ss")));
         }
 
         /// <summary>
