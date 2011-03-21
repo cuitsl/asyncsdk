@@ -44,6 +44,16 @@ namespace eTerm.AsyncSDK.Core {
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="eTerm363Session"/> class.
+        /// </summary>
+        /// <param name="userName">Name of the user.</param>
+        /// <param name="userPass">The user pass.</param>
+        public eTerm363Session(string userName, string userPass) {
+            this.userName = userName;
+            this.userPass = userPass;
+        }
+
+        /// <summary>
         /// 配置资源释放事件.
         /// </summary>
         public event EventHandler<AsyncEventArgs<eTerm363Session>> OnTSessionRelease;
