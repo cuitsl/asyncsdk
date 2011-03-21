@@ -202,7 +202,9 @@ namespace eTerm.AsyncSDK.Net {
                                     new TimerCallback(
                                             delegate(object sender)
                                             {
-                                                this.SendPacket(__DefendStatement);
+                                                ///TODO:2011-03-22 改用维持包
+                                                this.SendPacket(new byte[]{0x01,0xFB,0x00,0x05,0x00 });
+                                                //this.SendPacket(__DefendStatement);
                                             }),
                                         null, __IgInterval, __IgInterval);
                
