@@ -48,32 +48,36 @@ namespace ASync.eTermAddIn {
             try {
                 ass = Assembly.LoadFrom(File.FullName);
                 foreach (Type t in ass.GetTypes()) {
+                    bool IsSystem = false;
+                    SinglePlugIn PlugInCtr = null;
                     foreach (Type i in t.GetInterfaces()) {
                         if (i.FullName == typeof(IAfterCommand<eTerm443Async, eTerm443Packet>).FullName) {
                             IAfterCommand<eTerm443Async, eTerm443Packet> plugIn = (IAfterCommand<eTerm443Async, eTerm443Packet>)System.Activator.CreateInstance(t);
                             object[] attris = t.GetCustomAttributes(typeof(AfterASynCommandAttribute), true);
-                            SinglePlugIn PlugInCtr = new SinglePlugIn() {
+                            PlugInCtr = new SinglePlugIn() {
                                 FullName = t.FullName,
                                 Title = plugIn.Description
                             };
                             foreach (AfterASynCommandAttribute att in attris) {
+                                if (att.IsSystem) IsSystem=att.IsSystem;
                                 PlugInCtr.Append(att.ASynCommand);
                             }
-                            this.flowLayoutBack.Controls.Add(PlugInCtr);
                         }
                         else if (i.FullName == typeof(IAfterCommand<eTerm363Session, eTerm363Packet>).FullName) {
                             IAfterCommand<eTerm363Session, eTerm363Packet> plugIn = (IAfterCommand<eTerm363Session, eTerm363Packet>)System.Activator.CreateInstance(t);
                             object[] attris = t.GetCustomAttributes(typeof(AfterASynCommandAttribute), true);
-                            SinglePlugIn PlugInCtr = new SinglePlugIn() {
+                            PlugInCtr = new SinglePlugIn() {
                                 FullName = t.FullName,
                                 Title = plugIn.Description
                             };
                             foreach (AfterASynCommandAttribute att in attris) {
+                                if (att.IsSystem) IsSystem = att.IsSystem;
                                 PlugInCtr.Append(att.ASynCommand);
                             }
-                            this.flowLayoutInter.Controls.Add(PlugInCtr);
                         }
                     }
+                    if(!IsSystem&&PlugInCtr!=null)
+                        this.flowLayoutInter.Controls.Add(PlugInCtr);
                 }
             }
             catch { }
