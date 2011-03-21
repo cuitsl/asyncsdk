@@ -49,6 +49,8 @@ namespace ASyncSDK.Office {
         public delegate void UpdateListViewItem(ListViewEx ViewEx, string ImageKey, string Id, float TotalBytes, string Reconnect);
 
         public delegate void AppendSessionLogDelegate(ListView View, string SessionName, string operationType, string SessionCommand, string flag);
+
+        public delegate void UpdateStatusTextDelegate(ToolStripStatusLabel targetLable, string Text);
         #endregion
 
         #region 关闭事件
@@ -76,6 +78,21 @@ namespace ASyncSDK.Office {
         #endregion
 
         #region AppendistViewItem
+        /// <summary>
+        /// Updates the status text.
+        /// </summary>
+        /// <param name="targetLable">The target lable.</param>
+        /// <param name="Text">The text.</param>
+        private void UpdateStatusText(ToolStripStatusLabel targetLable, string Text) {
+            if (this.InvokeRequired) {
+                this.BeginInvoke(new UpdateStatusTextDelegate(UpdateStatusText), targetLable, Text);
+                return;
+            }
+            try {
+                targetLable.Text = Text;
+            }
+            catch { }
+        }
         /// <summary>
         /// Appends the list by thread.
         /// </summary>
@@ -221,24 +238,24 @@ namespace ASyncSDK.Office {
                 );
 
             AsyncStackNet.Instance.OnCoreConnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
-                    delegate(object sender, AsyncEventArgs<eTerm443Async> e) { 
-                        
+                    delegate(object sender, AsyncEventArgs<eTerm443Async> e) {
+                        UpdateStatusText(statusInfo, string.Format(@"与中心服务器{{{0}:{1}}}连接已连接！", AsyncStackNet.Instance.ASyncSetup.CoreServer, AsyncStackNet.Instance.ASyncSetup.CoreServerPort));
                     }
                 );
 
             AsyncStackNet.Instance.OnCoreDisconnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
-                    delegate(object sender, AsyncEventArgs<eTerm443Async> e) { 
-                        
+                    delegate(object sender, AsyncEventArgs<eTerm443Async> e) {
+                        UpdateStatusText(statusInfo, string.Format(@"与中心服务器{{{0}:{1}}}连接已经断开！", AsyncStackNet.Instance.ASyncSetup.CoreServer, AsyncStackNet.Instance.ASyncSetup.CoreServerPort));
                     }
                 );
             AsyncStackNet.Instance.OnSDKTimeout += new EventHandler<ErrorEventArgs>(
-                    delegate(object sender, ErrorEventArgs e) { 
-                        
+                    delegate(object sender, ErrorEventArgs e) {
+                        UpdateStatusText(statusInfo, @"授权已到期！");
                     }
                 );
             AsyncStackNet.Instance.OnSystemException += new EventHandler<ErrorEventArgs>(
-                    delegate(object sender, ErrorEventArgs e) { 
-                        
+                    delegate(object sender, ErrorEventArgs e) {
+                        UpdateStatusText(statusInfo, e.GetException().Message);
                     }
                 );
             AsyncStackNet.Instance.OnAsyncDisconnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
@@ -407,6 +424,7 @@ namespace ASyncSDK.Office {
                         else {
                             //激活配置
                             AsyncStackNet.Instance.BeginAsync();
+                            UpdateStatusText(statusServer, string.Format(@"中心服务器为{{{0}:{1}}}", AsyncStackNet.Instance.ASyncSetup.CoreServer, AsyncStackNet.Instance.ASyncSetup.CoreServerPort));
                             if ((AsyncStackNet.Instance.ASyncSetup.AllowPlugIn ?? false)) {
                                 AsyncStackNet.Instance.BeginReflectorPlugIn(new AsyncCallback(delegate(IAsyncResult iar1)
                                 {
