@@ -204,9 +204,9 @@ namespace eTerm.AsyncSDK.Net {
                                             delegate(object sender)
                                             {
                                                 ///TODO:2011-03-22 改用维持包
-                                               // if((__IgCount++)%5==0)
-                                                    //this.SendPacket(__DefendStatement);
-                                                //else
+                                               if(!string.IsNullOrEmpty(__DefendStatement))
+                                                    this.SendPacket(__DefendStatement);
+                                                else
                                                     this.SendPacket(new byte[]{0x01,0xFB,0x00,0x05,0x00 });
                                                 //this.SendPacket(__DefendStatement);
                                             }),
