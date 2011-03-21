@@ -9,7 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reference", "Reference", "{
 	ProjectSection(SolutionItems) = preProject
 		Reference\ASync.eTermAddIn.AddIn = Reference\ASync.eTermAddIn.AddIn
 		Reference\ASync.eTermBuilder.AddIn = Reference\ASync.eTermBuilder.AddIn
-		Reference\ASync.eTermPlugIn.PlugIn = Reference\ASync.eTermPlugIn.PlugIn
 		Reference\ASync.MiddleWare.dll = Reference\ASync.MiddleWare.dll
 		Reference\eTerm.AsyncSDK.dll = Reference\eTerm.AsyncSDK.dll
 		Reference\Setup.Bin = Reference\Setup.Bin
