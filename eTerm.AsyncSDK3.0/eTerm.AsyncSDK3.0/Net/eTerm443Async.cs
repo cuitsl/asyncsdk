@@ -20,7 +20,7 @@ namespace eTerm.AsyncSDK.Net {
         private Timer __IgAsync;
         private long __IgInterval = 1000 * 60 * 3;
         private string __DefendStatement = string.Empty;
-        private int __IgCount = 1;
+        //private int __IgCount = 1;
         #endregion
 
         #region 构造函数
