@@ -220,6 +220,27 @@ namespace ASyncSDK.Office {
                     }
                 );
 
+            AsyncStackNet.Instance.OnCoreConnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
+                    delegate(object sender, AsyncEventArgs<eTerm443Async> e) { 
+                        
+                    }
+                );
+
+            AsyncStackNet.Instance.OnCoreDisconnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
+                    delegate(object sender, AsyncEventArgs<eTerm443Async> e) { 
+                        
+                    }
+                );
+            AsyncStackNet.Instance.OnSDKTimeout += new EventHandler<ErrorEventArgs>(
+                    delegate(object sender, ErrorEventArgs e) { 
+                        
+                    }
+                );
+            AsyncStackNet.Instance.OnSystemException += new EventHandler<ErrorEventArgs>(
+                    delegate(object sender, ErrorEventArgs e) { 
+                        
+                    }
+                );
             AsyncStackNet.Instance.OnAsyncDisconnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
