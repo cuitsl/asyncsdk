@@ -11,7 +11,7 @@ using eTerm.AsyncSDK;
 using eTerm.AsyncSDK.Util;
 
 namespace ASync.eTermAddIn {
-    public partial class ASynConnect : BaseAddIn {
+    public partial class ASynConnect : UserControl {
         /// <summary>
         /// Initializes a new instance of the <see cref="ASyncSession"/> class.
         /// </summary>
