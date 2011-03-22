@@ -450,8 +450,9 @@ namespace eTerm.AsyncSDK {
                     delegate(object sender, AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> e)
                     {
                         if (e.InPacket.OriginalBytes[0] == 0x00) return;
-                        DateTime serverDate = DateTime.Parse(Encoding.GetEncoding("gb2312").GetString(e.Session.UnInPakcet(e.OutPacket)));
-                        if (((TimeSpan)(serverDate - DateTime.Now)).TotalDays != 0) {
+                        string coreDate = Regex.Match(Encoding.GetEncoding("gb2312").GetString(e.Session.UnOutPakcet(e.InPacket)), @"(\d{4}\-\d{1,2}\-\d{1,2})").Value;
+                        DateTime serverDate = DateTime.Parse(coreDate);
+                        if (((TimeSpan)(serverDate - DateTime.Now)).Days != 0) {
                             SystemUtil.SetSysTime(serverDate);
                             //日期比较
                             if (this.OnSystemException != null)
