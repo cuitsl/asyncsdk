@@ -242,14 +242,14 @@ namespace eTerm.AsyncSDK {
         /// 重连接次数验证.
         /// </summary>
         /// <value>The T session reconnect validate.</value>
-        internal AsyncBase<eTerm443Async, eTerm443Packet>.ValidateTSessionCallback TSessionReconnectValidate {
-            get {
-                return new AsyncBase<eTerm443Async, eTerm443Packet>.ValidateTSessionCallback(delegate( eTerm443Packet Packet,eTerm443Async Async)
-                {
-                    return (ASyncSetup.AutoReconnect??false)&&Async.ReconnectCount<(ASyncSetup.MaxReconnect??10);
-                });
-            }
-        }
+        //internal AsyncBase<eTerm443Async, eTerm443Packet>.ValidateTSessionCallback TSessionReconnectValidate {
+        //    get {
+        //        return new AsyncBase<eTerm443Async, eTerm443Packet>.ValidateTSessionCallback(delegate( eTerm443Packet Packet,eTerm443Async Async)
+        //        {
+        //            return (ASyncSetup.AutoReconnect??false)&&Async.ReconnectCount<(ASyncSetup.MaxReconnect??10);
+        //        });
+        //    }
+        //}
 
         #endregion
 
@@ -259,7 +259,7 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         /// <param name="Async">The async.</param>
         public void ReconnectAsync(eTerm443Async Async) {
-            if (this.TSessionReconnectValidate != null && this.TSessionReconnectValidate(new eTerm443Packet(), Async)) {
+            if ((ASyncSetup.AutoReconnect ?? false) && Async.ReconnectCount < (ASyncSetup.MaxReconnect ?? 10)) {
                 AppendAsync(
                     new eTerm443Async(Async.RemoteEP.Address.ToString(), Async.RemoteEP.Port, Async.userName, Async.userPass, (byte)Async.SID, (byte)Async.RID) { SiText = Async.SiText, IsSsl = Async.IsSsl, ReconnectCount = ++Async.ReconnectCount, GroupCode = Async.GroupCode }
                     );
@@ -387,7 +387,10 @@ namespace eTerm.AsyncSDK {
             #endregion
 
             #region CallBack
-            Async.TSessionReconnectValidate = TSessionReconnectValidate;
+            Async.TSessionReconnectValidate =new AsyncBase<eTerm443Async,eTerm443Packet>.ValidateTSessionCallback(delegate(eTerm443Packet Packet,eTerm443Async ASync)
+                {
+                    return (ASyncSetup.AutoReconnect??false)&&Async.ReconnectCount<(ASyncSetup.MaxReconnect??10);
+                });
             #endregion
 
             #region OnAsyncDisconnect
