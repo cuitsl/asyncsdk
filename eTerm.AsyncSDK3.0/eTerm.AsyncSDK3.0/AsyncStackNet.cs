@@ -54,7 +54,7 @@ namespace eTerm.AsyncSDK {
         private InvokePlugInCallback __RateExecute;
         private string __SetupFile = string.Empty;
         private Timer __rateAsync;
-        private eTerm363Session __CoreASync = null;
+        private eTerm443Async __CoreASync = null;
 
         /// <summary>
         /// Occurs when [on rate event].
@@ -147,7 +147,7 @@ namespace eTerm.AsyncSDK {
         /// <summary>
         /// 资源读取事件.
         /// </summary>
-        public event EventHandler<AsyncEventArgs<eTerm443Packet,eTerm443Packet, eTerm443Async>> OnAsyncReadPacket;
+        public event EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>> OnAsyncReadPacket;
 
         /// <summary>
         /// 资源发送事件.
@@ -177,7 +177,7 @@ namespace eTerm.AsyncSDK {
         /// <summary>
         /// 会话读取事件.
         /// </summary>
-        public event EventHandler<AsyncEventArgs<eTerm363Packet,eTerm363Packet, eTerm363Session>> OnTSessionReadPacket;
+        public event EventHandler<AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session>> OnTSessionReadPacket;
 
         /// <summary>
         /// 会话资源释放事件.
@@ -202,12 +202,12 @@ namespace eTerm.AsyncSDK {
         /// <summary>
         /// 与中心服务器断开连接事件通知.
         /// </summary>
-        public event EventHandler<AsyncEventArgs<eTerm363Session>> OnCoreDisconnect;
+        public event EventHandler<AsyncEventArgs<eTerm443Async>> OnCoreDisconnect;
 
         /// <summary>
         /// 与中心服务器断开连接事件通知.
         /// </summary>
-        public event EventHandler<AsyncEventArgs<eTerm363Session>> OnCoreConnect;
+        public event EventHandler<AsyncEventArgs<eTerm443Async>> OnCoreConnect;
 
         /// <summary>
         /// 授授认证错误通知 .
@@ -226,7 +226,7 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         /// <param name="e">The <see cref="System.IO.ErrorEventArgs"/> instance containing the event data.</param>
         /// <param name="Session">The session.</param>
-        private void FireExcetion(ErrorEventArgs e,eTerm363Session Session) {
+        private void FireExcetion(ErrorEventArgs e, eTerm363Session Session) {
             if (this.OnExecuteException != null)
                 this.OnExecuteException(Session, e);
         }
@@ -236,7 +236,7 @@ namespace eTerm.AsyncSDK {
         /// 会话认证代理.
         /// </summary>
         /// <value>The T session validate.</value>
-        public AsyncBaseServer<eTerm363Session,eTerm363Packet>.ValidateCallback TSessionValidate { get; set; }
+        public AsyncBaseServer<eTerm363Session, eTerm363Packet>.ValidateCallback TSessionValidate { get; set; }
 
         /// <summary>
         /// 重连接次数验证.
@@ -254,7 +254,7 @@ namespace eTerm.AsyncSDK {
         public void ReconnectAsync(eTerm443Async Async) {
             if (this.TSessionReconnectValidate != null && this.TSessionReconnectValidate(new eTerm443Packet(), Async)) {
                 AppendAsync(
-                    new eTerm443Async(Async.RemoteEP.Address.ToString(), Async.RemoteEP.Port, Async.userName, Async.userPass, (byte)Async.SID, (byte)Async.RID) { SiText = Async.SiText, IsSsl = Async.IsSsl, ReconnectCount = ++Async.ReconnectCount, GroupCode=Async.GroupCode }
+                    new eTerm443Async(Async.RemoteEP.Address.ToString(), Async.RemoteEP.Port, Async.userName, Async.userPass, (byte)Async.SID, (byte)Async.RID) { SiText = Async.SiText, IsSsl = Async.IsSsl, ReconnectCount = ++Async.ReconnectCount, GroupCode = Async.GroupCode }
                     );
             }
         }
@@ -267,7 +267,7 @@ namespace eTerm.AsyncSDK {
         /// <param name="TSession">The T session.</param>
         /// <returns></returns>
         private void GetActiveAsync(eTerm363Session TSession) {
-            if (TSession.Async443 != null) return ;
+            if (TSession.Async443 != null) return;
             lock (this.__asyncList) {
                 foreach (var connect in
                         from entry in __asyncList
@@ -290,7 +290,7 @@ namespace eTerm.AsyncSDK {
             foreach (ConnectSetup T in ASyncSetup.AsynCollection) {
                 if (!T.IsOpen) continue;
                 AppendAsync(
-                    new eTerm443Async(T.Address, T.Port, T.userName, T.userPass, (byte)T.SID, (byte)T.RID) { SiText = T.SiText, IsSsl = T.IsSsl,OfficeCode=T.OfficeCode, GroupCode=T.GroupCode });
+                    new eTerm443Async(T.Address, T.Port, T.userName, T.userPass, (byte)T.SID, (byte)T.RID) { SiText = T.SiText, IsSsl = T.IsSsl, OfficeCode = T.OfficeCode, GroupCode = T.GroupCode });
             }
         }
         #endregion
@@ -305,7 +305,7 @@ namespace eTerm.AsyncSDK {
             if (__asyncList.Count >= LicenceManager.Instance.LicenceBody.MaxAsync) return;
             #endregion
 
-            Async.Instruction =string.IsNullOrEmpty( AsyncStackNet.Instance.ASyncSetup.SequenceDirective)?"CP":AsyncStackNet.Instance.ASyncSetup.SequenceDirective;
+            Async.Instruction = string.IsNullOrEmpty(AsyncStackNet.Instance.ASyncSetup.SequenceDirective) ? "CP" : AsyncStackNet.Instance.ASyncSetup.SequenceDirective;
             Async.IgInterval = AsyncStackNet.Instance.ASyncSetup.SequenceRate ?? 5;
 
             #region OnReadPacket
@@ -360,7 +360,8 @@ namespace eTerm.AsyncSDK {
 
             #region OnAsyncPacketSent
             Async.OnPacketSent += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>>(
-                    delegate(object sender, AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> e) {
+                    delegate(object sender, AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> e)
+                    {
                         if (this.OnAsyncPacketSent != null)
                             this.OnAsyncPacketSent(sender, e);
                     }
@@ -417,37 +418,39 @@ namespace eTerm.AsyncSDK {
                 ||
                 string.IsNullOrEmpty(AsyncStackNet.Instance.ASyncSetup.CorePass)
                 ||
-                (AsyncStackNet.Instance.ASyncSetup.CoreServerPort??0)==0
+                (AsyncStackNet.Instance.ASyncSetup.CoreServerPort ?? 0) == 0
             )
                 throw new NotImplementedException(@"系统缺少中心指令服务器相关设置,请联系发开商!");
             ///TODO:初始化认证连接，认证频率计时器为：30分钟
-            __CoreASync = new eTerm363Session(ASyncSetup.CoreAccount,ASyncSetup.CorePass){
-                 RemoteEP=new IPEndPoint(IPAddress.Parse( ASyncSetup.CoreServer),ASyncSetup.CoreServerPort.Value),
-                 IsSsl=false};
-            __CoreASync.OnAsyncDisconnect += new EventHandler<AsyncEventArgs<eTerm363Session>>(
-                    delegate(object sender, AsyncEventArgs<eTerm363Session> e)
+            __CoreASync = new eTerm443Async(
+                                ASyncSetup.CoreServer,
+                                ASyncSetup.CoreServerPort.Value,
+                                ASyncSetup.CoreAccount,
+                                ASyncSetup.CorePass, 0x00, 0x00) { IsSsl = false, Instruction = @"!UpdateDate", IgInterval = 5 };
+            __CoreASync.OnAsyncDisconnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
+                    delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
                         if (this.OnCoreDisconnect != null)
                             this.OnCoreDisconnect(sender, e);
                     }
                 );
-            __CoreASync.TSessionReconnectValidate = new AsyncBase<eTerm363Session, eTerm363Packet>.ValidateTSessionCallback(
-                delegate(eTerm363Packet Packet, eTerm363Session ASync)
+            __CoreASync.TSessionReconnectValidate = new AsyncBase<eTerm443Async, eTerm443Packet>.ValidateTSessionCallback(
+                delegate(eTerm443Packet Packet, eTerm443Async ASync)
                 {
                     return false;
-            });
-            __CoreASync.OnAsynConnect += new EventHandler<AsyncEventArgs<eTerm363Session>>(
-                    delegate(object sender, AsyncEventArgs<eTerm363Session> e)
+                });
+            __CoreASync.OnAsynConnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
+                    delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
                         if (this.OnCoreConnect != null)
                             this.OnCoreConnect(sender, e);
                     }
                 );
-            __CoreASync.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session>>(
-                    delegate(object sender, AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session> e)
+            __CoreASync.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>>(
+                    delegate(object sender, AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> e)
                     {
-                        //if (e.InPacket.OriginalBytes[0] == 0x00) return;
-                        DateTime serverDate=DateTime.Parse( Encoding.GetEncoding("gb2312").GetString(e.Session.UnInPakcet(e.OutPacket)));
+                        if (e.InPacket.OriginalBytes[0] == 0x00) return;
+                        DateTime serverDate = DateTime.Parse(Encoding.GetEncoding("gb2312").GetString(e.Session.UnInPakcet(e.OutPacket)));
                         if (((TimeSpan)(serverDate - DateTime.Now)).TotalDays != 0) {
                             SystemUtil.SetSysTime(serverDate);
                             //日期比较
@@ -515,7 +518,7 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         public void BeginAsync() {
             if (!LicenceManager.Instance.ValidateResult) throw new OverflowException(__eTerm443Packet.AUTHERROR_MES);
-            StackNetPoint = new IPEndPoint(IPAddress.Any, this.__Setup.ExternalPort??360);
+            StackNetPoint = new IPEndPoint(IPAddress.Any, this.__Setup.ExternalPort ?? 360);
             __asyncServer = new eTermAsyncServer(StackNetPoint, SID, RID);
             __asyncServer.MaxSession = LicenceManager.Instance.LicenceBody.MaxTSession;
             __asyncServer.OnPacketSent += new EventHandler<AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session>>(
@@ -544,8 +547,8 @@ namespace eTerm.AsyncSDK {
                                     return;
                                 }
                             }
-                            catch(Exception ex) {
-                                FireExcetion(new ErrorEventArgs( ex),e.Session);
+                            catch (Exception ex) {
+                                FireExcetion(new ErrorEventArgs(ex), e.Session);
                                 //return;
                             }
 
@@ -572,8 +575,9 @@ namespace eTerm.AsyncSDK {
                     {
                         if (this.OnTSessionAccept != null)
                             this.OnTSessionAccept(sender, e);
-                        
-                        e.Session.ReleaseIntervalSet = new ReleaseIntervalSetDelegate(delegate(string packet,eTerm363Session TSession) {
+
+                        e.Session.ReleaseIntervalSet = new ReleaseIntervalSetDelegate(delegate(string packet, eTerm363Session TSession)
+                        {
                             try {
                                 if (!string.IsNullOrEmpty(TSession.SpecialIntervalList)) {
                                     string SpecialPacket = Regex.Replace(TSession.SpecialIntervalList, @"\d+\,", string.Empty, RegexOptions.IgnoreCase | RegexOptions.Multiline);
@@ -589,7 +593,7 @@ namespace eTerm.AsyncSDK {
                             finally { }
                             return TSession.TSessionInterval;
                         });
-                        
+
                         e.Session.OnTSessionRelease += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                                 delegate(object Session, AsyncEventArgs<eTerm363Session> ie)
                                 {
@@ -628,7 +632,7 @@ namespace eTerm.AsyncSDK {
                                         null, (this.ASyncSetup.StatisticalFrequency ?? 10) * 1000 * 60, (this.ASyncSetup.StatisticalFrequency ?? 10) * 1000 * 60);
 
             ConnectCore();
-            
+
             AppendAsync();
         }
 
@@ -792,7 +796,7 @@ namespace eTerm.AsyncSDK {
                     }
                 }
             }
-            catch(Exception ex) {
+            catch (Exception ex) {
                 throw ex;
             }
         }
