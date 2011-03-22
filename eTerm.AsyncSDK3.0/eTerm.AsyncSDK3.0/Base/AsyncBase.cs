@@ -60,7 +60,7 @@ namespace eTerm.AsyncSDK.Base {
         /// 结果包.
         /// </summary>
         /// <value>The packet.</value>
-        protected P InPacket { get { return this.__inPacket; } }
+        protected P InPacket { get { return this.__inPacket; } set { this.__inPacket = value; } }
 
         /// <summary>
         /// 解包入口数据包.
