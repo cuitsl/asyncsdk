@@ -17,28 +17,28 @@ using eTerm.AsyncSDK;
 namespace AsyncAPI3._0Tst {
     class Program {
         static void Main(string[] args) {
-            byte[] buffer;
-            using(FileStream fs=new FileStream(@"C:\Setup.Bin", FileMode.Open)){
-                BinaryReader br=new BinaryReader(fs);
-                buffer=new byte[fs.Length];
-                br.Read(buffer,0,buffer.Length);
+            //byte[] buffer;
+            //using(FileStream fs=new FileStream(@"C:\Setup.Bin", FileMode.Open)){
+            //    BinaryReader br=new BinaryReader(fs);
+            //    buffer=new byte[fs.Length];
+            //    br.Read(buffer,0,buffer.Length);
                 
-                br.Close();
-            }
+            //    br.Close();
+            //}
 
-            SystemSetup setup = new SystemSetup().DeXmlSerialize(eTerm.AsyncSDK.Util.TEACrypter.GetDefaultKey, buffer);
-            setup.CoreServer = @"116.232.100.214";
-            setup.CoreServerPort = 360;
-            setup.CoreAccount = @"Authorization";
-            setup.CorePass = @"authorization";
+            //SystemSetup setup = new SystemSetup().DeXmlSerialize(eTerm.AsyncSDK.Util.TEACrypter.GetDefaultKey, buffer);
+            //setup.CoreServer = @"116.232.100.214";
+            //setup.CoreServerPort = 360;
+            //setup.CoreAccount = @"Authorization";
+            //setup.CorePass = @"authorization";
 
-            setup.XmlSerialize(eTerm.AsyncSDK.Util.TEACrypter.GetDefaultKey, @"C:\Setup.Bin");
+            //setup.XmlSerialize(eTerm.AsyncSDK.Util.TEACrypter.GetDefaultKey, @"C:\Setup.Bin");
 
-            
-           
+
+
             //AVCommand Av = new AVCommand();
             //int i = 0;
-            //foreach (AvItem Item in (Av.getAvailability("SHA", "CSX",new DateTime(2011,01,29)) as AVResult).AvSegment) {
+            //foreach (AvItem Item in (Av.getAvailability("SHA", "CTU", new DateTime(2011, 01, 29)) as AVResult).AvSegment) {
             //    Console.WriteLine(string.Format(@"{3}、{0}       {1}    {2} ", Item.getAirline, Item.getDepdate, Item.getDeptime, ++i));
             //    foreach (AvItemCabinChar cabin in Item.getCabins) {
             //        Console.Write(cabin + " ");
@@ -46,28 +46,6 @@ namespace AsyncAPI3._0Tst {
             //    Console.WriteLine();
             //}
 
-            //FDCommand fd1 = new FDCommand();
-            //FDResult Result1 = fd1.findPrice("CSX", "CAN", DateTime.Now.AddDays(10), string.Empty, string.Empty, string.Empty) as FDResult;
-            //foreach (FDItem item in Result1.getElements) {
-            //    Console.WriteLine("{0}-{1}/{2}  {3} {4}", item.getAirline, item.getCabinType, item.getBasicCabinType, item.getSinglePrice, item.getRoundPrice);
-            //}
-            //Console.ReadLine();
-            ContextInstance.Instance.connectionString = @"Data Source=(local);Initial Catalog=Async;User ID=sa;Password=Password01!";
-            ContextInstance.Instance.providerName = @"System.Data.SqlClient";
-
-            List<ASync_CityCode> DesCitys = new List<ASync_CityCode>();
-            using (FileStream fs = new FileStream(@"D:\city.txt", FileMode.Open, FileAccess.ReadWrite)) {
-                StreamReader sr = new StreamReader(fs,Encoding.GetEncoding("gb2312"));
-                using (TransactionScope scope = new TransactionScope()) {
-                    foreach (Match m in Regex.Matches(sr.ReadToEnd(), @"^([A-Z]{3,3})\,([A-Z]+)\,([\u4E00-\u9FA5]+)\,", RegexOptions.IgnoreCase | RegexOptions.Multiline)) {
-                        new ASync_CityCode() { CityCode = m.Groups[1].Value, CityName = m.Groups[3].Value, CityPinYin = AsyncAPI3._0Tst.Cn2PyUtil.FullConvert(m.Groups[3].Value) }
-                            .Add();
-                        //DesCitys.Add(new ASync_CityCode() { CityCode = m.Groups[1].Value, CityName = m.Groups[3].Value, CityPinYin= AsyncAPI3._0Tst.Cn2PyUtil.FullConvert(m.Groups[3].Value) });
-                    }
-                    scope.Complete();
-                }
-                sr.Dispose();
-            }
 
 
 
