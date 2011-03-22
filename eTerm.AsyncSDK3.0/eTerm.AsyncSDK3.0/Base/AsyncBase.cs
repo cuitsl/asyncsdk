@@ -384,8 +384,9 @@ namespace eTerm.AsyncSDK.Base {
             Dispose();
             if (this.OnAsyncDisconnect != null)
                 this.OnAsyncDisconnect(this, new AsyncEventArgs<T>(this as T));
-            //if (this.TSessionReconnectValidate != null && this.TSessionReconnectValidate(new P(), this as T))
-            //    Connect();
+            __sequence = 0;
+            if (this.TSessionReconnectValidate != null && this.TSessionReconnectValidate(new P(), this as T))
+                Connect();
         }
 
         /// <summary>
