@@ -258,13 +258,13 @@ namespace eTerm.AsyncSDK {
         /// Reconnects the async.
         /// </summary>
         /// <param name="Async">The async.</param>
-        public void ReconnectAsync(eTerm443Async Async) {
-            if ((ASyncSetup.AutoReconnect ?? false) && Async.ReconnectCount < (ASyncSetup.MaxReconnect ?? 10)) {
-                AppendAsync(
-                    new eTerm443Async(Async.RemoteEP.Address.ToString(), Async.RemoteEP.Port, Async.userName, Async.userPass, (byte)Async.SID, (byte)Async.RID) { SiText = Async.SiText, IsSsl = Async.IsSsl, ReconnectCount = ++Async.ReconnectCount, GroupCode = Async.GroupCode }
-                    );
-            }
-        }
+        //public void ReconnectAsync(eTerm443Async Async) {
+        //    if ((ASyncSetup.AutoReconnect ?? false) && Async.ReconnectCount < (ASyncSetup.MaxReconnect ?? 10)) {
+        //        AppendAsync(
+        //            new eTerm443Async(Async.RemoteEP.Address.ToString(), Async.RemoteEP.Port, Async.userName, Async.userPass, (byte)Async.SID, (byte)Async.RID) { SiText = Async.SiText, IsSsl = Async.IsSsl, ReconnectCount = ++Async.ReconnectCount, GroupCode = Async.GroupCode }
+        //            );
+        //    }
+        //}
         #endregion
 
         #region 配置管理
