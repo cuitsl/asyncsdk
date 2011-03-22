@@ -242,7 +242,7 @@ namespace eTerm.AsyncSDK {
         /// 重连接次数验证.
         /// </summary>
         /// <value>The T session reconnect validate.</value>
-        public AsyncBase<eTerm443Async, eTerm443Packet>.ValidateTSessionCallback TSessionReconnectValidate {
+        internal AsyncBase<eTerm443Async, eTerm443Packet>.ValidateTSessionCallback TSessionReconnectValidate {
             get {
                 return new AsyncBase<eTerm443Async, eTerm443Packet>.ValidateTSessionCallback(delegate( eTerm443Packet Packet,eTerm443Async Async)
                 {
