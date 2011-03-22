@@ -134,11 +134,11 @@ OutPacket:{2}"
                 return true;
             });
 
-            AsyncStackNet.Instance.TSessionReconnectValidate = new AsyncBase<eTerm443Async, eTerm443Packet>.ValidateTSessionCallback(
-                delegate(eTerm443Packet Packet, eTerm443Async Async)
-                {
-                    return Async.ReconnectCount <= 5;
-                });
+            //AsyncStackNet.Instance.TSessionReconnectValidate = new AsyncBase<eTerm443Async, eTerm443Packet>.ValidateTSessionCallback(
+            //    delegate(eTerm443Packet Packet, eTerm443Async Async)
+            //    {
+            //        return Async.ReconnectCount <= 5;
+            //    });
 
             AsyncStackNet.Instance.OnTSessionAssign += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Session> e) {
