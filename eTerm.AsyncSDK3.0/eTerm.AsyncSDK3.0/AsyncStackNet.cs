@@ -242,7 +242,14 @@ namespace eTerm.AsyncSDK {
         /// 重连接次数验证.
         /// </summary>
         /// <value>The T session reconnect validate.</value>
-        public AsyncBase<eTerm443Async, eTerm443Packet>.ValidateTSessionCallback TSessionReconnectValidate { get; set; }
+        public AsyncBase<eTerm443Async, eTerm443Packet>.ValidateTSessionCallback TSessionReconnectValidate {
+            get {
+                return new AsyncBase<eTerm443Async, eTerm443Packet>.ValidateTSessionCallback(delegate( eTerm443Packet Packet,eTerm443Async Async)
+                {
+                    return (ASyncSetup.AutoReconnect??false)&&Async.ReconnectCount<(ASyncSetup.MaxReconnect??10);
+                });
+            }
+        }
 
         #endregion
 
@@ -437,7 +444,7 @@ namespace eTerm.AsyncSDK {
             __CoreASync.TSessionReconnectValidate = new AsyncBase<eTerm443Async, eTerm443Packet>.ValidateTSessionCallback(
                 delegate(eTerm443Packet Packet, eTerm443Async ASync)
                 {
-                    return false;
+                    return true;
                 });
             __CoreASync.OnAsynConnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
@@ -456,7 +463,7 @@ namespace eTerm.AsyncSDK {
                             SystemUtil.SetSysTime(serverDate);
                             //日期比较
                             if (this.OnSystemException != null)
-                                this.OnSystemException(sender, new ErrorEventArgs(new DataMisalignedException(@"为防止授权错误，不允许手工修改系统日期，请联系发开发商！")));
+                                this.OnSystemException(sender, new ErrorEventArgs(new DataMisalignedException(@"为防止授权错误，不允许手工修改系统日期，请联系发开发商")));
                             //return;
                         }
 
@@ -466,7 +473,7 @@ namespace eTerm.AsyncSDK {
                             ((TimeSpan)(LicenceManager.Instance.LicenceBody.ExpireDate - DateTime.Now)).TotalDays >= 1
                             ) {
                             if (this.OnSystemException != null)
-                                this.OnSystemException(sender, new ErrorEventArgs(new ArithmeticException(@"系统授权即将到期，如需继续使用请从开发商获取新授权！")));
+                                this.OnSystemException(sender, new ErrorEventArgs(new ArithmeticException(@"系统授权即将到期，如需继续使用请从开发商获取新授权")));
                             return;
                         }
                         else if (((TimeSpan)(LicenceManager.Instance.LicenceBody.ExpireDate - DateTime.Now)).TotalDays <= 0) {
@@ -477,8 +484,10 @@ namespace eTerm.AsyncSDK {
                                 EndRateUpdate(iar);
                             }));
                             if (OnSDKTimeout != null)
-                                OnSDKTimeout(sender, new ErrorEventArgs(new TimeZoneNotFoundException(@"系统授权已到期，如需继续使用请从开发商获取新授权！")));
+                                OnSDKTimeout(sender, new ErrorEventArgs(new TimeZoneNotFoundException(@"系统授权已到期，如需继续使用请从开发商获取新授权")));
                         }
+                        if (this.OnSystemException != null)
+                            this.OnSystemException(sender, new ErrorEventArgs(new ExecutionEngineException(@"认证信息验证完成")));
 
                     }
                 );

@@ -152,7 +152,7 @@ namespace ASyncSDK.Office {
                     eTerm443Async Async = ViewEx.Items[Id].Tag as eTerm443Async;
                     ViewEx.Items[Id].Remove();
                     //Thread.Sleep(5000);
-                    AsyncStackNet.Instance.ReconnectAsync(Async);
+                    //AsyncStackNet.Instance.ReconnectAsync(Async);
                     return;
                 }
                 ViewEx.Items[Id].SubItems[2].Text = TotalBytes.ToString("f2");
@@ -352,12 +352,12 @@ namespace ASyncSDK.Office {
                 return true;
             });
 
-            AsyncStackNet.Instance.TSessionReconnectValidate = new AsyncBase<eTerm443Async, eTerm443Packet>.ValidateTSessionCallback(
-                delegate(eTerm443Packet Packet, eTerm443Async Async)
-                {
-                    UpdateListByThread(lstSession, "Circle_Grey.png", Async.SessionId.ToString(), Async.TotalBytes, Async.TotalCount.ToString());
-                    return (AsyncStackNet.Instance.ASyncSetup.AutoReconnect ?? false) && Async.ReconnectCount <= (AsyncStackNet.Instance.ASyncSetup.MaxReconnect??10);
-                });
+            //AsyncStackNet.Instance.TSessionReconnectValidate = new AsyncBase<eTerm443Async, eTerm443Packet>.ValidateTSessionCallback(
+            //    delegate(eTerm443Packet Packet, eTerm443Async Async)
+            //    {
+            //        UpdateListByThread(lstSession, "Circle_Grey.png", Async.SessionId.ToString(), Async.TotalBytes, Async.TotalCount.ToString());
+            //        return (AsyncStackNet.Instance.ASyncSetup.AutoReconnect ?? false) && Async.ReconnectCount <= (AsyncStackNet.Instance.ASyncSetup.MaxReconnect??10);
+            //    });
 
             AsyncStackNet.Instance.OnTSessionAssign += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Session> e)
