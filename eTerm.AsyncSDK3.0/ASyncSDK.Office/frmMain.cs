@@ -237,14 +237,16 @@ namespace ASyncSDK.Office {
                     }
                 );
 
-            AsyncStackNet.Instance.OnCoreConnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
-                    delegate(object sender, AsyncEventArgs<eTerm443Async> e) {
+            AsyncStackNet.Instance.OnCoreConnect += new EventHandler<AsyncEventArgs<eTerm363Session>>(
+                    delegate(object sender, AsyncEventArgs<eTerm363Session> e)
+                    {
                         UpdateStatusText(statusInfo, string.Format(@"与中心服务器{{{0}:{1}}}连接已连接！", AsyncStackNet.Instance.ASyncSetup.CoreServer, AsyncStackNet.Instance.ASyncSetup.CoreServerPort));
                     }
                 );
 
-            AsyncStackNet.Instance.OnCoreDisconnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
-                    delegate(object sender, AsyncEventArgs<eTerm443Async> e) {
+            AsyncStackNet.Instance.OnCoreDisconnect += new EventHandler<AsyncEventArgs<eTerm363Session>>(
+                    delegate(object sender, AsyncEventArgs<eTerm363Session> e)
+                    {
                         UpdateStatusText(statusInfo, string.Format(@"与中心服务器{{{0}:{1}}}连接已经断开！", AsyncStackNet.Instance.ASyncSetup.CoreServer, AsyncStackNet.Instance.ASyncSetup.CoreServerPort));
                     }
                 );

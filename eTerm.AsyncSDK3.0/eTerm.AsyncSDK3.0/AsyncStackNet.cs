@@ -54,7 +54,7 @@ namespace eTerm.AsyncSDK {
         private InvokePlugInCallback __RateExecute;
         private string __SetupFile = string.Empty;
         private Timer __rateAsync;
-        private eTerm443Async __CoreASync = null;
+        private eTerm363Session __CoreASync = null;
 
         /// <summary>
         /// Occurs when [on rate event].
@@ -202,12 +202,12 @@ namespace eTerm.AsyncSDK {
         /// <summary>
         /// 与中心服务器断开连接事件通知.
         /// </summary>
-        public event EventHandler<AsyncEventArgs<eTerm443Async>> OnCoreDisconnect;
+        public event EventHandler<AsyncEventArgs<eTerm363Session>> OnCoreDisconnect;
 
         /// <summary>
         /// 与中心服务器断开连接事件通知.
         /// </summary>
-        public event EventHandler<AsyncEventArgs<eTerm443Async>> OnCoreConnect;
+        public event EventHandler<AsyncEventArgs<eTerm363Session>> OnCoreConnect;
 
         /// <summary>
         /// 授授认证错误通知 .
@@ -421,31 +421,32 @@ namespace eTerm.AsyncSDK {
             )
                 throw new NotImplementedException(@"系统缺少中心指令服务器相关设置,请联系发开商!");
             ///TODO:初始化认证连接，认证频率计时器为：30分钟
-            __CoreASync = new eTerm443Async(
-                                ASyncSetup.CoreServer,
-                                ASyncSetup.CoreServerPort.Value,
-                                ASyncSetup.CoreAccount,
-                                ASyncSetup.CorePass, 0x00, 0x00) { IsSsl = false, Instruction = @"!UpdateDate", IgInterval=5 };
-            __CoreASync.OnAsyncDisconnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
-                    delegate(object sender, AsyncEventArgs<eTerm443Async> e) {
+            __CoreASync = new eTerm363Session(ASyncSetup.CoreAccount,ASyncSetup.CorePass){
+                 RemoteEP=new IPEndPoint(IPAddress.Parse( ASyncSetup.CoreServer),ASyncSetup.CoreServerPort.Value),
+                 IsSsl=false};
+            __CoreASync.OnAsyncDisconnect += new EventHandler<AsyncEventArgs<eTerm363Session>>(
+                    delegate(object sender, AsyncEventArgs<eTerm363Session> e)
+                    {
                         if (this.OnCoreDisconnect != null)
                             this.OnCoreDisconnect(sender, e);
                     }
                 );
-            __CoreASync.TSessionReconnectValidate = new AsyncBase<eTerm443Async, eTerm443Packet>.ValidateTSessionCallback(
-                delegate(eTerm443Packet Packet, eTerm443Async ASync) {
+            __CoreASync.TSessionReconnectValidate = new AsyncBase<eTerm363Session, eTerm363Packet>.ValidateTSessionCallback(
+                delegate(eTerm363Packet Packet, eTerm363Session ASync)
+                {
                     return false;
             });
-            __CoreASync.OnAsynConnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
-                    delegate(object sender, AsyncEventArgs<eTerm443Async> e)
+            __CoreASync.OnAsynConnect += new EventHandler<AsyncEventArgs<eTerm363Session>>(
+                    delegate(object sender, AsyncEventArgs<eTerm363Session> e)
                     {
                         if (this.OnCoreConnect != null)
                             this.OnCoreConnect(sender, e);
                     }
                 );
-            __CoreASync.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>>(
-                    delegate(object sender, AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> e) {
-                        if (e.InPacket.OriginalBytes[0] == 0x00) return;
+            __CoreASync.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session>>(
+                    delegate(object sender, AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session> e)
+                    {
+                        //if (e.InPacket.OriginalBytes[0] == 0x00) return;
                         DateTime serverDate=DateTime.Parse( Encoding.GetEncoding("gb2312").GetString(e.Session.UnInPakcet(e.OutPacket)));
                         if (((TimeSpan)(serverDate - DateTime.Now)).TotalDays != 0) {
                             SystemUtil.SetSysTime(serverDate);
