@@ -210,7 +210,7 @@ namespace eTerm.AsyncSDK.Net {
                                                     this.SendPacket(new byte[]{0x01,0xFB,0x00,0x05,0x00 });
                                                 //this.SendPacket(__DefendStatement);
                                             }),
-                                        null, __IgInterval, __IgInterval);
+                                        null, 500, __IgInterval);
                
             }
             else {
