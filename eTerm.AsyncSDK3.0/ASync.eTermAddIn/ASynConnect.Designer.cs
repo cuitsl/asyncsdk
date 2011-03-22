@@ -56,7 +56,6 @@
             this.labelX10 = new DevComponents.DotNetBar.LabelX();
             this.labelX9 = new DevComponents.DotNetBar.LabelX();
             this.labelX8 = new DevComponents.DotNetBar.LabelX();
-            this.btnSingleSave = new DevComponents.DotNetBar.ButtonX();
             this.txtSIText = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX5 = new DevComponents.DotNetBar.LabelX();
             this.chkIsOpen = new DevComponents.DotNetBar.Controls.CheckBoxX();
@@ -70,6 +69,8 @@
             this.txtSessionName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.tabItem2 = new DevComponents.DotNetBar.TabItem(this.components);
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnSingleSave = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
@@ -79,19 +80,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.integerInput2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.integerInput1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.CanReorderTabs = true;
-            this.tabControl1.Controls.Add(this.tabControlPanel1);
             this.tabControl1.Controls.Add(this.PanelSession);
+            this.tabControl1.Controls.Add(this.tabControlPanel1);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedTabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.tabControl1.SelectedTabIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(653, 417);
+            this.tabControl1.Size = new System.Drawing.Size(690, 458);
             this.tabControl1.Style = DevComponents.DotNetBar.eTabStripStyle.Office2007Document;
             this.tabControl1.TabIndex = 1;
             this.tabControl1.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
@@ -287,6 +289,7 @@
             // PanelSession
             // 
             this.PanelSession.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.PanelSession.Controls.Add(this.flowLayoutPanel1);
             this.PanelSession.Controls.Add(this.comboTree1);
             this.PanelSession.Controls.Add(this.labelX11);
             this.PanelSession.Controls.Add(this.comboBoxEx1);
@@ -298,7 +301,6 @@
             this.PanelSession.Controls.Add(this.labelX10);
             this.PanelSession.Controls.Add(this.labelX9);
             this.PanelSession.Controls.Add(this.labelX8);
-            this.PanelSession.Controls.Add(this.btnSingleSave);
             this.PanelSession.Controls.Add(this.txtSIText);
             this.PanelSession.Controls.Add(this.labelX5);
             this.PanelSession.Controls.Add(this.chkIsOpen);
@@ -316,7 +318,7 @@
             this.PanelSession.Location = new System.Drawing.Point(0, 23);
             this.PanelSession.Name = "PanelSession";
             this.PanelSession.Padding = new System.Windows.Forms.Padding(1);
-            this.PanelSession.Size = new System.Drawing.Size(653, 394);
+            this.PanelSession.Size = new System.Drawing.Size(690, 435);
             this.PanelSession.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(254)))));
             this.PanelSession.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(188)))), ((int)(((byte)(227)))));
             this.PanelSession.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -493,19 +495,6 @@
             this.labelX8.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.labelX8.TabIndex = 18;
             this.labelX8.Text = "安全连接：";
-            // 
-            // btnSingleSave
-            // 
-            this.btnSingleSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnSingleSave.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnSingleSave.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnSingleSave.Location = new System.Drawing.Point(1, 370);
-            this.btnSingleSave.Name = "btnSingleSave";
-            this.btnSingleSave.Size = new System.Drawing.Size(651, 23);
-            this.btnSingleSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnSingleSave.TabIndex = 10;
-            this.btnSingleSave.Text = "保存配置（&U）";
-            this.btnSingleSave.Click += new System.EventHandler(this.btnSingleSave_Click);
             // 
             // txtSIText
             // 
@@ -699,13 +688,36 @@
             this.tabItem2.Name = "tabItem2";
             this.tabItem2.Text = "配置信息修改";
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel1.Controls.Add(this.btnSingleSave);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(1, 389);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(688, 45);
+            this.flowLayoutPanel1.TabIndex = 27;
+            // 
+            // btnSingleSave
+            // 
+            this.btnSingleSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnSingleSave.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnSingleSave.Location = new System.Drawing.Point(592, 3);
+            this.btnSingleSave.Name = "btnSingleSave";
+            this.btnSingleSave.Size = new System.Drawing.Size(93, 23);
+            this.btnSingleSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnSingleSave.TabIndex = 11;
+            this.btnSingleSave.Text = "保存配置（&U）";
+            this.btnSingleSave.Click += new System.EventHandler(this.btnSingleSave_Click);
+            // 
             // ASynConnect
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl1);
             this.Name = "ASynConnect";
-            this.Size = new System.Drawing.Size(653, 417);
+            this.Size = new System.Drawing.Size(690, 458);
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabControlPanel1.ResumeLayout(false);
@@ -716,6 +728,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.integerInput2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.integerInput1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -749,7 +762,6 @@
         private DevComponents.DotNetBar.Controls.CheckBoxX chkIsOpen;
         private DevComponents.DotNetBar.LabelX labelX5;
         private DevComponents.DotNetBar.Controls.TextBoxX txtSIText;
-        private DevComponents.DotNetBar.ButtonX btnSingleSave;
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private DevComponents.DotNetBar.Controls.CheckBoxX chkIsSsl;
         private DevComponents.DotNetBar.LabelX labelX8;
@@ -768,6 +780,8 @@
         private DevComponents.Editors.IntegerInput integerInput1;
         private DevComponents.DotNetBar.Controls.ComboTree comboTree1;
         private DevComponents.DotNetBar.LabelX labelX11;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private DevComponents.DotNetBar.ButtonX btnSingleSave;
 
     }
 }
