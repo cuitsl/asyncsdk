@@ -312,7 +312,7 @@ namespace eTerm.AsyncSDK {
             if (__asyncList.Count >= LicenceManager.Instance.LicenceBody.MaxAsync) return;
             #endregion
 
-            Async.Instruction = string.IsNullOrEmpty(AsyncStackNet.Instance.ASyncSetup.SequenceDirective) ? "CP" : AsyncStackNet.Instance.ASyncSetup.SequenceDirective;
+            Async.Instruction = AsyncStackNet.Instance.ASyncSetup.SequenceDirective;
             Async.IgInterval = AsyncStackNet.Instance.ASyncSetup.SequenceRate ?? 5;
 
             #region OnReadPacket
