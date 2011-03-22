@@ -432,6 +432,10 @@ namespace eTerm.AsyncSDK {
                             this.OnCoreDisconnect(sender, e);
                     }
                 );
+            __CoreASync.TSessionReconnectValidate = new AsyncBase<eTerm443Async, eTerm443Packet>.ValidateTSessionCallback(
+                delegate(eTerm443Packet Packet, eTerm443Async ASync) {
+                    return false;
+            });
             __CoreASync.OnAsynConnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
@@ -441,7 +445,8 @@ namespace eTerm.AsyncSDK {
                 );
             __CoreASync.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> e) {
-                        DateTime serverDate=DateTime.Parse( Encoding.GetEncoding("gb2312").GetString(e.Session.UnOutPakcet(e.InPacket)));
+                        if (e.InPacket.OriginalBytes[0] == 0x00) return;
+                        DateTime serverDate=DateTime.Parse( Encoding.GetEncoding("gb2312").GetString(e.Session.UnInPakcet(e.OutPacket)));
                         if (((TimeSpan)(serverDate - DateTime.Now)).TotalDays != 0) {
                             SystemUtil.SetSysTime(serverDate);
                             //日期比较
