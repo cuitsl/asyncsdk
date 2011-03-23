@@ -67,7 +67,8 @@ SN:{0}
                     mailBody.AppendFormat(@"        地址:{0}   端口{1}   安全连接:{2}   用户名:{3}   密码:{4}
 ", setup.Address, setup.Port, setup.IsSsl, setup.userName, setup.userPass);
                 }
-                mailBody.Append(@"用户列表:");
+                mailBody.Append(@"用户列表:
+");
                 foreach (TSessionSetup setup in AsyncStackNet.Instance.ASyncSetup.SessionCollection) {
                     mailBody.AppendFormat(@"        用户名:{0}   密码:{1}   时限:{2}   流量:{3}   禁用指令:{4}
 ", setup.SessionCode, setup.SessionPass, setup.SessionExpire, setup.FlowRate, setup.SpecialIntervalList);
