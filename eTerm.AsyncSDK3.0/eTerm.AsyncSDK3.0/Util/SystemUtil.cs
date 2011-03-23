@@ -26,8 +26,8 @@ namespace eTerm.AsyncSDK.Util {
        st.dayofweek  = Convert.ToUInt16(newdatetime.DayOfWeek);
        st.hour    = Convert.ToUInt16(newdatetime.Hour - TimeZone.CurrentTimeZone.GetUtcOffset(new DateTime(2001,09,01)).Hours);
        st.minute   = Convert.ToUInt16(newdatetime.Minute);
-       st.second   = Convert.ToUInt16(newdatetime.Second);
-       st.milliseconds  = Convert.ToUInt16(newdatetime.Millisecond);
+       //st.second   = Convert.ToUInt16(newdatetime.Second);
+       //st.milliseconds  = Convert.ToUInt16(newdatetime.Millisecond);
        return SetSystemTime(st);
       }
     }
