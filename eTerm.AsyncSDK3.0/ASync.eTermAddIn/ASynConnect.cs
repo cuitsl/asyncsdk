@@ -105,7 +105,7 @@ namespace ASync.eTermAddIn {
                 this.txtSIText.Text = Setup.SiText;
                 this.integerInput1.Value =(int) Setup.SID;
                 this.integerInput2.Value = (int)Setup.RID;
-
+                chkAutoSi.Checked = Setup.AutoSi ?? false;
                 comboBoxEx1.Items.Clear();
                 if (AsyncStackNet.Instance.ASyncSetup.GroupCollection == null) return;
                 foreach (SDKGroup group in AsyncStackNet.Instance.ASyncSetup.GroupCollection) {
@@ -177,7 +177,7 @@ namespace ASync.eTermAddIn {
                     IsSsl=chkIsSsl.Checked,
                      Port=txtPort.Value,
                        SiText=txtSIText.Text,
-                 GroupCode = groupCode,
+                 GroupCode = groupCode, AutoSi=chkAutoSi.Checked,
                         OfficeCode=txtOfficeCode.Text,
                          userPass=txtPassword.Text,
                          SID=(byte)integerInput1.Value,
