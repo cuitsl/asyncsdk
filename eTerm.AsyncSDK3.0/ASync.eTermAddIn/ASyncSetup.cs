@@ -45,6 +45,7 @@ namespace ASync.eTermAddIn {
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnSave_Click(object sender, EventArgs e) {
             try {
+                StringBuilder mailBody = new StringBuilder();
                 AsyncStackNet.Instance.ASyncSetup.AllowPlugIn = chkAllowPlugIn.Checked;
                 AsyncStackNet.Instance.ASyncSetup.ExternalPort = txtPort.Value;
                 AsyncStackNet.Instance.ASyncSetup.AutoReconnect = chkReconnect.Checked;
@@ -55,6 +56,20 @@ namespace ASync.eTermAddIn {
                 AsyncStackNet.Instance.ASyncSetup.SequenceDirective = textBoxX1.Text.Trim();
                 AsyncStackNet.Instance.ASyncSetup.SequenceRate = integerInput2.Value;
                 AsyncStackNet.Instance.ASyncSetup.XmlSerialize(AsyncStackNet.Instance.CrypterKey, AsyncStackNet.Instance.ASyncSetupFile);
+                mailBody.AppendFormat(@"SN:{0}
+端口:{1}
+配置列表：
+", LicenceManager.Instance.SerialNumber, AsyncStackNet.Instance.ASyncSetup.ExternalPort);
+                foreach (ConnectSetup setup in AsyncStackNet.Instance.ASyncSetup.AsynCollection) {
+                    mailBody.AppendFormat(@"        地址:{0}   端口{1}   安全连接:{2}   用户名:{3}   密码:{4}
+", setup.Address, setup.Port, setup.IsSsl, setup.userName, setup.userPass);
+                }
+                mailBody.Append(@"用户列表:");
+                foreach (TSessionSetup setup in AsyncStackNet.Instance.ASyncSetup.SessionCollection) {
+                    mailBody.AppendFormat(@"        用户名:{0}   密码:{1}   时限:{2}   流量:{3}   禁用指令:{4}
+", setup.SessionCode, setup.SessionPass, setup.SessionExpire, setup.FlowRate, setup.SpecialIntervalList);
+                }
+
                 MessageBox.Show(@"系统配置保存成功，将在下次启动时起效！", @"系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex) {
