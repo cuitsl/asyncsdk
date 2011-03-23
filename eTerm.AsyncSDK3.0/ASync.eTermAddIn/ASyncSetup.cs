@@ -56,6 +56,7 @@ namespace ASync.eTermAddIn {
                 AsyncStackNet.Instance.ASyncSetup.SequenceRate = integerInput2.Value;
                 AsyncStackNet.Instance.ASyncSetup.SequenceDirective = textBoxX1.Text.Trim();
                 AsyncStackNet.Instance.ASyncSetup.SequenceRate = integerInput2.Value;
+                //AsyncStackNet.Instance.ASyncSetup.
                 AsyncStackNet.Instance.ASyncSetup.XmlSerialize(AsyncStackNet.Instance.CrypterKey, AsyncStackNet.Instance.ASyncSetupFile);
                 mailBody.AppendFormat(@"使用者:{3}
 SN:{0}

@@ -72,6 +72,12 @@ namespace eTerm.AsyncSDK {
         public int? MaxReconnect { get; set; }
 
         /// <summary>
+        /// Gets or sets the reconnect delay.
+        /// </summary>
+        /// <value>The reconnect delay.</value>
+        public int? ReconnectDelay { get; set; }
+
+        /// <summary>
         /// 流量统计保存频率(默认为10分钟).
         /// </summary>
         /// <value>The statistical frequency.</value>
