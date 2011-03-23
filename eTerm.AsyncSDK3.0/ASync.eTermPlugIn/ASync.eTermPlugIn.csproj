@@ -93,7 +93,6 @@
     <Compile Include="RTLogPlugIn.cs" />
     <Compile Include="SDKConnect.cs" />
     <Compile Include="SDKDuration.cs" />
-    <Compile Include="SDKExpire.cs" />
     <Compile Include="SDKTSession.cs" />
   </ItemGroup>
   <ItemGroup>
