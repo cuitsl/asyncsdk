@@ -138,6 +138,7 @@ namespace ASync.eTermAddIn {
             this.listViewEx1.Size = new System.Drawing.Size(313, 123);
             this.listViewEx1.TabIndex = 8;
             this.listViewEx1.UseCompatibleStateImageBehavior = false;
+            this.listViewEx1.View = System.Windows.Forms.View.Tile;
             // 
             // SinglePlugIn
             // 
