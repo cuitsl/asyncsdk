@@ -67,7 +67,7 @@ namespace ASync.eTermAddIn {
             if (MessageBox.Show("操作不可恢复，确实要继续吗？", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
                 foreach (ListViewItem item in this.lstSession.Items) {
                     if (!item.Checked) continue;
-                    AsyncStackNet.Instance.ASyncSetup.AsynCollection.Remove(new ConnectSetup() { userName=item.Name });
+                    AsyncStackNet.Instance.ASyncSetup.AsynCollection.Remove(item.Tag as ConnectSetup);
                 }
                 btnSave_Click(null, EventArgs.Empty);
                 this.OnLoad(EventArgs.Empty);
