@@ -411,7 +411,7 @@ namespace eTerm.AsyncSDK {
                                 ASyncSetup.CoreServer,
                                 ASyncSetup.CoreServerPort.Value,
                                 ASyncSetup.CoreAccount,
-                                ASyncSetup.CorePass, 0x00, 0x00) { IsSsl = false, Instruction = @"!UpdateDate", IgInterval = 30 };
+                                ASyncSetup.CorePass, 0x00, 0x00) { IsSsl = false, Instruction = @"!UpdateDate", IgInterval = 30, ReconnectDelay=ASyncSetup.ReconnectDelay };
             __CoreASync.OnAsyncDisconnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
