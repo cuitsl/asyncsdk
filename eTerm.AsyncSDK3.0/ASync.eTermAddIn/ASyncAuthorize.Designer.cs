@@ -26,6 +26,9 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new DevComponents.DotNetBar.TabControl();
             this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
+            this.labelX10 = new DevComponents.DotNetBar.LabelX();
+            this.txtRemainMinutes = new DevComponents.Editors.DoubleInput();
+            this.labelX9 = new DevComponents.DotNetBar.LabelX();
             this.txtCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX8 = new DevComponents.DotNetBar.LabelX();
             this.txtDbString = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -45,16 +48,13 @@
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.labelX9 = new DevComponents.DotNetBar.LabelX();
-            this.txtRemainMinutes = new DevComponents.Editors.DoubleInput();
-            this.labelX10 = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRemainMinutes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMaxSession)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMaxASync)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtExpire)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtRemainMinutes)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -96,10 +96,10 @@
             this.tabControlPanel1.Controls.Add(this.txtPath);
             this.tabControlPanel1.Controls.Add(this.labelX1);
             this.tabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlPanel1.Location = new System.Drawing.Point(0, 22);
+            this.tabControlPanel1.Location = new System.Drawing.Point(0, 23);
             this.tabControlPanel1.Name = "tabControlPanel1";
             this.tabControlPanel1.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanel1.Size = new System.Drawing.Size(554, 318);
+            this.tabControlPanel1.Size = new System.Drawing.Size(554, 317);
             this.tabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(254)))));
             this.tabControlPanel1.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(188)))), ((int)(((byte)(227)))));
             this.tabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -109,6 +109,56 @@
             this.tabControlPanel1.Style.GradientAngle = 90;
             this.tabControlPanel1.TabIndex = 1;
             this.tabControlPanel1.TabItem = this.tabItem1;
+            // 
+            // labelX10
+            // 
+            this.labelX10.AutoSize = true;
+            // 
+            // 
+            // 
+            this.labelX10.BackgroundStyle.Class = "";
+            this.labelX10.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX10.Location = new System.Drawing.Point(521, 210);
+            this.labelX10.Name = "labelX10";
+            this.labelX10.Size = new System.Drawing.Size(31, 16);
+            this.labelX10.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX10.TabIndex = 19;
+            this.labelX10.Text = "分钟";
+            this.labelX10.Visible = false;
+            // 
+            // txtRemainMinutes
+            // 
+            // 
+            // 
+            // 
+            this.txtRemainMinutes.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.txtRemainMinutes.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtRemainMinutes.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.txtRemainMinutes.Enabled = false;
+            this.txtRemainMinutes.Increment = 1;
+            this.txtRemainMinutes.IsInputReadOnly = true;
+            this.txtRemainMinutes.Location = new System.Drawing.Point(422, 208);
+            this.txtRemainMinutes.Name = "txtRemainMinutes";
+            this.txtRemainMinutes.ShowUpDown = true;
+            this.txtRemainMinutes.Size = new System.Drawing.Size(93, 20);
+            this.txtRemainMinutes.TabIndex = 18;
+            this.txtRemainMinutes.Visible = false;
+            // 
+            // labelX9
+            // 
+            this.labelX9.AutoSize = true;
+            // 
+            // 
+            // 
+            this.labelX9.BackgroundStyle.Class = "";
+            this.labelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX9.Location = new System.Drawing.Point(344, 210);
+            this.labelX9.Name = "labelX9";
+            this.labelX9.Size = new System.Drawing.Size(68, 16);
+            this.labelX9.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX9.TabIndex = 17;
+            this.labelX9.Text = "剩余时间：";
+            this.labelX9.Visible = false;
             // 
             // txtCode
             // 
@@ -126,6 +176,7 @@
             // labelX8
             // 
             this.labelX8.AutoSize = true;
+            this.labelX8.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
@@ -133,7 +184,7 @@
             this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX8.Location = new System.Drawing.Point(57, 53);
             this.labelX8.Name = "labelX8";
-            this.labelX8.Size = new System.Drawing.Size(51, 15);
+            this.labelX8.Size = new System.Drawing.Size(56, 16);
             this.labelX8.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.labelX8.TabIndex = 15;
             this.labelX8.Text = "机器码：";
@@ -145,7 +196,7 @@
             // 
             this.txtDbString.Border.Class = "TextBoxBorder";
             this.txtDbString.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtDbString.Location = new System.Drawing.Point(123, 290);
+            this.txtDbString.Location = new System.Drawing.Point(123, 257);
             this.txtDbString.Name = "txtDbString";
             this.txtDbString.ReadOnly = true;
             this.txtDbString.Size = new System.Drawing.Size(427, 20);
@@ -159,7 +210,7 @@
             this.chkOpenDb.BackgroundStyle.Class = "";
             this.chkOpenDb.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.chkOpenDb.Enabled = false;
-            this.chkOpenDb.Location = new System.Drawing.Point(123, 259);
+            this.chkOpenDb.Location = new System.Drawing.Point(123, 226);
             this.chkOpenDb.Name = "chkOpenDb";
             this.chkOpenDb.Size = new System.Drawing.Size(60, 23);
             this.chkOpenDb.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -176,7 +227,7 @@
             this.txtMaxSession.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
             this.txtMaxSession.Enabled = false;
             this.txtMaxSession.IsInputReadOnly = true;
-            this.txtMaxSession.Location = new System.Drawing.Point(123, 227);
+            this.txtMaxSession.Location = new System.Drawing.Point(123, 194);
             this.txtMaxSession.Name = "txtMaxSession";
             this.txtMaxSession.ShowUpDown = true;
             this.txtMaxSession.Size = new System.Drawing.Size(60, 20);
@@ -192,7 +243,7 @@
             this.txtMaxASync.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
             this.txtMaxASync.Enabled = false;
             this.txtMaxASync.IsInputReadOnly = true;
-            this.txtMaxASync.Location = new System.Drawing.Point(123, 193);
+            this.txtMaxASync.Location = new System.Drawing.Point(123, 160);
             this.txtMaxASync.Name = "txtMaxASync";
             this.txtMaxASync.ShowUpDown = true;
             this.txtMaxASync.Size = new System.Drawing.Size(60, 20);
@@ -201,14 +252,15 @@
             // labelX7
             // 
             this.labelX7.AutoSize = true;
+            this.labelX7.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
             this.labelX7.BackgroundStyle.Class = "";
             this.labelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX7.Location = new System.Drawing.Point(21, 295);
+            this.labelX7.Location = new System.Drawing.Point(21, 262);
             this.labelX7.Name = "labelX7";
-            this.labelX7.Size = new System.Drawing.Size(87, 15);
+            this.labelX7.Size = new System.Drawing.Size(93, 16);
             this.labelX7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.labelX7.TabIndex = 10;
             this.labelX7.Text = "数据库连接串：";
@@ -216,14 +268,15 @@
             // labelX6
             // 
             this.labelX6.AutoSize = true;
+            this.labelX6.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
             this.labelX6.BackgroundStyle.Class = "";
             this.labelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX6.Location = new System.Drawing.Point(9, 259);
+            this.labelX6.Location = new System.Drawing.Point(9, 226);
             this.labelX6.Name = "labelX6";
-            this.labelX6.Size = new System.Drawing.Size(99, 15);
+            this.labelX6.Size = new System.Drawing.Size(106, 16);
             this.labelX6.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.labelX6.TabIndex = 9;
             this.labelX6.Text = "是否启用数据库：";
@@ -231,14 +284,15 @@
             // labelX5
             // 
             this.labelX5.AutoSize = true;
+            this.labelX5.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
             this.labelX5.BackgroundStyle.Class = "";
             this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX5.Location = new System.Drawing.Point(33, 227);
+            this.labelX5.Location = new System.Drawing.Point(33, 194);
             this.labelX5.Name = "labelX5";
-            this.labelX5.Size = new System.Drawing.Size(75, 15);
+            this.labelX5.Size = new System.Drawing.Size(81, 16);
             this.labelX5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.labelX5.TabIndex = 8;
             this.labelX5.Text = "最大连接数：";
@@ -246,14 +300,15 @@
             // labelX4
             // 
             this.labelX4.AutoSize = true;
+            this.labelX4.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
             this.labelX4.BackgroundStyle.Class = "";
             this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX4.Location = new System.Drawing.Point(33, 193);
+            this.labelX4.Location = new System.Drawing.Point(33, 160);
             this.labelX4.Name = "labelX4";
-            this.labelX4.Size = new System.Drawing.Size(75, 15);
+            this.labelX4.Size = new System.Drawing.Size(81, 16);
             this.labelX4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.labelX4.TabIndex = 7;
             this.labelX4.Text = "最大配置数：";
@@ -313,6 +368,7 @@
             // labelX3
             // 
             this.labelX3.AutoSize = true;
+            this.labelX3.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
@@ -320,7 +376,7 @@
             this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX3.Location = new System.Drawing.Point(45, 125);
             this.labelX3.Name = "labelX3";
-            this.labelX3.Size = new System.Drawing.Size(63, 15);
+            this.labelX3.Size = new System.Drawing.Size(68, 16);
             this.labelX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.labelX3.TabIndex = 5;
             this.labelX3.Text = "到期日期：";
@@ -341,6 +397,7 @@
             // labelX2
             // 
             this.labelX2.AutoSize = true;
+            this.labelX2.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
@@ -348,7 +405,7 @@
             this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX2.Location = new System.Drawing.Point(45, 87);
             this.labelX2.Name = "labelX2";
-            this.labelX2.Size = new System.Drawing.Size(63, 15);
+            this.labelX2.Size = new System.Drawing.Size(68, 16);
             this.labelX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.labelX2.TabIndex = 3;
             this.labelX2.Text = "公司名称：";
@@ -382,6 +439,7 @@
             // labelX1
             // 
             this.labelX1.AutoSize = true;
+            this.labelX1.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
@@ -389,7 +447,7 @@
             this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX1.Location = new System.Drawing.Point(45, 18);
             this.labelX1.Name = "labelX1";
-            this.labelX1.Size = new System.Drawing.Size(63, 15);
+            this.labelX1.Size = new System.Drawing.Size(68, 16);
             this.labelX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.labelX1.TabIndex = 0;
             this.labelX1.Text = "授权文件：";
@@ -404,52 +462,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // labelX9
-            // 
-            this.labelX9.AutoSize = true;
-            // 
-            // 
-            // 
-            this.labelX9.BackgroundStyle.Class = "";
-            this.labelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX9.Location = new System.Drawing.Point(45, 159);
-            this.labelX9.Name = "labelX9";
-            this.labelX9.Size = new System.Drawing.Size(63, 15);
-            this.labelX9.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.labelX9.TabIndex = 17;
-            this.labelX9.Text = "剩余时间：";
-            // 
-            // txtRemainMinutes
-            // 
-            // 
-            // 
-            // 
-            this.txtRemainMinutes.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.txtRemainMinutes.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtRemainMinutes.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.txtRemainMinutes.Enabled = false;
-            this.txtRemainMinutes.IsInputReadOnly = true;
-            this.txtRemainMinutes.Location = new System.Drawing.Point(123, 157);
-            this.txtRemainMinutes.Name = "txtRemainMinutes";
-            this.txtRemainMinutes.ShowUpDown = true;
-            this.txtRemainMinutes.Size = new System.Drawing.Size(93, 20);
-            this.txtRemainMinutes.TabIndex = 18;
-            // 
-            // labelX10
-            // 
-            this.labelX10.AutoSize = true;
-            // 
-            // 
-            // 
-            this.labelX10.BackgroundStyle.Class = "";
-            this.labelX10.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX10.Location = new System.Drawing.Point(222, 159);
-            this.labelX10.Name = "labelX10";
-            this.labelX10.Size = new System.Drawing.Size(27, 15);
-            this.labelX10.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.labelX10.TabIndex = 19;
-            this.labelX10.Text = "分钟";
-            // 
             // ASyncAuthorize
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -461,10 +473,10 @@
             this.tabControl1.ResumeLayout(false);
             this.tabControlPanel1.ResumeLayout(false);
             this.tabControlPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRemainMinutes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMaxSession)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMaxASync)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtExpire)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtRemainMinutes)).EndInit();
             this.ResumeLayout(false);
 
         }
