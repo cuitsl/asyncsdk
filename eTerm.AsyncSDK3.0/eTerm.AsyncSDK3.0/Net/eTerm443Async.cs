@@ -93,6 +93,12 @@ namespace eTerm.AsyncSDK.Net {
         public string SiText {get; set; }
 
         /// <summary>
+        /// 是否允许自动SI.
+        /// </summary>
+        /// <value>The auto si.</value>
+        public bool AutoSi { get; set; }
+
+        /// <summary>
         /// Office号.
         /// </summary>
         /// <value>The office code.</value>
@@ -198,7 +204,7 @@ namespace eTerm.AsyncSDK.Net {
                 if(this.RID==0)
                     this.RID = base.InPacket.OriginalBytes[9];
                 base.InPacket = new eTerm443Packet();
-                if(!string.IsNullOrEmpty(this.SiText))
+                if(this.AutoSi&& !string.IsNullOrEmpty(this.SiText))
                     this.SendPacket(this.SiText);
 
                                     __IgAsync = new Timer(
@@ -212,7 +218,7 @@ namespace eTerm.AsyncSDK.Net {
                                                     this.SendPacket(new byte[]{0x01,0xFB,0x00,0x05,0x00 });
                                                 //this.SendPacket(__DefendStatement);
                                             }),
-                                        null, __IgInterval, __IgInterval);
+                                        null, 500, __IgInterval);
                
             }
             else {
