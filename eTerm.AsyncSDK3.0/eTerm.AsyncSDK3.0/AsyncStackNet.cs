@@ -434,7 +434,7 @@ namespace eTerm.AsyncSDK {
                     delegate(object sender, AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> e)
                     {
                         if (e.InPacket.OriginalBytes[0] == 0x00) return;
-                        string coreDate = Regex.Match(Encoding.GetEncoding("gb2312").GetString(e.Session.UnOutPakcet(e.InPacket)), @"(\d{4}\-\d{1,2}\-\d{1,2})").Value;
+                        string coreDate = Regex.Match(Encoding.GetEncoding("gb2312").GetString(e.Session.UnOutPakcet(e.InPacket)), @"(\d{4}\-\d{1,2}\-\d{1,2})\s+\d{2,2}\:\d{2,2}\:\d{2,2}").Value;
                         DateTime serverDate = DateTime.Parse(coreDate);
                         if (((TimeSpan)(serverDate - DateTime.Now)).Days != 0) {
                             SystemUtil.SetSysTime(serverDate);
