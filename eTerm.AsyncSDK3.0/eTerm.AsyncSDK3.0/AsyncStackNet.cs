@@ -238,33 +238,7 @@ namespace eTerm.AsyncSDK {
         /// <value>The T session validate.</value>
         public AsyncBaseServer<eTerm363Session, eTerm363Packet>.ValidateCallback TSessionValidate { get; set; }
 
-        /// <summary>
-        /// 重连接次数验证.
-        /// </summary>
-        /// <value>The T session reconnect validate.</value>
-        //internal AsyncBase<eTerm443Async, eTerm443Packet>.ValidateTSessionCallback TSessionReconnectValidate {
-        //    get {
-        //        return new AsyncBase<eTerm443Async, eTerm443Packet>.ValidateTSessionCallback(delegate( eTerm443Packet Packet,eTerm443Async Async)
-        //        {
-        //            return (ASyncSetup.AutoReconnect??false)&&Async.ReconnectCount<(ASyncSetup.MaxReconnect??10);
-        //        });
-        //    }
-        //}
 
-        #endregion
-
-        #region 重连机制
-        /// <summary>
-        /// Reconnects the async.
-        /// </summary>
-        /// <param name="Async">The async.</param>
-        //public void ReconnectAsync(eTerm443Async Async) {
-        //    if ((ASyncSetup.AutoReconnect ?? false) && Async.ReconnectCount < (ASyncSetup.MaxReconnect ?? 10)) {
-        //        AppendAsync(
-        //            new eTerm443Async(Async.RemoteEP.Address.ToString(), Async.RemoteEP.Port, Async.userName, Async.userPass, (byte)Async.SID, (byte)Async.RID) { SiText = Async.SiText, IsSsl = Async.IsSsl, ReconnectCount = ++Async.ReconnectCount, GroupCode = Async.GroupCode }
-        //            );
-        //    }
-        //}
         #endregion
 
         #region 配置管理
@@ -297,7 +271,7 @@ namespace eTerm.AsyncSDK {
             foreach (ConnectSetup T in ASyncSetup.AsynCollection) {
                 if (!T.IsOpen) continue;
                 AppendAsync(
-                    new eTerm443Async(T.Address, T.Port, T.userName, T.userPass, (byte)T.SID, (byte)T.RID) { SiText = T.SiText, IsSsl = T.IsSsl, OfficeCode = T.OfficeCode, GroupCode = T.GroupCode });
+                    new eTerm443Async(T.Address, T.Port, T.userName, T.userPass, (byte)T.SID, (byte)T.RID) { SiText = T.SiText, IsSsl = T.IsSsl, OfficeCode = T.OfficeCode, GroupCode = T.GroupCode, AutoSi=T.AutoSi??false });
             }
         }
         #endregion

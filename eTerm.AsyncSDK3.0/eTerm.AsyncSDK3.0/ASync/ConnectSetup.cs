@@ -139,6 +139,12 @@ namespace eTerm.AsyncSDK {
         public string SiText { get; set; }
 
         /// <summary>
+        /// Gets or sets the auto si.
+        /// </summary>
+        /// <value>The auto si.</value>
+        public bool? AutoSi { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether this instance is open.
         /// </summary>
         /// <value><c>true</c> if this instance is open; otherwise, <c>false</c>.</value>
