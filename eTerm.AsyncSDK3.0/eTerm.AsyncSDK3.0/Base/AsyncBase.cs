@@ -54,7 +54,7 @@ namespace eTerm.AsyncSDK.Base {
         /// 重连延时.
         /// </summary>
         /// <value>The reconnect delay.</value>
-        public float? ReconnectDelay { set; protected get; }
+        public int? ReconnectDelay { set; protected get; }
 
         /// <summary>
         /// 上一次收到的数据包.
@@ -397,7 +397,7 @@ namespace eTerm.AsyncSDK.Base {
                     delegate(object sender)
                     {
                         Connect();
-                    }),null,int.Parse(((ReconnectDelay??1.0)*1000).ToString()),Timeout.Infinite);
+                    }),null,(ReconnectDelay??1)*1000,Timeout.Infinite);
             }
         }
 

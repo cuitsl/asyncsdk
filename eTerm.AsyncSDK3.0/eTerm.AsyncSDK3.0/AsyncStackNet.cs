@@ -288,6 +288,7 @@ namespace eTerm.AsyncSDK {
 
             Async.Instruction = AsyncStackNet.Instance.ASyncSetup.SequenceDirective;
             Async.IgInterval = AsyncStackNet.Instance.ASyncSetup.SequenceRate ?? 5;
+            Async.ReconnectDelay = ASyncSetup.ReconnectDelay;
 
             #region OnReadPacket
             Async.OnReadPacket += new EventHandler<eTerm.AsyncSDK.AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>>(
