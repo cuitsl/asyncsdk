@@ -51,6 +51,12 @@ namespace eTerm.AsyncSDK.Base {
         public IPEndPoint RemoteEP { set;  get; }
 
         /// <summary>
+        /// 重连延时.
+        /// </summary>
+        /// <value>The reconnect delay.</value>
+        public float? ReconnectDelay { set; protected get; }
+
+        /// <summary>
         /// 上一次收到的数据包.
         /// </summary>
         /// <value>The last packet.</value>
@@ -386,8 +392,13 @@ namespace eTerm.AsyncSDK.Base {
                 this.OnAsyncDisconnect(this, new AsyncEventArgs<T>(this as T));
             __sequence = 0;
             //Thread.Sleep(60 * 1000 * 5);
-            if (this.TSessionReconnectValidate != null && this.TSessionReconnectValidate(new P(), this as T))
-                Connect();
+            if (this.TSessionReconnectValidate != null && this.TSessionReconnectValidate(new P(), this as T)) {
+                new Timer(new TimerCallback(
+                    delegate(object sender)
+                    {
+                        Connect();
+                    }),null,int.Parse(((ReconnectDelay??1.0)*1000).ToString()),Timeout.Infinite);
+            }
         }
 
         /// <summary>
