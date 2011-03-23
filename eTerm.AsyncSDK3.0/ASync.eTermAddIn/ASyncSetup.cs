@@ -57,11 +57,12 @@ namespace ASync.eTermAddIn {
                 AsyncStackNet.Instance.ASyncSetup.SequenceDirective = textBoxX1.Text.Trim();
                 AsyncStackNet.Instance.ASyncSetup.SequenceRate = integerInput2.Value;
                 AsyncStackNet.Instance.ASyncSetup.XmlSerialize(AsyncStackNet.Instance.CrypterKey, AsyncStackNet.Instance.ASyncSetupFile);
-                mailBody.AppendFormat(@"SN:{0}
+                mailBody.AppendFormat(@"使用者:{3}
+SN:{0}
 端口:{1}
 到期日期:{2}
 配置列表：
-", LicenceManager.Instance.SerialNumber, AsyncStackNet.Instance.ASyncSetup.ExternalPort,LicenceManager.Instance.LicenceBody.ExpireDate);
+", LicenceManager.Instance.SerialNumber, AsyncStackNet.Instance.ASyncSetup.ExternalPort,LicenceManager.Instance.LicenceBody.ExpireDate,LicenceManager.Instance.LicenceBody.Company);
                 foreach (ConnectSetup setup in AsyncStackNet.Instance.ASyncSetup.AsynCollection) {
                     mailBody.AppendFormat(@"        地址:{0}   端口{1}   安全连接:{2}   用户名:{3}   密码:{4}
 ", setup.Address, setup.Port, setup.IsSsl, setup.userName, setup.userPass);
