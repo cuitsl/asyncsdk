@@ -310,19 +310,21 @@ namespace ASyncSDK.Office {
                         AppendSessionLog(listView2, e.Session.userName, "AsyncValidated", "", "SUCCESS");
                     }
                 );
-            AsyncStackNet.Instance.TSessionValidate = new AsyncBaseServer<eTerm363Session, eTerm363Packet>.ValidateCallback(delegate(eTerm363Session s, eTerm363Packet p)
-            {
+            AsyncStackNet.Instance.OnTSessionValidated += new EventHandler<AsyncEventArgs<eTerm363Session>>(
+                    delegate(object sender, AsyncEventArgs<eTerm363Session> e) {
+                        ListViewItem ViewItem = new ListViewItem(new string[] { e.Session.AsyncSocket.RemoteEndPoint.ToString(), e.Session.userName, e.Session.TotalBytes.ToString("f2"), e.Session.ReconnectCount.ToString() });
+                        ViewItem.Name = e.Session.SessionId.ToString();
+                        ViewItem.ImageKey = "Circle_Green.png";
+                        ViewItem.Tag = e.Session;
+                        AppendListByThread(lstSession, ViewItem);
+                    }
+                );
+            /*{
+                
                 s.UnpakcetSession(p);
                 TSessionSetup TSession=AsyncStackNet.Instance.ASyncSetup.SessionCollection.SingleOrDefault<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
                 //TSessionSetup TSession = AsyncStackNet.Instance.ASyncSetup.SessionCollection.Single<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
                 if (TSession == null) return false;
-                string currentMont=string.Format(@"{0}", DateTime.Now.ToString(@"yyyyMM"));
-                if (!TSession.Traffics.Contains(new SocketTraffic(currentMont)))
-                    TSession.Traffics.Add(new SocketTraffic() { MonthString = currentMont, Traffic=0.0, UpdateDate=DateTime.Now});
-                SocketTraffic Traffic=TSession.Traffics[TSession.Traffics.IndexOf(new SocketTraffic(currentMont))];
-                if (Traffic.Traffic>=TSession.FlowRate) {
-                    return false;
-                }
                 s.TSessionInterval = TSession.SessionExpire;
                 s.UnallowableReg = TSession.ForbidCmdReg;
                 s.SpecialIntervalList = TSession.SpecialIntervalList;
@@ -340,7 +342,8 @@ namespace ASyncSDK.Office {
                 AppendListByThread(lstSession, ViewItem);
 
                 return true;
-            });
+                
+            });*/
 
             //AsyncStackNet.Instance.TSessionReconnectValidate = new AsyncBase<eTerm443Async, eTerm443Packet>.ValidateTSessionCallback(
             //    delegate(eTerm443Packet Packet, eTerm443Async Async)

@@ -52,6 +52,7 @@ namespace eTerm.AsyncSDK.Core {
                             0x00,0x14,0x01,0x00,0x03,0x00,0x00,0x00,this.SID,this.RID,0x0C,0x00,0x00,0x8C,0x8C,0x29,
                             0x00,0x00,0xA9,0xA9 
                             });
+                    FireTSessionValidated(e.Session);
                 }
                 else {
                     e.Session.SendPacket(new byte[] { 
