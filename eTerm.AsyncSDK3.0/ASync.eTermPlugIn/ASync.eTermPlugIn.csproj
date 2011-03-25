@@ -91,6 +91,7 @@
     <Compile Include="QueryMyFlow.cs" />
     <Compile Include="QueryMyPnr.cs" />
     <Compile Include="RTLogPlugIn.cs" />
+    <Compile Include="SDKAuthorize.cs" />
     <Compile Include="SDKConnect.cs" />
     <Compile Include="SDKDuration.cs" />
     <Compile Include="SDKTSession.cs" />
