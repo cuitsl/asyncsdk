@@ -74,6 +74,7 @@
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
             this.labelX13 = new DevComponents.DotNetBar.LabelX();
+            this.integerInput3 = new DevComponents.Editors.IntegerInput();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.PanelSession.SuspendLayout();
@@ -84,6 +85,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).BeginInit();
             this.tabControlPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.integerInput3)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -126,6 +128,7 @@
             this.PanelSession.Controls.Add(this.chkAutoSi);
             this.PanelSession.Controls.Add(this.chkIsOpen);
             this.PanelSession.Controls.Add(this.labelX4);
+            this.PanelSession.Controls.Add(this.integerInput3);
             this.PanelSession.Controls.Add(this.integerInput2);
             this.PanelSession.Controls.Add(this.integerInput1);
             this.PanelSession.Controls.Add(this.txtPort);
@@ -764,6 +767,23 @@
             this.labelX13.TabIndex = 28;
             this.labelX13.Text = "月流量：";
             // 
+            // integerInput3
+            // 
+            // 
+            // 
+            // 
+            this.integerInput3.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.integerInput3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.integerInput3.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.integerInput3.Location = new System.Drawing.Point(283, 153);
+            this.integerInput3.MaxValue = 100000;
+            this.integerInput3.MinValue = 0;
+            this.integerInput3.Name = "integerInput3";
+            this.integerInput3.ShowUpDown = true;
+            this.integerInput3.Size = new System.Drawing.Size(49, 20);
+            this.integerInput3.TabIndex = 5;
+            this.integerInput3.Value = 100;
+            // 
             // ASynConnect
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -782,6 +802,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).EndInit();
             this.tabControlPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.integerInput3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -838,6 +859,7 @@
         private DevComponents.DotNetBar.LabelX labelX12;
         private DevComponents.DotNetBar.Controls.CheckBoxX chkAutoSi;
         private DevComponents.DotNetBar.LabelX labelX13;
+        private DevComponents.Editors.IntegerInput integerInput3;
 
     }
 }

@@ -105,7 +105,7 @@ namespace ASync.eTermAddIn {
                 this.txtSessionName.Text = Setup.userName;
                 this.txtSIText.Text = Setup.SiText;
                 this.integerInput1.Value =(int) Setup.SID;
-                this.integerInput2.Value = (int)Setup.RID;
+                this.integerInput3.Value = (int)Setup.RID;
                 chkAutoSi.Checked = Setup.AutoSi ?? false;
                 comboBoxEx1.Items.Clear();
                 if (AsyncStackNet.Instance.ASyncSetup.GroupCollection == null) return;
@@ -182,7 +182,7 @@ namespace ASync.eTermAddIn {
                         OfficeCode=txtOfficeCode.Text,
                          userPass=txtPassword.Text,
                          SID=(byte)integerInput1.Value,
-                          RID=(byte)integerInput2.Value,
+                 RID = (byte)integerInput3.Value,
                            FlowRate=integerInput2.Value
             };
             Setup.Traffics = (PanelSession.Tag as ConnectSetup).Traffics;
