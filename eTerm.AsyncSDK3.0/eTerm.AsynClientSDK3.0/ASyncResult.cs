@@ -12,14 +12,18 @@ namespace eTerm.ASynClientSDK {
     [Serializable]
     public abstract class ASyncResult {
         /// <summary>
-        /// Gets or sets the A syn CMD.
+        /// 发送指令.
         /// </summary>
         /// <value>The A syn CMD.</value>
         [XmlIgnore]
         public string ASynCmd { set; get; }
 
+        /// <summary>
+        /// 原始指令结果.
+        /// </summary>
+        /// <value>The org command.</value>
         [XmlIgnore]
-        public string OrgCommand { get; internal set; }
+        public string OrgCommandResult { get; internal set; }
 
 
         /// <summary>

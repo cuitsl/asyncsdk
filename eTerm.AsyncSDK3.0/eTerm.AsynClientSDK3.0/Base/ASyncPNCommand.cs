@@ -48,11 +48,12 @@ namespace eTerm.ASynClientSDK.Base {
                 Thread.Sleep(int.Parse((this.AsnCommandSleep??0.5 * 1000).ToString()));
                 SendStream(PnCommand);
                 PnResult = ConvertResult(GetStream());
-                pnResult.AppendFormat("\0{0}", PnResult);
+                pnResult.AppendFormat("\r{0}", PnResult);
             }
             Dispose();
             ASyncResult Restult = ResultAdapter(pnResult.ToString());
             Restult.ASynCmd = SynCmd;
+            Restult.OrgCommandResult = pnResult.ToString();
             return Restult;
         }
     }

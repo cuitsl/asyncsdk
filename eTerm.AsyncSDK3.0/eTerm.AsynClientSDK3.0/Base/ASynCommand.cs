@@ -277,9 +277,10 @@ namespace eTerm.ASynClientSDK.Base {
             SendStream( SynCmd);
             string OrgCommand = ConvertResult(GetStream());
             ASyncResult Result = ResultAdapter(OrgCommand);
-            Result.OrgCommand = OrgCommand;
+            Result.OrgCommandResult = OrgCommand;
             Dispose();
             Result.ASynCmd = SynCmd;
+            Result.OrgCommandResult = OrgCommand;
             return Result;
         }
 

@@ -9,7 +9,6 @@ using eTerm.ASynClientSDK.Base;
 using System.Threading;
 using System.Text.RegularExpressions;
 using System.Runtime.Remoting.Contexts;
-using ASync.eTermPlugIn;
 using System.Transactions;
 using eTerm.AsyncSDK;
 
@@ -46,8 +45,12 @@ namespace AsyncAPI3._0Tst {
             //    Console.WriteLine();
             //}
 
-
-
+            FDCommand fd = new FDCommand();
+            FDResult Result = fd.findPrice("SHA", "PEK", DateTime.Now.AddDays(10), string.Empty, string.Empty, string.Empty) as FDResult;
+            foreach (FDItem item in Result.getElements) {
+                Console.WriteLine(@"{0} {4}/{1} {2}/{3}", item.getAirline, item.getCabinType, item.getSinglePrice, item.getRoundPrice, item.getBasicCabinType);
+            }
+            Console.ReadLine();
 
             /*
             Random rnd = new Random(DateTime.Now.Millisecond);
@@ -140,7 +143,6 @@ namespace AsyncAPI3._0Tst {
             */
 
             
-            Console.ReadLine();
         }
     }
 

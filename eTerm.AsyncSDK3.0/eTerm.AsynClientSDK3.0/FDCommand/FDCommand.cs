@@ -86,7 +86,7 @@ namespace eTerm.ASynClientSDK {
         private void ParseFd(FDResult Fd, string Msg) {
             Fd.getElements = new List<FDItem>();
             float CabinY = Regex.IsMatch(Msg, @"\s\w{2}\/[Y]\s*\/\s*(\d*\.?\d{0,2})\=\s*(\d*\.?\d{0,2})", RegexOptions.IgnoreCase) ? float.Parse(Regex.Match(Msg, @"\s\w{2}\/[Y]\s*\/\s*(\d*\.?\d{0,2})\=\s*(\d*\.?\d{0,2})", RegexOptions.IgnoreCase).Groups[1].Value) : 0.0f;
-            Fd.getMoneyType = Regex.Match(Msg, @"\/\w{2}\s*\/([A-Z]{3})", RegexOptions.IgnoreCase).Groups[1].Value;
+            //Fd.getMoneyType = Regex.Match(Msg, @"\/\w{2}\s*\/([A-Z]{3})", RegexOptions.IgnoreCase).Groups[1].Value;
             Fd.getOrg = Regex.Match(Msg, @"FD\:([A-Z]{3})([A-Z]{3})\/", RegexOptions.IgnoreCase).Groups[1].Value;
             Fd.getDst = Regex.Match(Msg, @"FD\:([A-Z]{3})([A-Z]{3})\/", RegexOptions.IgnoreCase).Groups[2].Value;
             Fd.getDistance = Regex.Match(Msg, @"\/TPM\s*(\d{1,})\s*\/", RegexOptions.IgnoreCase).Groups[1].Value;
@@ -112,11 +112,13 @@ namespace eTerm.ASynClientSDK {
         public FDItem ParseItem(string MsgItem,double CabinY,string Msg) {
             FDItem Item = new FDItem();
             Item.getAirline = Regex.Match(MsgItem, @"^\d+\s(\w{2})", RegexOptions.IgnoreCase).Groups[1].Value;
-            Item.getCabinType = Regex.Match(MsgItem, @"\d{2,2}\s+([A-Z0-9]{2,2})\/([A-Z]\d?)\s+\/[\s\d\=\.]*\/([A-Z])\/([A-Z])\/", RegexOptions.IgnoreCase).Groups[2].Value;
+
+            Match cabinMatch = Regex.Match(MsgItem, @"\d{2,2}\s+([A-Z0-9]{2,2})\/(([A-Z0-9]{1,2})|([A-Z])OW|([A-Z])RT)\s+\/[\s\d\=\.]*\/([A-Z])\/([A-Z])\/", RegexOptions.IgnoreCase);
+            Item.getCabinType = string.IsNullOrEmpty(cabinMatch.Groups[3].Value) ? cabinMatch.Groups[6].Value : cabinMatch.Groups[3].Value;
             //查找Y航价格{CA/Y}
             //Match CabinMatch = Regex.Match(MsgItem, @"\s*\/([A-Z])\/([A-Z])\/", RegexOptions.IgnoreCase);
             //Item.getDiscountRate = (double.Parse(CabinMatch.Groups[1].Value) / CabinY).ToString("f2");
-            Item.getBasicCabinType = Regex.Match(MsgItem, @"\d{2,2}\s+([A-Z0-9]{2,2})\/([A-Z]\d?)\s+\/[\s\d\=\.]*\/([A-Z])\/([A-Z])\/", RegexOptions.IgnoreCase).Groups[4].Value;
+            Item.getBasicCabinType=cabinMatch.Groups[7].Value;
             if (!Regex.IsMatch(MsgItem, @"(\d*\.?\d{0,2})\=\s*(\d*\.?\d{0,2})", RegexOptions.IgnoreCase)) {
                 //Match m = Regex.Match(MsgItem, @"^\d{1,}\s*("+Item.getAirline+@")\s*\/(" + Item.getCabinType + @")OW\s*\/\s*(\d*\.?\d{0,2})\s*\/([A-Z])\/([A-Z])\/");
                 Item.getSinglePrice = Regex.Match(Msg, @"\d{1,}\s*(" + Item.getAirline + @")\s*\/(" + Item.getCabinType + @")OW\s*\/\s*(\d*\.?\d{0,2})\s*\/([A-Z])\/([A-Z])\/").Groups[3].Value;
@@ -127,16 +129,18 @@ namespace eTerm.ASynClientSDK {
                 Item.getSinglePrice = m.Groups[1].Value;
                 Item.getRoundPrice = m.Groups[2].Value;
             }
-            /*
-            if(Regex.IsMatch(MsgItem, @"(\d*\.?\d{0,2})\=\s*(\d*\.?\d{0,2})", RegexOptions.IgnoreCase))
-                Item.getSinglePrice = Regex.Match(MsgItem, @"(\d*\.?\d{0,2})\=\s*(\d*\.?\d{0,2})", RegexOptions.IgnoreCase).Groups[1].Value;
-            else
-                Item.getSinglePrice = Regex.Match(MsgItem, @"(\d{1,}\.\d{1,2})(\s{1,})\/", RegexOptions.IgnoreCase).Groups[1].Value;
-            if (Regex.IsMatch(MsgItem, @"(\d*\.?\d{0,2})\=\s*(\d*\.?\d{0,2})", RegexOptions.IgnoreCase))
-                Item.getRoundPrice = Regex.Match(MsgItem, @"(\d*\.?\d{0,2})\=\s*(\d*\.?\d{0,2})", RegexOptions.IgnoreCase).Groups[2].Value;
-            else
-                Item.getRoundPrice = Regex.Match(MsgItem, @"(\d*\.?\d{0,2})\=\s*(\d*\.?\d{0,2})", RegexOptions.IgnoreCase).Groups[2].Value;
-            */
+
+
+            if (Regex.IsMatch(MsgItem, @"\d+\s+(" + Item.getAirline + @")\/(" + Item.getCabinType + @")\s+\/\s+(\d*\.?\d{0,2})\s+\/([A-Z0-9]{1,2})\/(" + Item.getBasicCabinType + @")", RegexOptions.IgnoreCase)) {
+                Item.getSinglePrice = Regex.Match(MsgItem, @"\d+\s+(" + Item.getAirline + @")\/(" + Item.getCabinType + @")\s+\/\s+(\d*\.?\d{0,2})\s+\/([A-Z0-9]{1,2})\/(" + Item.getBasicCabinType + @")", RegexOptions.IgnoreCase).Groups[3].Value;
+                if (Regex.IsMatch(MsgItem, @"\d+\s+(" + Item.getAirline + @")\/(" + Item.getCabinType + @")\s+\/\s+(\d*\.?\d{0,2})\s+\/[A-Z0-9]{1,2}\/(" + Item.getBasicCabinType + @")", RegexOptions.IgnoreCase | RegexOptions.Multiline))
+                    Item.getRoundPrice = Regex.Match(MsgItem, @"\d+\s+(" + Item.getAirline + @")\/(" + Item.getCabinType + @")\s+\/\s+(\d*\.?\d{0,2})\s+\/[A-Z0-9]{1,2}\/(" + Item.getBasicCabinType + @")", RegexOptions.IgnoreCase | RegexOptions.Multiline).Groups[3].Value;
+            }
+
+            if (Regex.IsMatch(MsgItem, @"\d+\s+(" + Item.getAirline + @")\/(" + Item.getCabinType + @")OW\s+\/\s+(\d+\.\d+)\s+\/([A-Z0-9]{1,2})\/(" + Item.getBasicCabinType + @")\/", RegexOptions.Multiline | RegexOptions.IgnoreCase)) {
+                Item.getSinglePrice= Regex.Match(MsgItem, @"\d+\s+(" + Item.getAirline + @")\/(" + Item.getCabinType + @")OW\s+\/\s+(\d+\.\d+)\s+\/([A-Z0-9]{1,2})\/(" + Item.getBasicCabinType + @")\/", RegexOptions.Multiline | RegexOptions.IgnoreCase).Groups[3].Value;
+            }
+            
             Item.getStartDate = Regex.Match(MsgItem, @"\.\s*\/(\d{2}[A-Z]{3}\d{2})\s*", RegexOptions.IgnoreCase).Groups[1].Value;
             return Item;
         }
