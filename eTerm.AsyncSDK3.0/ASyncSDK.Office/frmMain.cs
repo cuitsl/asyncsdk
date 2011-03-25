@@ -313,24 +313,14 @@ namespace ASyncSDK.Office {
             AsyncStackNet.Instance.TSessionValidate = new AsyncBaseServer<eTerm363Session, eTerm363Packet>.ValidateCallback(delegate(eTerm363Session s, eTerm363Packet p)
             {
                 s.UnpakcetSession(p);
-                TSessionSetup TSession = AsyncStackNet.Instance.ASyncSetup.SessionCollection.Single<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
+                TSessionSetup TSession=AsyncStackNet.Instance.ASyncSetup.SessionCollection.SingleOrDefault<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
+                //TSessionSetup TSession = AsyncStackNet.Instance.ASyncSetup.SessionCollection.Single<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
                 if (TSession == null) return false;
-                if (
-                    AsyncStackNet.Instance.ASyncSetup.SessionCollection.Contains(new TSessionSetup(s.userName))
-                    &&
-                    AsyncStackNet.Instance.ASyncSetup.SessionCollection[
-                        AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup(s.userName))
-                        ].Traffics.Contains(new SocketTraffic(DateTime.Now.ToString(@"yyyyMM")))
-                    &&
-                    AsyncStackNet.Instance.ASyncSetup.SessionCollection[
-                        AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup(s.userName))
-                        ].Traffics[
-                            AsyncStackNet.Instance.ASyncSetup.SessionCollection[
-                        AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup(s.userName) )
-                        ].Traffics.IndexOf(new SocketTraffic(DateTime.Now.ToString(@"yyyyMM")))].Traffic >= AsyncStackNet.Instance.ASyncSetup.SessionCollection[
-                        AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup(s.userName))
-                        ].FlowRate
-                    ) {
+                string currentMont=string.Format(@"{0}", DateTime.Now.ToString(@"yyyyMM"));
+                if (!TSession.Traffics.Contains(new SocketTraffic(currentMont)))
+                    TSession.Traffics.Add(new SocketTraffic() { MonthString = currentMont, Traffic=0.0, UpdateDate=DateTime.Now});
+                SocketTraffic Traffic=TSession.Traffics[TSession.Traffics.IndexOf(new SocketTraffic(currentMont))];
+                if (Traffic.Traffic>=TSession.FlowRate) {
                     return false;
                 }
                 s.TSessionInterval = TSession.SessionExpire;

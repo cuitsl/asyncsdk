@@ -151,6 +151,12 @@ namespace eTerm.AsyncSDK {
         public bool IsOpen { get; set; }
 
         /// <summary>
+        /// Gets or sets the flow rate.
+        /// </summary>
+        /// <value>The flow rate.</value>
+        public float? FlowRate { get; set; }
+
+        /// <summary>
         /// Gets or sets the traffics.
         /// </summary>
         /// <value>The traffics.</value>
