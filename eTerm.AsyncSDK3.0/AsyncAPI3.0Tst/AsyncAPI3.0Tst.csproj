@@ -72,10 +72,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ASync.eTermPlugIn\ASync.eTermPlugIn.csproj">
-      <Project>{D80776C3-538D-4A77-8FCA-D4A88ECD982B}</Project>
-      <Name>ASync.eTermPlugIn</Name>
-    </ProjectReference>
     <ProjectReference Include="..\eTerm.AsynClientSDK3.0\eTerm.AsynClientSDK3.0.csproj">
       <Project>{88A7ABE1-8AEB-4E8C-92C9-0FFFB8F70421}</Project>
       <Name>eTerm.AsynClientSDK3.0</Name>
