@@ -468,7 +468,7 @@ namespace eTerm.AsyncSDK.Base {
 #endif
             }
             catch (Exception ex) {  // 读 socket 异常，关闭该会话，系统不认为是错误（这种错误可能太多）
-                throw;
+                //throw;
 #if DEBUG
                         WriteLog(ex);
 #endif
