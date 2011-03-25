@@ -175,6 +175,11 @@ namespace eTerm.AsyncSDK {
         public event EventHandler<AsyncEventArgs<eTerm363Session>> OnTSessionAccept;
 
         /// <summary>
+        /// 客户认证成功.
+        /// </summary>
+        public event EventHandler<AsyncEventArgs<eTerm363Session>> OnTSessionValidated;
+
+        /// <summary>
         /// 会话读取事件.
         /// </summary>
         public event EventHandler<AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session>> OnTSessionReadPacket;
@@ -356,6 +361,16 @@ namespace eTerm.AsyncSDK {
                     {
                         if (this.OnAsyncValidated != null)
                             this.OnAsyncValidated(sender, e);
+                        string CurrentMonth = DateTime.Now.ToString(@"yyyyMM");
+                        ConnectSetup TSession = AsyncStackNet.Instance.ASyncSetup.AsynCollection.SingleOrDefault<ConnectSetup>(Fun => Fun.userPass ==e.Session.userPass && Fun.userName ==e.Session.userName);
+                        if (!TSession.Traffics.Contains(new SocketTraffic(CurrentMonth)))
+                            TSession.Traffics.Add(new SocketTraffic() { MonthString = CurrentMonth, Traffic = 0.0, UpdateDate = DateTime.Now });
+                        SocketTraffic Traffic = TSession.Traffics[TSession.Traffics.IndexOf(new SocketTraffic(CurrentMonth))];
+                        if (Traffic.Traffic >= TSession.FlowRate) {
+                            e.Session.ObligatoryReconnect = false;
+                            e.Session.Close();
+                            return;
+                        }
                         this.__asyncList.Add(Async);
                     }
                 );
@@ -516,6 +531,51 @@ namespace eTerm.AsyncSDK {
                             OnTSessionPacketSent(sender, e);
                     }
                 );
+
+            this.TSessionValidate = new AsyncBaseServer<eTerm363Session, eTerm363Packet>.ValidateCallback(delegate(eTerm363Session s, eTerm363Packet p)
+            {
+                s.UnpakcetSession(p);
+                TSessionSetup TSession=AsyncStackNet.Instance.ASyncSetup.SessionCollection.SingleOrDefault<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
+                //TSessionSetup TSession = AsyncStackNet.Instance.ASyncSetup.SessionCollection.Single<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
+                if (TSession == null) return false;
+                s.TSessionInterval = TSession.SessionExpire;
+                s.UnallowableReg = TSession.ForbidCmdReg;
+                s.SpecialIntervalList = TSession.SpecialIntervalList;
+                s.userGroup = TSession.GroupCode;
+                string currentMonth = string.Format(@"{0}", DateTime.Now.ToString(@"yyyyMM"));
+                if (!TSession.Traffics.Contains(new SocketTraffic(currentMonth)))
+                    TSession.Traffics.Add(new SocketTraffic() { MonthString = currentMonth, Traffic = 0.0, UpdateDate = DateTime.Now });
+                SocketTraffic Traffic = TSession.Traffics[TSession.Traffics.IndexOf(new SocketTraffic(currentMonth))];
+                if (Traffic.Traffic >= TSession.FlowRate) {
+                    return false;
+                }
+
+                s.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session>>(
+                        delegate(object Session, AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session> SessionArg)
+                        {
+                            if (this.OnTSessionReadPacket != null)
+                                this.OnTSessionReadPacket(Session, SessionArg);
+                        }
+                    );
+                if (this.OnTSessionValidated != null)
+                    this.OnTSessionValidated(s, new AsyncEventArgs<eTerm363Session>(s));
+                return true;
+            });
+
+            //__asyncServer.OnTSessionValidated += new EventHandler<AsyncEventArgs<eTerm363Session>>(
+            //        delegate(object sender, AsyncEventArgs<eTerm363Session> e) {
+            //            if (this.OnTSessionValidated != null)
+            //                this.OnTSessionValidated(sender, e);
+            //            string currentMonth = string.Format(@"{0}", DateTime.Now.ToString(@"yyyyMM"));
+            //            if (!TSession.Traffics.Contains(new SocketTraffic(currentMonth)))
+            //                TSession.Traffics.Add(new SocketTraffic() { MonthString = currentMonth, Traffic = 0.0, UpdateDate = DateTime.Now });
+            //            SocketTraffic Traffic = TSession.Traffics[TSession.Traffics.IndexOf(new SocketTraffic(currentMonth))];
+            //            if (Traffic.Traffic >= TSession.FlowRate) {
+            //                return false;
+            //            }
+            //        }
+            //    );
+
             __asyncServer.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session> e)
                     {

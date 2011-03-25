@@ -75,6 +75,11 @@ namespace eTerm.AsyncSDK.Base {
         public IPEndPoint AsyncEndPoint { protected get; set; }
 
         /// <summary>
+        /// 客户端认证成功.
+        /// </summary>
+        public event EventHandler<AsyncEventArgs<T>> OnTSessionValidated;
+
+        /// <summary>
         /// 最大连接数.
         /// </summary>
         /// <value>The max session.</value>
@@ -91,6 +96,15 @@ namespace eTerm.AsyncSDK.Base {
         /// </summary>
         /// <value>The T session validate.</value>
         public ValidateCallback TSessionValidate { get; set; }
+
+        /// <summary>
+        /// Fires the T session validated.
+        /// </summary>
+        /// <param name="TSession">The T session.</param>
+        protected virtual void FireTSessionValidated(T TSession) {
+            if (this.OnTSessionValidated != null)
+                this.OnTSessionValidated(TSession, new AsyncEventArgs<T>(TSession));
+        }
         #endregion
 
         #region 发送数据 

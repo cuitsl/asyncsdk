@@ -57,6 +57,12 @@ namespace eTerm.AsyncSDK.Base {
         public int? ReconnectDelay { set; protected get; }
 
         /// <summary>
+        /// 是否允许重连.
+        /// </summary>
+        /// <value><c>true</c> if [obligatory reconnect]; otherwise, <c>false</c>.</value>
+        internal bool ObligatoryReconnect { get; set; }
+
+        /// <summary>
         /// 上一次收到的数据包.
         /// </summary>
         /// <value>The last packet.</value>
@@ -270,6 +276,7 @@ namespace eTerm.AsyncSDK.Base {
         /// </summary>
         public AsyncBase() {
             if (!LicenceManager.Instance.ValidateResult) throw new OverflowException(__eTerm443Packet.AUTHERROR_MES);
+            this.ObligatoryReconnect = true;
         }
         #endregion
 
@@ -392,7 +399,7 @@ namespace eTerm.AsyncSDK.Base {
                 this.OnAsyncDisconnect(this, new AsyncEventArgs<T>(this as T));
             __sequence = 0;
             //Thread.Sleep(60 * 1000 * 5);
-            if (this.TSessionReconnectValidate != null && this.TSessionReconnectValidate(new P(), this as T)) {
+            if (this.ObligatoryReconnect&& this.TSessionReconnectValidate != null && this.TSessionReconnectValidate(new P(), this as T)) {
                 new Timer(new TimerCallback(
                     delegate(object sender)
                     {
