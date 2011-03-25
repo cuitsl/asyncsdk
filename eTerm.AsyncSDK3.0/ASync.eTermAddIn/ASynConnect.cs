@@ -32,7 +32,7 @@ namespace ASync.eTermAddIn {
                                 Setup.IsOpen.ToString(),
                                 Setup.SiText,
                                 Setup.OfficeCode,
-                                group==null?"未分组":group.groupName
+                                group==null?"未分组":group.groupName,
                             });
                             Item.Name = Setup.userName;
                             Item.Tag = Setup;
@@ -101,6 +101,7 @@ namespace ASync.eTermAddIn {
                 this.txtOfficeCode.Text = Setup.OfficeCode;
                 chkIsOpen.Checked = Setup.IsOpen;
                 chkIsSsl.Checked = Setup.IsSsl;
+                integerInput2.Value = int.Parse((Setup.FlowRate??0.0).ToString());
                 this.txtSessionName.Text = Setup.userName;
                 this.txtSIText.Text = Setup.SiText;
                 this.integerInput1.Value =(int) Setup.SID;
@@ -181,7 +182,8 @@ namespace ASync.eTermAddIn {
                         OfficeCode=txtOfficeCode.Text,
                          userPass=txtPassword.Text,
                          SID=(byte)integerInput1.Value,
-                          RID=(byte)integerInput2.Value
+                          RID=(byte)integerInput2.Value,
+                           FlowRate=integerInput2.Value
             };
             Setup.Traffics = (PanelSession.Tag as ConnectSetup).Traffics;
             PanelSession.Tag = Setup;

@@ -26,6 +26,7 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new DevComponents.DotNetBar.TabControl();
             this.PanelSession = new DevComponents.DotNetBar.TabControlPanel();
+            this.labelX12 = new DevComponents.DotNetBar.LabelX();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnSingleSave = new DevComponents.DotNetBar.ButtonX();
             this.comboTree1 = new DevComponents.DotNetBar.Controls.ComboTree();
@@ -41,6 +42,7 @@
             this.labelX8 = new DevComponents.DotNetBar.LabelX();
             this.txtSIText = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX5 = new DevComponents.DotNetBar.LabelX();
+            this.chkAutoSi = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.chkIsOpen = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
             this.integerInput2 = new DevComponents.Editors.IntegerInput();
@@ -71,8 +73,7 @@
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
-            this.labelX12 = new DevComponents.DotNetBar.LabelX();
-            this.chkAutoSi = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.labelX13 = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.PanelSession.SuspendLayout();
@@ -106,6 +107,7 @@
             // PanelSession
             // 
             this.PanelSession.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.PanelSession.Controls.Add(this.labelX13);
             this.PanelSession.Controls.Add(this.labelX12);
             this.PanelSession.Controls.Add(this.flowLayoutPanel1);
             this.PanelSession.Controls.Add(this.comboTree1);
@@ -147,6 +149,22 @@
             this.PanelSession.Style.GradientAngle = 90;
             this.PanelSession.TabIndex = 2;
             this.PanelSession.TabItem = this.tabItem2;
+            // 
+            // labelX12
+            // 
+            this.labelX12.AutoSize = true;
+            this.labelX12.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX12.BackgroundStyle.Class = "";
+            this.labelX12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX12.Location = new System.Drawing.Point(378, 253);
+            this.labelX12.Name = "labelX12";
+            this.labelX12.Size = new System.Drawing.Size(54, 16);
+            this.labelX12.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX12.TabIndex = 28;
+            this.labelX12.Text = "自动SI：";
             // 
             // flowLayoutPanel1
             // 
@@ -368,6 +386,21 @@
             this.labelX5.TabIndex = 8;
             this.labelX5.Text = "SI：";
             // 
+            // chkAutoSi
+            // 
+            this.chkAutoSi.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.chkAutoSi.BackgroundStyle.Class = "";
+            this.chkAutoSi.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkAutoSi.Location = new System.Drawing.Point(438, 253);
+            this.chkAutoSi.Name = "chkAutoSi";
+            this.chkAutoSi.Size = new System.Drawing.Size(58, 23);
+            this.chkAutoSi.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkAutoSi.TabIndex = 7;
+            this.chkAutoSi.Text = "是/否";
+            // 
             // chkIsOpen
             // 
             this.chkIsOpen.BackColor = System.Drawing.Color.Transparent;
@@ -407,14 +440,14 @@
             this.integerInput2.BackgroundStyle.Class = "DateTimeInputBackground";
             this.integerInput2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.integerInput2.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.integerInput2.Location = new System.Drawing.Point(283, 149);
-            this.integerInput2.MaxValue = 10000;
+            this.integerInput2.Location = new System.Drawing.Point(438, 186);
+            this.integerInput2.MaxValue = 100000;
             this.integerInput2.MinValue = 0;
             this.integerInput2.Name = "integerInput2";
             this.integerInput2.ShowUpDown = true;
-            this.integerInput2.Size = new System.Drawing.Size(49, 20);
+            this.integerInput2.Size = new System.Drawing.Size(88, 20);
             this.integerInput2.TabIndex = 5;
-            this.integerInput2.Value = 66;
+            this.integerInput2.Value = 100;
             // 
             // integerInput1
             // 
@@ -715,36 +748,21 @@
             this.tabItem1.Name = "tabItem1";
             this.tabItem1.Text = "配置管理";
             // 
-            // labelX12
+            // labelX13
             // 
-            this.labelX12.AutoSize = true;
-            this.labelX12.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX12.BackgroundStyle.Class = "";
-            this.labelX12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX12.Location = new System.Drawing.Point(378, 253);
-            this.labelX12.Name = "labelX12";
-            this.labelX12.Size = new System.Drawing.Size(54, 16);
-            this.labelX12.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.labelX12.TabIndex = 28;
-            this.labelX12.Text = "自动SI：";
-            // 
-            // chkAutoSi
-            // 
-            this.chkAutoSi.BackColor = System.Drawing.Color.Transparent;
+            this.labelX13.AutoSize = true;
+            this.labelX13.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            this.chkAutoSi.BackgroundStyle.Class = "";
-            this.chkAutoSi.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkAutoSi.Location = new System.Drawing.Point(425, 253);
-            this.chkAutoSi.Name = "chkAutoSi";
-            this.chkAutoSi.Size = new System.Drawing.Size(58, 23);
-            this.chkAutoSi.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkAutoSi.TabIndex = 7;
-            this.chkAutoSi.Text = "是/否";
+            this.labelX13.BackgroundStyle.Class = "";
+            this.labelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX13.Location = new System.Drawing.Point(378, 186);
+            this.labelX13.Name = "labelX13";
+            this.labelX13.Size = new System.Drawing.Size(54, 16);
+            this.labelX13.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX13.TabIndex = 28;
+            this.labelX13.Text = "自动SI：";
             // 
             // ASynConnect
             // 
@@ -819,6 +837,7 @@
         private DevComponents.DotNetBar.ButtonX btnSingleSave;
         private DevComponents.DotNetBar.LabelX labelX12;
         private DevComponents.DotNetBar.Controls.CheckBoxX chkAutoSi;
+        private DevComponents.DotNetBar.LabelX labelX13;
 
     }
 }
