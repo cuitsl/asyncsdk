@@ -759,10 +759,10 @@
             this.labelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX13.Location = new System.Drawing.Point(378, 186);
             this.labelX13.Name = "labelX13";
-            this.labelX13.Size = new System.Drawing.Size(54, 16);
+            this.labelX13.Size = new System.Drawing.Size(56, 16);
             this.labelX13.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.labelX13.TabIndex = 28;
-            this.labelX13.Text = "自动SI：";
+            this.labelX13.Text = "月流量：";
             // 
             // ASynConnect
             // 
