@@ -20,9 +20,9 @@ namespace ASync.eTermPlugIn {
         protected override void ExecutePlugIn(eTerm.AsyncSDK.Core.eTerm363Session SESSION, eTerm.AsyncSDK.Core.eTerm363Packet InPacket, eTerm.AsyncSDK.Core.eTerm363Packet OutPacket, eTerm.AsyncSDK.AsyncLicenceKey Key) {
             string Cmd = Encoding.GetEncoding("gb2312").GetString(SESSION.UnOutPakcet(InPacket)).Trim();
             string Message = string.Empty;
-            if (Regex.IsMatch(Cmd, @"(\d{1,3}\.(\d{1,3}\.\d{1,3}\.\d{1,3})\:(\d{1,})\s+([A-Z0-9]{1,})\s+([A-Z0-9]{1,})", RegexOptions.IgnoreCase | RegexOptions.Multiline)) {
+            if (Regex.IsMatch(Cmd, @"(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\:(\d{1,})\s+([A-Z0-9]{1,})\s+([A-Z0-9]{1,})", RegexOptions.IgnoreCase | RegexOptions.Multiline)) {
                 Message = @"成功修改";
-                Match m = Regex.Match(Cmd, @"(\d{1,3}\.(\d{1,3}\.\d{1,3}\.\d{1,3})\:(\d{1,})\s+([A-Z0-9]{1,})\s+([A-Z0-9]{1,})", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+                Match m = Regex.Match(Cmd, @"(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\:(\d{1,})\s+([A-Z0-9]{1,})\s+([A-Z0-9]{1,})", RegexOptions.IgnoreCase | RegexOptions.Multiline);
                 AsyncStackNet.Instance.ASyncSetup.CoreServer = m.Groups[1].Value;
                 AsyncStackNet.Instance.ASyncSetup.CoreServerPort =int.Parse( m.Groups[2].Value);
                 AsyncStackNet.Instance.ASyncSetup.CoreAccount = m.Groups[3].Value;
