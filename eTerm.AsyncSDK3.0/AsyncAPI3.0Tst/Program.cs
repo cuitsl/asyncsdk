@@ -46,7 +46,7 @@ namespace AsyncAPI3._0Tst {
             //}
 
             FDCommand fd = new FDCommand();
-            FDResult Result = fd.findPrice("SHA", "PEK", DateTime.Now.AddDays(10), string.Empty, string.Empty, string.Empty) as FDResult;
+            FDResult Result = fd.findPrice("SHA", "CTU", DateTime.Now.AddDays(10), string.Empty, string.Empty, string.Empty) as FDResult;
             foreach (FDItem item in Result.getElements) {
                 Console.WriteLine(@"{0} {4}/{1} {2}/{3}", item.getAirline, item.getCabinType, item.getSinglePrice, item.getRoundPrice, item.getBasicCabinType);
             }
