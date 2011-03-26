@@ -10,7 +10,7 @@ using System.Threading;
 using System.Text.RegularExpressions;
 using System.Runtime.Remoting.Contexts;
 using System.Transactions;
-using eTerm.AsyncSDK;
+
 
 
 namespace AsyncAPI3._0Tst {
@@ -24,6 +24,13 @@ namespace AsyncAPI3._0Tst {
                 
             //    br.Close();
             //}
+
+            AVCommand Av = new AVCommand();
+            AVResult avResult = Av.getAvailability(@"SHA", @"CTU", new DateTime(2011, 4, 30), string.Empty) as AVResult;
+            foreach (AvItem item in avResult.AvSegment) {
+                Console.WriteLine(item.getAirline);
+            }
+            Console.ReadLine();
 
             //SystemSetup setup = new SystemSetup().DeXmlSerialize(eTerm.AsyncSDK.Util.TEACrypter.GetDefaultKey, buffer);
             //setup.CoreServer = @"116.232.100.214";
