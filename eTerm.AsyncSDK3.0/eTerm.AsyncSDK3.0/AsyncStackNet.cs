@@ -306,6 +306,7 @@ namespace eTerm.AsyncSDK {
                             e.Session.TSession.IsCompleted = true;
                             e.Session.TSession.SendPacket(PacketBytes);
                         }
+                        UpdateASyncSession(e.Session);
                         if (LicenceManager.Instance.LicenceBody.AllowAfterValidate) {
                             try {
                                 string Command = Encoding.GetEncoding("gb2312").GetString(e.Session.UnInPakcet(e.OutPacket)).Trim().ToLower();
@@ -362,7 +363,7 @@ namespace eTerm.AsyncSDK {
                         if (this.OnAsyncValidated != null)
                             this.OnAsyncValidated(sender, e);
                         string CurrentMonth = DateTime.Now.ToString(@"yyyyMM");
-                        ConnectSetup TSession = AsyncStackNet.Instance.ASyncSetup.AsynCollection.SingleOrDefault<ConnectSetup>(Fun => Fun.userPass ==e.Session.userPass && Fun.userName ==e.Session.userName);
+                        ConnectSetup TSession = ASyncSetup.AsynCollection.SingleOrDefault<ConnectSetup>(Fun => Fun.userPass ==e.Session.userPass && Fun.userName ==e.Session.userName);
                         if (!TSession.Traffics.Contains(new SocketTraffic(CurrentMonth)))
                             TSession.Traffics.Add(new SocketTraffic() { MonthString = CurrentMonth, Traffic = 0.0, UpdateDate = DateTime.Now });
                         SocketTraffic Traffic = TSession.Traffics[TSession.Traffics.IndexOf(new SocketTraffic(CurrentMonth))];
@@ -480,8 +481,10 @@ namespace eTerm.AsyncSDK {
                                 if (OnSDKTimeout != null)
                                     OnSDKTimeout(sender, new ErrorEventArgs(new TimeZoneNotFoundException(@"系统授权已到期，如需继续使用请从开发商获取新授权")));
                             }
-                            if (this.OnSystemException != null)
-                                this.OnSystemException(sender, new ErrorEventArgs(new ExecutionEngineException(@"认证信息验证完成")));
+                            else {
+                                if (this.OnSystemException != null)
+                                    this.OnSystemException(sender, new ErrorEventArgs(new ExecutionEngineException(@"认证信息验证完成")));
+                            }
                         }
                         catch (Exception ex) {
                             if (this.OnSystemException != null)
@@ -547,6 +550,7 @@ namespace eTerm.AsyncSDK {
                 s.UnallowableReg = TSession.ForbidCmdReg;
                 s.SpecialIntervalList = TSession.SpecialIntervalList;
                 s.userGroup = TSession.GroupCode;
+
                 string currentMonth = string.Format(@"{0}", DateTime.Now.ToString(@"yyyyMM"));
                 if (!TSession.Traffics.Contains(new SocketTraffic(currentMonth)))
                     TSession.Traffics.Add(new SocketTraffic() { MonthString = currentMonth, Traffic = 0.0, UpdateDate = DateTime.Now });
@@ -584,6 +588,7 @@ namespace eTerm.AsyncSDK {
             __asyncServer.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session> e)
                     {
+                        UpdateSession(e.Session);
                         if (LicenceManager.Instance.LicenceBody.AllowAfterValidate) {
                             try {
                                 string Command = Encoding.GetEncoding("gb2312").GetString(e.Session.UnInPakcet(e.InPacket)).Trim().ToLower();
@@ -650,8 +655,8 @@ namespace eTerm.AsyncSDK {
                         e.Session.OnTSessionRelease += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                                 delegate(object Session, AsyncEventArgs<eTerm363Session> ie)
                                 {
-                                    UpdateSession(e.Session);
-                                    UpdateASyncSession(e.Session.Async443);
+                                    //UpdateSession(e.Session);
+                                    //UpdateASyncSession(e.Session.Async443);
                                     if (OnTSessionRelease != null)
                                         OnTSessionRelease(Session, ie);
                                     ie.Session.SendPacket(__eTerm443Packet.BuildSessionPacket(ie.Session.SID, ie.Session.RID, "注意,配置已释放,指令上下文可能已经丢失."));
@@ -753,12 +758,9 @@ namespace eTerm.AsyncSDK {
         /// <param name="TSession">The T session.</param>
         private void UpdateSession(eTerm363Session TSession) {
             try {
-                TSessionSetup Setup = this.ASyncSetup.SessionCollection[this.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup() { SessionCode = TSession.userName })];
-                if (!Setup.Traffics.Contains(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") }))
-                    Setup.Traffics.Add(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") });
-
-                SocketTraffic Traffic = Setup.Traffics[Setup.Traffics.IndexOf(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") })];
-                Traffic.Traffic = TSession.TotalCount + (Traffic.Traffic ?? 0);
+                TSessionSetup Seup = ASyncSetup.SessionCollection.SingleOrDefault<TSessionSetup>(Fun => Fun.SessionPass == TSession.userPass && Fun.SessionCode == TSession.userName);
+                SocketTraffic Traffic = Seup.Traffics[Seup.Traffics.IndexOf(new SocketTraffic(DateTime.Now.ToString(@"yyyyMM")))];
+                Traffic.Traffic++;
                 Traffic.UpdateDate = DateTime.Now;
             }
             catch { }
@@ -770,12 +772,9 @@ namespace eTerm.AsyncSDK {
         /// <param name="ASync">The A sync.</param>
         private void UpdateASyncSession(eTerm443Async ASync) {
             try {
-                ConnectSetup Setup = this.ASyncSetup.AsynCollection[this.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup() { userName = ASync.userName, Address = (ASync.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString() })];
-                if (!Setup.Traffics.Contains(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") }))
-                    Setup.Traffics.Add(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") });
-
-                SocketTraffic Traffic = Setup.Traffics[Setup.Traffics.IndexOf(new SocketTraffic() { MonthString = DateTime.Now.ToString(@"yyyyMM") })];
-                Traffic.Traffic = ASync.TotalCount + (Traffic.Traffic ?? 0);
+                ConnectSetup TSession = ASyncSetup.AsynCollection.SingleOrDefault<ConnectSetup>(Fun => Fun.userPass == ASync.userPass && Fun.userName == ASync.userName);
+                SocketTraffic Traffic = TSession.Traffics[TSession.Traffics.IndexOf(new SocketTraffic(DateTime.Now.ToString(@"yyyyMM")))];
+                Traffic.Traffic++;
                 Traffic.UpdateDate = DateTime.Now;
             }
             catch { }
