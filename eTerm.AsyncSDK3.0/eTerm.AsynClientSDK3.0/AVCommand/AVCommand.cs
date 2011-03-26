@@ -69,7 +69,7 @@ namespace eTerm.ASynClientSDK {
         /// <returns></returns>
         protected override ASyncResult ResultAdapter(string Msg) {
             AVResult result = SyncParseAVH(Msg) as AVResult;
-            foreach (AvItem item in result) {
+            foreach (AvItem item in result.AvSegment) {
                 item.getCabins.Reverse();
             }
             return result;
