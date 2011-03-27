@@ -20,7 +20,7 @@ namespace eTerm.ASynClientSDK {
         /// </summary>
         /// <param name="code">The code.</param>
         /// <param name="avalibly">The avalibly.</param>
-        public AvItemCabinChar(char code, char avalibly) {
+        public AvItemCabinChar(string code, string avalibly) {
             this.getCode = code;
             this.getAvalibly = avalibly;
         }
@@ -29,13 +29,13 @@ namespace eTerm.ASynClientSDK {
         /// 舱位等级.
         /// </summary>
         /// <value>The get code.</value>
-        public char getCode { get; set; }
+        public string getCode { get; set; }
 
         /// <summary>
         /// 有效数.
         /// </summary>
         /// <value>The get avalibly.</value>
-        public char getAvalibly { get; set; }
+        public string getAvalibly { get; set; }
 
         /// <summary>
         /// 舱位价格.
