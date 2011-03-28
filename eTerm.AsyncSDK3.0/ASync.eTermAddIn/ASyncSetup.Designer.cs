@@ -26,6 +26,9 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new DevComponents.DotNetBar.TabControl();
             this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
+            this.labelX11 = new DevComponents.DotNetBar.LabelX();
+            this.integerInput3 = new DevComponents.Editors.IntegerInput();
+            this.labelX12 = new DevComponents.DotNetBar.LabelX();
             this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX10 = new DevComponents.DotNetBar.LabelX();
             this.labelX8 = new DevComponents.DotNetBar.LabelX();
@@ -49,18 +52,17 @@
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.labelX11 = new DevComponents.DotNetBar.LabelX();
-            this.integerInput3 = new DevComponents.Editors.IntegerInput();
-            this.labelX12 = new DevComponents.DotNetBar.LabelX();
+            this.chkLog = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.labelX13 = new DevComponents.DotNetBar.LabelX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.integerInput3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.integerInput2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.integerInput1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMaxReconnect)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.integerInput3)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -80,6 +82,8 @@
             // 
             // tabControlPanel1
             // 
+            this.tabControlPanel1.Controls.Add(this.chkLog);
+            this.tabControlPanel1.Controls.Add(this.labelX13);
             this.tabControlPanel1.Controls.Add(this.labelX11);
             this.tabControlPanel1.Controls.Add(this.integerInput3);
             this.tabControlPanel1.Controls.Add(this.labelX12);
@@ -117,6 +121,55 @@
             this.tabControlPanel1.Style.GradientAngle = 90;
             this.tabControlPanel1.TabIndex = 1;
             this.tabControlPanel1.TabItem = this.tabItem1;
+            // 
+            // labelX11
+            // 
+            this.labelX11.AutoSize = true;
+            this.labelX11.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX11.BackgroundStyle.Class = "";
+            this.labelX11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX11.Location = new System.Drawing.Point(380, 246);
+            this.labelX11.Name = "labelX11";
+            this.labelX11.Size = new System.Drawing.Size(19, 16);
+            this.labelX11.TabIndex = 21;
+            this.labelX11.Text = "秒";
+            // 
+            // integerInput3
+            // 
+            this.integerInput3.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.integerInput3.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.integerInput3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.integerInput3.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.integerInput3.Location = new System.Drawing.Point(310, 246);
+            this.integerInput3.MaxValue = 360;
+            this.integerInput3.MinValue = 1;
+            this.integerInput3.Name = "integerInput3";
+            this.integerInput3.ShowUpDown = true;
+            this.integerInput3.Size = new System.Drawing.Size(64, 20);
+            this.integerInput3.TabIndex = 20;
+            this.integerInput3.Value = 1;
+            this.integerInput3.WatermarkText = "端口号";
+            // 
+            // labelX12
+            // 
+            this.labelX12.AutoSize = true;
+            this.labelX12.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX12.BackgroundStyle.Class = "";
+            this.labelX12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX12.Location = new System.Drawing.Point(246, 250);
+            this.labelX12.Name = "labelX12";
+            this.labelX12.Size = new System.Drawing.Size(68, 16);
+            this.labelX12.TabIndex = 19;
+            this.labelX12.Text = "重连频率：";
             // 
             // textBoxX1
             // 
@@ -439,54 +492,35 @@
             this.tabItem1.Name = "tabItem1";
             this.tabItem1.Text = "系统设置";
             // 
-            // labelX11
+            // chkLog
             // 
-            this.labelX11.AutoSize = true;
-            this.labelX11.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX11.BackgroundStyle.Class = "";
-            this.labelX11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX11.Location = new System.Drawing.Point(380, 246);
-            this.labelX11.Name = "labelX11";
-            this.labelX11.Size = new System.Drawing.Size(19, 16);
-            this.labelX11.TabIndex = 21;
-            this.labelX11.Text = "秒";
-            // 
-            // integerInput3
-            // 
-            this.integerInput3.BackColor = System.Drawing.Color.Transparent;
+            this.chkLog.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            this.integerInput3.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.integerInput3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.integerInput3.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.integerInput3.Location = new System.Drawing.Point(310, 246);
-            this.integerInput3.MaxValue = 360;
-            this.integerInput3.MinValue = 1;
-            this.integerInput3.Name = "integerInput3";
-            this.integerInput3.ShowUpDown = true;
-            this.integerInput3.Size = new System.Drawing.Size(64, 20);
-            this.integerInput3.TabIndex = 20;
-            this.integerInput3.Value = 1;
-            this.integerInput3.WatermarkText = "端口号";
+            this.chkLog.BackgroundStyle.Class = "";
+            this.chkLog.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkLog.Location = new System.Drawing.Point(346, 43);
+            this.chkLog.Name = "chkLog";
+            this.chkLog.Size = new System.Drawing.Size(64, 23);
+            this.chkLog.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkLog.TabIndex = 23;
+            this.chkLog.Text = "是/否";
             // 
-            // labelX12
+            // labelX13
             // 
-            this.labelX12.AutoSize = true;
-            this.labelX12.BackColor = System.Drawing.Color.Transparent;
+            this.labelX13.AutoSize = true;
+            this.labelX13.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
-            this.labelX12.BackgroundStyle.Class = "";
-            this.labelX12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX12.Location = new System.Drawing.Point(246, 250);
-            this.labelX12.Name = "labelX12";
-            this.labelX12.Size = new System.Drawing.Size(68, 16);
-            this.labelX12.TabIndex = 19;
-            this.labelX12.Text = "重连频率：";
+            this.labelX13.BackgroundStyle.Class = "";
+            this.labelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX13.Location = new System.Drawing.Point(226, 44);
+            this.labelX13.Name = "labelX13";
+            this.labelX13.Size = new System.Drawing.Size(118, 16);
+            this.labelX13.TabIndex = 22;
+            this.labelX13.Text = "是否启用日志插件：";
             // 
             // ASyncSetup
             // 
@@ -499,12 +533,12 @@
             this.tabControl1.ResumeLayout(false);
             this.tabControlPanel1.ResumeLayout(false);
             this.tabControlPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.integerInput3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.integerInput2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.integerInput1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMaxReconnect)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.integerInput3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -539,5 +573,7 @@
         private DevComponents.DotNetBar.LabelX labelX11;
         private DevComponents.Editors.IntegerInput integerInput3;
         private DevComponents.DotNetBar.LabelX labelX12;
+        private DevComponents.DotNetBar.Controls.CheckBoxX chkLog;
+        private DevComponents.DotNetBar.LabelX labelX13;
     }
 }

@@ -25,6 +25,7 @@ namespace ASync.eTermAddIn {
                         textBoxX1.Text = AsyncStackNet.Instance.ASyncSetup.SequenceDirective;
                         integerInput2.Value = AsyncStackNet.Instance.ASyncSetup.SequenceRate ?? 5;
                         integerInput3.Value = AsyncStackNet.Instance.ASyncSetup.ReconnectDelay ?? 1;
+                        chkLog.Checked = AsyncStackNet.Instance.ASyncSetup.AllowLog ?? false;
                     }
                 );
         }
@@ -58,6 +59,7 @@ namespace ASync.eTermAddIn {
                 AsyncStackNet.Instance.ASyncSetup.SequenceDirective = textBoxX1.Text.Trim();
                 AsyncStackNet.Instance.ASyncSetup.SequenceRate = integerInput2.Value;
                 AsyncStackNet.Instance.ASyncSetup.ReconnectDelay = integerInput3.Value;
+                AsyncStackNet.Instance.ASyncSetup.AllowLog = chkLog.Checked;
                 AsyncStackNet.Instance.ASyncSetup.XmlSerialize(AsyncStackNet.Instance.CrypterKey, AsyncStackNet.Instance.ASyncSetupFile);
                 mailBody.AppendFormat(@"使用者:{3}
 SN:{0}

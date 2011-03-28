@@ -124,5 +124,11 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         /// <value>The core pass.</value>
         public string CorePass { get; set; }
+
+        /// <summary>
+        /// 是否允许日志.
+        /// </summary>
+        /// <value>The allow log.</value>
+        public bool? AllowLog { get; set; }
     }
 }
