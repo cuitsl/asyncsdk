@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using eTerm.AsyncSDK.Base;
+using eTerm.AsyncSDK;
 
 namespace ASync.eTermPlugIn {
     [AfterASynCommand("AV")]
@@ -53,7 +54,7 @@ namespace ASync.eTermPlugIn {
         /// <param name="Key">The key.</param>
         /// <returns></returns>
         protected override bool ValidatePlugIn(eTerm.AsyncSDK.Net.eTerm443Async SESSION, eTerm.AsyncSDK.Net.eTerm443Packet InPacket, eTerm.AsyncSDK.Net.eTerm443Packet OutPacket, eTerm.AsyncSDK.AsyncLicenceKey Key) {
-            return Key.AllowDatabase && SESSION != null && SESSION.TSession!=null;
+            return (AsyncStackNet.Instance.ASyncSetup.AllowLog??false)&& Key.AllowDatabase && SESSION != null && SESSION.TSession!=null;
         }
 
         /// <summary>
