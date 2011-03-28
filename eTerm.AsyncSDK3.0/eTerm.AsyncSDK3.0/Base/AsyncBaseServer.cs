@@ -86,6 +86,12 @@ namespace eTerm.AsyncSDK.Base {
         public int? MaxSession { get; set; }
 
         /// <summary>
+        /// 会话集合.
+        /// </summary>
+        /// <value>The T session collection.</value>
+        public List<T> TSessionCollection { get { return this.__TSessionCollection; } protected set { this.__TSessionCollection = value; } }
+
+        /// <summary>
         /// 当前会话端总数.
         /// </summary>
         /// <value>The T session count.</value>
