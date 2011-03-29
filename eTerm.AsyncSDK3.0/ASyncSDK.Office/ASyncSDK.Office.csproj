@@ -247,12 +247,6 @@
     <Content Include="Direct Connect XP.ico" />
     <None Include="Resources\Flag2_Green.png" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\eTerm.AsyncSDK3.0\eTerm.AsyncSDK3.0.csproj">
-      <Project>{62D432A2-DEB0-415A-85DB-7FFDAAA5EB47}</Project>
-      <Name>eTerm.AsyncSDK3.0</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
