@@ -47,7 +47,8 @@ namespace eTerm.AsyncSDK.Core {
             if (e.InPacket.Sequence == 1) {
                 e.Session.RID = RID;
                 e.Session.SID = SID;
-                if (base.TSessionValidate != null && base.TSessionValidate(e.Session, e.InPacket)) {
+                string ValidateMessage = string.Empty;
+                if (base.TSessionValidate != null && base.TSessionValidate(e.Session, e.InPacket, out ValidateMessage)) {
                     e.Session.SendPacket(new byte[] { 
                             0x00,0x14,0x01,0x00,0x03,0x00,0x00,0x00,this.SID,this.RID,0x0C,0x00,0x00,0x8C,0x8C,0x29,
                             0x00,0x00,0xA9,0xA9 
