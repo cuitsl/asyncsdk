@@ -543,6 +543,14 @@ namespace eTerm.AsyncSDK {
             this.TSessionValidate = new AsyncBaseServer<eTerm363Session, eTerm363Packet>.ValidateCallback(delegate(eTerm363Session s, eTerm363Packet p, out string ValidateMessage)
             {
                 s.UnpakcetSession(p);
+                /*
+                string value= Encoding.GetEncoding(@"gb2312").GetString( s.UnOutPakcet(new eTerm363Packet() { OriginalBytes=new byte[]{
+                    0x00,0x37,0x00,0x31,0x30,0x30,0x30,0x31,0x3A,0x20,0xB5,0xC7,0xC2,0xBC,0xCA,0xA7
+                            ,0xB0,0xDC,0xA3,0xBA,0xC7,0xEB,0xBC,0xEC,0xB2,0xE9,0xD3,0xC3,0xBB,0xA7,0xC3,0xFB 
+                            ,0xBA,0xCD,0xBF,0xDA,0xC1,0xEE,0xA3,0xAC,0xBB,0xF2,0xD5,0xDF,0xC8,0xCF,0xD6,0xA4 
+                            ,0xC0,0xE0,0xD0,0xCD,0xA3,0xA1,0x00 
+                } }));
+                */
                 ValidateMessage = string.Empty;
                 TSessionSetup TSession=ASyncSetup.SessionCollection.SingleOrDefault<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
                 //TSessionSetup TSession = AsyncStackNet.Instance.ASyncSetup.SessionCollection.Single<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
