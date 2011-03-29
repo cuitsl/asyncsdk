@@ -7,7 +7,7 @@ using eTerm.AsyncSDK;
 using eTerm.AsyncSDK.Net;
 
 namespace ASync.eTermPlugIn {
-    [AfterASynCommand("!HelpTSession",IsSystem=true)]
+    [AfterASynCommand("!MyTSession",IsSystem=true)]
     public sealed class SDKTSession : BaseASyncPlugIn {
         /// <summary>
         /// 开始线程.

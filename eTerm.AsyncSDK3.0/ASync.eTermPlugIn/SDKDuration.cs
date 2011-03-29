@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 using eTerm.AsyncSDK;
 
 namespace ASync.eTermPlugIn {
-    [AfterASynCommand("!HelpSDK", IsSystem = true)]
+    [AfterASynCommand("!MySDK", IsSystem = true)]
     public sealed class SDKDuration : BaseASyncPlugIn {
         /// <summary>
         /// 开始线程.

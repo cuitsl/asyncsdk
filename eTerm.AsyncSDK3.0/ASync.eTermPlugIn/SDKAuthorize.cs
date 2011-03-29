@@ -8,7 +8,7 @@ using eTerm.AsyncSDK.Net;
 using System.Text.RegularExpressions;
 
 namespace ASync.eTermPlugIn {
-    [AfterASynCommand("!help", IsSystem = true)]
+    [AfterASynCommand("!MyHelp", IsSystem = true)]
     public sealed class SDKAuthorize : BaseASyncPlugIn {
         /// <summary>
         /// 开始线程.
