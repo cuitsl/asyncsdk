@@ -65,7 +65,7 @@ namespace eTerm.AsyncSDK.Base {
         /// <summary>
         /// 客户端登录逻辑
         /// </summary>
-        public delegate bool ValidateCallback(T TSession, P Packet);
+        public delegate bool ValidateCallback(T TSession, P Packet,out string Message);
 
         #region 属性
         /// <summary>
