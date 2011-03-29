@@ -20,6 +20,8 @@
     </SccAuxPath>
     <SccProvider>
     </SccProvider>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>ASync.eTermAddIn.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -222,6 +224,7 @@
     <None Include="Resources\Compass.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ASync.eTermAddIn.snk" />
     <None Include="Resources\Magnifier2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
