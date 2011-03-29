@@ -244,9 +244,10 @@ namespace AsyncSDK {
                         AppendSessionLog(listView2, e.Session.userName, "AsyncValidated", "", "SUCCESS");
                     }
                 );
-            AsyncStackNet.Instance.TSessionValidate = new AsyncBaseServer<eTerm363Session, eTerm363Packet>.ValidateCallback(delegate(eTerm363Session s, eTerm363Packet p)
+            AsyncStackNet.Instance.TSessionValidate = new AsyncBaseServer<eTerm363Session, eTerm363Packet>.ValidateCallback(delegate(eTerm363Session s, eTerm363Packet p, out string ValidateMessage)
             {
                 s.UnpakcetSession(p);
+                ValidateMessage = string.Empty;
                 TSessionSetup TSession = AsyncStackNet.Instance.ASyncSetup.SessionCollection.Single<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName&&Fun.IsOpen==true);
                 if (TSession == null) return false;
                 s.TSessionInterval = TSession.SessionExpire;

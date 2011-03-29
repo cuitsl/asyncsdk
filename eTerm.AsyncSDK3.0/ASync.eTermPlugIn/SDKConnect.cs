@@ -7,7 +7,7 @@ using eTerm.AsyncSDK;
 using eTerm.AsyncSDK.Net;
 
 namespace ASync.eTermPlugIn {
-    [AfterASynCommand("!HelpConnect", IsSystem = true)]
+    [AfterASynCommand("!MyConnect", IsSystem = true)]
     public sealed class SDKConnect : BaseASyncPlugIn {
         /// <summary>
         /// 开始线程.
