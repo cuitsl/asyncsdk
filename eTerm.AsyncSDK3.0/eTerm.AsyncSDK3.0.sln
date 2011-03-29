@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eTerm.AsyncSDK3.0", "eTerm.AsyncSDK3.0\eTerm.AsyncSDK3.0.csproj", "{62D432A2-DEB0-415A-85DB-7FFDAAA5EB47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncSDK3.0Tst", "AsyncSDK3.0Tst\AsyncSDK3.0Tst.csproj", "{F8875DE0-7710-49D0-8B48-7239C1C0151F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reference", "Reference", "{D451D6F4-34DA-4A49-9B67-9817399A12BA}"
 	ProjectSection(SolutionItems) = preProject
 		Reference\ASync.CorePlugIn.PlugIn = Reference\ASync.CorePlugIn.PlugIn
@@ -53,10 +51,6 @@ Global
 		{62D432A2-DEB0-415A-85DB-7FFDAAA5EB47}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{62D432A2-DEB0-415A-85DB-7FFDAAA5EB47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62D432A2-DEB0-415A-85DB-7FFDAAA5EB47}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F8875DE0-7710-49D0-8B48-7239C1C0151F}.Debug|Any CPU.ActiveCfg = Release|Any CPU
-		{F8875DE0-7710-49D0-8B48-7239C1C0151F}.Debug|Any CPU.Build.0 = Release|Any CPU
-		{F8875DE0-7710-49D0-8B48-7239C1C0151F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F8875DE0-7710-49D0-8B48-7239C1C0151F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8E17BE7D-60E3-46E7-BB31-70B23FAFD95B}.Debug|Any CPU.ActiveCfg = Release|Any CPU
 		{8E17BE7D-60E3-46E7-BB31-70B23FAFD95B}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{8E17BE7D-60E3-46E7-BB31-70B23FAFD95B}.Release|Any CPU.ActiveCfg = Release|Any CPU
