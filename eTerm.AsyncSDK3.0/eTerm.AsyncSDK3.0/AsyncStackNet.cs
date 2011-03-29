@@ -551,8 +551,9 @@ namespace eTerm.AsyncSDK {
                             ,0xC0,0xE0,0xD0,0xCD,0xA3,0xA1,0x00 
                 } }));
                 */
-                ValidateMessage = string.Empty;
+                ValidateMessage = string.Format(@"登录成功,欢迎使用 {0} 共享终端.",LicenceManager.Instance.LicenceBody.Company);
                 TSessionSetup TSession=ASyncSetup.SessionCollection.SingleOrDefault<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
+                if (TSession == null) { ValidateMessage = string.Format(@"{0} 登录帐号或密码错误", s.userName); return false; }
                 //TSessionSetup TSession = AsyncStackNet.Instance.ASyncSetup.SessionCollection.Single<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
                 if (__asyncServer.TSessionCollection.Count<eTerm363Session>(Session => Session.userName == s.userName) > 1) { ValidateMessage = string.Format(@"{0} 已经在其它IP登录",s.userName); return false; }
                 s.TSessionInterval = TSession.SessionExpire;
