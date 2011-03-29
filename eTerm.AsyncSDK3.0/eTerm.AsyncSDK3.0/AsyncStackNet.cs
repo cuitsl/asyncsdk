@@ -546,8 +546,8 @@ namespace eTerm.AsyncSDK {
                 TSessionSetup TSession=ASyncSetup.SessionCollection.SingleOrDefault<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
                 //TSessionSetup TSession = AsyncStackNet.Instance.ASyncSetup.SessionCollection.Single<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
                 if (TSession == null) return false;
-                eTerm363Session TSessionOnline = __asyncServer.TSessionCollection.SingleOrDefault(Session => Session.userName == s.userName);
-                if (TSessionOnline != null) return false;
+                //eTerm363Session TSessionOnline = __asyncServer.TSessionCollection.SingleOrDefault(Session => Session.userName == s.userName);
+                //if (TSessionOnline != null) return false;
                 s.TSessionInterval = TSession.SessionExpire;
                 s.UnallowableReg = TSession.ForbidCmdReg;
                 s.SpecialIntervalList = TSession.SpecialIntervalList;
