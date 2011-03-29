@@ -560,13 +560,16 @@ namespace eTerm.AsyncSDK {
                 #region 关闭其它登录终端
                 foreach (var connect in
                         from entry in __asyncServer.TSessionCollection
-                        where entry.userName==s.userName
+                        where entry.userName==s.userName&&entry.SessionId!=s.SessionId
                         orderby entry.LastActive ascending
                         select entry) {
-                    if (connect.SessionId == s.SessionId) break;
-                    connect.SendPacket(__eTerm443Packet.BuildSessionPacket(s.SID, s.RID, string.Format(@"登录退出[{0}],该帐号已在另外的地址登录[{1} {2}]", (connect.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), (s.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), DateTime.Now.ToString(@"MM dd HH:mm:ss"))));
+                    connect.SendPacket(__eTerm443Packet.BuildSessionPacket(this.SID, this.RID, string.Format(@"登录退出[{0}],该帐号已在另外的地址登录[{1} {2}]", (connect.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), (s.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), DateTime.Now.ToString(@"MM dd HH:mm:ss"))));
                     connect.ObligatoryReconnect = false;
-                    connect.Close();
+                    new Timer(new TimerCallback(
+                        delegate(object sender)
+                        {
+                            connect.Close();
+                        }), null,1000, Timeout.Infinite);
                 }
                 #endregion
 
