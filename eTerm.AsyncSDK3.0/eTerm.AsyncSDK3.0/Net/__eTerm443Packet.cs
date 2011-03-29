@@ -49,7 +49,7 @@ namespace eTerm.AsyncSDK.Net {
         /// <returns></returns>
         public static byte[] BuildSessionPacket(byte Sid, byte Rid, string Message) {
             List<byte> __b = new List<byte>();
-            __b.AddRange(new byte[] { 0x01, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x01, Sid, Rid, 0x70, 0x02, 0x1B, 0x0B, 0x22, 0x22, 0x0F, 0x1B, 0x4D,0x1C });
+            __b.AddRange(new byte[] { 0x01, 0x00, 0x00, 0x20, 0x00, 0x00, 0x00, 0x01, Sid, Rid, 0x70, 0x02, 0x1B, 0x0B, 0x22, 0x20, 0x0F, 0x1B, 0x4D/*,0x1C*/ });
             foreach (byte b in GbToUsas(Message)) {
                 if (b == 0x0A) continue;
                 if (b == 0x0D) {
@@ -59,7 +59,7 @@ namespace eTerm.AsyncSDK.Net {
                 __b.Add(b);
             }
             //__b.AddRange(GbToUsas(Message));
-            __b.AddRange(new byte[] {0x1D,0x0D,0x1E,0x1B,0x62, 0x03 });
+            __b.AddRange(new byte[] {/*0x1D,*/0x0D,0x1E,0x1B,0x62, 0x03 });
             __b[3] = (byte)__b.Count;
             return __b.ToArray();
         }
