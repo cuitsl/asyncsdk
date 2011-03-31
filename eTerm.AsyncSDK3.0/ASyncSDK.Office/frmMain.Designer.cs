@@ -94,6 +94,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusServer = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusInfo = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lableLocalIp = new System.Windows.Forms.ToolStripStatusLabel();
             this.ribbonControl1.SuspendLayout();
             this.ribbonPanel1.SuspendLayout();
             this.ribbonPanel2.SuspendLayout();
@@ -866,7 +867,8 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusServer,
-            this.statusInfo});
+            this.statusInfo,
+            this.lableLocalIp});
             this.statusStrip1.Location = new System.Drawing.Point(5, 627);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(787, 22);
@@ -882,6 +884,13 @@
             // 
             this.statusInfo.Name = "statusInfo";
             this.statusInfo.Size = new System.Drawing.Size(0, 17);
+            // 
+            // lableLocalIp
+            // 
+            this.lableLocalIp.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.lableLocalIp.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.lableLocalIp.Name = "lableLocalIp";
+            this.lableLocalIp.Size = new System.Drawing.Size(0, 17);
             // 
             // frmMain
             // 
@@ -986,6 +995,7 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel statusServer;
         private System.Windows.Forms.ToolStripStatusLabel statusInfo;
+        private System.Windows.Forms.ToolStripStatusLabel lableLocalIp;
 
     }
 }

@@ -437,6 +437,7 @@ namespace eTerm.AsyncSDK {
             __CoreASync.OnAsyncDisconnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
+                        this.LocalEndPoint = e.Session.AsyncSocket.LocalEndPoint as IPEndPoint;
                         if (this.OnCoreDisconnect != null)
                             this.OnCoreDisconnect(sender, e);
                     }
@@ -449,9 +450,9 @@ namespace eTerm.AsyncSDK {
             __CoreASync.OnAsynConnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
+                        this.LocalEndPoint = e.Session.AsyncSocket.LocalEndPoint as IPEndPoint;
                         if (this.OnCoreConnect != null)
                             this.OnCoreConnect(sender, e);
-                        this.LocalEndPoint = e.Session.AsyncSocket.LocalEndPoint as IPEndPoint;
                     }
                 );
             __CoreASync.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>>(
