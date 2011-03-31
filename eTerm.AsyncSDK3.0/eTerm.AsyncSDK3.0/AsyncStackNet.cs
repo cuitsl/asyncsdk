@@ -451,6 +451,7 @@ namespace eTerm.AsyncSDK {
                     {
                         if (this.OnCoreConnect != null)
                             this.OnCoreConnect(sender, e);
+                        this.LocalEndPoint = e.Session.AsyncSocket.LocalEndPoint as IPEndPoint;
                     }
                 );
             __CoreASync.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>>(
