@@ -301,6 +301,15 @@ namespace eTerm.AsyncSDK {
             Async.IgInterval = AsyncStackNet.Instance.ASyncSetup.SequenceRate ?? 5;
             Async.ReconnectDelay = ASyncSetup.ReconnectDelay;
 
+            #region OnAsynConnect
+            Async.OnAsynConnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
+                    delegate(object sender, AsyncEventArgs<eTerm443Async> e)
+                    {
+                        this.LocalEndPoint = e.Session.AsyncSocket.LocalEndPoint as IPEndPoint;
+                    }
+                );
+            #endregion
+
             #region OnReadPacket
             Async.OnReadPacket += new EventHandler<eTerm.AsyncSDK.AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> e)
@@ -437,7 +446,7 @@ namespace eTerm.AsyncSDK {
             __CoreASync.OnAsyncDisconnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
-                        this.LocalEndPoint = e.Session.AsyncSocket.LocalEndPoint as IPEndPoint;
+                        //this.LocalEndPoint = e.Session.AsyncSocket.LocalEndPoint as IPEndPoint;
                         if (this.OnCoreDisconnect != null)
                             this.OnCoreDisconnect(sender, e);
                     }
@@ -450,7 +459,7 @@ namespace eTerm.AsyncSDK {
             __CoreASync.OnAsynConnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
-                        this.LocalEndPoint = e.Session.AsyncSocket.LocalEndPoint as IPEndPoint;
+                        //this.LocalEndPoint = e.Session.AsyncSocket.LocalEndPoint as IPEndPoint;
                         if (this.OnCoreConnect != null)
                             this.OnCoreConnect(sender, e);
                     }
@@ -467,7 +476,7 @@ namespace eTerm.AsyncSDK {
                                 //日期比较
                                 if (this.OnSystemException != null)
                                     this.OnSystemException(sender, new ErrorEventArgs(new DataMisalignedException(@"为防止授权错误，不允许手工修改系统日期，请联系发开发商")));
-                                //return;
+                                return;
                             }
 
                             if (

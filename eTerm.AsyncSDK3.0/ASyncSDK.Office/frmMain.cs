@@ -202,7 +202,7 @@ namespace ASyncSDK.Office {
             //Key = Key.DeXmlSerialize(keys, Buffer);
 
             AsyncStackNet.Instance.CrypterKey = TEACrypter.GetDefaultKey; 
-            AsyncStackNet.Instance.ASyncSetupFile = new FileInfo(@"Setup.BIN").FullName;
+            AsyncStackNet.Instance.ASyncSetupFile = new FileInfo(@"Setup.Bin").FullName;
 
             AsyncStackNet.Instance.AfterIntercept = new InterceptCallback(delegate(AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session> e)
             {
@@ -241,7 +241,7 @@ namespace ASyncSDK.Office {
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
                         UpdateStatusText(statusInfo, string.Format(@"与中心服务器{{{0}:{1}}}连接已连接！", AsyncStackNet.Instance.ASyncSetup.CoreServer, AsyncStackNet.Instance.ASyncSetup.CoreServerPort));
-                        UpdateStatusText(lableLocalIp, string.Format(@"本机IP：", AsyncStackNet.Instance.LocalEndPoint.Address.ToString()));
+                        UpdateStatusText(lableLocalIp, string.Format(@"本机IP：{0}", AsyncStackNet.Instance.LocalEndPoint.Address.ToString()));
                     }
                 );
 
@@ -249,7 +249,7 @@ namespace ASyncSDK.Office {
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
                         UpdateStatusText(statusInfo, string.Format(@"与中心服务器{{{0}:{1}}}连接已经断开！", AsyncStackNet.Instance.ASyncSetup.CoreServer, AsyncStackNet.Instance.ASyncSetup.CoreServerPort));
-                        UpdateStatusText(lableLocalIp, string.Format(@"本机IP：", AsyncStackNet.Instance.LocalEndPoint.Address.ToString()));
+                        UpdateStatusText(lableLocalIp, string.Format(@"本机IP：{0}", AsyncStackNet.Instance.LocalEndPoint.Address.ToString()));
                     }
                 );
             AsyncStackNet.Instance.OnSDKTimeout += new EventHandler<ErrorEventArgs>(
