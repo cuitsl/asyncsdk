@@ -112,12 +112,16 @@ namespace eTerm.ASynClientSDK {
         private List<string> getAvItemStringArray(string itemString) {
             List<string> items = new List<string>();
             MatchCollection matchs = new Regex(@"(^\d(.{1,}))|(^>(.{1,}))", RegexOptions.Multiline | RegexOptions.IgnoreCase).Matches(itemString.Replace("\r", "\r\n")); //Regex.Matches(itemString, @"(^\d(.{1,}))|(^>(.{1,}))");
-            for (int i = 0; i < matchs.Count; i++) {
-                try {
-                    items.Add(string.Format("{0}{1}", matchs[i].Value.PadRight(80, ' '), matchs[++i].Value.PadRight(80, ' ')));
-                }
-                catch { }
+            foreach(Match m in  new Regex(@"(^\d(.{1,}))|(^>(.{1,}))", RegexOptions.Multiline | RegexOptions.IgnoreCase).Matches(itemString.Replace("\r", "\r\n"))){ //Regex.Matches(itemString, @"(^\d(.{1,}))|(^>(.{1,}))")
+                items.Add(m.Value);
             }
+                
+            //for (int i = 0; i < matchs.Count; i++) {
+            //    try {
+            //        items.Add(string.Format("{0}{1}", matchs[i].Value.PadRight(80, ' '), matchs[++i].Value.PadRight(80, ' ')));
+            //    }
+            //    catch { }
+            //}
             return items;
         }
 
