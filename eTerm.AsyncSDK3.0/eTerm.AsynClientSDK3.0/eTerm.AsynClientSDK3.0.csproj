@@ -20,6 +20,8 @@
     </SccAuxPath>
     <SccProvider>
     </SccProvider>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>eTerm.AsynClientSDK.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -140,6 +142,9 @@
     <Compile Include="Utils\StringUtil.cs" />
     <Compile Include="Utils\TEACrypter.cs" />
     <Compile Include="Utils\TypeUtil.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="eTerm.AsynClientSDK.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
