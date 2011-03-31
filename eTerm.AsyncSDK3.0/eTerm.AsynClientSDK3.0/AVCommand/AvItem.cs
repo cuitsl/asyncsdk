@@ -32,6 +32,12 @@ namespace eTerm.ASynClientSDK {
         public string getCode { get; set; }
 
         /// <summary>
+        /// 单程折扣.
+        /// </summary>
+        /// <value>The get single discount.</value>
+        public string getSingleDiscount { get; set; }
+
+        /// <summary>
         /// 有效数.
         /// </summary>
         /// <value>The get avalibly.</value>
