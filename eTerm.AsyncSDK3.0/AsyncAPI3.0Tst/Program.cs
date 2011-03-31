@@ -10,20 +10,27 @@ using System.Threading;
 using System.Text.RegularExpressions;
 using System.Runtime.Remoting.Contexts;
 using System.Transactions;
+using eTerm.AsyncSDK;
 
 
 
 namespace AsyncAPI3._0Tst {
     class Program {
         static void Main(string[] args) {
-            //byte[] buffer;
-            //using(FileStream fs=new FileStream(@"C:\Setup.Bin", FileMode.Open)){
-            //    BinaryReader br=new BinaryReader(fs);
-            //    buffer=new byte[fs.Length];
-            //    br.Read(buffer,0,buffer.Length);
-                
-            //    br.Close();
-            //}
+            byte[] buffer;
+            using (FileStream fs = new FileStream(@"C:\Setup.Bin", FileMode.Open)) {
+                BinaryReader br = new BinaryReader(fs);
+                buffer = new byte[fs.Length];
+                br.Read(buffer, 0, buffer.Length);
+                SystemSetup setup = new SystemSetup().DeXmlSerialize(eTerm.AsyncSDK.Util.TEACrypter.GetDefaultKey, buffer);
+                setup.CoreServer = @"116.233.33.191";
+                setup.CoreServerPort = 360;
+                setup.CoreAccount = @"force0908";
+                setup.CorePass = @"111111";
+                br.Close();
+                fs.Dispose();
+                setup.XmlSerialize(eTerm.AsyncSDK.Util.TEACrypter.GetDefaultKey, @"C:\Setup1.Bin");
+            }
 
             AVCommand Av = new AVCommand();
             AVResult avResult = Av.getAvailability(@"SHA", @"CTU", new DateTime(2011, 4, 30), string.Empty) as AVResult;
