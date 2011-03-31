@@ -887,7 +887,7 @@
             // 
             // lableLocalIp
             // 
-            this.lableLocalIp.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.lableLocalIp.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
             this.lableLocalIp.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.lableLocalIp.Name = "lableLocalIp";
             this.lableLocalIp.Size = new System.Drawing.Size(0, 17);
