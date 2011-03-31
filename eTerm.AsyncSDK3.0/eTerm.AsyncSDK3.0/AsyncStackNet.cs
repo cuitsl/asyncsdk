@@ -86,6 +86,12 @@ namespace eTerm.AsyncSDK {
         public IPEndPoint StackNetPoint { private get; set; }
 
         /// <summary>
+        /// 本地IP地址.
+        /// </summary>
+        /// <value>The local end point.</value>
+        public IPEndPoint LocalEndPoint { get; private set; }
+
+        /// <summary>
         /// 默认SID.
         /// </summary>
         /// <value>The SID.</value>
