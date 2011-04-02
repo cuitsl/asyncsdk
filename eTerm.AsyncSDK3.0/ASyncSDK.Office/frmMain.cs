@@ -70,6 +70,7 @@ namespace ASyncSDK.Office {
                 if (this.lstAsync.Items.ContainsKey(SessionId)) {
                     connectItem = this.lstAsync.Items[SessionId];
                     connectItem.ImageKey = @"Circle_Green.png";
+                    connectItem.SubItems[4].Text = ASync.ReconnectCount.ToString();
                     connectItem.Group = group1;
                     return;
                 }
@@ -81,7 +82,7 @@ namespace ASyncSDK.Office {
                     ASync.TotalBytes.ToString("f2"),
                     ASync.TotalCount.ToString(),
                     ASync.ReconnectCount.ToString(),
-                    ASync.CurrentBytes.ToString(@"f2"),
+                    string.Format(@"{0} KBytes",ASync.CurrentBytes.ToString(@"f2")),
                     ASync.LastActive.ToString(@"HH:mm:ss")
                 }, group1) { Name = SessionId };
                     connectItem.Tag = ASync;
@@ -120,7 +121,33 @@ namespace ASyncSDK.Office {
             }
             try {
                 string SessionId = string.Format(@"{0}{1}{2}", ASync.RemoteEP.ToString(), ASync.userName, ASync.IsSsl);
+                ListViewItem item = this.lstAsync.Items[SessionId];
+                item.SubItems[2].Text =string.Format(@"{0} KBytes", ASync.TotalBytes.ToString(@"f2"));
+                item.SubItems[3].Text = ASync.TotalCount.ToString();
+                item.SubItems[5].Text = ASync.CurrentBytes.ToString(@"f2");
+                item.SubItems[6].Text = ASync.LastActive.ToString(@"HH:mm:ss");
+                item.ImageKey = @"Circle_Yellow.png";
+            }
+            catch { }
+        }
 
+        /// <summary>
+        /// Packets the A sync.
+        /// </summary>
+        /// <param name="ASync">The A sync.</param>
+        private void packetASync(eTerm443Async ASync) {
+            if (this.InvokeRequired) {
+                this.BeginInvoke(new ASynConnectCallback(packetASync), ASync);
+                return;
+            }
+            try {
+                string SessionId = string.Format(@"{0}{1}{2}", ASync.RemoteEP.ToString(), ASync.userName, ASync.IsSsl);
+                ListViewItem item = this.lstAsync.Items[SessionId];
+                item.SubItems[2].Text = string.Format(@"{0} KBytes", ASync.TotalBytes.ToString(@"f2"));
+                item.SubItems[3].Text = ASync.TotalCount.ToString();
+                item.SubItems[5].Text =string.Format(@"{0} Bytes", ASync.CurrentBytes.ToString(@"f0"));
+                item.SubItems[6].Text = ASync.LastActive.ToString(@"HH:mm:ss");
+                item.ImageKey = @"Circle_Green.png";
             }
             catch { }
         }
@@ -167,32 +194,6 @@ namespace ASyncSDK.Office {
             catch { }
         }
 
-        /// <summary>
-        /// Appends the session log.
-        /// </summary>
-        /// <param name="SessionName">Name of the session.</param>
-        /// <param name="operationType">Type of the operation.</param>
-        /// <param name="SessionCommand">The session command.</param>
-        /// <param name="flag">The flag.</param>
-        private void AppendSessionLog(ListView View, string SessionName, string operationType, string SessionCommand, string flag) {
-            if (this.InvokeRequired) {
-                this.BeginInvoke(new AppendSessionLogDelegate(AppendSessionLog), View, SessionName, operationType, SessionCommand, flag);
-                return;
-            }
-            try {
-                if (View.Items.Count >= 250) View.Items.Clear();
-                View.Items.Insert(0, new ListViewItem(new string[]{
-                    (View.Items.Count+1).ToString(),
-                    SessionName,
-                    operationType,
-                    SessionCommand,
-                    flag,
-                    DateTime.Now.ToString("HH:mm:ss")
-                }));
-            }
-            catch { }
-        }
-
         #endregion
 
         #region 服务方法
@@ -223,7 +224,7 @@ namespace ASyncSDK.Office {
 
             AsyncStackNet.Instance.AfterIntercept = new InterceptCallback(delegate(AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session> e)
             {
-                AppendSessionLog(listView1, e.Session.userName, "AfterIntercept", Encoding.GetEncoding("gb2312").GetString(e.Session.UnOutPakcet(e.InPacket)), "SUCCESS");
+                //AppendSessionLog(listView1, e.Session.userName, "AfterIntercept", Encoding.GetEncoding("gb2312").GetString(e.Session.UnOutPakcet(e.InPacket)), "SUCCESS");
                 e.Session.SendPacket(__eTerm443Packet.BuildSessionPacket(e.Session.SID, e.Session.RID, "指令被禁止"));
             });
 
@@ -233,7 +234,7 @@ namespace ASyncSDK.Office {
             AsyncStackNet.Instance.OnExecuteException += new EventHandler<ErrorEventArgs>(
                     delegate(object sender, ErrorEventArgs e)
                     {
-                        AppendSessionLog(listView1, (sender as eTerm363Session).userName, "ExecuteException", e.GetException().Message, "ERROR");
+
                     }
                 );
 
@@ -278,15 +279,13 @@ namespace ASyncSDK.Office {
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
                         disconnectASync(e.Session);
-                        //AppendSessionLog(listView2, e.Session.userName, "AsyncDisconnect", string.Empty, "SUCCESS");
-                        //UpdateListByThread(lstAsync, "Circle_Green.png", e.Session.SessionId.ToString(), 0f, string.Empty);
                     }
                 );
 
             AsyncStackNet.Instance.OnTSessionPacketSent += new EventHandler<AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session> e)
                     {
-                        //UpdateListByThread(lstSession, "Circle_Green.png", e.Session.SessionId.ToString(), e.Session.TotalBytes, e.Session.TotalCount.ToString());
+
                     }
                 );
 
@@ -294,15 +293,13 @@ namespace ASyncSDK.Office {
                     delegate(object sender, AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> e)
                     {
                         updateASync(e.Session);
-                        //UpdateListByThread(lstAsync, "Circle_Red.png", e.Session.SessionId.ToString(), e.Session.TotalBytes, e.Session.TotalCount.ToString());
                     }
                 );
 
             AsyncStackNet.Instance.OnAsyncReadPacket += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> e)
                     {
-                        //UpdateListByThread(lstAsync, "Circle_Green.png", e.Session.SessionId.ToString(), e.Session.TotalBytes, e.Session.TotalCount.ToString());
-                        AppendSessionLog(listView2, e.Session.userName, "AsyncReadPacket", Encoding.GetEncoding("gb2312").GetString(e.Session.UnInPakcet(e.OutPacket)), "SUCCESS");
+                        packetASync(e.Session);
                         if (e.Session.TSession == null) return;
                     }
                 );
@@ -316,13 +313,10 @@ namespace ASyncSDK.Office {
                         e.Session.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>>(
                                 delegate(object Session, AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> SessionArg)
                                 {
-                                    //UpdateListByThread(lstAsync, "Circle_Green.png", SessionArg.Session.SessionId.ToString(), SessionArg.Session.TotalBytes, SessionArg.Session.TotalCount.ToString());
+
                                 }
                             );
                         ViewItem.Tag = e.Session;
-                        //ViewItem.Group = new ListViewGroup(;
-                        //AppendListByThread(lstAsync, ViewItem);
-                        AppendSessionLog(listView2, e.Session.userName, "AsyncValidated", "", "SUCCESS");
                     }
                 );
             AsyncStackNet.Instance.OnTSessionValidated += new EventHandler<AsyncEventArgs<eTerm363Session>>(
@@ -331,42 +325,36 @@ namespace ASyncSDK.Office {
                         ViewItem.Name = e.Session.SessionId.ToString();
                         ViewItem.ImageKey = "Circle_Green.png";
                         ViewItem.Tag = e.Session;
-                        //AppendListByThread(lstSession, ViewItem);
                     }
                 );
 
             AsyncStackNet.Instance.OnTSessionAssign += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Session> e)
                     {
-                        //UpdateListByThread(lstSession, "Circle_Yellow.png", e.Session.SessionId.ToString(), e.Session.TotalBytes, e.Session.TotalCount.ToString());
-                        //UpdateListByThread(lstAsync, "Circle_Yellow.png", e.Session.Async443.SessionId.ToString(), e.Session.Async443.TotalBytes, e.Session.Async443.TotalCount.ToString());
                     }
                 );
             AsyncStackNet.Instance.OnTSessionAccept += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Session> e)
                     {
-                        AppendSessionLog(listView1, e.Session.SessionId.ToString(), "TSessionAccept", "", "SUCCESS");
+
                     }
                 );
             AsyncStackNet.Instance.OnTSessionClosed += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Session> e)
                     {
-                        //UpdateListByThread(lstSession, "Circle_Red.png", e.Session.SessionId.ToString(), 0f, e.Session.TotalBytes.ToString("f2"));
-                        AppendSessionLog(listView1, e.Session.userName, "TSessionClosed", "", "SUCCESS");
+
                     }
                 );
             AsyncStackNet.Instance.OnAsyncTimeout += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
-                        //stateAsync.Image = AsyncResource.Circle_Orange;
-                        //SetToolbarImg(stateAsync, AsyncResource.Circle_Orange,string.Empty);
-                        //Console.WriteLine("OnAsyncTimeout {0}", e.Session);
+
                     }
                 );
             AsyncStackNet.Instance.OnTSessionRelease += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Session> e)
                     {
-                        AppendSessionLog(listView1, e.Session.userName, "TSessionRelease", "", "SUCCESS");
+
                         if (e.Session.Async443 != null && !e.Session.IsCompleted)
                             e.Session.SendPacket(__eTerm443Packet.BuildSessionPacket(e.Session.SID, e.Session.RID, "无数据返回或读取超时"));
                     }
@@ -376,11 +364,10 @@ namespace ASyncSDK.Office {
                     delegate(object sender, AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session> e)
                     {
                         try {
-                            //UpdateListByThread(lstSession, "Circle_Red.png", e.Session.SessionId.ToString(), e.Session.TotalBytes, e.Session.TotalCount.ToString());
-                            AppendSessionLog(listView1, e.Session.userName, "ReadPacket", Encoding.GetEncoding("gb2312").GetString(e.Session.UnOutPakcet(e.InPacket)), "SUCCESS");
+
                         }
                         catch (Exception Ex) {
-                            AppendSessionLog(listView1, e.Session.userName, "ReadPacket", Ex.Message, "ERROR");
+
                         }
                     }
                 );
