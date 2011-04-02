@@ -206,6 +206,8 @@ namespace ASyncSDK.Office {
                     }
                 );
 
+            //AsyncStackNet.Instance.onasync
+
             AsyncStackNet.Instance.OnRateEvent += new EventHandler(
                     delegate(object sender, EventArgs e) {
                         AsyncStackNet.Instance.BeginRateUpdate(new AsyncCallback(delegate(IAsyncResult iar) {
