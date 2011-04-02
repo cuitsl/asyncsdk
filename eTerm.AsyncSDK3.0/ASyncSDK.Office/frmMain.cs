@@ -241,7 +241,7 @@ namespace ASyncSDK.Office {
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
                         UpdateStatusText(statusInfo, string.Format(@"与中心服务器{{{0}:{1}}}连接已连接！", AsyncStackNet.Instance.ASyncSetup.CoreServer, AsyncStackNet.Instance.ASyncSetup.CoreServerPort));
-                        UpdateStatusText(lableLocalIp, string.Format(@"本机IP：{0}", AsyncStackNet.Instance.LocalEndPoint.Address.ToString()));
+                        //UpdateStatusText(lableLocalIp, string.Format(@"本机IP：{0}", AsyncStackNet.Instance.LocalEndPoint.Address.ToString()));
                     }
                 );
 
@@ -249,7 +249,6 @@ namespace ASyncSDK.Office {
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
                         UpdateStatusText(statusInfo, string.Format(@"与中心服务器{{{0}:{1}}}连接已经断开！", AsyncStackNet.Instance.ASyncSetup.CoreServer, AsyncStackNet.Instance.ASyncSetup.CoreServerPort));
-                        UpdateStatusText(lableLocalIp, string.Format(@"本机IP：{0}", AsyncStackNet.Instance.LocalEndPoint.Address.ToString()));
                     }
                 );
             AsyncStackNet.Instance.OnSDKTimeout += new EventHandler<ErrorEventArgs>(
@@ -298,6 +297,7 @@ namespace ASyncSDK.Office {
             AsyncStackNet.Instance.OnAsyncValidated += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Packet, eTerm443Async> e)
                     {
+                        UpdateStatusText(lableLocalIp, string.Format(@"本机IP：{0}", (e.Session.AsyncSocket.LocalEndPoint as IPEndPoint).Address.ToString()));
                         ListViewItem ViewItem = new ListViewItem(new string[] { e.Session.AsyncSocket.RemoteEndPoint.ToString(), e.Session.userName, e.Session.TotalBytes.ToString("f2"), e.Session.ReconnectCount.ToString(), e.Session.TotalBytes.ToString("f2") });
                         ViewItem.Name = e.Session.SessionId.ToString();
                         ViewItem.ImageKey = "Circle_Green.png";
