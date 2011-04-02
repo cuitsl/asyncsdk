@@ -52,6 +52,78 @@ namespace ASyncSDK.Office {
         public delegate void AppendSessionLogDelegate(ListView View, string SessionName, string operationType, string SessionCommand, string flag);
 
         public delegate void UpdateStatusTextDelegate(ToolStripStatusLabel targetLable, string Text);
+
+        public delegate void ASynConnectCallback(eTerm443Async ASync);
+
+        /// <summary>
+        /// Appends the A syn connect.
+        /// </summary>
+        /// <param name="ASync">The A sync.</param>
+        private void appendASynConnect(eTerm443Async ASync) {
+            if (this.InvokeRequired) {
+                this.BeginInvoke(new ASynConnectCallback(appendASynConnect), ASync);
+                return;
+            }
+            try {
+                string SessionId = string.Format(@"{0}{1}{2}", ASync.RemoteEP.ToString(), ASync.userName, ASync.IsSsl);
+                ListViewItem connectItem;
+                if (this.lstAsync.Items.ContainsKey(SessionId)) {
+                    connectItem = this.lstAsync.Items[SessionId];
+                    connectItem.ImageKey = @"Circle_Green.png";
+                    connectItem.Group = group1;
+                    return;
+                }
+
+                connectItem = new ListViewItem(
+                        new string[] {
+                    ASync.RemoteEP.ToString(),
+                    ASync.userName,
+                    ASync.TotalBytes.ToString("f2"),
+                    ASync.TotalCount.ToString(),
+                    ASync.ReconnectCount.ToString(),
+                    ASync.CurrentBytes.ToString(@"f2"),
+                    ASync.LastActive.ToString(@"HH:mm:ss")
+                }, group1) { Name = SessionId };
+                    connectItem.Tag = ASync;
+                    connectItem.ImageKey = @"Circle_Green.png";
+                    this.lstAsync.Items.Add(connectItem);
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Disconnects the A sync.
+        /// </summary>
+        /// <param name="ASync">The A sync.</param>
+        private void disconnectASync(eTerm443Async ASync) {
+            if (this.InvokeRequired) {
+                this.BeginInvoke(new ASynConnectCallback(disconnectASync), ASync);
+                return;
+            }
+            try {
+                string SessionId = string.Format(@"{0}{1}{2}", ASync.RemoteEP.ToString(), ASync.userName, ASync.IsSsl);
+                ListViewItem item = this.lstAsync.Items[SessionId];
+                item.ImageKey = @"Circle_Red.png";
+                item.Group = group2;
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// Updates the A sync.
+        /// </summary>
+        /// <param name="ASync">The A sync.</param>
+        private void updateASync(eTerm443Async ASync) {
+            if (this.InvokeRequired) {
+                this.BeginInvoke(new ASynConnectCallback(updateASync), ASync);
+                return;
+            }
+            try {
+                string SessionId = string.Format(@"{0}{1}{2}", ASync.RemoteEP.ToString(), ASync.userName, ASync.IsSsl);
+
+            }
+            catch { }
+        }
         #endregion
 
         #region 关闭事件
@@ -166,8 +238,8 @@ namespace ASyncSDK.Office {
                 );
 
             AsyncStackNet.Instance.OnAsyncConnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
-                    delegate(object sender, AsyncEventArgs<eTerm443Async> e) { 
-                        
+                    delegate(object sender, AsyncEventArgs<eTerm443Async> e) {
+                        appendASynConnect(e.Session);
                     }
                 );
 
@@ -205,7 +277,8 @@ namespace ASyncSDK.Office {
             AsyncStackNet.Instance.OnAsyncDisconnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
-                        AppendSessionLog(listView2, e.Session.userName, "AsyncDisconnect", string.Empty, "SUCCESS");
+                        disconnectASync(e.Session);
+                        //AppendSessionLog(listView2, e.Session.userName, "AsyncDisconnect", string.Empty, "SUCCESS");
                         //UpdateListByThread(lstAsync, "Circle_Green.png", e.Session.SessionId.ToString(), 0f, string.Empty);
                     }
                 );
@@ -220,6 +293,7 @@ namespace ASyncSDK.Office {
             AsyncStackNet.Instance.OnAsyncPacketSent += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> e)
                     {
+                        updateASync(e.Session);
                         //UpdateListByThread(lstAsync, "Circle_Red.png", e.Session.SessionId.ToString(), e.Session.TotalBytes, e.Session.TotalCount.ToString());
                     }
                 );

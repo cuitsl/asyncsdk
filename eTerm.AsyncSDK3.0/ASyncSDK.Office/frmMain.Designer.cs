@@ -57,6 +57,9 @@
             this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader22 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader23 = new System.Windows.Forms.ColumnHeader();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panelDockContainer4 = new DevComponents.DotNetBar.PanelDockContainer();
             this.contextMenuBar2 = new DevComponents.DotNetBar.ContextMenuBar();
@@ -524,13 +527,15 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4,
-            this.columnHeader5});
+            this.columnHeader5,
+            this.columnHeader6,
+            this.columnHeader22,
+            this.columnHeader23});
             this.contextMenuBar1.SetContextMenuEx(this.lstAsync, this.btnReally);
             this.lstAsync.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstAsync.FullRowSelect = true;
             this.lstAsync.LargeImageList = this.imageList1;
             this.lstAsync.Location = new System.Drawing.Point(0, 0);
-            this.lstAsync.MultiSelect = false;
             this.lstAsync.Name = "lstAsync";
             this.lstAsync.Size = new System.Drawing.Size(775, 500);
             this.lstAsync.SmallImageList = this.imageList1;
@@ -543,22 +548,37 @@
             // columnHeader2
             // 
             this.columnHeader2.Text = "IP地址";
-            this.columnHeader2.Width = 155;
+            this.columnHeader2.Width = 140;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "用户名";
-            this.columnHeader3.Width = 128;
+            this.columnHeader3.Width = 80;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "通信量(KBytes)";
-            this.columnHeader4.Width = 134;
+            this.columnHeader4.Width = 106;
             // 
             // columnHeader5
             // 
             this.columnHeader5.Text = "通信次数";
             this.columnHeader5.Width = 126;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "重连次数";
+            this.columnHeader6.Width = 86;
+            // 
+            // columnHeader22
+            // 
+            this.columnHeader22.Text = "最后字节数";
+            this.columnHeader22.Width = 88;
+            // 
+            // columnHeader23
+            // 
+            this.columnHeader23.Text = "最后通信时间";
+            this.columnHeader23.Width = 114;
             // 
             // imageList1
             // 
@@ -668,22 +688,18 @@
             // columnHeader7
             // 
             this.columnHeader7.Text = "IP地址";
-            this.columnHeader7.Width = 159;
             // 
             // columnHeader8
             // 
             this.columnHeader8.Text = "用户名";
-            this.columnHeader8.Width = 141;
             // 
             // columnHeader9
             // 
             this.columnHeader9.Text = "通信量(KBytes)";
-            this.columnHeader9.Width = 146;
             // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "通信次数";
-            this.columnHeader1.Width = 126;
             // 
             // panelDockContainer1
             // 
@@ -996,6 +1012,9 @@
         private System.Windows.Forms.ToolStripStatusLabel statusServer;
         private System.Windows.Forms.ToolStripStatusLabel statusInfo;
         private System.Windows.Forms.ToolStripStatusLabel lableLocalIp;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ColumnHeader columnHeader22;
+        private System.Windows.Forms.ColumnHeader columnHeader23;
 
     }
 }
