@@ -21,11 +21,14 @@ using eTerm.AsyncSDK.Util;
 namespace ASyncSDK.Office {
     public partial class frmMain : Office2007RibbonForm {
         #region 初始化
+        ListViewGroup group1 = new ListViewGroup("活动连接");
+        ListViewGroup group2 = new ListViewGroup("非活动连接");
         public frmMain() {
             InitializeComponent();
             this.Load += new EventHandler(
                     delegate(object sender, EventArgs e)
                     {
+                        lstAsync.Groups.AddRange(new ListViewGroup[] { group1, group2 });
                             foreach (object itemValue in Enum.GetValues(DevComponents.DotNetBar.eStyle.Windows7Blue.GetType())) {
                                 ButtonItem btnItem = new ButtonItem() { ButtonStyle = eButtonStyle.ImageAndText, Text = itemValue.ToString(), Tag=itemValue };
                                 btnItem.Image = global::ASyncSDK.Office.Properties.Resources.Flag2_Green;
@@ -148,11 +151,9 @@ namespace ASyncSDK.Office {
             }
             try {
                 if (TotalBytes <= 0) {
-                    //if (!ViewEx.Items.Contains(new ListViewItem() {Name=Id })) return;
                     eTerm443Async Async = ViewEx.Items[Id].Tag as eTerm443Async;
-                    ViewEx.Items[Id].Remove();
-                    //Thread.Sleep(5000);
-                    //AsyncStackNet.Instance.ReconnectAsync(Async);
+                    //ViewEx.Items[Id].Group=new ListViewGroup(
+                    //ViewEx.Items[Id].Remove();
                     return;
                 }
                 ViewEx.Items[Id].SubItems[2].Text = TotalBytes.ToString("f2");
@@ -171,9 +172,6 @@ namespace ASyncSDK.Office {
         private void StopService() {
             AsyncStackNet.Instance.EndAsync();
 
-            //stateAsync.Visible = false;
-            //stateAsync.Image = AsyncResource.Circle_Green;
-
             //按钮控制
             this.btnStart.Enabled = true;
             this.btnStop.Enabled = false;
@@ -183,24 +181,12 @@ namespace ASyncSDK.Office {
             btnStartService.Enabled = true;
             btnStopService.Enabled = false;
             btnResetService.Enabled = true;
-
-            //this.toolStripStart.Enabled = true;
-            //this.toolStripStop.Enabled = false;
-            //this.toolStripReset.Enabled = true;
-
         }
 
         /// <summary>
         /// Starts the service.
         /// </summary>
         private void StartService() {
-            //stateAsync.Visible = true;
-            //stateAsync.Image = AsyncResource.Circle_Green;
-
-
-            //byte[] Buffer = new AsyncLicenceKey().XmlSerialize(keys, @"C:\XIAOFANG.Bin");
-            //Key = Key.DeXmlSerialize(keys, Buffer);
-
             AsyncStackNet.Instance.CrypterKey = TEACrypter.GetDefaultKey; 
             AsyncStackNet.Instance.ASyncSetupFile = new FileInfo(@"Setup.Bin").FullName;
 
@@ -210,16 +196,7 @@ namespace ASyncSDK.Office {
                 e.Session.SendPacket(__eTerm443Packet.BuildSessionPacket(e.Session.SID, e.Session.RID, "指令被禁止"));
             });
 
-            /*
-            AsyncStackNet.Instance.AfterPacket = new AfterPacketCallback(delegate(AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> Args, PlugInSetup PlugIn)
-            {
-                PlugIn.PlugInstance.BeginExecute(new AsyncCallback(delegate(IAsyncResult iar)
-                {
-                    PlugIn.PlugInstance.EndExecute(iar);
-                }), Args.Session, Args.InPacket, Args.OutPacket);
-            });
-            */
-            //AsyncStackNet.Instance.StackNetPoint = new IPEndPoint(IPAddress.Any, 360);
+
             AsyncStackNet.Instance.RID = 0x51;
             AsyncStackNet.Instance.SID = 0x27;
             AsyncStackNet.Instance.OnExecuteException += new EventHandler<ErrorEventArgs>(
@@ -241,7 +218,6 @@ namespace ASyncSDK.Office {
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
                         UpdateStatusText(statusInfo, string.Format(@"与中心服务器{{{0}:{1}}}连接已连接！", AsyncStackNet.Instance.ASyncSetup.CoreServer, AsyncStackNet.Instance.ASyncSetup.CoreServerPort));
-                        //UpdateStatusText(lableLocalIp, string.Format(@"本机IP：{0}", AsyncStackNet.Instance.LocalEndPoint.Address.ToString()));
                     }
                 );
 
@@ -265,10 +241,7 @@ namespace ASyncSDK.Office {
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
                         AppendSessionLog(listView2, e.Session.userName, "AsyncDisconnect", string.Empty, "SUCCESS");
-                        //AsyncStackNet.Instance.ReconnectAsync(e.Session);
                         UpdateListByThread(lstAsync, "Circle_Green.png", e.Session.SessionId.ToString(), 0f, string.Empty);
-                        //AsyncStackNet.Instance.ReconnectAsync(e.Session);
-                        //SetToolbarImg(toolStripSplitPlugIn, AsyncResource.Circle_Red, string.Format(@"{0} 断开于 {1}", sender, DateTime.Now));
                     }
                 );
 
@@ -308,6 +281,7 @@ namespace ASyncSDK.Office {
                                 }
                             );
                         ViewItem.Tag = e.Session;
+                        //ViewItem.Group = new ListViewGroup(;
                         AppendListByThread(lstAsync, ViewItem);
                         AppendSessionLog(listView2, e.Session.userName, "AsyncValidated", "", "SUCCESS");
                     }
@@ -321,38 +295,6 @@ namespace ASyncSDK.Office {
                         AppendListByThread(lstSession, ViewItem);
                     }
                 );
-            /*{
-                
-                s.UnpakcetSession(p);
-                TSessionSetup TSession=AsyncStackNet.Instance.ASyncSetup.SessionCollection.SingleOrDefault<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
-                //TSessionSetup TSession = AsyncStackNet.Instance.ASyncSetup.SessionCollection.Single<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
-                if (TSession == null) return false;
-                s.TSessionInterval = TSession.SessionExpire;
-                s.UnallowableReg = TSession.ForbidCmdReg;
-                s.SpecialIntervalList = TSession.SpecialIntervalList;
-                s.userGroup = TSession.GroupCode;
-                ListViewItem ViewItem = new ListViewItem(new string[] { s.AsyncSocket.RemoteEndPoint.ToString(), s.userName, s.TotalBytes.ToString("f2"), s.ReconnectCount.ToString() });
-                ViewItem.Name = s.SessionId.ToString();
-                ViewItem.ImageKey = "Circle_Green.png";
-                s.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session>>(
-                        delegate(object Session, AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session> SessionArg)
-                        {
-                            UpdateListByThread(lstSession, "Circle_Red.png", SessionArg.Session.SessionId.ToString(), SessionArg.Session.TotalBytes, SessionArg.Session.TotalCount.ToString());
-                        }
-                    );
-                ViewItem.Tag = s;
-                AppendListByThread(lstSession, ViewItem);
-
-                return true;
-                
-            });*/
-
-            //AsyncStackNet.Instance.TSessionReconnectValidate = new AsyncBase<eTerm443Async, eTerm443Packet>.ValidateTSessionCallback(
-            //    delegate(eTerm443Packet Packet, eTerm443Async Async)
-            //    {
-            //        UpdateListByThread(lstSession, "Circle_Grey.png", Async.SessionId.ToString(), Async.TotalBytes, Async.TotalCount.ToString());
-            //        return (AsyncStackNet.Instance.ASyncSetup.AutoReconnect ?? false) && Async.ReconnectCount <= (AsyncStackNet.Instance.ASyncSetup.MaxReconnect??10);
-            //    });
 
             AsyncStackNet.Instance.OnTSessionAssign += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Session> e)
@@ -386,19 +328,14 @@ namespace ASyncSDK.Office {
                     delegate(object sender, AsyncEventArgs<eTerm363Session> e)
                     {
                         AppendSessionLog(listView1, e.Session.userName, "TSessionRelease", "", "SUCCESS");
-                        //UpdateListByThread(lstSession, "Circle_Green.png", e.Session.SessionId.ToString(), e.Session.TotalBytes,e.Session.TotalBytes.ToString("f2"));
-                        //UpdateListByThread(lstAsync, "Circle_Green.png", e.Session.Async443.SessionId.ToString(), e.Session.Async443.TotalBytes, e.Session.Async443.TotalCount.ToString());
                         if (e.Session.Async443 != null && !e.Session.IsCompleted)
                             e.Session.SendPacket(__eTerm443Packet.BuildSessionPacket(e.Session.SID, e.Session.RID, "无数据返回或读取超时"));
-                        //Console.WriteLine("Session {0} Release {2} On {1}", e.Session, DateTime.Now, e.Session.Async443);
                     }
                 );
 
             AsyncStackNet.Instance.OnTSessionReadPacket += new EventHandler<AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session> e)
                     {
-                        //stateAsync.Image = AsyncResource.Circle_Yellow;
-                        //SetToolbarImg(stateAsync, AsyncResource.Circle_Yellow,string.Empty);
                         try {
                             UpdateListByThread(lstSession, "Circle_Red.png", e.Session.SessionId.ToString(), e.Session.TotalBytes, e.Session.TotalCount.ToString());
                             AppendSessionLog(listView1, e.Session.userName, "ReadPacket", Encoding.GetEncoding("gb2312").GetString(e.Session.UnOutPakcet(e.InPacket)), "SUCCESS");
@@ -406,7 +343,6 @@ namespace ASyncSDK.Office {
                         catch (Exception Ex) {
                             AppendSessionLog(listView1, e.Session.userName, "ReadPacket", Ex.Message, "ERROR");
                         }
-                        //Console.WriteLine("OnReadPacket From {0} Packet Sequence:{1} Total Bytes:{2:f2} KBytes ", e.Session.AsyncSocket.RemoteEndPoint, e.InPacket.Sequence, e.Session.TotalBytes);
                     }
                 );
 
@@ -416,7 +352,7 @@ namespace ASyncSDK.Office {
                 {
                     try {
                         if (!LicenceManager.Instance.EndValidate(iar)) {
-                            //Console.WriteLine("Validate Error");
+
                         }
                         else {
                             //激活配置
@@ -487,14 +423,6 @@ namespace ASyncSDK.Office {
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void lstAsync_SelectedIndexChanged(object sender, EventArgs e) {
-            //if (this.lstAsync.SelectedItems.Count == 1) {
-            //    this.btnDispose.Enabled = true;
-            //    this.btnRelease.Enabled = true;
-            //}
-            //else {
-            //    this.btnDispose.Enabled = false;
-            //    this.btnRelease.Enabled = false;
-            //}
             btnDispose.Enabled = lstAsync.SelectedItems.Count > 0;
             btnRelease.Enabled = lstAsync.SelectedItems.Count > 0;
         }
@@ -505,7 +433,6 @@ namespace ASyncSDK.Office {
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnDispose_Click(object sender, EventArgs e) {
-            //(this.lstAsync.SelectedItems[0].Tag as eTerm443Async).Close();
             foreach (ListViewItem item in this.lstAsync.SelectedItems) {
                 eTerm443Async Async = item.Tag as eTerm443Async;
                 Async.Close();
@@ -524,6 +451,11 @@ namespace ASyncSDK.Office {
             }
         }
 
+        /// <summary>
+        /// Handles the Click event of the btnDisconnectSession control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnDisconnectSession_Click(object sender, EventArgs e) {
             foreach (ListViewItem item in this.lstSession.SelectedItems) {
                 eTerm363Session Session = item.Tag as eTerm363Session;
@@ -531,6 +463,11 @@ namespace ASyncSDK.Office {
             }
         }
 
+        /// <summary>
+        /// Handles the SelectedIndexChanged event of the lstSession control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void lstSession_SelectedIndexChanged(object sender, EventArgs e) {
             btnSendMessage.Enabled = lstSession.SelectedItems.Count > 0;
             btnDisconnectSession.Enabled = lstSession.SelectedItems.Count > 0;
@@ -578,14 +515,10 @@ namespace ASyncSDK.Office {
 
             PlugInButton.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             PlugInButton.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            //PlugInButton.Dock = System.Windows.Forms.DockStyle.Top;
             if (!string.IsNullOrEmpty(PlugIn.ImageIcon))
                 PlugInButton.Image = new Bitmap(new FileStream(PlugIn.ImageIcon, FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
-            //PlugInButton.Location = new System.Drawing.Point(0, 0);
             PlugInButton.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.F5);
             PlugInButton.Size = new System.Drawing.Size(158, 23);
-            //PlugInButton.TextAlignment = eButtonTextAlignment.Left;
-            //PlugInButton.Padding = new System.Windows.Forms.Padding(20);
             PlugInButton.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             PlugInButton.Text = PlugIn.ButtonName;
             PlugInButton.Tag = PlugIn;
@@ -600,8 +533,6 @@ namespace ASyncSDK.Office {
                         dockAddIn.Text = (sender as ButtonItem).Text;
                         ((sender as ButtonItem).Tag as BaseAddIn).ASyncSetup = LicenceManager.Instance.LicenceBody;
                         dockAddIn.Control.Controls.Add((sender as ButtonItem).Tag as BaseAddIn);
-                        //MessageBox.Show((sender as ButtonX).Text);
-                        
                     }
                 );
             PlugInButton.MouseHover += new EventHandler(
@@ -623,7 +554,6 @@ namespace ASyncSDK.Office {
                 this.BeginInvoke(new AppendAddInButtonDelegate(AppendAddInButton), PlugInButton);
                 return;
             }
-            //this.PlugInBar.Items.Add(PlugInButton);
             this.PlugInBar.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             PlugInButton});
         }

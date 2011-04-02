@@ -172,6 +172,11 @@ namespace eTerm.AsyncSDK {
         public event EventHandler<AsyncEventArgs<eTerm443Async>> OnAsyncDisconnect;
 
         /// <summary>
+        /// 资源连接事件.
+        /// </summary>
+        public event EventHandler<AsyncEventArgs<eTerm443Async>> OnAsyncConnect;
+
+        /// <summary>
         /// 会话断线事件.
         /// </summary>
         public event EventHandler<AsyncEventArgs<eTerm363Session>> OnTSessionClosed;
@@ -306,6 +311,8 @@ namespace eTerm.AsyncSDK {
             Async.OnAsynConnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
+                        if (OnAsyncConnect != null)
+                            OnAsyncConnect(sender, e);
                         this.LocalEndPoint = e.Session.AsyncSocket.LocalEndPoint as IPEndPoint;
                     }
                 );
