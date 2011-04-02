@@ -69,6 +69,7 @@ namespace eTerm.AsyncSDK {
         private AsyncStackNet() {
             _Execute = new InvokePlugInCallback(QueryPlugIn);
             __RateExecute = new InvokePlugInCallback(RateUpdate);
+            this.LocalEndPoint = new IPEndPoint(IPAddress.Any, 3900);
         }
         #endregion
 
