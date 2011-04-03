@@ -25,7 +25,6 @@ namespace eTerm.ASynClientSDK {
         [XmlIgnore]
         public string OrgCommandResult { get; internal set; }
 
-
         /// <summary>
         /// 将对像本身序列化成XML串.
         /// </summary>
