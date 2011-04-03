@@ -126,6 +126,8 @@
     <Compile Include="RTCommand\RTCommand.cs" />
     <Compile Include="RTCommand\RTResult.cs" />
     <Compile Include="SdkException.cs" />
+    <Compile Include="SmsCommand\SmsCommand.cs" />
+    <Compile Include="SmsCommand\SmsResult.cs" />
     <Compile Include="SSCommand\BookAirSeg.cs" />
     <Compile Include="SSCommand\BookContact.cs" />
     <Compile Include="SSCommand\BookInfant.cs" />
