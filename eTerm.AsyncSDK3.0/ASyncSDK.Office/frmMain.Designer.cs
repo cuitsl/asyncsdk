@@ -98,6 +98,8 @@
             this.statusServer = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.lableLocalIp = new System.Windows.Forms.ToolStripStatusLabel();
+            this.columnHeader24 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader25 = new System.Windows.Forms.ColumnHeader();
             this.ribbonControl1.SuspendLayout();
             this.ribbonPanel1.SuspendLayout();
             this.ribbonPanel2.SuspendLayout();
@@ -423,11 +425,11 @@
             this.bar3.CanDockRight = false;
             this.bar3.CanDockTop = false;
             this.bar3.CanUndock = false;
-            this.bar3.Controls.Add(this.panelDockContainer5);
             this.bar3.Controls.Add(this.panelDockContainer4);
             this.bar3.Controls.Add(this.panelDockContainer1);
             this.bar3.Controls.Add(this.panelDockContainer2);
             this.bar3.Controls.Add(this.panelDockContainer3);
+            this.bar3.Controls.Add(this.panelDockContainer5);
             this.bar3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bar3.DockedBorderStyle = DevComponents.DotNetBar.eBorderType.Sunken;
             this.bar3.DockTabAlignment = DevComponents.DotNetBar.eTabStripAlignment.Top;
@@ -442,7 +444,7 @@
             this.bar3.LayoutType = DevComponents.DotNetBar.eLayoutType.DockContainer;
             this.bar3.Location = new System.Drawing.Point(5, 112);
             this.bar3.Name = "bar3";
-            this.bar3.SelectedDockTab = 0;
+            this.bar3.SelectedDockTab = 1;
             this.bar3.Size = new System.Drawing.Size(787, 537);
             this.bar3.Stretch = true;
             this.bar3.Style = DevComponents.DotNetBar.eDotNetBarStyle.Windows7;
@@ -669,13 +671,14 @@
             this.columnHeader7,
             this.columnHeader8,
             this.columnHeader9,
-            this.columnHeader1});
+            this.columnHeader1,
+            this.columnHeader24,
+            this.columnHeader25});
             this.contextMenuBar2.SetContextMenuEx(this.lstSession, this.buttonItem1);
             this.lstSession.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstSession.FullRowSelect = true;
             this.lstSession.LargeImageList = this.imageList1;
             this.lstSession.Location = new System.Drawing.Point(0, 0);
-            this.lstSession.MultiSelect = false;
             this.lstSession.Name = "lstSession";
             this.lstSession.Size = new System.Drawing.Size(775, 500);
             this.lstSession.SmallImageList = this.imageList1;
@@ -688,18 +691,22 @@
             // columnHeader7
             // 
             this.columnHeader7.Text = "IP地址";
+            this.columnHeader7.Width = 141;
             // 
             // columnHeader8
             // 
             this.columnHeader8.Text = "用户名";
+            this.columnHeader8.Width = 96;
             // 
             // columnHeader9
             // 
             this.columnHeader9.Text = "通信量(KBytes)";
+            this.columnHeader9.Width = 111;
             // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "通信次数";
+            this.columnHeader1.Width = 78;
             // 
             // panelDockContainer1
             // 
@@ -908,6 +915,16 @@
             this.lableLocalIp.Name = "lableLocalIp";
             this.lableLocalIp.Size = new System.Drawing.Size(0, 17);
             // 
+            // columnHeader24
+            // 
+            this.columnHeader24.Text = "最后字节数 (Bytes)";
+            this.columnHeader24.Width = 112;
+            // 
+            // columnHeader25
+            // 
+            this.columnHeader25.Text = "最后时间";
+            this.columnHeader25.Width = 100;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1015,6 +1032,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ColumnHeader columnHeader22;
         private System.Windows.Forms.ColumnHeader columnHeader23;
+        private System.Windows.Forms.ColumnHeader columnHeader24;
+        private System.Windows.Forms.ColumnHeader columnHeader25;
 
     }
 }
