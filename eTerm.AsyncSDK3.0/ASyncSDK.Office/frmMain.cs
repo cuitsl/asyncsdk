@@ -46,6 +46,78 @@ namespace ASyncSDK.Office {
         }
         #endregion
 
+        #region 客户端会话状态会话
+        /// <summary>
+        /// Disconnects the T session.
+        /// </summary>
+        /// <param name="TSession">The T session.</param>
+        private void DisconnectTSession(eTerm363Session TSession) {
+            if (this.InvokeRequired) {
+                this.BeginInvoke(new TSessionCallback(DisconnectTSession), TSession);
+                return;
+            }
+            this.lstSession.Items.Remove(this.lstSession.Items[TSession.SessionId.ToString()]);
+        }
+
+
+        /// <summary>
+        /// Accepts the T session.
+        /// </summary>
+        /// <param name="TSession">The T session.</param>
+        private void AcceptTSession(eTerm363Session TSession) {
+            if (this.InvokeRequired) {
+                this.BeginInvoke(new TSessionCallback(AcceptTSession), TSession);
+                return;
+            }
+            ListViewItem item = new ListViewItem(new string[] {
+                (TSession.AsyncSocket.RemoteEndPoint as IPEndPoint).ToString(),
+                string.Empty,
+                @"0 KByes",
+                @"0",
+                @"0",
+                @"00:00:00"
+            }, @"Circle_Yellow.png") { Name = TSession.SessionId.ToString() };
+            item.Tag = TSession;
+            this.lstSession.Items.Add(item);
+        }
+
+        /// <summary>
+        /// Updates the T session.
+        /// </summary>
+        /// <param name="TSession">The T session.</param>
+        private void updateTSessionRead(eTerm363Session TSession) {
+            if (this.InvokeRequired) {
+                this.BeginInvoke(new TSessionCallback(updateTSessionRead), TSession);
+                return;
+            }
+            ListViewItem item = this.lstSession.Items[TSession.SessionId.ToString()];
+            item.ImageKey = @"Circle_Yellow.png";// ? @"Circle_Yellow.png" : @"Circle_Green.png";
+            item.SubItems[1].Text = TSession.userName;
+            item.SubItems[2].Text = string.Format(@"{0} KBytes", TSession.TotalBytes.ToString(@"f2"));
+            item.SubItems[3].Text = TSession.TotalCount.ToString();
+            item.SubItems[4].Text = string.Format(@"{0} Bytes", TSession.CurrentBytes.ToString(@"f2"));
+            item.SubItems[5].Text = TSession.LastActive.ToString(@"HH:mm:ss");
+        }
+
+        /// <summary>
+        /// Updates the T session sent.
+        /// </summary>
+        /// <param name="TSession">The T session.</param>
+        private void updateTSessionSent(eTerm363Session TSession) {
+            if (this.InvokeRequired) {
+                this.BeginInvoke(new TSessionCallback(updateTSessionSent), TSession);
+                return;
+            }
+            ListViewItem item = this.lstSession.Items[TSession.SessionId.ToString()];
+            item.ImageKey = @"Circle_Green.png";// ? @"Circle_Yellow.png" : @"Circle_Green.png";
+            item.SubItems[1].Text = TSession.userName;
+            item.SubItems[2].Text = string.Format(@"{0} KBytes", TSession.TotalBytes.ToString(@"f2"));
+            item.SubItems[3].Text = TSession.TotalCount.ToString();
+            item.SubItems[4].Text = string.Format(@"{0} Bytes", TSession.CurrentBytes.ToString(@"f2"));
+            item.SubItems[5].Text = TSession.LastActive.ToString(@"HH:mm:ss");
+        }
+        #endregion
+
         #region UI代理定义
         public delegate void UpdateListViewItem(ListViewEx ViewEx, string ImageKey, string Id, float TotalBytes, string Reconnect);
 
@@ -54,6 +126,8 @@ namespace ASyncSDK.Office {
         public delegate void UpdateStatusTextDelegate(ToolStripStatusLabel targetLable, string Text);
 
         public delegate void ASynConnectCallback(eTerm443Async ASync);
+
+        public delegate void TSessionCallback(eTerm363Session TSession);
 
         /// <summary>
         /// Appends the A syn connect.
@@ -285,7 +359,7 @@ namespace ASyncSDK.Office {
             AsyncStackNet.Instance.OnTSessionPacketSent += new EventHandler<AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session> e)
                     {
-
+                        updateTSessionSent(e.Session);
                     }
                 );
 
@@ -307,54 +381,50 @@ namespace ASyncSDK.Office {
                     delegate(object sender, AsyncEventArgs<eTerm443Packet, eTerm443Async> e)
                     {
                         UpdateStatusText(lableLocalIp, string.Format(@"本机IP：{0}", (e.Session.AsyncSocket.LocalEndPoint as IPEndPoint).Address.ToString()));
-                        ListViewItem ViewItem = new ListViewItem(new string[] { e.Session.AsyncSocket.RemoteEndPoint.ToString(), e.Session.userName, e.Session.TotalBytes.ToString("f2"), e.Session.ReconnectCount.ToString(), e.Session.TotalBytes.ToString("f2") });
-                        ViewItem.Name = e.Session.SessionId.ToString();
-                        ViewItem.ImageKey = "Circle_Green.png";
                         e.Session.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>>(
                                 delegate(object Session, AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> SessionArg)
                                 {
 
                                 }
                             );
-                        ViewItem.Tag = e.Session;
                     }
                 );
             AsyncStackNet.Instance.OnTSessionValidated += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Session> e) {
-                        ListViewItem ViewItem = new ListViewItem(new string[] { e.Session.AsyncSocket.RemoteEndPoint.ToString(), e.Session.userName, e.Session.TotalBytes.ToString("f2"), e.Session.ReconnectCount.ToString() });
-                        ViewItem.Name = e.Session.SessionId.ToString();
-                        ViewItem.ImageKey = "Circle_Green.png";
-                        ViewItem.Tag = e.Session;
+                        updateTSessionRead(e.Session);
                     }
                 );
 
             AsyncStackNet.Instance.OnTSessionAssign += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Session> e)
                     {
+                        updateTSessionRead(e.Session);
                     }
                 );
             AsyncStackNet.Instance.OnTSessionAccept += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Session> e)
                     {
-
+                        AcceptTSession(e.Session);
                     }
                 );
             AsyncStackNet.Instance.OnTSessionClosed += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Session> e)
                     {
-
+                        DisconnectTSession(e.Session);
                     }
                 );
             AsyncStackNet.Instance.OnAsyncTimeout += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
-
+                        
                     }
                 );
             AsyncStackNet.Instance.OnTSessionRelease += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Session> e)
                     {
-
+                        updateTSessionSent(e.Session);
+                        if(e.Session.Async443!=null)
+                            updateASync(e.Session.Async443);
                         if (e.Session.Async443 != null && !e.Session.IsCompleted)
                             e.Session.SendPacket(__eTerm443Packet.BuildSessionPacket(e.Session.SID, e.Session.RID, "无数据返回或读取超时"));
                     }
@@ -363,12 +433,7 @@ namespace ASyncSDK.Office {
             AsyncStackNet.Instance.OnTSessionReadPacket += new EventHandler<AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session> e)
                     {
-                        try {
-
-                        }
-                        catch (Exception Ex) {
-
-                        }
+                        updateTSessionRead(e.Session);
                     }
                 );
 
