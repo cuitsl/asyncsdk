@@ -456,7 +456,9 @@ namespace eTerm.ASynClientSDK {
         protected virtual string createContact() {
             StringBuilder sb = new StringBuilder();
             foreach (BookContact c in this.__bookContactList) {
-                sb.AppendFormat("\rCT:{0} {1} {2}", c.getcity, c.psgrName, c.getcontact);
+                //sb.AppendFormat("\rCT:{0} {1} {2}", c.getcity, c.psgrName, c.getcontact);
+                if (!string.IsNullOrEmpty(c.getcontact))
+                    sb.AppendFormat(@"RMK MP {0}/P1", c.getcontact);
             }
             return sb.ToString();
         }
