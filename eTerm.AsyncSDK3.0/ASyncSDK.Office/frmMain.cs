@@ -118,6 +118,32 @@ namespace ASyncSDK.Office {
         }
         #endregion
 
+        #region 客户端会话日志
+        /// <summary>
+        /// Ts the session log.
+        /// </summary>
+        /// <param name="TSession">The T session.</param>
+        private void TSessionLog(string SessionId, string TSessionCmd, string LogType, string Flag) {
+            if (this.InvokeRequired) {
+                this.BeginInvoke(new TSessionLogCallback(TSessionLog), SessionId,TSessionCmd,LogType,Flag);
+                return;
+            }
+            try {
+                if (this.lstTSessionLog.Items.Count >= 100) this.lstTSessionLog.Items.Clear();
+                ListViewItem item = new ListViewItem(new string[]{
+                (this.lstTSessionLog.Items.Count+1).ToString(),
+                SessionId,
+                LogType,
+                TSessionCmd,
+                Flag,
+                DateTime.Now.ToString(@"HH:mm:ss")
+            });
+                this.lstTSessionLog.Items.Insert(0,item);
+            }
+            catch { }
+        }
+        #endregion
+
         #region UI代理定义
         public delegate void UpdateListViewItem(ListViewEx ViewEx, string ImageKey, string Id, float TotalBytes, string Reconnect);
 
@@ -126,6 +152,8 @@ namespace ASyncSDK.Office {
         public delegate void ASynConnectCallback(eTerm443Async ASync);
 
         public delegate void TSessionCallback(eTerm363Session TSession);
+
+        public delegate void TSessionLogCallback(string SessionId, string TSessionCmd, string LogType,string Flag);
 
         /// <summary>
         /// Appends the A syn connect.
@@ -358,6 +386,9 @@ namespace ASyncSDK.Office {
                     delegate(object sender, AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session> e)
                     {
                         updateTSessionSent(e.Session);
+                        //TSessionLog(string.IsNullOrEmpty(e.Session.userName) ? e.Session.SessionId.ToString() : e.Session.userName,
+                        //    string.IsNullOrEmpty(e.Session.userName) ? string.Empty : Encoding.GetEncoding(@"gb2312").GetString(e.Session.UnOutPakcet(e.InPacket)),
+                        //    @"OnTSessionPacketSent", @"SUCCESS");
                     }
                 );
 
@@ -390,24 +421,36 @@ namespace ASyncSDK.Office {
             AsyncStackNet.Instance.OnTSessionValidated += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Session> e) {
                         updateTSessionRead(e.Session);
+                        TSessionLog(string.IsNullOrEmpty(e.Session.userName) ? e.Session.SessionId.ToString() : e.Session.userName,
+                            string.Empty,
+                            @"OnTSessionValidated", @"SUCCESS");
                     }
                 );
 
             AsyncStackNet.Instance.OnTSessionAssign += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Session> e)
                     {
+                        TSessionLog(string.IsNullOrEmpty(e.Session.userName) ? e.Session.SessionId.ToString() : e.Session.userName,
+                            string.Format(@"【{0}】",e.Session.Async443.userName),
+                            @"OnTSessionAssign", @"SUCCESS");
                         updateTSessionRead(e.Session);
                     }
                 );
             AsyncStackNet.Instance.OnTSessionAccept += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Session> e)
                     {
+                        TSessionLog(string.IsNullOrEmpty(e.Session.userName) ? e.Session.SessionId.ToString() : e.Session.userName,
+                        string.Empty,
+                        @"OnTSessionAccept", @"SUCCESS");
                         AcceptTSession(e.Session);
                     }
                 );
             AsyncStackNet.Instance.OnTSessionClosed += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Session> e)
                     {
+                        TSessionLog(string.IsNullOrEmpty(e.Session.userName) ? e.Session.SessionId.ToString() : e.Session.userName,
+string.Empty,
+@"OnTSessionClosed", @"SUCCESS");
                         DisconnectTSession(e.Session);
                     }
                 );
@@ -431,6 +474,9 @@ namespace ASyncSDK.Office {
             AsyncStackNet.Instance.OnTSessionReadPacket += new EventHandler<AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session> e)
                     {
+                        TSessionLog(string.IsNullOrEmpty(e.Session.userName) ? e.Session.SessionId.ToString() : e.Session.userName,
+Encoding.GetEncoding(@"gb2312").GetString(e.Session.UnOutPakcet(e.InPacket)),
+@"OnTSessionReadPacket", @"SUCCESS");
                         updateTSessionRead(e.Session);
                     }
                 );
