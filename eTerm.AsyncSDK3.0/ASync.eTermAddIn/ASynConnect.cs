@@ -285,6 +285,7 @@ namespace ASync.eTermAddIn {
             AsyncStackNet.Instance.BeginRateUpdate(new AsyncCallback(delegate(IAsyncResult iar)
             {
                 AsyncStackNet.Instance.EndRateUpdate(iar);
+                this.OnLoad(EventArgs.Empty);
             }));
         }
         
