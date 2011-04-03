@@ -125,7 +125,7 @@ namespace ASyncSDK.Office {
         /// <param name="TSession">The T session.</param>
         private void TSessionLog(string SessionId, string TSessionCmd, string LogType, string Flag) {
             if (this.InvokeRequired) {
-                this.BeginInvoke(new TSessionLogCallback(TSessionLog), SessionId,TSessionCmd,LogType,Flag);
+                this.BeginInvoke(new TSessionLogCallback(TSessionLog), SessionId, TSessionCmd, LogType, Flag);
                 return;
             }
             try {
@@ -138,7 +138,34 @@ namespace ASyncSDK.Office {
                 Flag,
                 DateTime.Now.ToString(@"HH:mm:ss")
             });
-                this.lstTSessionLog.Items.Insert(0,item);
+                this.lstTSessionLog.Items.Insert(0, item);
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// TAs the sync log.
+        /// </summary>
+        /// <param name="SessionId">The session id.</param>
+        /// <param name="TSessionCmd">The T session CMD.</param>
+        /// <param name="LogType">Type of the log.</param>
+        /// <param name="Flag">The flag.</param>
+        private void TASyncLog(string SessionId, string TSessionCmd, string LogType, string Flag) {
+            if (this.InvokeRequired) {
+                this.BeginInvoke(new TSessionLogCallback(TASyncLog), SessionId, TSessionCmd, LogType, Flag);
+                return;
+            }
+            try {
+                if (this.lstASyncLog.Items.Count >= 100) this.lstTSessionLog.Items.Clear();
+                ListViewItem item = new ListViewItem(new string[]{
+                (this.lstASyncLog.Items.Count+1).ToString(),
+                SessionId,
+                LogType,
+                TSessionCmd,
+                Flag,
+                DateTime.Now.ToString(@"HH:mm:ss")
+            });
+                this.lstASyncLog.Items.Insert(0, item);
             }
             catch { }
         }
@@ -202,6 +229,7 @@ namespace ASyncSDK.Office {
                 return;
             }
             try {
+                appendASynConnect(ASync);
                 string SessionId = string.Format(@"{0}{1}{2}", ASync.RemoteEP.ToString(), ASync.userName, ASync.IsSsl);
                 ListViewItem item = this.lstAsync.Items[SessionId];
                 item.ImageKey = @"Circle_Red.png";
@@ -324,7 +352,9 @@ namespace ASyncSDK.Office {
 
             AsyncStackNet.Instance.AfterIntercept = new InterceptCallback(delegate(AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session> e)
             {
-                //AppendSessionLog(listView1, e.Session.userName, "AfterIntercept", Encoding.GetEncoding("gb2312").GetString(e.Session.UnOutPakcet(e.InPacket)), "SUCCESS");
+                TSessionLog(string.IsNullOrEmpty(e.Session.userName) ? e.Session.SessionId.ToString() : e.Session.userName,
+string.Empty,
+@"AfterIntercept", @"SUCCESS");
                 e.Session.SendPacket(__eTerm443Packet.BuildSessionPacket(e.Session.SID, e.Session.RID, "指令被禁止"));
             });
 
@@ -341,6 +371,7 @@ namespace ASyncSDK.Office {
             AsyncStackNet.Instance.OnAsyncConnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e) {
                         appendASynConnect(e.Session);
+                        TASyncLog(e.Session.userName, string.Empty, @"OnAsyncConnect", @"SUCCESS");
                     }
                 );
 
@@ -379,6 +410,7 @@ namespace ASyncSDK.Office {
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
                         disconnectASync(e.Session);
+                        TASyncLog(e.Session.userName, string.Empty, @"OnAsyncDisconnect", @"SUCCESS");
                     }
                 );
 
@@ -386,15 +418,16 @@ namespace ASyncSDK.Office {
                     delegate(object sender, AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session> e)
                     {
                         updateTSessionSent(e.Session);
-                        //TSessionLog(string.IsNullOrEmpty(e.Session.userName) ? e.Session.SessionId.ToString() : e.Session.userName,
-                        //    string.IsNullOrEmpty(e.Session.userName) ? string.Empty : Encoding.GetEncoding(@"gb2312").GetString(e.Session.UnOutPakcet(e.InPacket)),
-                        //    @"OnTSessionPacketSent", @"SUCCESS");
+                        TSessionLog(string.IsNullOrEmpty(e.Session.userName) ? e.Session.SessionId.ToString() : e.Session.userName,
+string.Empty,
+@"OnTSessionPacketSent", @"SUCCESS");
                     }
                 );
 
             AsyncStackNet.Instance.OnAsyncPacketSent += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> e)
                     {
+                        TASyncLog(e.Session.userName, Encoding.GetEncoding(@"gb2312").GetString(e.Session.UnInPakcet(e.OutPacket)), @"OnAsyncPacketSent", @"SUCCESS");
                         updateASync(e.Session);
                     }
                 );
@@ -403,6 +436,7 @@ namespace ASyncSDK.Office {
                     delegate(object sender, AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> e)
                     {
                         packetASync(e.Session);
+                        TASyncLog(e.Session.userName, string.Empty, @"OnAsyncReadPacket", @"SUCCESS");
                         if (e.Session.TSession == null) return;
                     }
                 );
@@ -410,12 +444,15 @@ namespace ASyncSDK.Office {
                     delegate(object sender, AsyncEventArgs<eTerm443Packet, eTerm443Async> e)
                     {
                         UpdateStatusText(lableLocalIp, string.Format(@"本机IP：{0}", (e.Session.AsyncSocket.LocalEndPoint as IPEndPoint).Address.ToString()));
+                        TASyncLog(e.Session.userName, string.Empty, @"OnAsyncValidated", @"SUCCESS");
+                        /*
                         e.Session.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>>(
                                 delegate(object Session, AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> SessionArg)
                                 {
 
                                 }
                             );
+                        */
                     }
                 );
             AsyncStackNet.Instance.OnTSessionValidated += new EventHandler<AsyncEventArgs<eTerm363Session>>(
@@ -433,6 +470,7 @@ namespace ASyncSDK.Office {
                         TSessionLog(string.IsNullOrEmpty(e.Session.userName) ? e.Session.SessionId.ToString() : e.Session.userName,
                             string.Format(@"【{0}】",e.Session.Async443.userName),
                             @"OnTSessionAssign", @"SUCCESS");
+                        //TASyncLog(e.Session.userName, string.Format(@"",e.Session., @"OnAsyncValidated", @"SUCCESS");
                         updateTSessionRead(e.Session);
                     }
                 );
@@ -457,14 +495,17 @@ string.Empty,
             AsyncStackNet.Instance.OnAsyncTimeout += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
-                        
+                        TASyncLog(e.Session.userName, string.Empty, @"OnAsyncTimeout", @"SUCCESS");
                     }
                 );
             AsyncStackNet.Instance.OnTSessionRelease += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Session> e)
                     {
                         updateTSessionSent(e.Session);
-                        if(e.Session.Async443!=null)
+                        TSessionLog(string.IsNullOrEmpty(e.Session.userName) ? e.Session.SessionId.ToString() : e.Session.userName,
+                           string.Format(@"【{0}】", e.Session.Async443 != null?e.Session.Async443.userName:string.Empty),
+@"OnTSessionRelease", @"SUCCESS");
+                        if (e.Session.Async443 != null)
                             updateASync(e.Session.Async443);
                         if (e.Session.Async443 != null && !e.Session.IsCompleted)
                             e.Session.SendPacket(__eTerm443Packet.BuildSessionPacket(e.Session.SID, e.Session.RID, "无数据返回或读取超时"));

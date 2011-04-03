@@ -46,6 +46,15 @@
             this.buttonItem3 = new DevComponents.DotNetBar.ButtonItem();
             this.qatCustomizeItem1 = new DevComponents.DotNetBar.QatCustomizeItem();
             this.bar3 = new DevComponents.DotNetBar.Bar();
+            this.panelDockContainer1 = new DevComponents.DotNetBar.PanelDockContainer();
+            this.lstASyncLog = new System.Windows.Forms.ListView();
+            this.columnHeader16 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader17 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader18 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader19 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader20 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader21 = new System.Windows.Forms.ColumnHeader();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panelDockContainer5 = new DevComponents.DotNetBar.PanelDockContainer();
             this.contextMenuBar1 = new DevComponents.DotNetBar.ContextMenuBar();
             this.btnReally = new DevComponents.DotNetBar.ButtonItem();
@@ -60,7 +69,6 @@
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader22 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader23 = new System.Windows.Forms.ColumnHeader();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panelDockContainer4 = new DevComponents.DotNetBar.PanelDockContainer();
             this.contextMenuBar2 = new DevComponents.DotNetBar.ContextMenuBar();
             this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
@@ -72,14 +80,9 @@
             this.columnHeader8 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader9 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-            this.panelDockContainer1 = new DevComponents.DotNetBar.PanelDockContainer();
-            this.listView2 = new System.Windows.Forms.ListView();
-            this.columnHeader16 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader17 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader18 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader19 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader20 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader21 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader24 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader25 = new System.Windows.Forms.ColumnHeader();
+            this.panelDockContainer3 = new DevComponents.DotNetBar.PanelDockContainer();
             this.panelDockContainer2 = new DevComponents.DotNetBar.PanelDockContainer();
             this.lstTSessionLog = new System.Windows.Forms.ListView();
             this.columnHeader10 = new System.Windows.Forms.ColumnHeader();
@@ -88,7 +91,6 @@
             this.columnHeader13 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader14 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader15 = new System.Windows.Forms.ColumnHeader();
-            this.panelDockContainer3 = new DevComponents.DotNetBar.PanelDockContainer();
             this.dockContainerItem6 = new DevComponents.DotNetBar.DockContainerItem();
             this.dockContainerItem5 = new DevComponents.DotNetBar.DockContainerItem();
             this.dockContainerItem1 = new DevComponents.DotNetBar.DockContainerItem();
@@ -98,18 +100,16 @@
             this.statusServer = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.lableLocalIp = new System.Windows.Forms.ToolStripStatusLabel();
-            this.columnHeader24 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader25 = new System.Windows.Forms.ColumnHeader();
             this.ribbonControl1.SuspendLayout();
             this.ribbonPanel1.SuspendLayout();
             this.ribbonPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bar3)).BeginInit();
             this.bar3.SuspendLayout();
+            this.panelDockContainer1.SuspendLayout();
             this.panelDockContainer5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).BeginInit();
             this.panelDockContainer4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar2)).BeginInit();
-            this.panelDockContainer1.SuspendLayout();
             this.panelDockContainer2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -425,11 +425,11 @@
             this.bar3.CanDockRight = false;
             this.bar3.CanDockTop = false;
             this.bar3.CanUndock = false;
-            this.bar3.Controls.Add(this.panelDockContainer2);
             this.bar3.Controls.Add(this.panelDockContainer1);
-            this.bar3.Controls.Add(this.panelDockContainer3);
             this.bar3.Controls.Add(this.panelDockContainer5);
             this.bar3.Controls.Add(this.panelDockContainer4);
+            this.bar3.Controls.Add(this.panelDockContainer2);
+            this.bar3.Controls.Add(this.panelDockContainer3);
             this.bar3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bar3.DockedBorderStyle = DevComponents.DotNetBar.eBorderType.Sunken;
             this.bar3.DockTabAlignment = DevComponents.DotNetBar.eTabStripAlignment.Top;
@@ -444,12 +444,88 @@
             this.bar3.LayoutType = DevComponents.DotNetBar.eLayoutType.DockContainer;
             this.bar3.Location = new System.Drawing.Point(5, 112);
             this.bar3.Name = "bar3";
-            this.bar3.SelectedDockTab = 3;
+            this.bar3.SelectedDockTab = 2;
             this.bar3.Size = new System.Drawing.Size(787, 537);
             this.bar3.Stretch = true;
             this.bar3.Style = DevComponents.DotNetBar.eDotNetBarStyle.Windows7;
             this.bar3.TabIndex = 1;
             this.bar3.TabStop = false;
+            // 
+            // panelDockContainer1
+            // 
+            this.panelDockContainer1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Windows7;
+            this.panelDockContainer1.Controls.Add(this.lstASyncLog);
+            this.panelDockContainer1.Location = new System.Drawing.Point(6, 31);
+            this.panelDockContainer1.Name = "panelDockContainer1";
+            this.panelDockContainer1.Size = new System.Drawing.Size(775, 500);
+            this.panelDockContainer1.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelDockContainer1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
+            this.panelDockContainer1.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.panelDockContainer1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
+            this.panelDockContainer1.Style.GradientAngle = 90;
+            this.panelDockContainer1.TabIndex = 6;
+            // 
+            // lstASyncLog
+            // 
+            this.lstASyncLog.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader16,
+            this.columnHeader17,
+            this.columnHeader18,
+            this.columnHeader19,
+            this.columnHeader20,
+            this.columnHeader21});
+            this.lstASyncLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstASyncLog.FullRowSelect = true;
+            this.lstASyncLog.LargeImageList = this.imageList1;
+            this.lstASyncLog.Location = new System.Drawing.Point(0, 0);
+            this.lstASyncLog.Name = "lstASyncLog";
+            this.lstASyncLog.Size = new System.Drawing.Size(775, 500);
+            this.lstASyncLog.SmallImageList = this.imageList1;
+            this.lstASyncLog.StateImageList = this.imageList1;
+            this.lstASyncLog.TabIndex = 2;
+            this.lstASyncLog.UseCompatibleStateImageBehavior = false;
+            this.lstASyncLog.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader16
+            // 
+            this.columnHeader16.Text = "";
+            this.columnHeader16.Width = 87;
+            // 
+            // columnHeader17
+            // 
+            this.columnHeader17.Text = "会话名";
+            this.columnHeader17.Width = 113;
+            // 
+            // columnHeader18
+            // 
+            this.columnHeader18.Text = "会话类型";
+            this.columnHeader18.Width = 155;
+            // 
+            // columnHeader19
+            // 
+            this.columnHeader19.Text = "会话信息";
+            this.columnHeader19.Width = 131;
+            // 
+            // columnHeader20
+            // 
+            this.columnHeader20.Text = "会话标志";
+            this.columnHeader20.Width = 109;
+            // 
+            // columnHeader21
+            // 
+            this.columnHeader21.Text = "会话时间";
+            this.columnHeader21.Width = 122;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "Circle_Blue.png");
+            this.imageList1.Images.SetKeyName(1, "Circle_Green.png");
+            this.imageList1.Images.SetKeyName(2, "Circle_Grey.png");
+            this.imageList1.Images.SetKeyName(3, "Circle_Orange.png");
+            this.imageList1.Images.SetKeyName(4, "Circle_Red.png");
+            this.imageList1.Images.SetKeyName(5, "Circle_Yellow.png");
             // 
             // panelDockContainer5
             // 
@@ -582,17 +658,6 @@
             this.columnHeader23.Text = "最后通信时间";
             this.columnHeader23.Width = 114;
             // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "Circle_Blue.png");
-            this.imageList1.Images.SetKeyName(1, "Circle_Green.png");
-            this.imageList1.Images.SetKeyName(2, "Circle_Grey.png");
-            this.imageList1.Images.SetKeyName(3, "Circle_Orange.png");
-            this.imageList1.Images.SetKeyName(4, "Circle_Red.png");
-            this.imageList1.Images.SetKeyName(5, "Circle_Yellow.png");
-            // 
             // panelDockContainer4
             // 
             this.panelDockContainer4.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Windows7;
@@ -708,70 +773,28 @@
             this.columnHeader1.Text = "通信次数";
             this.columnHeader1.Width = 78;
             // 
-            // panelDockContainer1
+            // columnHeader24
             // 
-            this.panelDockContainer1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Windows7;
-            this.panelDockContainer1.Controls.Add(this.listView2);
-            this.panelDockContainer1.Location = new System.Drawing.Point(6, 31);
-            this.panelDockContainer1.Name = "panelDockContainer1";
-            this.panelDockContainer1.Size = new System.Drawing.Size(775, 500);
-            this.panelDockContainer1.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelDockContainer1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
-            this.panelDockContainer1.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
-            this.panelDockContainer1.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
-            this.panelDockContainer1.Style.GradientAngle = 90;
-            this.panelDockContainer1.TabIndex = 6;
+            this.columnHeader24.Text = "最后字节数 (Bytes)";
+            this.columnHeader24.Width = 112;
             // 
-            // listView2
+            // columnHeader25
             // 
-            this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader16,
-            this.columnHeader17,
-            this.columnHeader18,
-            this.columnHeader19,
-            this.columnHeader20,
-            this.columnHeader21});
-            this.listView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView2.FullRowSelect = true;
-            this.listView2.LargeImageList = this.imageList1;
-            this.listView2.Location = new System.Drawing.Point(0, 0);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(775, 500);
-            this.listView2.SmallImageList = this.imageList1;
-            this.listView2.StateImageList = this.imageList1;
-            this.listView2.TabIndex = 2;
-            this.listView2.UseCompatibleStateImageBehavior = false;
-            this.listView2.View = System.Windows.Forms.View.Details;
+            this.columnHeader25.Text = "最后时间";
+            this.columnHeader25.Width = 100;
             // 
-            // columnHeader16
+            // panelDockContainer3
             // 
-            this.columnHeader16.Text = "";
-            this.columnHeader16.Width = 52;
-            // 
-            // columnHeader17
-            // 
-            this.columnHeader17.Text = "会话名";
-            this.columnHeader17.Width = 85;
-            // 
-            // columnHeader18
-            // 
-            this.columnHeader18.Text = "会话类型";
-            this.columnHeader18.Width = 115;
-            // 
-            // columnHeader19
-            // 
-            this.columnHeader19.Text = "会话信息";
-            this.columnHeader19.Width = 190;
-            // 
-            // columnHeader20
-            // 
-            this.columnHeader20.Text = "会话标志";
-            this.columnHeader20.Width = 106;
-            // 
-            // columnHeader21
-            // 
-            this.columnHeader21.Text = "会话时间";
-            this.columnHeader21.Width = 109;
+            this.panelDockContainer3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Windows7;
+            this.panelDockContainer3.Location = new System.Drawing.Point(6, 31);
+            this.panelDockContainer3.Name = "panelDockContainer3";
+            this.panelDockContainer3.Size = new System.Drawing.Size(775, 500);
+            this.panelDockContainer3.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelDockContainer3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
+            this.panelDockContainer3.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.panelDockContainer3.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
+            this.panelDockContainer3.Style.GradientAngle = 90;
+            this.panelDockContainer3.TabIndex = 10;
             // 
             // panelDockContainer2
             // 
@@ -811,45 +834,32 @@
             // columnHeader10
             // 
             this.columnHeader10.Text = "";
-            this.columnHeader10.Width = 52;
+            this.columnHeader10.Width = 84;
             // 
             // columnHeader11
             // 
             this.columnHeader11.Text = "会话名";
-            this.columnHeader11.Width = 85;
+            this.columnHeader11.Width = 105;
             // 
             // columnHeader12
             // 
             this.columnHeader12.Text = "会话类型";
-            this.columnHeader12.Width = 115;
+            this.columnHeader12.Width = 140;
             // 
             // columnHeader13
             // 
             this.columnHeader13.Text = "会话信息";
-            this.columnHeader13.Width = 190;
+            this.columnHeader13.Width = 129;
             // 
             // columnHeader14
             // 
             this.columnHeader14.Text = "会话标志";
-            this.columnHeader14.Width = 106;
+            this.columnHeader14.Width = 78;
             // 
             // columnHeader15
             // 
             this.columnHeader15.Text = "会话时间";
-            this.columnHeader15.Width = 109;
-            // 
-            // panelDockContainer3
-            // 
-            this.panelDockContainer3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Windows7;
-            this.panelDockContainer3.Location = new System.Drawing.Point(6, 31);
-            this.panelDockContainer3.Name = "panelDockContainer3";
-            this.panelDockContainer3.Size = new System.Drawing.Size(775, 500);
-            this.panelDockContainer3.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelDockContainer3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
-            this.panelDockContainer3.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
-            this.panelDockContainer3.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
-            this.panelDockContainer3.Style.GradientAngle = 90;
-            this.panelDockContainer3.TabIndex = 10;
+            this.columnHeader15.Width = 107;
             // 
             // dockContainerItem6
             // 
@@ -915,16 +925,6 @@
             this.lableLocalIp.Name = "lableLocalIp";
             this.lableLocalIp.Size = new System.Drawing.Size(0, 17);
             // 
-            // columnHeader24
-            // 
-            this.columnHeader24.Text = "最后字节数 (Bytes)";
-            this.columnHeader24.Width = 112;
-            // 
-            // columnHeader25
-            // 
-            this.columnHeader25.Text = "最后时间";
-            this.columnHeader25.Width = 100;
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -944,11 +944,11 @@
             this.ribbonPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bar3)).EndInit();
             this.bar3.ResumeLayout(false);
+            this.panelDockContainer1.ResumeLayout(false);
             this.panelDockContainer5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).EndInit();
             this.panelDockContainer4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar2)).EndInit();
-            this.panelDockContainer1.ResumeLayout(false);
             this.panelDockContainer2.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -1004,7 +1004,7 @@
         private DevComponents.DotNetBar.ButtonItem btnReset;
         private DevComponents.DotNetBar.PanelDockContainer panelDockContainer1;
         private DevComponents.DotNetBar.DockContainerItem dockContainerItem1;
-        private System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.ListView lstASyncLog;
         private System.Windows.Forms.ColumnHeader columnHeader16;
         private System.Windows.Forms.ColumnHeader columnHeader17;
         private System.Windows.Forms.ColumnHeader columnHeader18;
