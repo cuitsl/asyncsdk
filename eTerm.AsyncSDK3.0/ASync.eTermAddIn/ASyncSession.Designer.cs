@@ -26,6 +26,8 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new DevComponents.DotNetBar.TabControl();
             this.PanelSession = new DevComponents.DotNetBar.TabControlPanel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnSingleSave = new DevComponents.DotNetBar.ButtonX();
             this.comboTree1 = new DevComponents.DotNetBar.Controls.ComboTree();
             this.labelX10 = new DevComponents.DotNetBar.LabelX();
             this.contextMenuBar2 = new DevComponents.DotNetBar.ContextMenuBar();
@@ -80,17 +82,16 @@
             this.columnHeader9 = new DevComponents.AdvTree.ColumnHeader();
             this.columnHeader10 = new DevComponents.AdvTree.ColumnHeader();
             this.columnHeader11 = new DevComponents.AdvTree.ColumnHeader();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnSingleSave = new DevComponents.DotNetBar.ButtonX();
+            this.btnClearTraffic = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.PanelSession.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtExpire)).BeginInit();
             this.tabControlPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).BeginInit();
-            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -114,6 +115,7 @@
             // PanelSession
             // 
             this.PanelSession.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.PanelSession.Controls.Add(this.btnClearTraffic);
             this.PanelSession.Controls.Add(this.flowLayoutPanel1);
             this.PanelSession.Controls.Add(this.comboTree1);
             this.PanelSession.Controls.Add(this.labelX10);
@@ -152,6 +154,29 @@
             this.PanelSession.Style.GradientAngle = 90;
             this.PanelSession.TabIndex = 2;
             this.PanelSession.TabItem = this.tabItem2;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel1.Controls.Add(this.btnSingleSave);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(1, 368);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(634, 46);
+            this.flowLayoutPanel1.TabIndex = 23;
+            // 
+            // btnSingleSave
+            // 
+            this.btnSingleSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnSingleSave.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnSingleSave.Location = new System.Drawing.Point(540, 3);
+            this.btnSingleSave.Name = "btnSingleSave";
+            this.btnSingleSave.Size = new System.Drawing.Size(91, 23);
+            this.btnSingleSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnSingleSave.TabIndex = 11;
+            this.btnSingleSave.Text = "保存用户（&U）";
+            this.btnSingleSave.Click += new System.EventHandler(this.btnSingleSave_Click);
             // 
             // comboTree1
             // 
@@ -776,28 +801,17 @@
             this.columnHeader11.Text = "4";
             this.columnHeader11.Width.Absolute = 150;
             // 
-            // flowLayoutPanel1
+            // btnClearTraffic
             // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
-            this.flowLayoutPanel1.Controls.Add(this.btnSingleSave);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(1, 368);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(634, 46);
-            this.flowLayoutPanel1.TabIndex = 23;
-            // 
-            // btnSingleSave
-            // 
-            this.btnSingleSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnSingleSave.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnSingleSave.Location = new System.Drawing.Point(540, 3);
-            this.btnSingleSave.Name = "btnSingleSave";
-            this.btnSingleSave.Size = new System.Drawing.Size(91, 23);
-            this.btnSingleSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnSingleSave.TabIndex = 11;
-            this.btnSingleSave.Text = "保存用户（&U）";
-            this.btnSingleSave.Click += new System.EventHandler(this.btnSingleSave_Click);
+            this.btnClearTraffic.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnClearTraffic.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnClearTraffic.Location = new System.Drawing.Point(369, 237);
+            this.btnClearTraffic.Name = "btnClearTraffic";
+            this.btnClearTraffic.Size = new System.Drawing.Size(78, 23);
+            this.btnClearTraffic.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnClearTraffic.TabIndex = 30;
+            this.btnClearTraffic.Text = "清除（&D）";
+            this.btnClearTraffic.Click += new System.EventHandler(this.btnClearTraffic_Click);
             // 
             // ASyncSession
             // 
@@ -810,12 +824,12 @@
             this.tabControl1.ResumeLayout(false);
             this.PanelSession.ResumeLayout(false);
             this.PanelSession.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFlow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtExpire)).EndInit();
             this.tabControlPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).EndInit();
-            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -880,6 +894,7 @@
         private DevComponents.AdvTree.ColumnHeader columnHeader11;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private DevComponents.DotNetBar.ButtonX btnSingleSave;
+        private DevComponents.DotNetBar.ButtonX btnClearTraffic;
 
     }
 }
