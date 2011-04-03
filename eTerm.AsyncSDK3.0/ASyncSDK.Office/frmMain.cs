@@ -56,7 +56,10 @@ namespace ASyncSDK.Office {
                 this.BeginInvoke(new TSessionCallback(DisconnectTSession), TSession);
                 return;
             }
-            this.lstSession.Items.Remove(this.lstSession.Items[TSession.SessionId.ToString()]);
+            try {
+                this.lstSession.Items.Remove(this.lstSession.Items[TSession.SessionId.ToString()]);
+            }
+            catch { }
         }
 
 
@@ -90,13 +93,16 @@ namespace ASyncSDK.Office {
                 this.BeginInvoke(new TSessionCallback(updateTSessionRead), TSession);
                 return;
             }
-            ListViewItem item = this.lstSession.Items[TSession.SessionId.ToString()];
-            item.ImageKey = @"Circle_Yellow.png";// ? @"Circle_Yellow.png" : @"Circle_Green.png";
-            item.SubItems[1].Text = TSession.userName;
-            item.SubItems[2].Text = string.Format(@"{0} KBytes", TSession.TotalBytes.ToString(@"f2"));
-            item.SubItems[3].Text = TSession.TotalCount.ToString();
-            item.SubItems[4].Text = string.Format(@"{0} Bytes", TSession.CurrentBytes.ToString(@"f2"));
-            item.SubItems[5].Text = TSession.LastActive.ToString(@"HH:mm:ss");
+            try {
+                ListViewItem item = this.lstSession.Items[TSession.SessionId.ToString()];
+                item.ImageKey = @"Circle_Yellow.png";// ? @"Circle_Yellow.png" : @"Circle_Green.png";
+                item.SubItems[1].Text = TSession.userName;
+                item.SubItems[2].Text = string.Format(@"{0} KBytes", TSession.TotalBytes.ToString(@"f2"));
+                item.SubItems[3].Text = TSession.TotalCount.ToString();
+                item.SubItems[4].Text = string.Format(@"{0} Bytes", TSession.CurrentBytes.ToString(@"f2"));
+                item.SubItems[5].Text = TSession.LastActive.ToString(@"HH:mm:ss");
+            }
+            catch { }
         }
 
         /// <summary>
@@ -108,13 +114,16 @@ namespace ASyncSDK.Office {
                 this.BeginInvoke(new TSessionCallback(updateTSessionSent), TSession);
                 return;
             }
-            ListViewItem item = this.lstSession.Items[TSession.SessionId.ToString()];
-            item.ImageKey = @"Circle_Green.png";// ? @"Circle_Yellow.png" : @"Circle_Green.png";
-            item.SubItems[1].Text = TSession.userName;
-            item.SubItems[2].Text = string.Format(@"{0} KBytes", TSession.TotalBytes.ToString(@"f2"));
-            item.SubItems[3].Text = TSession.TotalCount.ToString();
-            item.SubItems[4].Text = string.Format(@"{0} Bytes", TSession.CurrentBytes.ToString(@"f2"));
-            item.SubItems[5].Text = TSession.LastActive.ToString(@"HH:mm:ss");
+            try {
+                ListViewItem item = this.lstSession.Items[TSession.SessionId.ToString()];
+                item.ImageKey = @"Circle_Green.png";// ? @"Circle_Yellow.png" : @"Circle_Green.png";
+                item.SubItems[1].Text = TSession.userName;
+                item.SubItems[2].Text = string.Format(@"{0} KBytes", TSession.TotalBytes.ToString(@"f2"));
+                item.SubItems[3].Text = TSession.TotalCount.ToString();
+                item.SubItems[4].Text = string.Format(@"{0} Bytes", TSession.CurrentBytes.ToString(@"f2"));
+                item.SubItems[5].Text = TSession.LastActive.ToString(@"HH:mm:ss");
+            }
+            catch { }
         }
         #endregion
 
