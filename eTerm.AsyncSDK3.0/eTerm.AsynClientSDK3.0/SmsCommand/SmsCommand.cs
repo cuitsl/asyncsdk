@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using eTerm.ASynClientSDK.Base;
+using System.Text.RegularExpressions;
 
 namespace eTerm.ASynClientSDK {
     /// <summary>
@@ -41,7 +42,9 @@ namespace eTerm.ASynClientSDK {
         /// <param name="Msg">指令结果集合.</param>
         /// <returns></returns>
         protected override ASyncResult ResultAdapter(string Msg) {
-            throw new NotImplementedException();
+            SmsResult Result = new SmsResult();
+            Result.Success = Regex.IsMatch(Msg, @"OK", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+            return Result;
         }
     }
 }
