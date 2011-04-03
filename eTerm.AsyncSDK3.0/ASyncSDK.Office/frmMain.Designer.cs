@@ -81,7 +81,7 @@
             this.columnHeader20 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader21 = new System.Windows.Forms.ColumnHeader();
             this.panelDockContainer2 = new DevComponents.DotNetBar.PanelDockContainer();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lstTSessionLog = new System.Windows.Forms.ListView();
             this.columnHeader10 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader11 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader12 = new System.Windows.Forms.ColumnHeader();
@@ -425,11 +425,11 @@
             this.bar3.CanDockRight = false;
             this.bar3.CanDockTop = false;
             this.bar3.CanUndock = false;
-            this.bar3.Controls.Add(this.panelDockContainer4);
-            this.bar3.Controls.Add(this.panelDockContainer1);
             this.bar3.Controls.Add(this.panelDockContainer2);
+            this.bar3.Controls.Add(this.panelDockContainer1);
             this.bar3.Controls.Add(this.panelDockContainer3);
             this.bar3.Controls.Add(this.panelDockContainer5);
+            this.bar3.Controls.Add(this.panelDockContainer4);
             this.bar3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.bar3.DockedBorderStyle = DevComponents.DotNetBar.eBorderType.Sunken;
             this.bar3.DockTabAlignment = DevComponents.DotNetBar.eTabStripAlignment.Top;
@@ -444,7 +444,7 @@
             this.bar3.LayoutType = DevComponents.DotNetBar.eLayoutType.DockContainer;
             this.bar3.Location = new System.Drawing.Point(5, 112);
             this.bar3.Name = "bar3";
-            this.bar3.SelectedDockTab = 1;
+            this.bar3.SelectedDockTab = 3;
             this.bar3.Size = new System.Drawing.Size(787, 537);
             this.bar3.Stretch = true;
             this.bar3.Style = DevComponents.DotNetBar.eDotNetBarStyle.Windows7;
@@ -776,7 +776,7 @@
             // panelDockContainer2
             // 
             this.panelDockContainer2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Windows7;
-            this.panelDockContainer2.Controls.Add(this.listView1);
+            this.panelDockContainer2.Controls.Add(this.lstTSessionLog);
             this.panelDockContainer2.Location = new System.Drawing.Point(6, 31);
             this.panelDockContainer2.Name = "panelDockContainer2";
             this.panelDockContainer2.Size = new System.Drawing.Size(775, 500);
@@ -787,26 +787,26 @@
             this.panelDockContainer2.Style.GradientAngle = 90;
             this.panelDockContainer2.TabIndex = 8;
             // 
-            // listView1
+            // lstTSessionLog
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lstTSessionLog.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader10,
             this.columnHeader11,
             this.columnHeader12,
             this.columnHeader13,
             this.columnHeader14,
             this.columnHeader15});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.FullRowSelect = true;
-            this.listView1.LargeImageList = this.imageList1;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(775, 500);
-            this.listView1.SmallImageList = this.imageList1;
-            this.listView1.StateImageList = this.imageList1;
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.lstTSessionLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstTSessionLog.FullRowSelect = true;
+            this.lstTSessionLog.LargeImageList = this.imageList1;
+            this.lstTSessionLog.Location = new System.Drawing.Point(0, 0);
+            this.lstTSessionLog.Name = "lstTSessionLog";
+            this.lstTSessionLog.Size = new System.Drawing.Size(775, 500);
+            this.lstTSessionLog.SmallImageList = this.imageList1;
+            this.lstTSessionLog.StateImageList = this.imageList1;
+            this.lstTSessionLog.TabIndex = 1;
+            this.lstTSessionLog.UseCompatibleStateImageBehavior = false;
+            this.lstTSessionLog.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader10
             // 
@@ -1013,7 +1013,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader21;
         private DevComponents.DotNetBar.PanelDockContainer panelDockContainer2;
         private DevComponents.DotNetBar.DockContainerItem dockContainerItem2;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView lstTSessionLog;
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.ColumnHeader columnHeader12;

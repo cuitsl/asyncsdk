@@ -611,6 +611,7 @@ namespace eTerm.AsyncSDK {
                     return false;
                 }
 
+                /*
                 s.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session>>(
                         delegate(object Session, AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session> SessionArg)
                         {
@@ -618,6 +619,7 @@ namespace eTerm.AsyncSDK {
                                 this.OnTSessionReadPacket(Session, SessionArg);
                         }
                     );
+                */
                 if (this.OnTSessionValidated != null)
                     this.OnTSessionValidated(s, new AsyncEventArgs<eTerm363Session>(s));
                 return true;
