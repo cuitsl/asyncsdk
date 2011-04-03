@@ -121,8 +121,6 @@ namespace ASyncSDK.Office {
         #region UI代理定义
         public delegate void UpdateListViewItem(ListViewEx ViewEx, string ImageKey, string Id, float TotalBytes, string Reconnect);
 
-        public delegate void AppendSessionLogDelegate(ListView View, string SessionName, string operationType, string SessionCommand, string flag);
-
         public delegate void UpdateStatusTextDelegate(ToolStripStatusLabel targetLable, string Text);
 
         public delegate void ASynConnectCallback(eTerm443Async ASync);
@@ -251,7 +249,7 @@ namespace ASyncSDK.Office {
         }
         #endregion
 
-        #region AppendistViewItem
+        #region 状态栏文本更新
         /// <summary>
         /// Updates the status text.
         /// </summary>
@@ -494,6 +492,19 @@ namespace ASyncSDK.Office {
             StopService();
         }
 
+        /// <summary>
+        /// Handles the Click event of the btnSendMessage control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void btnSendMessage_Click(object sender, EventArgs e) {
+            List<eTerm363Session> sessionLst = new List<eTerm363Session>();
+            foreach (ListViewItem item in this.lstSession.SelectedItems) {
+                sessionLst.Add(item.Tag as eTerm363Session);
+            }
+            new frmSender(sessionLst).ShowDialog();
+        }
+
 
         /// <summary>
         /// Handles the Click event of the btnReset control.
@@ -655,13 +666,6 @@ namespace ASyncSDK.Office {
         private delegate void AppendAddInButtonDelegate(ButtonItem PlugInButton);
         #endregion
 
-        private void btnSendMessage_Click(object sender, EventArgs e) {
-            List<eTerm363Session> sessionLst = new List<eTerm363Session>();
-            foreach (ListViewItem item in this.lstSession.SelectedItems) {
-                sessionLst.Add(item.Tag as eTerm363Session);
-            }
-            new frmSender(sessionLst).ShowDialog();
-        }
 
     }
 }
