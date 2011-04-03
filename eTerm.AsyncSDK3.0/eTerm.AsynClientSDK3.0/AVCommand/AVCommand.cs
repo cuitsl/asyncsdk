@@ -170,7 +170,7 @@ namespace eTerm.ASynClientSDK {
         /// <param name="airline">航空公司.</param>
         /// <returns></returns>
         public ASyncResult getAvailability(string org, string dst, DateTime date, string airline) {
-            avResult.getDate = date.ToString(@"yyyy-MM-dd");
+            avResult.getDate = date;
             avResult.getOrg = org;
             avResult.getDst = dst;
             return this.getAvailability(org, dst, string.Format(@"{0}{1}", date.Day.ToString("D2"), getDateString(date)), airline, true, true);
@@ -184,7 +184,7 @@ namespace eTerm.ASynClientSDK {
         /// <param name="date">查询日期.</param>
         /// <returns></returns>
         public ASyncResult getAvailability(string org, string dst, DateTime date) {
-            avResult.getDate = date.ToString(@"yyyy-MM-dd");
+            avResult.getDate = date;
             avResult.getOrg = org;
             avResult.getDst = dst;
             return this.getAvailability(org, dst, string.Format(@"{0}{1}", date.Day.ToString("D2"), getDateString(date)), string.Empty, true, true);
@@ -200,7 +200,7 @@ namespace eTerm.ASynClientSDK {
         /// <param name="direct">是否只查询直达航班.</param>
         /// <returns></returns>
         public ASyncResult getAvailability(string org, string dst, DateTime date, string airline, bool direct) {
-            avResult.getDate = date.ToString(@"yyyy-MM-dd");
+            avResult.getDate = date;
             avResult.getOrg = org;
             avResult.getDst = dst;
             return this.getAvailability(org, dst, string.Format(@"{0}{1}", date.Day.ToString("D2"), getDateString(date)), airline, direct, true);
@@ -217,7 +217,7 @@ namespace eTerm.ASynClientSDK {
         /// <param name="e_ticket">是否只查询支持电子客户票航班.</param>
         /// <returns></returns>
         public ASyncResult getAvailability(string org, string dst, DateTime date, string airline, bool direct, bool e_ticket) {
-            avResult.getDate = date.ToString(@"yyyy-MM-dd");
+            avResult.getDate = date;
             avResult.getOrg = org;
             avResult.getDst = dst;
             return this.getAvailability(org, dst, string.Format(@"{0}{1}", date.Day.ToString("D2"), getDateString(date)), airline, direct, e_ticket);
