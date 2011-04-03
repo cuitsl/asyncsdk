@@ -81,7 +81,10 @@ namespace ASync.eTermAddIn {
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnSave_Click(object sender, EventArgs e) {
             if (MessageBox.Show("操作不可恢复，重启程序后配置将生效！", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
-                AsyncStackNet.Instance.ASyncSetup.XmlSerialize(AsyncStackNet.Instance.CrypterKey, AsyncStackNet.Instance.ASyncSetupFile);
+                AsyncStackNet.Instance.BeginRateUpdate(new AsyncCallback(delegate(IAsyncResult iar)
+                {
+                    AsyncStackNet.Instance.EndRateUpdate(iar);
+                }));
             }
         }
 
@@ -266,6 +269,23 @@ namespace ASync.eTermAddIn {
                 return;
             this.comboTree1.DataSource = AsyncStackNet.Instance.ASyncSetup.AsynCollection[
                 AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup(Setup.Address, Setup.userName))].Traffics;
+        }
+
+        /// <summary>
+        /// Handles the Click event of the btnClearTraffic control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void btnClearTraffic_Click(object sender, EventArgs e) {
+            ConnectSetup Setup = lstSession.SelectedItems[0].Tag as ConnectSetup;
+            if(this.comboTree1.SelectedValue.ToString()==DateTime.Now.ToString(@"yyyyMM")){MessageBox.Show(@"当月流量统计不允许清除！",@"操作错误", MessageBoxButtons.OK, MessageBoxIcon.Error); return;}
+            List<SocketTraffic> Traffics= AsyncStackNet.Instance.ASyncSetup.AsynCollection[
+                AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup(Setup.Address, Setup.userName))].Traffics;
+            Traffics.RemoveAt(Traffics.IndexOf(new SocketTraffic() { MonthString = this.comboTree1.SelectedValue.ToString() }));
+            AsyncStackNet.Instance.BeginRateUpdate(new AsyncCallback(delegate(IAsyncResult iar)
+            {
+                AsyncStackNet.Instance.EndRateUpdate(iar);
+            }));
         }
         
     }

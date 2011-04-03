@@ -21,8 +21,8 @@ using eTerm.AsyncSDK.Util;
 namespace ASyncSDK.Office {
     public partial class frmMain : Office2007RibbonForm {
         #region 初始化
-        ListViewGroup group1 = new ListViewGroup("活动连接");
-        ListViewGroup group2 = new ListViewGroup("非活动连接");
+        ListViewGroup group1 = new ListViewGroup("活动连接", HorizontalAlignment.Center);
+        ListViewGroup group2 = new ListViewGroup("非活动连接", HorizontalAlignment.Center);
         public frmMain() {
             InitializeComponent();
             this.Load += new EventHandler(

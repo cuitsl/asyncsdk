@@ -26,6 +26,7 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new DevComponents.DotNetBar.TabControl();
             this.PanelSession = new DevComponents.DotNetBar.TabControlPanel();
+            this.labelX13 = new DevComponents.DotNetBar.LabelX();
             this.labelX12 = new DevComponents.DotNetBar.LabelX();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnSingleSave = new DevComponents.DotNetBar.ButtonX();
@@ -45,6 +46,7 @@
             this.chkAutoSi = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.chkIsOpen = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
+            this.integerInput3 = new DevComponents.Editors.IntegerInput();
             this.integerInput2 = new DevComponents.Editors.IntegerInput();
             this.integerInput1 = new DevComponents.Editors.IntegerInput();
             this.txtPort = new DevComponents.Editors.IntegerInput();
@@ -73,19 +75,18 @@
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
-            this.labelX13 = new DevComponents.DotNetBar.LabelX();
-            this.integerInput3 = new DevComponents.Editors.IntegerInput();
+            this.btnClearTraffic = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.PanelSession.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtAddress)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.integerInput3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.integerInput2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.integerInput1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).BeginInit();
             this.tabControlPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.integerInput3)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -109,6 +110,7 @@
             // PanelSession
             // 
             this.PanelSession.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.PanelSession.Controls.Add(this.btnClearTraffic);
             this.PanelSession.Controls.Add(this.labelX13);
             this.PanelSession.Controls.Add(this.labelX12);
             this.PanelSession.Controls.Add(this.flowLayoutPanel1);
@@ -153,6 +155,22 @@
             this.PanelSession.TabIndex = 2;
             this.PanelSession.TabItem = this.tabItem2;
             // 
+            // labelX13
+            // 
+            this.labelX13.AutoSize = true;
+            this.labelX13.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX13.BackgroundStyle.Class = "";
+            this.labelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX13.Location = new System.Drawing.Point(378, 186);
+            this.labelX13.Name = "labelX13";
+            this.labelX13.Size = new System.Drawing.Size(56, 16);
+            this.labelX13.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX13.TabIndex = 28;
+            this.labelX13.Text = "月流量：";
+            // 
             // labelX12
             // 
             this.labelX12.AutoSize = true;
@@ -162,7 +180,7 @@
             // 
             this.labelX12.BackgroundStyle.Class = "";
             this.labelX12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX12.Location = new System.Drawing.Point(378, 253);
+            this.labelX12.Location = new System.Drawing.Point(380, 150);
             this.labelX12.Name = "labelX12";
             this.labelX12.Size = new System.Drawing.Size(54, 16);
             this.labelX12.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -397,7 +415,7 @@
             // 
             this.chkAutoSi.BackgroundStyle.Class = "";
             this.chkAutoSi.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkAutoSi.Location = new System.Drawing.Point(438, 253);
+            this.chkAutoSi.Location = new System.Drawing.Point(440, 150);
             this.chkAutoSi.Name = "chkAutoSi";
             this.chkAutoSi.Size = new System.Drawing.Size(58, 23);
             this.chkAutoSi.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -434,6 +452,23 @@
             this.labelX4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.labelX4.TabIndex = 6;
             this.labelX4.Text = "配置状态：";
+            // 
+            // integerInput3
+            // 
+            // 
+            // 
+            // 
+            this.integerInput3.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.integerInput3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.integerInput3.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.integerInput3.Location = new System.Drawing.Point(283, 153);
+            this.integerInput3.MaxValue = 100000;
+            this.integerInput3.MinValue = 0;
+            this.integerInput3.Name = "integerInput3";
+            this.integerInput3.ShowUpDown = true;
+            this.integerInput3.Size = new System.Drawing.Size(49, 20);
+            this.integerInput3.TabIndex = 5;
+            this.integerInput3.Value = 100;
             // 
             // integerInput2
             // 
@@ -751,38 +786,17 @@
             this.tabItem1.Name = "tabItem1";
             this.tabItem1.Text = "配置管理";
             // 
-            // labelX13
+            // btnClearTraffic
             // 
-            this.labelX13.AutoSize = true;
-            this.labelX13.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX13.BackgroundStyle.Class = "";
-            this.labelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX13.Location = new System.Drawing.Point(378, 186);
-            this.labelX13.Name = "labelX13";
-            this.labelX13.Size = new System.Drawing.Size(56, 16);
-            this.labelX13.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.labelX13.TabIndex = 28;
-            this.labelX13.Text = "月流量：";
-            // 
-            // integerInput3
-            // 
-            // 
-            // 
-            // 
-            this.integerInput3.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.integerInput3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.integerInput3.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.integerInput3.Location = new System.Drawing.Point(283, 153);
-            this.integerInput3.MaxValue = 100000;
-            this.integerInput3.MinValue = 0;
-            this.integerInput3.Name = "integerInput3";
-            this.integerInput3.ShowUpDown = true;
-            this.integerInput3.Size = new System.Drawing.Size(49, 20);
-            this.integerInput3.TabIndex = 5;
-            this.integerInput3.Value = 100;
+            this.btnClearTraffic.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnClearTraffic.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnClearTraffic.Location = new System.Drawing.Point(378, 253);
+            this.btnClearTraffic.Name = "btnClearTraffic";
+            this.btnClearTraffic.Size = new System.Drawing.Size(78, 23);
+            this.btnClearTraffic.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnClearTraffic.TabIndex = 29;
+            this.btnClearTraffic.Text = "清除（&D）";
+            this.btnClearTraffic.Click += new System.EventHandler(this.btnClearTraffic_Click);
             // 
             // ASynConnect
             // 
@@ -797,12 +811,12 @@
             this.PanelSession.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtAddress)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.integerInput3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.integerInput2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.integerInput1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).EndInit();
             this.tabControlPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.integerInput3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -860,6 +874,7 @@
         private DevComponents.DotNetBar.Controls.CheckBoxX chkAutoSi;
         private DevComponents.DotNetBar.LabelX labelX13;
         private DevComponents.Editors.IntegerInput integerInput3;
+        private DevComponents.DotNetBar.ButtonX btnClearTraffic;
 
     }
 }
