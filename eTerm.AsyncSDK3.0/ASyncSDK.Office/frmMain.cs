@@ -614,6 +614,11 @@ Encoding.GetEncoding(@"gb2312").GetString(e.Session.UnOutPakcet(e.InPacket)),
         private void lstAsync_SelectedIndexChanged(object sender, EventArgs e) {
             btnDispose.Enabled = lstAsync.SelectedItems.Count > 0;
             btnRelease.Enabled = lstAsync.SelectedItems.Count > 0;
+            btnManualConnect.Enabled=(
+                    this.lstAsync.SelectedItems.Count==1
+                    &&
+                    this.lstAsync.SelectedItems[0].Group==this.group2
+                );
         }
 
         /// <summary>
@@ -747,12 +752,23 @@ Encoding.GetEncoding(@"gb2312").GetString(e.Session.UnOutPakcet(e.InPacket)),
             PlugInButton});
         }
 
+
+        /// <summary>
+        /// Handles the Click event of the btnManualConnect control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void btnManualConnect_Click(object sender, EventArgs e) {
+            (this.lstAsync.SelectedItems[0].Tag as eTerm443Async).Connect();
+        }
+
+
+
         /// <summary>
         /// 线程UI代理
         /// </summary>
         private delegate void AppendAddInButtonDelegate(ButtonItem PlugInButton);
         #endregion
-
 
     }
 }
