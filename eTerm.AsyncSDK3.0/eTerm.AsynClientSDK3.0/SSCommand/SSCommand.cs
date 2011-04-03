@@ -458,7 +458,7 @@ namespace eTerm.ASynClientSDK {
             foreach (BookContact c in this.__bookContactList) {
                 //sb.AppendFormat("\rCT:{0} {1} {2}", c.getcity, c.psgrName, c.getcontact);
                 if (!string.IsNullOrEmpty(c.getcontact))
-                    sb.AppendFormat(@"RMK MP {0}/P1", c.getcontact);
+                    sb.AppendFormat("\rRMK MP {0}/P1", c.getcontact);
             }
             return sb.ToString();
         }
