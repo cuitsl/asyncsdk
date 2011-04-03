@@ -165,7 +165,7 @@ namespace ASyncSDK.Office {
                 return;
             }
             try {
-                if (this.lstASyncLog.Items.Count >= 100) this.lstTSessionLog.Items.Clear();
+                if (this.lstASyncLog.Items.Count >= 100) this.lstASyncLog.Items.Clear();
                 ListViewItem item = new ListViewItem(new string[]{
                 (this.lstASyncLog.Items.Count+1).ToString(),
                 SessionId,
