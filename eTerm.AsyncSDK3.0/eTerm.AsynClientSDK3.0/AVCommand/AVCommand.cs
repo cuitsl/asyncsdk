@@ -136,8 +136,8 @@ namespace eTerm.ASynClientSDK {
             avItem.isCodeShare = avItem.getAirline.StartsWith("*");
             avItem.getAirline = avItem.getAirline.Substring(1);
             avItem.getCarrier = avItem.getAirline.Substring(0, 2);
-            avItem.getDeptime = Regex.Matches(itemString, @"\s\d{4}\+?\d?\s")[0].Value.Trim();
-            avItem.getArritime = Regex.Matches(itemString, @"\s\d{4}\+?\d?\s")[1].Value.Trim().Substring(0, 4);
+            avItem.getDeptime = Regex.Matches(itemString, @"\s\d{4}\+?\d?\s")[0].Value.Trim().Insert(2,":");
+            avItem.getArritime = Regex.Matches(itemString, @"\s\d{4}\+?\d?\s")[1].Value.Trim().Substring(0, 4).Insert(2,":");
             avItem.getOrgcity = Regex.Match(itemString, @"\s[A-Z]{6}\s").Value.Trim().Substring(0, 3);
             avItem.getDstcity = Regex.Match(itemString, @"\s[A-Z]{6}\s").Value.Trim().Substring(3);
             avItem.getLink = Regex.Match(itemString, @"\s[A-Z]{2}\#").Value.Trim();
