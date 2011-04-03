@@ -22,7 +22,7 @@ namespace eTerm.ASynClientSDK {
         /// 得到Date类型的日期.
         /// </summary>
         /// <value>The depart date.</value>
-        public string getDate { get; set; }
+        public DateTime? getDate { get; set; }
 
         /// <summary>
         /// 得到日期信息中的星期, 返回的值为星期的缩写形式.
