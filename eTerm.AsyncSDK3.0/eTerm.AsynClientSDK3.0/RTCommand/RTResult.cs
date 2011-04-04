@@ -47,6 +47,18 @@ namespace eTerm.ASynClientSDK {
         public int getGroupNumber { get; set; }
 
         /// <summary>
+        /// 出票时限.
+        /// </summary>
+        /// <value>The tk tl.</value>
+        public string TkTl { get; set; }
+
+        /// <summary>
+        /// 出票时限.
+        /// </summary>
+        /// <value>The office code.</value>
+        public string OfficeCode { get; set; }
+
+        /// <summary>
         /// 获取所有婴儿组.
         /// </summary>
         /// <value>The get infants.</value>

@@ -27,6 +27,12 @@ namespace eTerm.ASynClientSDK {
         }
 
         /// <summary>
+        /// 证件号 .
+        /// </summary>
+        /// <value>The identity no.</value>
+        public string IdentityNo { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="PNRPassengerResult"/> class.
         /// </summary>
         /// <param name="name">The name.</param>
