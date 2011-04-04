@@ -99,9 +99,13 @@ namespace eTerm.ASynClientSDK {
         /// <param name="Msg">The MSG.</param>
         private void ParsePassager(RTResult Rt, string Msg) {
             Rt.getPassengers =new List<PNRPassengerResult>();
+            int IndexOf = 1;
             foreach (Match m in Regex.Matches(Msg.Replace("\0", "\r"), @"(\d+\.(([A-Z]+\/[A-Z]+)|([\u4e00-\u9fa5]+))\s*(NI)?\s*)+" + this.__pnr, RegexOptions.IgnoreCase | RegexOptions.Multiline)) {
                 foreach (Capture c in m.Groups[2].Captures) {
-                    Rt.getPassengers.Add(new PNRPassengerResult(c.Value));
+                    string IdentityNo = string.Empty;
+                    if (Regex.IsMatch(Msg, @"^\d+\.SSR\s+FOID\s+([A-Z0-9]{2})\s([A-Z]{2}\d+)\s+NI([A-Z0-9]+)\/P" + (IndexOf).ToString(), RegexOptions.IgnoreCase | RegexOptions.Multiline))
+                        IdentityNo = Regex.Match(Msg, @"^\d+\.SSR\s+FOID\s+([A-Z0-9]{2})\s([A-Z]{2}\d+)\s+NI([A-Z0-9]+)\/P"+(IndexOf++).ToString(), RegexOptions.Multiline | RegexOptions.IgnoreCase).Groups[3].Value;
+                    Rt.getPassengers.Add(new PNRPassengerResult(c.Value) { IdentityNo=IdentityNo });
                 }
             }
         }
