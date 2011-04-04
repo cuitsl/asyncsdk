@@ -72,7 +72,8 @@ namespace ASyncSDK.Office {
                 this.BeginInvoke(new TSessionCallback(AcceptTSession), TSession);
                 return;
             }
-            ListViewItem item = new ListViewItem(new string[] {
+            try {
+                ListViewItem item = new ListViewItem(new string[] {
                 (TSession.AsyncSocket.RemoteEndPoint as IPEndPoint).ToString(),
                 string.Empty,
                 @"0 KByes",
@@ -80,8 +81,10 @@ namespace ASyncSDK.Office {
                 @"0",
                 @"00:00:00"
             }, @"Circle_Yellow.png") { Name = TSession.SessionId.ToString() };
-            item.Tag = TSession;
-            this.lstSession.Items.Add(item);
+                item.Tag = TSession;
+                this.lstSession.Items.Add(item);
+            }
+            catch { }
         }
 
         /// <summary>
