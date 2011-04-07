@@ -48,7 +48,18 @@ namespace eTerm.AsyncSDK.Base {
         /// 远程主机地址.
         /// </summary>
         /// <value>The remote ip.</value>
-        public IPEndPoint RemoteEP { set;  get; }
+        public IPEndPoint RemoteEP {protected set;  get; }
+
+        /// <summary>
+        /// 远程主机地址
+        /// </summary>
+        public string Address {internal get; set; }
+
+        /// <summary>
+        /// 主机端口号.
+        /// </summary>
+        /// <value>The port.</value>
+        public int Port { internal get; set; }
 
         /// <summary>
         /// 重连延时.
@@ -157,6 +168,36 @@ namespace eTerm.AsyncSDK.Base {
         protected virtual void FireOnAsynConnect() {
             if (this.OnAsynConnect != null)
                 OnAsynConnect(this, new AsyncEventArgs<T>(this as T));
+        }
+
+
+        /// <summary>
+        /// Connects the specified host.
+        /// </summary>
+        /// <param name="host">The host.</param>
+        /// <param name="port">The port.</param>
+        /// <param name="ssl">if set to <c>true</c> [SSL].</param>
+        public virtual void Connect(string host, int port, bool ssl) {
+            if (string.IsNullOrEmpty(host)) {
+                throw new ArgumentException("Argument 'host' value may not be null or empty.");
+            }
+            if (port < 1) {
+                throw new ArgumentException("Argument 'port' value must be >= 1.");
+            }
+
+            IPAddress[] ips = System.Net.Dns.GetHostAddresses(host);
+            for (int i = 0; i < ips.Length; i++) {
+                try {
+                    //Connect(null, new IPEndPoint(ips[i], port), ssl);
+                    this.RemoteEP = new IPEndPoint(ips[i], port);
+                    this.IsSsl = ssl;
+                    Connect();
+                    break;
+                }
+                catch (System.Exception x) {
+                    throw x;
+                }
+            }
         }
 
         /// <summary>

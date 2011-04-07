@@ -46,10 +46,12 @@ namespace eTerm.AsyncSDK.Net {
         /// <param name="Rid">The rid.</param>
         public eTerm443Async(string Ip, int Port,string userName,string userPass,byte Sid,byte Rid):this() {
             if (Regex.IsMatch(Ip, @"^(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])$", RegexOptions.IgnoreCase | RegexOptions.Multiline))
-                base.RemoteEP = new System.Net.IPEndPoint(IPAddress.Parse(Ip), Port);
+                //base.RemoteEP = new System.Net.IPEndPoint(IPAddress.Parse(Ip), Port);
+                base.Address = Ip;
             else
-                base.RemoteEP = new System.Net.IPEndPoint(Dns.GetHostEntry(Ip).AddressList[0].Address, Port);
-            
+                base.Address = Dns.GetHostEntry(Ip).AddressList[0].Address.ToString();
+                //base.RemoteEP = new System.Net.IPEndPoint(Dns.GetHostEntry(Ip).AddressList[0].Address, Port);
+            base.Port = Port;
             base.IsSsl = true;
             this.userName = userName;
             this.userPass = userPass;
