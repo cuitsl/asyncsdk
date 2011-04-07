@@ -313,7 +313,7 @@ namespace eTerm.AsyncSDK {
                     {
                         if (OnAsyncConnect != null)
                             OnAsyncConnect(sender, e);
-                        this.LocalEndPoint = e.Session.AsyncSocket.LocalEndPoint as IPEndPoint;
+                        //this.LocalEndPoint = e.Session.AsyncSocket.LocalEndPoint as IPEndPoint;
                     }
                 );
             #endregion
@@ -467,7 +467,7 @@ namespace eTerm.AsyncSDK {
             __CoreASync.OnAsynConnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
-                        //this.LocalEndPoint = e.Session.AsyncSocket.LocalEndPoint as IPEndPoint;
+                        this.LocalEndPoint = e.Session.AsyncSocket.LocalEndPoint as IPEndPoint;
                         if (this.OnCoreConnect != null)
                             this.OnCoreConnect(sender, e);
                     }
