@@ -39,10 +39,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="eTerm.AsyncSDK, Version=3.2.0.9201, Culture=neutral, PublicKeyToken=ab9f30c4b7887c28, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Reference\eTerm.AsyncSDK.dll</HintPath>
-    </Reference>
     <Reference Include="SubSonic.Core, Version=3.0.0.3, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Reference\SubSonic.Core.dll</HintPath>
@@ -75,6 +71,10 @@
     <ProjectReference Include="..\eTerm.AsynClientSDK3.0\eTerm.AsynClientSDK3.0.csproj">
       <Project>{88A7ABE1-8AEB-4E8C-92C9-0FFFB8F70421}</Project>
       <Name>eTerm.AsynClientSDK3.0</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\eTerm.AsyncSDK3.0\eTerm.AsyncSDK3.0.csproj">
+      <Project>{62D432A2-DEB0-415A-85DB-7FFDAAA5EB47}</Project>
+      <Name>eTerm.AsyncSDK3.0</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
