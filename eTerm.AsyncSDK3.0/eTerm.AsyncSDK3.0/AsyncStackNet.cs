@@ -425,7 +425,7 @@ namespace eTerm.AsyncSDK {
 
             #region 调用
             //this.__asyncList.Add(Async);
-            Async.Connect();
+            Async.Connect(Async.Address, Async.Port, Async.IsSsl);
             #endregion
         }
         #endregion
