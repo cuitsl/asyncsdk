@@ -87,6 +87,7 @@
       <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="ASyncLogPlugIn.cs" />
+    <Compile Include="ASyncLogQueue.cs" />
     <Compile Include="Expression.cs" />
     <Compile Include="Expressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
