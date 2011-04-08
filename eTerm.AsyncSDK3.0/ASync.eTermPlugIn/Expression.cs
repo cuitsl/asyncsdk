@@ -7,6 +7,9 @@ using eTerm.AsyncSDK.Net;
 using System.Text.RegularExpressions;
 
 namespace ASync.eTermPlugIn {
+    /// <summary>
+    /// 表达式计算插件
+    /// </summary>
     [AfterASynCommand(@"!COMM")]
     public class Expression : BaseASyncPlugIn {
 
