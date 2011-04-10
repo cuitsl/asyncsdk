@@ -65,6 +65,12 @@ namespace eTerm.AsyncSDK {
         public float FlowRate { get; set; }
 
         /// <summary>
+        /// 是否允许重复登录.
+        /// </summary>
+        /// <value>The allow duplicate.</value>
+        public bool? AllowDuplicate { get; set; }
+
+        /// <summary>
         /// Gets or sets the traffics.
         /// </summary>
         /// <value>The traffics.</value>

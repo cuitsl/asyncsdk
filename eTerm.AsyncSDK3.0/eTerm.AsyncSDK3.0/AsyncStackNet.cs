@@ -582,22 +582,6 @@ namespace eTerm.AsyncSDK {
                 //TSessionSetup TSession = AsyncStackNet.Instance.ASyncSetup.SessionCollection.Single<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
                 //if (__asyncServer.TSessionCollection.Count<eTerm363Session>(Session => Session.userName == s.userName) > 1) { ValidateMessage = string.Format(@"{0} 已经在其它IP登录", s.userName); return false; }
 
-                #region 关闭其它登录终端
-                foreach (var connect in
-                        from entry in __asyncServer.TSessionCollection
-                        where entry.userName==s.userName&&entry.SessionId!=s.SessionId
-                        orderby entry.LastActive ascending
-                        select entry) {
-                    connect.SendPacket(__eTerm443Packet.BuildSessionPacket(this.SID, this.RID, string.Format(@"登录退出[{0}],该帐号已在另外的地址登录[{1} {2}]", (connect.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), (s.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), DateTime.Now.ToString(@"MM dd HH:mm:ss"))));
-                    connect.ObligatoryReconnect = false;
-                    new Timer(new TimerCallback(
-                        delegate(object sender)
-                        {
-                            connect.Close();
-                        }), null,1000, Timeout.Infinite);
-                }
-                #endregion
-
                 s.TSessionInterval = TSession.SessionExpire;
                 s.UnallowableReg = TSession.ForbidCmdReg;
                 s.SpecialIntervalList = TSession.SpecialIntervalList;
@@ -610,6 +594,24 @@ namespace eTerm.AsyncSDK {
                 if (Traffic.Traffic >= TSession.FlowRate) {
                     return false;
                 }
+
+                #region 关闭其它登录终端
+                if (!(TSession.AllowDuplicate??false)) {
+                    foreach (var connect in
+                            from entry in __asyncServer.TSessionCollection
+                            where entry.userName == s.userName && entry.SessionId != s.SessionId
+                            orderby entry.LastActive ascending
+                            select entry) {
+                        connect.SendPacket(__eTerm443Packet.BuildSessionPacket(this.SID, this.RID, string.Format(@"登录退出[{0}],该帐号已在另外的地址登录[{1} {2}]", (connect.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), (s.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), DateTime.Now.ToString(@"MM dd HH:mm:ss"))));
+                        connect.ObligatoryReconnect = false;
+                        new Timer(new TimerCallback(
+                            delegate(object sender)
+                            {
+                                connect.Close();
+                            }), null, 1000, Timeout.Infinite);
+                    }
+                }
+                #endregion
 
                 /*
                 s.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session>>(
