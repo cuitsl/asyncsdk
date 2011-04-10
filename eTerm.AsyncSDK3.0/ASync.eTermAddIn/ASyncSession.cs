@@ -108,6 +108,7 @@ namespace ASync.eTermAddIn {
                 PanelSession.Tag = Setup;
                 comboBoxEx3.Items.Clear();
                 comboBoxEx1.Items.Clear();
+                chkAllowRepeat.Checked = Setup.AllowDuplicate ?? false;
                 comboBoxEx3.ValueMember = "SessionCode";
                 comboBoxEx3.DisplayMember = "Description";
                 foreach (string Cmd in Setup.TSessionForbidCmd)
@@ -189,6 +190,7 @@ namespace ASync.eTermAddIn {
                     SessionExpire=txtExpire.Value,
                      SessionPass=txtPassword.Text,
                       FlowRate=float.Parse(this.txtFlow.Value.ToString()),
+                       AllowDuplicate=chkAllowRepeat.Checked,
                  SpecialIntervalList =string.Empty
             };
 

@@ -26,6 +26,7 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new DevComponents.DotNetBar.TabControl();
             this.PanelSession = new DevComponents.DotNetBar.TabControlPanel();
+            this.btnClearTraffic = new DevComponents.DotNetBar.ButtonX();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnSingleSave = new DevComponents.DotNetBar.ButtonX();
             this.comboTree1 = new DevComponents.DotNetBar.Controls.ComboTree();
@@ -82,7 +83,8 @@
             this.columnHeader9 = new DevComponents.AdvTree.ColumnHeader();
             this.columnHeader10 = new DevComponents.AdvTree.ColumnHeader();
             this.columnHeader11 = new DevComponents.AdvTree.ColumnHeader();
-            this.btnClearTraffic = new DevComponents.DotNetBar.ButtonX();
+            this.labelX11 = new DevComponents.DotNetBar.LabelX();
+            this.chkAllowRepeat = new DevComponents.DotNetBar.Controls.CheckBoxX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.PanelSession.SuspendLayout();
@@ -131,6 +133,8 @@
             this.PanelSession.Controls.Add(this.labelX6);
             this.PanelSession.Controls.Add(this.txtDescription);
             this.PanelSession.Controls.Add(this.labelX5);
+            this.PanelSession.Controls.Add(this.chkAllowRepeat);
+            this.PanelSession.Controls.Add(this.labelX11);
             this.PanelSession.Controls.Add(this.chkIsOpen);
             this.PanelSession.Controls.Add(this.labelX4);
             this.PanelSession.Controls.Add(this.txtExpire);
@@ -154,6 +158,18 @@
             this.PanelSession.Style.GradientAngle = 90;
             this.PanelSession.TabIndex = 2;
             this.PanelSession.TabItem = this.tabItem2;
+            // 
+            // btnClearTraffic
+            // 
+            this.btnClearTraffic.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnClearTraffic.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnClearTraffic.Location = new System.Drawing.Point(369, 262);
+            this.btnClearTraffic.Name = "btnClearTraffic";
+            this.btnClearTraffic.Size = new System.Drawing.Size(78, 23);
+            this.btnClearTraffic.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnClearTraffic.TabIndex = 30;
+            this.btnClearTraffic.Text = "清除（&D）";
+            this.btnClearTraffic.Click += new System.EventHandler(this.btnClearTraffic_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -187,7 +203,7 @@
             this.comboTree1.BackgroundStyle.Class = "TextBoxBorder";
             this.comboTree1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.comboTree1.ButtonDropDown.Visible = true;
-            this.comboTree1.Location = new System.Drawing.Point(87, 237);
+            this.comboTree1.Location = new System.Drawing.Point(87, 262);
             this.comboTree1.Name = "comboTree1";
             this.comboTree1.Size = new System.Drawing.Size(276, 23);
             this.comboTree1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -202,7 +218,7 @@
             // 
             this.labelX10.BackgroundStyle.Class = "";
             this.labelX10.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX10.Location = new System.Drawing.Point(19, 237);
+            this.labelX10.Location = new System.Drawing.Point(19, 262);
             this.labelX10.Name = "labelX10";
             this.labelX10.Size = new System.Drawing.Size(68, 16);
             this.labelX10.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -215,7 +231,7 @@
             this.contextMenuBar2.DockSide = DevComponents.DotNetBar.eDockSide.Document;
             this.contextMenuBar2.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItem2});
-            this.contextMenuBar2.Location = new System.Drawing.Point(510, 178);
+            this.contextMenuBar2.Location = new System.Drawing.Point(510, 203);
             this.contextMenuBar2.Name = "contextMenuBar2";
             this.contextMenuBar2.Size = new System.Drawing.Size(75, 27);
             this.contextMenuBar2.Stretch = true;
@@ -340,7 +356,7 @@
             this.btnDeleteCommand.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnDeleteCommand.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
             this.btnDeleteCommand.Image = global::ASync.eTermAddIn.Properties.Resources.Lock;
-            this.btnDeleteCommand.Location = new System.Drawing.Point(257, 187);
+            this.btnDeleteCommand.Location = new System.Drawing.Point(257, 212);
             this.btnDeleteCommand.Name = "btnDeleteCommand";
             this.btnDeleteCommand.Size = new System.Drawing.Size(106, 41);
             this.btnDeleteCommand.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -384,7 +400,7 @@
             this.comboBoxEx1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxEx1.FormattingEnabled = true;
             this.comboBoxEx1.ItemHeight = 14;
-            this.comboBoxEx1.Location = new System.Drawing.Point(87, 198);
+            this.comboBoxEx1.Location = new System.Drawing.Point(87, 223);
             this.comboBoxEx1.Name = "comboBoxEx1";
             this.comboBoxEx1.Size = new System.Drawing.Size(142, 20);
             this.comboBoxEx1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -399,7 +415,7 @@
             // 
             this.labelX7.BackgroundStyle.Class = "";
             this.labelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX7.Location = new System.Drawing.Point(18, 200);
+            this.labelX7.Location = new System.Drawing.Point(18, 225);
             this.labelX7.Name = "labelX7";
             this.labelX7.Size = new System.Drawing.Size(68, 16);
             this.labelX7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -446,7 +462,7 @@
             // 
             this.txtDescription.Border.Class = "TextBoxBorder";
             this.txtDescription.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtDescription.Location = new System.Drawing.Point(88, 276);
+            this.txtDescription.Location = new System.Drawing.Point(88, 301);
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(528, 40);
@@ -462,7 +478,7 @@
             // 
             this.labelX5.BackgroundStyle.Class = "";
             this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX5.Location = new System.Drawing.Point(18, 276);
+            this.labelX5.Location = new System.Drawing.Point(18, 301);
             this.labelX5.Name = "labelX5";
             this.labelX5.Size = new System.Drawing.Size(68, 16);
             this.labelX5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -801,17 +817,35 @@
             this.columnHeader11.Text = "4";
             this.columnHeader11.Width.Absolute = 150;
             // 
-            // btnClearTraffic
+            // labelX11
             // 
-            this.btnClearTraffic.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnClearTraffic.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnClearTraffic.Location = new System.Drawing.Point(369, 237);
-            this.btnClearTraffic.Name = "btnClearTraffic";
-            this.btnClearTraffic.Size = new System.Drawing.Size(78, 23);
-            this.btnClearTraffic.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnClearTraffic.TabIndex = 30;
-            this.btnClearTraffic.Text = "清除（&D）";
-            this.btnClearTraffic.Click += new System.EventHandler(this.btnClearTraffic_Click);
+            this.labelX11.AutoSize = true;
+            this.labelX11.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX11.BackgroundStyle.Class = "";
+            this.labelX11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX11.Location = new System.Drawing.Point(18, 193);
+            this.labelX11.Name = "labelX11";
+            this.labelX11.Size = new System.Drawing.Size(68, 16);
+            this.labelX11.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX11.TabIndex = 6;
+            this.labelX11.Text = "重复登录：";
+            // 
+            // chkAllowRepeat
+            // 
+            // 
+            // 
+            // 
+            this.chkAllowRepeat.BackgroundStyle.Class = "";
+            this.chkAllowRepeat.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkAllowRepeat.Location = new System.Drawing.Point(88, 188);
+            this.chkAllowRepeat.Name = "chkAllowRepeat";
+            this.chkAllowRepeat.Size = new System.Drawing.Size(58, 23);
+            this.chkAllowRepeat.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkAllowRepeat.TabIndex = 7;
+            this.chkAllowRepeat.Text = "是/否";
             // 
             // ASyncSession
             // 
@@ -895,6 +929,8 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private DevComponents.DotNetBar.ButtonX btnSingleSave;
         private DevComponents.DotNetBar.ButtonX btnClearTraffic;
+        private DevComponents.DotNetBar.Controls.CheckBoxX chkAllowRepeat;
+        private DevComponents.DotNetBar.LabelX labelX11;
 
     }
 }
