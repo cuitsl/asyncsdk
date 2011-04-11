@@ -17,8 +17,7 @@ using eTerm.ASynClientSDK.Utils;
 namespace AsyncAPI3._0Tst {
     class Program {
         static void Main(string[] args) {
-            AVCommand Av = new AVCommand();
-            AVResult Result= Av.getAvailability("CSX", "CTU", new DateTime(2011, 04, 28)) as AVResult;
+            RTResult Result = new RTCommand().retrieve(@"JNV1R5") as RTResult;
             Console.ReadLine();
 
         }
