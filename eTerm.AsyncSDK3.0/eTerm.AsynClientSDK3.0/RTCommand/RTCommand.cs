@@ -123,8 +123,8 @@ namespace eTerm.ASynClientSDK {
                 PNRAirSegResult seg = new PNRAirSegResult();
                 seg.getActionCode = m.Groups[6].Value;
                 seg.getAirNo = m.Groups[1].Value;
-                seg.getArrivalTime = string.Format(@"{0} {1}", m.Groups[3].Value, m.Groups[8].Value);
-                seg.getDepartureTime = string.Format(@"{0} {1}", m.Groups[3].Value, m.Groups[7].Value);
+                seg.getArrivalTime = string.Format(@"{0} {1}", m.Groups[3].Value, m.Groups[8].Value.Insert(2,":"));
+                seg.getDepartureTime = string.Format(@"{0} {1}", m.Groups[3].Value, m.Groups[7].Value.Insert(2, ":"));
                 seg.getDesCity = m.Groups[5].Value;
                 seg.getFltClass = m.Groups[2].Value;
                 seg.getOrgCity = m.Groups[4].Value;
