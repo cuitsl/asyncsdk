@@ -87,7 +87,9 @@ namespace eTerm.ASynClientSDK {
         /// <returns>pnr信息解析存储,若对应pnr编号无相应信息或已经删除则返回null</returns>
         public ASyncResult retrieve(string pnrno) {
             __pnr = pnrno;
-            return base.GetSyncResult(string.Format(@"RT:{0}", pnrno));
+            RTResult Result=base.GetSyncResult(string.Format(@"RT:{0}", pnrno)) as RTResult;
+            Result.PnrCode = pnrno;
+            return Result;
         }
         #endregion
 
