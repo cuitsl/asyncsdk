@@ -16,6 +16,12 @@ namespace eTerm.ASynClientSDK {
         public List<PNRAirSegResult> getAirSegs { get; set; }
 
         /// <summary>
+        /// 记录编号.
+        /// </summary>
+        /// <value>The PNR code.</value>
+        public string PnrCode { get; set; }
+
+        /// <summary>
         /// 获取所有联系组 .
         /// </summary>
         /// <value>The get contacts.</value>
