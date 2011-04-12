@@ -38,7 +38,7 @@ namespace ASync.WorkFlow {
         /// <value>The description.</value>
         public override string Description {
             get {
-                return "主机日期获取";
+                return "创建工作流程实例";
             }
         }
     }
