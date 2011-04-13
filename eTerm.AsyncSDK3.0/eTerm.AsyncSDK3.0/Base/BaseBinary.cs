@@ -56,11 +56,13 @@ namespace eTerm.AsyncSDK.Base {
         /// <returns></returns>
         public byte[] XmlSerialize(byte[] Keys, string pathInfo) {
             lock (this) {
-                byte[] buffer = XmlSerialize(Keys);
                 //if (File.Exists(pathInfo))
                 //    File.Delete(pathInfo);
-                using (FileStream fs = new FileStream(pathInfo, FileMode.CreateNew)) {
+                byte[] buffer = XmlSerialize(Keys);
+
+                using (FileStream fs = new FileStream(pathInfo, FileMode.OpenOrCreate)) {
                     fs.SetLength(0);
+                    fs.Flush();
                     BinaryWriter bw = new BinaryWriter(fs, Encoding.UTF8);
 
                     bw.Write(buffer);
