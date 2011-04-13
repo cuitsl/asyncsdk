@@ -576,7 +576,6 @@ namespace eTerm.AsyncSDK {
                             ,0xC0,0xE0,0xD0,0xCD,0xA3,0xA1,0x00 
                 } }));
                 */
-                ValidateMessage = string.Format(@"登录成功,欢迎使用 {0} 共享终端.",LicenceManager.Instance.LicenceBody.Company);
                 TSessionSetup TSession=ASyncSetup.SessionCollection.SingleOrDefault<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
                 if (TSession == null) { ValidateMessage = string.Format(@"{0} 登录帐号或密码错误", s.userName); return false; }
                 //TSessionSetup TSession = AsyncStackNet.Instance.ASyncSetup.SessionCollection.Single<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
@@ -586,7 +585,7 @@ namespace eTerm.AsyncSDK {
                 s.UnallowableReg = TSession.ForbidCmdReg;
                 s.SpecialIntervalList = TSession.SpecialIntervalList;
                 s.userGroup = TSession.GroupCode;
-
+                ValidateMessage = string.Format(@"欢迎使用 {0} 共享终端,指令时限为:{1}秒.", LicenceManager.Instance.LicenceBody.Company, s.TSessionInterval);
                 string currentMonth = string.Format(@"{0}", DateTime.Now.ToString(@"yyyyMM"));
                 if (!TSession.Traffics.Contains(new SocketTraffic(currentMonth)))
                     TSession.Traffics.Add(new SocketTraffic() { MonthString = currentMonth, Traffic = 0.0, UpdateDate = DateTime.Now });
