@@ -55,18 +55,20 @@ namespace eTerm.AsyncSDK.Base {
         /// <param name="pathInfo">The path info.</param>
         /// <returns></returns>
         public byte[] XmlSerialize(byte[] Keys, string pathInfo) {
-            byte[] buffer = XmlSerialize(Keys);
-            //if (File.Exists(pathInfo))
-            //    File.Delete(pathInfo);
-            using (FileStream fs = new FileStream(pathInfo, FileMode.CreateNew)) {
-                fs.SetLength(0);
-                BinaryWriter bw = new BinaryWriter(fs,Encoding.UTF8);
-                
-                bw.Write(buffer);
-                bw.Flush();
-                bw.Close();
+            lock (this) {
+                byte[] buffer = XmlSerialize(Keys);
+                //if (File.Exists(pathInfo))
+                //    File.Delete(pathInfo);
+                using (FileStream fs = new FileStream(pathInfo, FileMode.CreateNew)) {
+                    fs.SetLength(0);
+                    BinaryWriter bw = new BinaryWriter(fs, Encoding.UTF8);
+
+                    bw.Write(buffer);
+                    bw.Flush();
+                    bw.Close();
+                }
+                return buffer;
             }
-            return buffer;
         }
 
         /// <summary>
