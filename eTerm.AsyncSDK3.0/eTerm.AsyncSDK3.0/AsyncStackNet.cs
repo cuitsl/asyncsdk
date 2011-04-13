@@ -585,7 +585,7 @@ namespace eTerm.AsyncSDK {
                 s.UnallowableReg = TSession.ForbidCmdReg;
                 s.SpecialIntervalList = TSession.SpecialIntervalList;
                 s.userGroup = TSession.GroupCode;
-                ValidateMessage = string.Format(@"欢迎使用 {0} 共享终端,指令时限为:{1}秒.", LicenceManager.Instance.LicenceBody.Company, s.TSessionInterval);
+                ValidateMessage = string.Format(@"欢迎使用 {0} 共享终端,时限:{1}秒 {2}.", LicenceManager.Instance.LicenceBody.Company, s.TSessionInterval,DateTime.Now.ToString(@"yyyy-MM-dd HH:mm:ss"));
                 string currentMonth = string.Format(@"{0}", DateTime.Now.ToString(@"yyyyMM"));
                 if (!TSession.Traffics.Contains(new SocketTraffic(currentMonth)))
                     TSession.Traffics.Add(new SocketTraffic() { MonthString = currentMonth, Traffic = 0.0, UpdateDate = DateTime.Now });
