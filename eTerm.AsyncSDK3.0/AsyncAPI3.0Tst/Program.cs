@@ -10,14 +10,21 @@ using System.Threading;
 using System.Text.RegularExpressions;
 using System.Runtime.Remoting.Contexts;
 using System.Transactions;
-using eTerm.ASynClientSDK.Utils;
+
+using eTerm.AsyncSDK;
+using eTerm.AsyncSDK.Util;
 
 
 
 namespace AsyncAPI3._0Tst {
     class Program {
         static void Main(string[] args) {
-            RTResult Result = new RTCommand().retrieve(@"JNV1R5") as RTResult;
+            using (FileStream fs = new FileStream(@"C:\Setup.Bin", FileMode.Open)) {
+                byte[] buffer = new byte[fs.Length];
+                BinaryReader br = new BinaryReader(fs, Encoding.GetEncoding(@"utf-8"));
+                br.Read(buffer, 0, buffer.Length);
+                SystemSetup setup= new SystemSetup().DeXmlSerialize(TEACrypter.GetDefaultKey, buffer);
+            }
             Console.ReadLine();
 
         }
