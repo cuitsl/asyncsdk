@@ -22,16 +22,18 @@ namespace eTerm.AsyncSDK.Base {
         /// <param name="pObj">需要序列化的对象</param>
         /// <returns>byte[]</returns>
         public byte[] SerializeObject(T pObj) {
-            if (pObj == null)
-                return null;
-            System.IO.MemoryStream _memory = new System.IO.MemoryStream();
-            BinaryFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(_memory, pObj);
-            _memory.Position = 0;
-            byte[] read = new byte[_memory.Length];
-            _memory.Read(read, 0, read.Length);
-            _memory.Close();
-            return read;
+            lock (this) {
+                if (pObj == null)
+                    return null;
+                System.IO.MemoryStream _memory = new System.IO.MemoryStream();
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(_memory, pObj);
+                _memory.Position = 0;
+                byte[] read = new byte[_memory.Length];
+                _memory.Read(read, 0, read.Length);
+                _memory.Close();
+                return read;
+            }
         }
 
         /// <summary>
@@ -40,12 +42,14 @@ namespace eTerm.AsyncSDK.Base {
         /// <param name="Keys">密钥.</param>
         /// <returns></returns>
         public byte[] XmlSerialize(byte[] Keys) {
-            StringBuilder sb = new StringBuilder(1024);
-            StringWriter sw = new StringWriter(sb);
-            XmlSerializer serializer = new XmlSerializer(this.GetType());
-            serializer.Serialize(sw, this);
-            //return sb.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n", string.Empty).Replace(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"", string.Empty).Replace(" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"", string.Empty).ToString();
-            return Keys==null||Keys.Length==0?Encoding.UTF8.GetBytes(sb.ToString()): new TEACrypter().Encrypt(Encoding.UTF8.GetBytes(sb.ToString()), Keys);
+            lock (this) {
+                StringBuilder sb = new StringBuilder(1024);
+                StringWriter sw = new StringWriter(sb);
+                XmlSerializer serializer = new XmlSerializer(this.GetType());
+                serializer.Serialize(sw, this);
+                //return sb.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n", string.Empty).Replace(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"", string.Empty).Replace(" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"", string.Empty).ToString();
+                return Keys == null || Keys.Length == 0 ? Encoding.UTF8.GetBytes(sb.ToString()) : new TEACrypter().Encrypt(Encoding.UTF8.GetBytes(sb.ToString()), Keys);
+            }
         }
 
         /// <summary>
@@ -55,16 +59,18 @@ namespace eTerm.AsyncSDK.Base {
         /// <param name="pathInfo">The path info.</param>
         /// <returns></returns>
         public byte[] XmlSerialize(byte[] Keys, string pathInfo) {
-            byte[] buffer = XmlSerialize(Keys);
-            if (File.Exists(pathInfo))
-                File.Delete(pathInfo);
-            using (FileStream fs = new FileStream(pathInfo, FileMode.CreateNew)) {
-                BinaryWriter bw = new BinaryWriter(fs,Encoding.UTF8);
-                bw.Write(buffer);
-                bw.Flush();
-                bw.Close();
+            lock (this) {
+                byte[] buffer = XmlSerialize(Keys);
+                if (File.Exists(pathInfo))
+                    File.Delete(pathInfo);
+                using (FileStream fs = new FileStream(pathInfo, FileMode.CreateNew)) {
+                    BinaryWriter bw = new BinaryWriter(fs, Encoding.UTF8);
+                    bw.Write(buffer);
+                    bw.Flush();
+                    bw.Close();
+                }
+                return buffer;
             }
-            return buffer;
         }
 
         /// <summary>
@@ -74,20 +80,22 @@ namespace eTerm.AsyncSDK.Base {
         /// <param name="Buffer">The buffer.</param>
         /// <returns></returns>
         public T DeXmlSerialize(byte[] Keys, byte[] Buffer) {
-            StreamReader sr = null;
-            try {
-                using (MemoryStream ms = new MemoryStream(Keys==null||Keys.Length==0?Buffer: new TEACrypter().Decrypt( Buffer,Keys))) {
-                    sr = new StreamReader(ms);
-                    XmlSerializer serializer = new XmlSerializer(typeof(T));
-                    object obj = serializer.Deserialize(sr);
-                    sr.Close();
-                    return (T)obj;
+            lock (this) {
+                StreamReader sr = null;
+                try {
+                    using (MemoryStream ms = new MemoryStream(Keys == null || Keys.Length == 0 ? Buffer : new TEACrypter().Decrypt(Buffer, Keys))) {
+                        sr = new StreamReader(ms);
+                        XmlSerializer serializer = new XmlSerializer(typeof(T));
+                        object obj = serializer.Deserialize(sr);
+                        sr.Close();
+                        return (T)obj;
+                    }
                 }
-            }
-            finally {
-                if (sr != null)
-                    try { sr.Close(); }
-                    catch (Exception) { }
+                finally {
+                    if (sr != null)
+                        try { sr.Close(); }
+                        catch (Exception) { }
+                }
             }
         }
 
@@ -96,11 +104,13 @@ namespace eTerm.AsyncSDK.Base {
         /// </summary>
         /// <param name="FilePath">The file path.</param>
         public void SerializeToFile(string FilePath) {
-            using (FileStream fs = new FileStream(FilePath, FileMode.OpenOrCreate)) {
-                BinaryWriter bw = new BinaryWriter(fs);
-                bw.Write(SerializeObject(this as T));
-                bw.Flush();
-                bw.Close();
+            lock (this) {
+                using (FileStream fs = new FileStream(FilePath, FileMode.OpenOrCreate)) {
+                    BinaryWriter bw = new BinaryWriter(fs);
+                    bw.Write(SerializeObject(this as T));
+                    bw.Flush();
+                    bw.Close();
+                }
             }
         }
 
@@ -110,11 +120,13 @@ namespace eTerm.AsyncSDK.Base {
         /// <param name="FilePath">The file path.</param>
         /// <param name="Keys">The keys.</param>
         public void SerializeToFile(string FilePath, byte[] Keys) {
-            using (FileStream fs = new FileStream(FilePath, FileMode.OpenOrCreate)) {
-                BinaryWriter bw = new BinaryWriter(fs);
-                bw.Write(new TEACrypter().Encrypt(SerializeObject(this as T),Keys));
-                bw.Flush();
-                bw.Close();
+            lock (this) {
+                using (FileStream fs = new FileStream(FilePath, FileMode.OpenOrCreate)) {
+                    BinaryWriter bw = new BinaryWriter(fs);
+                    bw.Write(new TEACrypter().Encrypt(SerializeObject(this as T), Keys));
+                    bw.Flush();
+                    bw.Close();
+                }
             }
         }
 
@@ -124,15 +136,17 @@ namespace eTerm.AsyncSDK.Base {
         /// <param name="pBytes">字节流</param>
         /// <returns>object</returns>
         public T DeserializeObject(byte[] pBytes) {
-            object _newOjb = null;
-            if (pBytes == null)
-                return null;
-            using (System.IO.MemoryStream _memory = new System.IO.MemoryStream(pBytes)) {
-                _memory.Position = 0;
-                BinaryFormatter formatter = new BinaryFormatter();
-                _newOjb = formatter.Deserialize(_memory);
+            lock (this) {
+                object _newOjb = null;
+                if (pBytes == null)
+                    return null;
+                using (System.IO.MemoryStream _memory = new System.IO.MemoryStream(pBytes)) {
+                    _memory.Position = 0;
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    _newOjb = formatter.Deserialize(_memory);
+                }
+                return (T)_newOjb;
             }
-            return (T)_newOjb;
         }
 
         /// <summary>
@@ -142,13 +156,15 @@ namespace eTerm.AsyncSDK.Base {
         /// <param name="Keys">The keys.</param>
         /// <returns></returns>
         public T DeserializeObject(byte[] pBytes,byte[] Keys) {
-            T o = new T();
-            using (MemoryStream ms = new MemoryStream(pBytes)) {
-                ms.Position = 0;
-                BinaryFormatter formatter = new BinaryFormatter();
-                o=(T) formatter.Deserialize(ms);
+            lock (this) {
+                T o = new T();
+                using (MemoryStream ms = new MemoryStream(pBytes)) {
+                    ms.Position = 0;
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    o = (T)formatter.Deserialize(ms);
+                }
+                return o;
             }
-            return o;
         }
 
         /// <summary>
@@ -158,12 +174,14 @@ namespace eTerm.AsyncSDK.Base {
         /// <param name="Keys">The keys.</param>
         /// <returns></returns>
         public T DeserializeObject(string filePath, byte[] Keys) {
-            using (FileStream fs = new FileStream(filePath, FileMode.Open)) {
-                BinaryReader br = new BinaryReader(fs);
-                byte[] buffer = new byte[fs.Length];
-                br.Read(buffer, 0, buffer.Length);
-                br.Close();
-                return DeserializeObject(new TEACrypter().Decrypt( buffer, Keys));
+            lock (this) {
+                using (FileStream fs = new FileStream(filePath, FileMode.Open)) {
+                    BinaryReader br = new BinaryReader(fs);
+                    byte[] buffer = new byte[fs.Length];
+                    br.Read(buffer, 0, buffer.Length);
+                    br.Close();
+                    return DeserializeObject(new TEACrypter().Decrypt(buffer, Keys));
+                }
             }
         }
     }
