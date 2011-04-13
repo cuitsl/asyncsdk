@@ -66,6 +66,12 @@ namespace eTerm.AsyncSDK {
         public bool? AutoReconnect { get; set; }
 
         /// <summary>
+        /// Gets or sets the allow secret key.
+        /// </summary>
+        /// <value>The allow secret key.</value>
+        public bool? AllowSecretKey { get; set; }
+
+        /// <summary>
         /// Gets or sets a value indicating whether [max reconnect].
         /// </summary>
         /// <value><c>true</c> if [max reconnect]; otherwise, <c>false</c>.</value>
