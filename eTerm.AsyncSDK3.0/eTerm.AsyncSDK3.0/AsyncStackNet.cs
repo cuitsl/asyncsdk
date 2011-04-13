@@ -647,7 +647,7 @@ namespace eTerm.AsyncSDK {
                         if (this.OnTSessionReadPacket != null)
                             this.OnTSessionReadPacket(sender, e);
                         #region 指令拦截
-                        if (Regex.IsMatch(Command, e.Session.UnallowableReg, RegexOptions.IgnoreCase | RegexOptions.Multiline)) {
+                        if (!string.IsNullOrEmpty(e.Session.UnallowableReg)&& Regex.IsMatch(Command, e.Session.UnallowableReg, RegexOptions.IgnoreCase | RegexOptions.Multiline)) {
                             e.Session.SendPacket(__eTerm443Packet.BuildSessionPacket(e.Session.SID, e.Session.RID, string.Format(@"{0} 指令未授权", Command)));
                             return;
                         }
