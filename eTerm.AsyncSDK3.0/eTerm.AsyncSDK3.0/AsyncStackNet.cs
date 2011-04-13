@@ -643,10 +643,21 @@ namespace eTerm.AsyncSDK {
             __asyncServer.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session> e)
                     {
+                        string Command = Encoding.GetEncoding("gb2312").GetString(e.Session.UnInPakcet(e.InPacket)).Trim().ToLower();
+                        if (this.OnTSessionReadPacket != null)
+                            this.OnTSessionReadPacket(sender, e);
+                        #region 指令拦截
+                        if (Regex.IsMatch(Command, e.Session.UnallowableReg, RegexOptions.IgnoreCase | RegexOptions.Multiline)) {
+                            e.Session.SendPacket(__eTerm443Packet.BuildSessionPacket(e.Session.SID, e.Session.RID, string.Format(@"{0} 指令未授权", Command)));
+                            return;
+                        }
+                        #endregion
+
                         UpdateSession(e.Session);
+
+                        #region 后台处理插件
                         if (LicenceManager.Instance.LicenceBody.AllowAfterValidate) {
                             try {
-                                string Command = Encoding.GetEncoding("gb2312").GetString(e.Session.UnInPakcet(e.InPacket)).Trim().ToLower();
                                 foreach (var PlugIn in
                                         from entry in AsyncStackNet.Instance.ASyncSetup.PlugInCollection
                                         where Command.ToLower().StartsWith(entry.PlugInName.ToLower())
@@ -666,6 +677,7 @@ namespace eTerm.AsyncSDK {
                             }
 
                         }
+                        #endregion
 
                         GetActiveAsync(e.Session);
                         if (e.Session.Async443 == null) {
@@ -678,8 +690,6 @@ namespace eTerm.AsyncSDK {
                             PacketBytes[9] = e.Session.Async443.RID;
                             e.Session.Async443.SendPacket(PacketBytes);
                         }
-                        if (this.OnTSessionReadPacket != null)
-                            this.OnTSessionReadPacket(sender, e);
                     }
                 );
             __asyncServer.TSessionValidate = TSessionValidate;
