@@ -170,6 +170,12 @@ namespace eTerm.AsyncSDK.Base {
                 OnAsynConnect(this, new AsyncEventArgs<T>(this as T));
         }
 
+        /// <summary>
+        /// 本地地址绑定.
+        /// </summary>
+        /// <value>The local EP.</value>
+        public EndPoint LocalEP {protected get; set; }
+
 
         /// <summary>
         /// Connects the specified host.
@@ -208,6 +214,8 @@ namespace eTerm.AsyncSDK.Base {
             try {
                 //AsyncSocket.Connect(this.RemoteEP);
                 ReconnectCount++;
+                //if (LocalEP != null)
+                //    AsyncSocket.Bind(
                 AsyncSocket.BeginConnect(this.RemoteEP, new AsyncCallback(delegate(IAsyncResult iar) {
                     try {
                         Socket clientSocket = (Socket)iar.AsyncState;
