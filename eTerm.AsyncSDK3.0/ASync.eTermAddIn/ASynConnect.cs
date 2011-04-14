@@ -33,6 +33,7 @@ namespace ASync.eTermAddIn {
                                 Setup.SiText,
                                 Setup.OfficeCode,
                                 group==null?"未分组":group.groupName,
+                                (Setup.TSessionType??CertificationType.Address)== CertificationType.Address?@"地址认证":@"用户认证"
                             });
                             Item.Name = Setup.userName;
                             Item.Tag = Setup;
