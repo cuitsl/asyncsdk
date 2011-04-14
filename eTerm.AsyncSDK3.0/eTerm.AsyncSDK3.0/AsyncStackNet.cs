@@ -288,7 +288,7 @@ namespace eTerm.AsyncSDK {
             foreach (ConnectSetup T in ASyncSetup.AsynCollection) {
                 if (!T.IsOpen) continue;
                 AppendAsync(
-                    new eTerm443Async(T.Address, T.Port, T.userName, T.userPass, (byte)T.SID, (byte)T.RID) { /*LocalEP=new*/  SiText = T.SiText, IsSsl = T.IsSsl, OfficeCode = T.OfficeCode, GroupCode = T.GroupCode, AutoSi=T.AutoSi??false });
+                    new eTerm443Async(T.Address, T.Port, T.userName, T.userPass, (byte)T.SID, (byte)T.RID) { LocalEP= (T.TSessionType??CertificationType.Address)== CertificationType.Address?new IPEndPoint(IPAddress.Parse(T.LocalIp),0):null,  SiText = T.SiText, IsSsl = T.IsSsl, OfficeCode = T.OfficeCode, GroupCode = T.GroupCode, AutoSi=T.AutoSi??false });
             }
         }
         #endregion
