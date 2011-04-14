@@ -106,6 +106,12 @@ namespace eTerm.AsyncSDK {
         public CertificationType? TSessionType { get; set; }
 
         /// <summary>
+        /// 地址认证本地绑定IP.
+        /// </summary>
+        /// <value>The local EP.</value>
+        public string LocalIp { get; set; }
+
+        /// <summary>
         /// Gets or sets the port.
         /// </summary>
         /// <value>The port.</value>
