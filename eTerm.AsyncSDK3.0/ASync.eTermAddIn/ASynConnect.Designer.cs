@@ -26,6 +26,7 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new DevComponents.DotNetBar.TabControl();
             this.PanelSession = new DevComponents.DotNetBar.TabControlPanel();
+            this.btnClearTraffic = new DevComponents.DotNetBar.ButtonX();
             this.labelX13 = new DevComponents.DotNetBar.LabelX();
             this.labelX12 = new DevComponents.DotNetBar.LabelX();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -75,7 +76,12 @@
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
-            this.btnClearTraffic = new DevComponents.DotNetBar.ButtonX();
+            this.labelX14 = new DevComponents.DotNetBar.LabelX();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.radPassword = new System.Windows.Forms.RadioButton();
+            this.radAddress = new System.Windows.Forms.RadioButton();
+            this.labelX15 = new DevComponents.DotNetBar.LabelX();
+            this.ipLocalIp = new DevComponents.Editors.IpAddressInput();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.PanelSession.SuspendLayout();
@@ -87,6 +93,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).BeginInit();
             this.tabControlPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ipLocalIp)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -99,7 +107,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedTabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.tabControl1.SelectedTabIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(690, 458);
+            this.tabControl1.Size = new System.Drawing.Size(699, 520);
             this.tabControl1.Style = DevComponents.DotNetBar.eTabStripStyle.Office2007Document;
             this.tabControl1.TabIndex = 1;
             this.tabControl1.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
@@ -110,6 +118,10 @@
             // PanelSession
             // 
             this.PanelSession.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.PanelSession.Controls.Add(this.ipLocalIp);
+            this.PanelSession.Controls.Add(this.labelX15);
+            this.PanelSession.Controls.Add(this.panel1);
+            this.PanelSession.Controls.Add(this.labelX14);
             this.PanelSession.Controls.Add(this.btnClearTraffic);
             this.PanelSession.Controls.Add(this.labelX13);
             this.PanelSession.Controls.Add(this.labelX12);
@@ -144,7 +156,7 @@
             this.PanelSession.Location = new System.Drawing.Point(0, 23);
             this.PanelSession.Name = "PanelSession";
             this.PanelSession.Padding = new System.Windows.Forms.Padding(1);
-            this.PanelSession.Size = new System.Drawing.Size(690, 435);
+            this.PanelSession.Size = new System.Drawing.Size(699, 497);
             this.PanelSession.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(254)))));
             this.PanelSession.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(188)))), ((int)(((byte)(227)))));
             this.PanelSession.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -155,6 +167,18 @@
             this.PanelSession.TabIndex = 2;
             this.PanelSession.TabItem = this.tabItem2;
             // 
+            // btnClearTraffic
+            // 
+            this.btnClearTraffic.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnClearTraffic.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnClearTraffic.Location = new System.Drawing.Point(378, 237);
+            this.btnClearTraffic.Name = "btnClearTraffic";
+            this.btnClearTraffic.Size = new System.Drawing.Size(78, 23);
+            this.btnClearTraffic.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnClearTraffic.TabIndex = 29;
+            this.btnClearTraffic.Text = "清除（&D）";
+            this.btnClearTraffic.Click += new System.EventHandler(this.btnClearTraffic_Click);
+            // 
             // labelX13
             // 
             this.labelX13.AutoSize = true;
@@ -164,7 +188,7 @@
             // 
             this.labelX13.BackgroundStyle.Class = "";
             this.labelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX13.Location = new System.Drawing.Point(378, 186);
+            this.labelX13.Location = new System.Drawing.Point(378, 170);
             this.labelX13.Name = "labelX13";
             this.labelX13.Size = new System.Drawing.Size(56, 16);
             this.labelX13.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -180,7 +204,7 @@
             // 
             this.labelX12.BackgroundStyle.Class = "";
             this.labelX12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX12.Location = new System.Drawing.Point(380, 150);
+            this.labelX12.Location = new System.Drawing.Point(380, 134);
             this.labelX12.Name = "labelX12";
             this.labelX12.Size = new System.Drawing.Size(54, 16);
             this.labelX12.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -193,16 +217,16 @@
             this.flowLayoutPanel1.Controls.Add(this.btnSingleSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(1, 389);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(1, 451);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(688, 45);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(697, 45);
             this.flowLayoutPanel1.TabIndex = 27;
             // 
             // btnSingleSave
             // 
             this.btnSingleSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSingleSave.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnSingleSave.Location = new System.Drawing.Point(592, 3);
+            this.btnSingleSave.Location = new System.Drawing.Point(601, 3);
             this.btnSingleSave.Name = "btnSingleSave";
             this.btnSingleSave.Size = new System.Drawing.Size(93, 23);
             this.btnSingleSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -219,7 +243,7 @@
             this.comboTree1.BackgroundStyle.Class = "TextBoxBorder";
             this.comboTree1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.comboTree1.ButtonDropDown.Visible = true;
-            this.comboTree1.Location = new System.Drawing.Point(96, 253);
+            this.comboTree1.Location = new System.Drawing.Point(96, 237);
             this.comboTree1.Name = "comboTree1";
             this.comboTree1.Size = new System.Drawing.Size(276, 23);
             this.comboTree1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -234,7 +258,7 @@
             // 
             this.labelX11.BackgroundStyle.Class = "";
             this.labelX11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX11.Location = new System.Drawing.Point(28, 253);
+            this.labelX11.Location = new System.Drawing.Point(28, 237);
             this.labelX11.Name = "labelX11";
             this.labelX11.Size = new System.Drawing.Size(68, 16);
             this.labelX11.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -247,7 +271,7 @@
             this.comboBoxEx1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBoxEx1.FormattingEnabled = true;
             this.comboBoxEx1.ItemHeight = 14;
-            this.comboBoxEx1.Location = new System.Drawing.Point(96, 225);
+            this.comboBoxEx1.Location = new System.Drawing.Point(96, 209);
             this.comboBoxEx1.Name = "comboBoxEx1";
             this.comboBoxEx1.Size = new System.Drawing.Size(121, 20);
             this.comboBoxEx1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -262,7 +286,7 @@
             // 
             this.labelX7.BackgroundStyle.Class = "";
             this.labelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX7.Location = new System.Drawing.Point(27, 225);
+            this.labelX7.Location = new System.Drawing.Point(27, 209);
             this.labelX7.Name = "labelX7";
             this.labelX7.Size = new System.Drawing.Size(68, 16);
             this.labelX7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -276,7 +300,7 @@
             // 
             this.txtOfficeCode.Border.Class = "TextBoxBorder";
             this.txtOfficeCode.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtOfficeCode.Location = new System.Drawing.Point(96, 186);
+            this.txtOfficeCode.Location = new System.Drawing.Point(96, 170);
             this.txtOfficeCode.MaxLength = 16;
             this.txtOfficeCode.Name = "txtOfficeCode";
             this.txtOfficeCode.Size = new System.Drawing.Size(142, 20);
@@ -291,7 +315,7 @@
             // 
             this.labelX6.BackgroundStyle.Class = "";
             this.labelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX6.Location = new System.Drawing.Point(20, 186);
+            this.labelX6.Location = new System.Drawing.Point(20, 170);
             this.labelX6.Name = "labelX6";
             this.labelX6.Size = new System.Drawing.Size(75, 16);
             this.labelX6.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -308,9 +332,9 @@
             this.txtAddress.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtAddress.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
             this.txtAddress.ButtonFreeText.Visible = true;
-            this.txtAddress.Location = new System.Drawing.Point(96, 95);
+            this.txtAddress.Location = new System.Drawing.Point(96, 79);
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(137, 20);
+            this.txtAddress.Size = new System.Drawing.Size(142, 20);
             this.txtAddress.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.txtAddress.TabIndex = 20;
             // 
@@ -322,7 +346,7 @@
             // 
             this.chkIsSsl.BackgroundStyle.Class = "";
             this.chkIsSsl.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkIsSsl.Location = new System.Drawing.Point(96, 120);
+            this.chkIsSsl.Location = new System.Drawing.Point(96, 104);
             this.chkIsSsl.Name = "chkIsSsl";
             this.chkIsSsl.Size = new System.Drawing.Size(58, 23);
             this.chkIsSsl.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -338,7 +362,7 @@
             // 
             this.labelX10.BackgroundStyle.Class = "";
             this.labelX10.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX10.Location = new System.Drawing.Point(239, 153);
+            this.labelX10.Location = new System.Drawing.Point(239, 137);
             this.labelX10.Name = "labelX10";
             this.labelX10.Size = new System.Drawing.Size(38, 16);
             this.labelX10.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -354,7 +378,7 @@
             // 
             this.labelX9.BackgroundStyle.Class = "";
             this.labelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX9.Location = new System.Drawing.Point(239, 127);
+            this.labelX9.Location = new System.Drawing.Point(239, 111);
             this.labelX9.Name = "labelX9";
             this.labelX9.Size = new System.Drawing.Size(38, 16);
             this.labelX9.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -370,7 +394,7 @@
             // 
             this.labelX8.BackgroundStyle.Class = "";
             this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX8.Location = new System.Drawing.Point(27, 123);
+            this.labelX8.Location = new System.Drawing.Point(27, 107);
             this.labelX8.Name = "labelX8";
             this.labelX8.Size = new System.Drawing.Size(68, 16);
             this.labelX8.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -384,7 +408,7 @@
             // 
             this.txtSIText.Border.Class = "TextBoxBorder";
             this.txtSIText.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtSIText.Location = new System.Drawing.Point(96, 287);
+            this.txtSIText.Location = new System.Drawing.Point(96, 271);
             this.txtSIText.Multiline = true;
             this.txtSIText.Name = "txtSIText";
             this.txtSIText.Size = new System.Drawing.Size(492, 79);
@@ -400,7 +424,7 @@
             // 
             this.labelX5.BackgroundStyle.Class = "";
             this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX5.Location = new System.Drawing.Point(65, 287);
+            this.labelX5.Location = new System.Drawing.Point(65, 271);
             this.labelX5.Name = "labelX5";
             this.labelX5.Size = new System.Drawing.Size(29, 16);
             this.labelX5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -415,7 +439,7 @@
             // 
             this.chkAutoSi.BackgroundStyle.Class = "";
             this.chkAutoSi.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkAutoSi.Location = new System.Drawing.Point(440, 150);
+            this.chkAutoSi.Location = new System.Drawing.Point(440, 134);
             this.chkAutoSi.Name = "chkAutoSi";
             this.chkAutoSi.Size = new System.Drawing.Size(58, 23);
             this.chkAutoSi.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -430,7 +454,7 @@
             // 
             this.chkIsOpen.BackgroundStyle.Class = "";
             this.chkIsOpen.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkIsOpen.Location = new System.Drawing.Point(96, 150);
+            this.chkIsOpen.Location = new System.Drawing.Point(96, 134);
             this.chkIsOpen.Name = "chkIsOpen";
             this.chkIsOpen.Size = new System.Drawing.Size(58, 23);
             this.chkIsOpen.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -446,7 +470,7 @@
             // 
             this.labelX4.BackgroundStyle.Class = "";
             this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX4.Location = new System.Drawing.Point(27, 153);
+            this.labelX4.Location = new System.Drawing.Point(27, 137);
             this.labelX4.Name = "labelX4";
             this.labelX4.Size = new System.Drawing.Size(68, 16);
             this.labelX4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -461,14 +485,13 @@
             this.integerInput3.BackgroundStyle.Class = "DateTimeInputBackground";
             this.integerInput3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.integerInput3.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.integerInput3.Location = new System.Drawing.Point(283, 153);
+            this.integerInput3.Location = new System.Drawing.Point(283, 137);
             this.integerInput3.MaxValue = 100000;
             this.integerInput3.MinValue = 0;
             this.integerInput3.Name = "integerInput3";
             this.integerInput3.ShowUpDown = true;
             this.integerInput3.Size = new System.Drawing.Size(49, 20);
             this.integerInput3.TabIndex = 5;
-            this.integerInput3.Value = 100;
             // 
             // integerInput2
             // 
@@ -478,7 +501,7 @@
             this.integerInput2.BackgroundStyle.Class = "DateTimeInputBackground";
             this.integerInput2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.integerInput2.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.integerInput2.Location = new System.Drawing.Point(438, 186);
+            this.integerInput2.Location = new System.Drawing.Point(438, 170);
             this.integerInput2.MaxValue = 100000;
             this.integerInput2.MinValue = 0;
             this.integerInput2.Name = "integerInput2";
@@ -495,14 +518,13 @@
             this.integerInput1.BackgroundStyle.Class = "DateTimeInputBackground";
             this.integerInput1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.integerInput1.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.integerInput1.Location = new System.Drawing.Point(283, 126);
+            this.integerInput1.Location = new System.Drawing.Point(283, 110);
             this.integerInput1.MaxValue = 10000;
             this.integerInput1.MinValue = 0;
             this.integerInput1.Name = "integerInput1";
             this.integerInput1.ShowUpDown = true;
             this.integerInput1.Size = new System.Drawing.Size(49, 20);
             this.integerInput1.TabIndex = 5;
-            this.integerInput1.Value = 81;
             // 
             // txtPort
             // 
@@ -512,7 +534,7 @@
             this.txtPort.BackgroundStyle.Class = "DateTimeInputBackground";
             this.txtPort.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtPort.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.txtPort.Location = new System.Drawing.Point(239, 94);
+            this.txtPort.Location = new System.Drawing.Point(260, 79);
             this.txtPort.MaxValue = 10000;
             this.txtPort.MinValue = 2;
             this.txtPort.Name = "txtPort";
@@ -530,7 +552,7 @@
             // 
             this.labelX3.BackgroundStyle.Class = "";
             this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX3.Location = new System.Drawing.Point(15, 95);
+            this.labelX3.Location = new System.Drawing.Point(15, 79);
             this.labelX3.Name = "labelX3";
             this.labelX3.Size = new System.Drawing.Size(81, 16);
             this.labelX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -544,7 +566,7 @@
             // 
             this.txtPassword.Border.Class = "TextBoxBorder";
             this.txtPassword.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtPassword.Location = new System.Drawing.Point(96, 57);
+            this.txtPassword.Location = new System.Drawing.Point(329, 53);
             this.txtPassword.MaxLength = 16;
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(142, 20);
@@ -559,7 +581,7 @@
             // 
             this.labelX2.BackgroundStyle.Class = "";
             this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX2.Location = new System.Drawing.Point(27, 59);
+            this.labelX2.Location = new System.Drawing.Point(260, 55);
             this.labelX2.Name = "labelX2";
             this.labelX2.Size = new System.Drawing.Size(68, 16);
             this.labelX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -573,7 +595,7 @@
             // 
             this.txtSessionName.Border.Class = "TextBoxBorder";
             this.txtSessionName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtSessionName.Location = new System.Drawing.Point(96, 17);
+            this.txtSessionName.Location = new System.Drawing.Point(96, 51);
             this.txtSessionName.MaxLength = 16;
             this.txtSessionName.Name = "txtSessionName";
             this.txtSessionName.Size = new System.Drawing.Size(142, 20);
@@ -588,7 +610,7 @@
             // 
             this.labelX1.BackgroundStyle.Class = "";
             this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX1.Location = new System.Drawing.Point(27, 18);
+            this.labelX1.Location = new System.Drawing.Point(27, 52);
             this.labelX1.Name = "labelX1";
             this.labelX1.Size = new System.Drawing.Size(68, 16);
             this.labelX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -786,17 +808,89 @@
             this.tabItem1.Name = "tabItem1";
             this.tabItem1.Text = "配置管理";
             // 
-            // btnClearTraffic
+            // labelX14
             // 
-            this.btnClearTraffic.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnClearTraffic.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnClearTraffic.Location = new System.Drawing.Point(378, 253);
-            this.btnClearTraffic.Name = "btnClearTraffic";
-            this.btnClearTraffic.Size = new System.Drawing.Size(78, 23);
-            this.btnClearTraffic.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnClearTraffic.TabIndex = 29;
-            this.btnClearTraffic.Text = "清除（&D）";
-            this.btnClearTraffic.Click += new System.EventHandler(this.btnClearTraffic_Click);
+            this.labelX14.AutoSize = true;
+            this.labelX14.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX14.BackgroundStyle.Class = "";
+            this.labelX14.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX14.Location = new System.Drawing.Point(27, 20);
+            this.labelX14.Name = "labelX14";
+            this.labelX14.Size = new System.Drawing.Size(68, 16);
+            this.labelX14.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX14.TabIndex = 30;
+            this.labelX14.Text = "认证方式：";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.radAddress);
+            this.panel1.Controls.Add(this.radPassword);
+            this.panel1.Location = new System.Drawing.Point(96, 9);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(221, 36);
+            this.panel1.TabIndex = 31;
+            // 
+            // radPassword
+            // 
+            this.radPassword.AutoSize = true;
+            this.radPassword.Checked = true;
+            this.radPassword.Location = new System.Drawing.Point(6, 11);
+            this.radPassword.Name = "radPassword";
+            this.radPassword.Size = new System.Drawing.Size(73, 17);
+            this.radPassword.TabIndex = 0;
+            this.radPassword.TabStop = true;
+            this.radPassword.Text = "用户认证";
+            this.radPassword.UseVisualStyleBackColor = true;
+            this.radPassword.CheckedChanged += new System.EventHandler(this.radPassword_CheckedChanged);
+            // 
+            // radAddress
+            // 
+            this.radAddress.AutoSize = true;
+            this.radAddress.Location = new System.Drawing.Point(96, 11);
+            this.radAddress.Name = "radAddress";
+            this.radAddress.Size = new System.Drawing.Size(73, 17);
+            this.radAddress.TabIndex = 1;
+            this.radAddress.Text = "地址认证";
+            this.radAddress.UseVisualStyleBackColor = true;
+            this.radAddress.CheckedChanged += new System.EventHandler(this.radAddress_CheckedChanged);
+            // 
+            // labelX15
+            // 
+            this.labelX15.AutoSize = true;
+            this.labelX15.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX15.BackgroundStyle.Class = "";
+            this.labelX15.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX15.Location = new System.Drawing.Point(16, 53);
+            this.labelX15.Name = "labelX15";
+            this.labelX15.Size = new System.Drawing.Size(79, 16);
+            this.labelX15.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX15.TabIndex = 32;
+            this.labelX15.Text = "本地绑定IP：";
+            this.labelX15.Visible = false;
+            // 
+            // ipLocalIp
+            // 
+            this.ipLocalIp.AutoOverwrite = true;
+            // 
+            // 
+            // 
+            this.ipLocalIp.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.ipLocalIp.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ipLocalIp.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.ipLocalIp.ButtonFreeText.Visible = true;
+            this.ipLocalIp.Location = new System.Drawing.Point(96, 51);
+            this.ipLocalIp.Name = "ipLocalIp";
+            this.ipLocalIp.Size = new System.Drawing.Size(137, 20);
+            this.ipLocalIp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ipLocalIp.TabIndex = 33;
+            this.ipLocalIp.Visible = false;
             // 
             // ASynConnect
             // 
@@ -804,7 +898,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl1);
             this.Name = "ASynConnect";
-            this.Size = new System.Drawing.Size(690, 458);
+            this.Size = new System.Drawing.Size(699, 520);
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.PanelSession.ResumeLayout(false);
@@ -817,6 +911,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).EndInit();
             this.tabControlPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ipLocalIp)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -875,6 +972,12 @@
         private DevComponents.DotNetBar.LabelX labelX13;
         private DevComponents.Editors.IntegerInput integerInput3;
         private DevComponents.DotNetBar.ButtonX btnClearTraffic;
+        private DevComponents.DotNetBar.LabelX labelX14;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RadioButton radAddress;
+        private System.Windows.Forms.RadioButton radPassword;
+        private DevComponents.DotNetBar.LabelX labelX15;
+        private DevComponents.Editors.IpAddressInput ipLocalIp;
 
     }
 }

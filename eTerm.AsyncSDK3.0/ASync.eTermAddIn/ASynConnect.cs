@@ -288,6 +288,36 @@ namespace ASync.eTermAddIn {
                 btnSessionEdit_Click(null, EventArgs.Empty);
             }));
         }
+
+        /// <summary>
+        /// Handles the CheckedChanged event of the radPassword control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void radPassword_CheckedChanged(object sender, EventArgs e) {
+            labelX1.Visible = true;
+            txtSessionName.Visible = true;
+            labelX2.Visible = true;
+            txtPassword.Visible = true;
+
+            labelX15.Visible = false;
+            ipLocalIp.Visible = false;
+        }
+
+        /// <summary>
+        /// Handles the CheckedChanged event of the radAddress control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void radAddress_CheckedChanged(object sender, EventArgs e) {
+            labelX1.Visible = false;
+            txtSessionName.Visible = false;
+            labelX2.Visible = false;
+            txtPassword.Visible = false;
+
+            labelX15.Visible = true;
+            ipLocalIp.Visible = true;
+        }
         
     }
 }
