@@ -58,6 +58,21 @@ namespace eTerm.AsyncSDK {
     }
 
     /// <summary>
+    /// 认证类型
+    /// </summary>
+    [Flags]
+    public enum CertificationType : int {
+        /// <summary>
+        /// 地址认证
+        /// </summary>
+        Address=1,
+        /// <summary>
+        /// 用户认证
+        /// </summary>
+        Password=2
+    }
+
+    /// <summary>
     /// 配置实体
     /// </summary>
     [Serializable]
@@ -83,6 +98,12 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         /// <value>The address.</value>
         public string Address { get; set; }
+
+        /// <summary>
+        /// 认证类型.
+        /// </summary>
+        /// <value>The type of the T session.</value>
+        public CertificationType? TSessionType { get; set; }
 
         /// <summary>
         /// Gets or sets the port.
