@@ -188,6 +188,8 @@ namespace ASync.eTermAddIn {
                 groupCode = comboBoxEx1.SelectedItem.GetType().GetProperty("Value").GetValue(comboBoxEx1.SelectedItem, null).ToString();
 
             ConnectSetup Setup = new ConnectSetup() { 
+                 LocalIp=ipLocalIp.Value,
+                  TSessionType=radPassword.Checked?CertificationType.Password:CertificationType.Address,
                  Address=txtAddress.Value,
                   IsOpen =chkIsOpen.Checked,
                    userName=txtSessionName.Text,
