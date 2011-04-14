@@ -82,6 +82,7 @@
             this.radAddress = new System.Windows.Forms.RadioButton();
             this.labelX15 = new DevComponents.DotNetBar.LabelX();
             this.ipLocalIp = new DevComponents.Editors.IpAddressInput();
+            this.columnHeader8 = new System.Windows.Forms.ColumnHeader();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.PanelSession.SuspendLayout();
@@ -100,8 +101,8 @@
             // tabControl1
             // 
             this.tabControl1.CanReorderTabs = true;
-            this.tabControl1.Controls.Add(this.PanelSession);
             this.tabControl1.Controls.Add(this.tabControlPanel1);
+            this.tabControl1.Controls.Add(this.PanelSession);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -631,7 +632,7 @@
             this.tabControlPanel1.Location = new System.Drawing.Point(0, 23);
             this.tabControlPanel1.Name = "tabControlPanel1";
             this.tabControlPanel1.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanel1.Size = new System.Drawing.Size(690, 435);
+            this.tabControlPanel1.Size = new System.Drawing.Size(699, 497);
             this.tabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(254)))));
             this.tabControlPanel1.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(188)))), ((int)(((byte)(227)))));
             this.tabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -751,13 +752,14 @@
             this.columnHeader4,
             this.columnHeader7,
             this.columnHeader5,
-            this.columnHeader6});
+            this.columnHeader6,
+            this.columnHeader8});
             this.contextMenuBar1.SetContextMenuEx(this.lstSession, this.buttonItem1);
             this.lstSession.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstSession.FullRowSelect = true;
             this.lstSession.Location = new System.Drawing.Point(1, 1);
             this.lstSession.Name = "lstSession";
-            this.lstSession.Size = new System.Drawing.Size(688, 433);
+            this.lstSession.Size = new System.Drawing.Size(697, 495);
             this.lstSession.TabIndex = 0;
             this.lstSession.UseCompatibleStateImageBehavior = false;
             this.lstSession.View = System.Windows.Forms.View.Details;
@@ -892,6 +894,11 @@
             this.ipLocalIp.TabIndex = 33;
             this.ipLocalIp.Visible = false;
             // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "认证方式";
+            this.columnHeader8.Width = 95;
+            // 
             // ASynConnect
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -978,6 +985,7 @@
         private System.Windows.Forms.RadioButton radPassword;
         private DevComponents.DotNetBar.LabelX labelX15;
         private DevComponents.Editors.IpAddressInput ipLocalIp;
+        private System.Windows.Forms.ColumnHeader columnHeader8;
 
     }
 }
