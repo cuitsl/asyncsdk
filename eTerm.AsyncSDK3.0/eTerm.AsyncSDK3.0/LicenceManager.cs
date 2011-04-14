@@ -104,7 +104,7 @@ new TimerCallback(
             try {
                 __serialNumber = GetCpuSN();
                 __identification = Identification;
-                __secreteKey = TEACrypter.MD5(Encoding.Default.GetBytes(__serialNumber));
+                __secreteKey = TEACrypter.MD5(Encoding.Default.GetBytes(string.Format(@"{0}{1}",__serialNumber,TEACrypter.GetDefaultKey)));
                 using (FileStream fs = new FileStream(Identification, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) {
                     BinaryReader br = new BinaryReader(fs);
                     buffer = new byte[fs.Length];
