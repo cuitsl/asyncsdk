@@ -101,6 +101,19 @@ namespace ASync.eTermAddIn {
                 this.txtAddress.Value = Setup.Address;
                 this.txtPassword.Text = Setup.userPass;
                 this.txtPort.Value = Setup.Port;
+
+                this.radAddress.Checked = (Setup.TSessionType ?? CertificationType.Password) == CertificationType.Address;
+                if (this.radAddress.Checked) {
+                    this.radAddress_CheckedChanged(null, EventArgs.Empty);
+
+                }
+
+                this.radPassword.Checked = (Setup.TSessionType ?? CertificationType.Password) == CertificationType.Password;
+                if (this.radPassword.Checked) {
+                    this.radPassword_CheckedChanged(null, EventArgs.Empty);
+
+                }
+                this.ipLocalIp.Value = Setup.LocalIp;
                 this.txtOfficeCode.Text = Setup.OfficeCode;
                 chkIsOpen.Checked = Setup.IsOpen;
                 chkIsSsl.Checked = Setup.IsSsl;
