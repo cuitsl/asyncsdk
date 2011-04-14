@@ -193,7 +193,7 @@ namespace ASync.eTermAddIn {
                   TSessionType=radPassword.Checked?CertificationType.Password:CertificationType.Address,
                  Address=txtAddress.Value,
                   IsOpen =chkIsOpen.Checked,
-                   userName=txtSessionName.Text,
+                 userName = radPassword.Checked ? txtSessionName.Text : StringUtil.GenUniqueString(),
                     IsSsl=chkIsSsl.Checked,
                      Port=txtPort.Value,
                        SiText=txtSIText.Text,

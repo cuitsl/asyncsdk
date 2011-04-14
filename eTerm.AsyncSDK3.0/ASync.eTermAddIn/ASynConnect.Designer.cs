@@ -509,7 +509,6 @@
             this.integerInput2.ShowUpDown = true;
             this.integerInput2.Size = new System.Drawing.Size(88, 20);
             this.integerInput2.TabIndex = 5;
-            this.integerInput2.Value = 100;
             // 
             // integerInput1
             // 

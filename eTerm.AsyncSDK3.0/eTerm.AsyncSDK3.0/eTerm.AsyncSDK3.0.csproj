@@ -97,6 +97,7 @@
     <Compile Include="Net\eTerm443Packet.cs" />
     <Compile Include="Net\__eTerm443Packet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\StringUtil.cs" />
     <Compile Include="Util\SystemUtil.cs" />
     <Compile Include="Util\TEACrypter.cs" />
   </ItemGroup>
