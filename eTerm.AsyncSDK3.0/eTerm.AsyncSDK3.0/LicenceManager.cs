@@ -104,13 +104,13 @@ new TimerCallback(
             try {
                 __serialNumber = GetCpuSN();
                 __identification = Identification;
-                __secreteKey = TEACrypter.MD5(Encoding.Default.GetBytes(string.Format(@"{0}{1}",__serialNumber,TEACrypter.GetDefaultKey)));
+                __secreteKey = TEACrypter.MD5(Encoding.Default.GetBytes(string.Format(@"{0}{1}", __serialNumber, @"3048ljLKJ337204YLuF47381&36!$**(@")));
                 using (FileStream fs = new FileStream(Identification, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) {
                     BinaryReader br = new BinaryReader(fs);
                     buffer = new byte[fs.Length];
                     br.Read(buffer, 0, buffer.Length);
                     LicenceBody = LicenceBody.DeXmlSerialize(__secreteKey, buffer);
-                    __flag =CompareBytes(new TEACrypter().Decrypt(LicenceBody.Key,__secreteKey),Encoding.Default.GetBytes(__serialNumber));
+                    __flag = CompareBytes(new TEACrypter().Decrypt(LicenceBody.Key, __secreteKey), Encoding.Default.GetBytes(string.Format(@"{0}{1}", __serialNumber, @"3048ljLKJ337204YLuF47381&36!$**(@")));
                     __flag =__flag&& LicenceBody.ExpireDate >= DateTime.Now;
                     __flag = __flag && LicenceBody.RemainingMinutes > 0;
                 }
