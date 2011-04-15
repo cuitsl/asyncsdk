@@ -22,6 +22,7 @@ namespace ASync.eTermAddIn {
             this.Load += new EventHandler(
                     delegate(object sender, EventArgs e)
                     {
+                        tabControl1.SelectedTab = tabItem1;
                         this.lstSession.Items.Clear();
                         foreach (TSessionSetup Setup in AsyncStackNet.Instance.ASyncSetup.SessionCollection) {
                             SDKGroup group = null;
