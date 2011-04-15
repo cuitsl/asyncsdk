@@ -25,6 +25,21 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new DevComponents.DotNetBar.TabControl();
+            this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
+            this.contextMenuBar1 = new DevComponents.DotNetBar.ContextMenuBar();
+            this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
+            this.btnSessionEdit = new DevComponents.DotNetBar.ButtonItem();
+            this.itemContainer1 = new DevComponents.DotNetBar.ItemContainer();
+            this.btnDelete = new DevComponents.DotNetBar.ButtonItem();
+            this.itemContainer2 = new DevComponents.DotNetBar.ItemContainer();
+            this.btnInsert = new DevComponents.DotNetBar.ButtonItem();
+            this.lstSession = new DevComponents.DotNetBar.Controls.ListViewEx();
+            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
+            this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
             this.PanelSession = new DevComponents.DotNetBar.TabControlPanel();
             this.btnClearTraffic = new DevComponents.DotNetBar.ButtonX();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -63,21 +78,6 @@
             this.txtSessionName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.tabItem2 = new DevComponents.DotNetBar.TabItem(this.components);
-            this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
-            this.contextMenuBar1 = new DevComponents.DotNetBar.ContextMenuBar();
-            this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
-            this.btnSessionEdit = new DevComponents.DotNetBar.ButtonItem();
-            this.itemContainer1 = new DevComponents.DotNetBar.ItemContainer();
-            this.btnDelete = new DevComponents.DotNetBar.ButtonItem();
-            this.itemContainer2 = new DevComponents.DotNetBar.ItemContainer();
-            this.btnInsert = new DevComponents.DotNetBar.ButtonItem();
-            this.lstSession = new DevComponents.DotNetBar.Controls.ListViewEx();
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
-            this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
             this.itemContainer4 = new DevComponents.DotNetBar.ItemContainer();
             this.itemContainer7 = new DevComponents.DotNetBar.ItemContainer();
             this.buttonItem5 = new DevComponents.DotNetBar.ButtonItem();
@@ -87,13 +87,13 @@
             this.columnHeader11 = new DevComponents.AdvTree.ColumnHeader();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
+            this.tabControlPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).BeginInit();
             this.PanelSession.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtExpire)).BeginInit();
-            this.tabControlPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -113,6 +113,159 @@
             this.tabControl1.Tabs.Add(this.tabItem1);
             this.tabControl1.Tabs.Add(this.tabItem2);
             this.tabControl1.SelectedTabChanged += new DevComponents.DotNetBar.TabStrip.SelectedTabChangedEventHandler(this.tabControl1_SelectedTabChanged);
+            // 
+            // tabControlPanel1
+            // 
+            this.tabControlPanel1.Controls.Add(this.contextMenuBar1);
+            this.tabControlPanel1.Controls.Add(this.lstSession);
+            this.tabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPanel1.Location = new System.Drawing.Point(0, 23);
+            this.tabControlPanel1.Name = "tabControlPanel1";
+            this.tabControlPanel1.Padding = new System.Windows.Forms.Padding(1);
+            this.tabControlPanel1.Size = new System.Drawing.Size(636, 415);
+            this.tabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(254)))));
+            this.tabControlPanel1.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(188)))), ((int)(((byte)(227)))));
+            this.tabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.tabControlPanel1.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(165)))), ((int)(((byte)(199)))));
+            this.tabControlPanel1.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.tabControlPanel1.Style.GradientAngle = 90;
+            this.tabControlPanel1.TabIndex = 1;
+            this.tabControlPanel1.TabItem = this.tabItem1;
+            this.tabControlPanel1.Text = "用户管理";
+            // 
+            // contextMenuBar1
+            // 
+            this.contextMenuBar1.AntiAlias = true;
+            this.contextMenuBar1.DockSide = DevComponents.DotNetBar.eDockSide.Document;
+            this.contextMenuBar1.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItem1});
+            this.contextMenuBar1.Location = new System.Drawing.Point(115, 85);
+            this.contextMenuBar1.Name = "contextMenuBar1";
+            this.contextMenuBar1.Size = new System.Drawing.Size(75, 27);
+            this.contextMenuBar1.Stretch = true;
+            this.contextMenuBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.contextMenuBar1.TabIndex = 1;
+            this.contextMenuBar1.TabStop = false;
+            this.contextMenuBar1.Text = "contextMenuBar1";
+            // 
+            // buttonItem1
+            // 
+            this.buttonItem1.AutoExpandOnClick = true;
+            this.buttonItem1.Name = "buttonItem1";
+            this.buttonItem1.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnSessionEdit,
+            this.itemContainer1,
+            this.btnDelete,
+            this.itemContainer2,
+            this.btnInsert});
+            this.buttonItem1.Text = "用户管理";
+            // 
+            // btnSessionEdit
+            // 
+            this.btnSessionEdit.Enabled = false;
+            this.btnSessionEdit.Image = global::ASync.eTermAddIn.Properties.Resources.Pencil3;
+            this.btnSessionEdit.Name = "btnSessionEdit";
+            this.btnSessionEdit.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlE);
+            this.btnSessionEdit.Text = "修改用户（&E）";
+            this.btnSessionEdit.Click += new System.EventHandler(this.btnSessionEdit_Click);
+            // 
+            // itemContainer1
+            // 
+            // 
+            // 
+            // 
+            this.itemContainer1.BackgroundStyle.Class = "";
+            this.itemContainer1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemContainer1.Name = "itemContainer1";
+            this.itemContainer1.Text = "-";
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Enabled = false;
+            this.btnDelete.Image = global::ASync.eTermAddIn.Properties.Resources.DeleteRed;
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlD);
+            this.btnDelete.Text = "删除用户（&D）";
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // itemContainer2
+            // 
+            // 
+            // 
+            // 
+            this.itemContainer2.BackgroundStyle.Class = "";
+            this.itemContainer2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemContainer2.Name = "itemContainer2";
+            this.itemContainer2.Text = "-";
+            // 
+            // btnInsert
+            // 
+            this.btnInsert.Image = global::ASync.eTermAddIn.Properties.Resources.User1;
+            this.btnInsert.Name = "btnInsert";
+            this.btnInsert.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlN);
+            this.btnInsert.Text = "新增用户（&N）";
+            this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
+            // 
+            // lstSession
+            // 
+            // 
+            // 
+            // 
+            this.lstSession.Border.Class = "ListViewBorder";
+            this.lstSession.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lstSession.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+            this.contextMenuBar1.SetContextMenuEx(this.lstSession, this.buttonItem1);
+            this.lstSession.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstSession.FullRowSelect = true;
+            this.lstSession.Location = new System.Drawing.Point(1, 1);
+            this.lstSession.Name = "lstSession";
+            this.lstSession.Size = new System.Drawing.Size(634, 413);
+            this.lstSession.TabIndex = 0;
+            this.lstSession.UseCompatibleStateImageBehavior = false;
+            this.lstSession.View = System.Windows.Forms.View.Details;
+            this.lstSession.SelectedIndexChanged += new System.EventHandler(this.lstSession_SelectedIndexChanged);
+            this.lstSession.DoubleClick += new System.EventHandler(this.lstSession_DoubleClick);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "登录帐号";
+            this.columnHeader1.Width = 88;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "所属分组";
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader2.Width = 134;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "超时时限(秒)";
+            this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader3.Width = 84;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "月流量(条)";
+            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.columnHeader4.Width = 73;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "受限指令";
+            this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader5.Width = 211;
+            // 
+            // tabItem1
+            // 
+            this.tabItem1.AttachedControl = this.tabControlPanel1;
+            this.tabItem1.Name = "tabItem1";
+            this.tabItem1.Text = "用户管理";
             // 
             // PanelSession
             // 
@@ -643,158 +796,6 @@
             this.tabItem2.Name = "tabItem2";
             this.tabItem2.Text = "用户信息修改";
             // 
-            // tabControlPanel1
-            // 
-            this.tabControlPanel1.Controls.Add(this.contextMenuBar1);
-            this.tabControlPanel1.Controls.Add(this.lstSession);
-            this.tabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlPanel1.Location = new System.Drawing.Point(0, 23);
-            this.tabControlPanel1.Name = "tabControlPanel1";
-            this.tabControlPanel1.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanel1.Size = new System.Drawing.Size(636, 415);
-            this.tabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(254)))));
-            this.tabControlPanel1.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(188)))), ((int)(((byte)(227)))));
-            this.tabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.tabControlPanel1.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(165)))), ((int)(((byte)(199)))));
-            this.tabControlPanel1.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.tabControlPanel1.Style.GradientAngle = 90;
-            this.tabControlPanel1.TabIndex = 1;
-            this.tabControlPanel1.TabItem = this.tabItem1;
-            this.tabControlPanel1.Text = "用户管理";
-            // 
-            // contextMenuBar1
-            // 
-            this.contextMenuBar1.AntiAlias = true;
-            this.contextMenuBar1.DockSide = DevComponents.DotNetBar.eDockSide.Document;
-            this.contextMenuBar1.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItem1});
-            this.contextMenuBar1.Location = new System.Drawing.Point(115, 85);
-            this.contextMenuBar1.Name = "contextMenuBar1";
-            this.contextMenuBar1.Size = new System.Drawing.Size(75, 27);
-            this.contextMenuBar1.Stretch = true;
-            this.contextMenuBar1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.contextMenuBar1.TabIndex = 1;
-            this.contextMenuBar1.TabStop = false;
-            this.contextMenuBar1.Text = "contextMenuBar1";
-            // 
-            // buttonItem1
-            // 
-            this.buttonItem1.AutoExpandOnClick = true;
-            this.buttonItem1.Name = "buttonItem1";
-            this.buttonItem1.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnSessionEdit,
-            this.itemContainer1,
-            this.btnDelete,
-            this.itemContainer2,
-            this.btnInsert});
-            this.buttonItem1.Text = "用户管理";
-            // 
-            // btnSessionEdit
-            // 
-            this.btnSessionEdit.Enabled = false;
-            this.btnSessionEdit.Image = global::ASync.eTermAddIn.Properties.Resources.Pencil3;
-            this.btnSessionEdit.Name = "btnSessionEdit";
-            this.btnSessionEdit.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlE);
-            this.btnSessionEdit.Text = "修改用户（&E）";
-            this.btnSessionEdit.Click += new System.EventHandler(this.btnSessionEdit_Click);
-            // 
-            // itemContainer1
-            // 
-            // 
-            // 
-            // 
-            this.itemContainer1.BackgroundStyle.Class = "";
-            this.itemContainer1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.itemContainer1.Name = "itemContainer1";
-            this.itemContainer1.Text = "-";
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Enabled = false;
-            this.btnDelete.Image = global::ASync.eTermAddIn.Properties.Resources.DeleteRed;
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlD);
-            this.btnDelete.Text = "删除用户（&D）";
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // itemContainer2
-            // 
-            // 
-            // 
-            // 
-            this.itemContainer2.BackgroundStyle.Class = "";
-            this.itemContainer2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.itemContainer2.Name = "itemContainer2";
-            this.itemContainer2.Text = "-";
-            // 
-            // btnInsert
-            // 
-            this.btnInsert.Image = global::ASync.eTermAddIn.Properties.Resources.User1;
-            this.btnInsert.Name = "btnInsert";
-            this.btnInsert.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlN);
-            this.btnInsert.Text = "新增用户（&N）";
-            this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
-            // 
-            // lstSession
-            // 
-            // 
-            // 
-            // 
-            this.lstSession.Border.Class = "ListViewBorder";
-            this.lstSession.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lstSession.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5});
-            this.contextMenuBar1.SetContextMenuEx(this.lstSession, this.buttonItem1);
-            this.lstSession.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstSession.FullRowSelect = true;
-            this.lstSession.Location = new System.Drawing.Point(1, 1);
-            this.lstSession.Name = "lstSession";
-            this.lstSession.Size = new System.Drawing.Size(634, 413);
-            this.lstSession.TabIndex = 0;
-            this.lstSession.UseCompatibleStateImageBehavior = false;
-            this.lstSession.View = System.Windows.Forms.View.Details;
-            this.lstSession.DoubleClick += new System.EventHandler(this.lstSession_DoubleClick);
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "登录帐号";
-            this.columnHeader1.Width = 88;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "所属分组";
-            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader2.Width = 134;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "超时时限(秒)";
-            this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader3.Width = 84;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "月流量(条)";
-            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.columnHeader4.Width = 73;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "受限指令";
-            this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader5.Width = 211;
-            // 
-            // tabItem1
-            // 
-            this.tabItem1.AttachedControl = this.tabControlPanel1;
-            this.tabItem1.Name = "tabItem1";
-            this.tabItem1.Text = "用户管理";
-            // 
             // itemContainer4
             // 
             // 
@@ -855,14 +856,14 @@
             this.Size = new System.Drawing.Size(636, 438);
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            this.tabControlPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).EndInit();
             this.PanelSession.ResumeLayout(false);
             this.PanelSession.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFlow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtExpire)).EndInit();
-            this.tabControlPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).EndInit();
             this.ResumeLayout(false);
 
         }

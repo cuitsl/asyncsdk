@@ -335,6 +335,19 @@ namespace ASync.eTermAddIn {
         private void lstSession_DoubleClick(object sender, EventArgs e) {
             btnSessionEdit_Click(null, EventArgs.Empty);
         }
+
+        private void lstSession_SelectedIndexChanged(object sender, EventArgs e) {
+            if (lstSession.SelectedItems.Count != 1) {
+                btnDelete.Enabled = false;
+                btnInsert.Enabled = false;
+                btnSessionEdit.Enabled = false;
+                return;
+            }
+            btnDelete.Enabled = true;
+            btnInsert.Enabled = true;
+            btnSessionEdit.Enabled = true;
+
+        }
         
     }
 }
