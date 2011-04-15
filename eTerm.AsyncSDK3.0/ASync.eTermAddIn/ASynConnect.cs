@@ -166,7 +166,7 @@ namespace ASync.eTermAddIn {
             foreach (SDKGroup group in AsyncStackNet.Instance.ASyncSetup.GroupCollection) {
                 comboBoxEx1.Items.Add(new { Text = group.groupName, Value = group.groupCode });
             }
-
+            tabControl1.SelectedTab = tabItem2;
 
         }
 
