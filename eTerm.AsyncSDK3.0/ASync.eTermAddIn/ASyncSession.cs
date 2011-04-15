@@ -50,13 +50,7 @@ namespace ASync.eTermAddIn {
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.Windows.Forms.ItemCheckedEventArgs"/> instance containing the event data.</param>
         private void lstSession_ItemChecked(object sender, ItemCheckedEventArgs e) {
-            int checkCount = 0;
-            foreach (ListViewItem item in this.lstSession.Items) {
-                checkCount = item.Selected ? checkCount + 1 : checkCount;
-            }
-            btnSessionEdit.Enabled = checkCount == 1;
-            btnDelete.Enabled = checkCount > 0;
-            //btnInsert.Enabled = checkCount > 0;
+
         }
 
         /// <summary>
@@ -329,6 +323,15 @@ namespace ASync.eTermAddIn {
                 AsyncStackNet.Instance.EndRateUpdate(iar);
                 btnSessionEdit_Click(null, EventArgs.Empty);
             }));
+        }
+
+        /// <summary>
+        /// Handles the DoubleClick event of the lstSession control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void lstSession_DoubleClick(object sender, EventArgs e) {
+            btnSessionEdit_Click(null, EventArgs.Empty);
         }
         
     }
