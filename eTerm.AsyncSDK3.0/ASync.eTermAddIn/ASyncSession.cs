@@ -45,14 +45,7 @@ namespace ASync.eTermAddIn {
                     });
         }
 
-        /// <summary>
-        /// Handles the ItemChecked event of the lstSession control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.Windows.Forms.ItemCheckedEventArgs"/> instance containing the event data.</param>
-        private void lstSession_ItemChecked(object sender, ItemCheckedEventArgs e) {
-
-        }
+        
 
         /// <summary>
         /// Handles the Click event of the btnDelete control.
