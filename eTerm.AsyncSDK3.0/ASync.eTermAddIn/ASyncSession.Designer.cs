@@ -758,7 +758,7 @@
             this.lstSession.TabIndex = 0;
             this.lstSession.UseCompatibleStateImageBehavior = false;
             this.lstSession.View = System.Windows.Forms.View.Details;
-            this.lstSession.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lstSession_ItemChecked);
+            this.lstSession.DoubleClick += new System.EventHandler(this.lstSession_DoubleClick);
             // 
             // columnHeader1
             // 
