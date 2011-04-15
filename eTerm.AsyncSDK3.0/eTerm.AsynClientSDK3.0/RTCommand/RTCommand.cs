@@ -48,6 +48,9 @@ namespace eTerm.ASynClientSDK {
         /// <param name="Msg">指令结果集合.</param>
         /// <returns></returns>
         protected override ASyncResult ResultAdapter(string Msg) {
+
+            PNRInfo PnrInfoResult= new AnalysisPRN(__pnr, Msg).ParsePNR();
+
             Msg = string.Join("\r", Msg.Split(new char[]{'\0'}, StringSplitOptions.RemoveEmptyEntries));
             RTResult Rt = new RTResult();
             ParseContract(Rt, Msg);

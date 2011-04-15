@@ -55,9 +55,11 @@ namespace eTerm.AsyncSDK.Core {
                             0x00,0x00,0xA9,0xA9 
                             });
                     FireTSessionValidated(e.Session);
+                    /*
                     new Timer(new TimerCallback(delegate(object sender) {
                         e.Session.SendPacket(__eTerm443Packet.BuildSessionPacket(e.Session.SID, e.Session.RID, ValidateMessage));
                     }), null, 500, Timeout.Infinite);
+                    */
                 }
                 else {
                     e.Session.SendPacket(new byte[] { 

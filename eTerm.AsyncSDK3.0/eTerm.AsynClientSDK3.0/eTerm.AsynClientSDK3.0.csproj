@@ -126,6 +126,13 @@
     <Compile Include="RTCommand\PNRPassengerResult.cs" />
     <Compile Include="RTCommand\RTCommand.cs" />
     <Compile Include="RTCommand\RTResult.cs" />
+    <Compile Include="RTCommand\Util\AnalysisPRN.cs" />
+    <Compile Include="RTCommand\Util\FNInfo.cs" />
+    <Compile Include="RTCommand\Util\Passenger.cs" />
+    <Compile Include="RTCommand\Util\PNRInfo.cs" />
+    <Compile Include="RTCommand\Util\Seat.cs" />
+    <Compile Include="RTCommand\Util\Segment.cs" />
+    <Compile Include="RTCommand\Util\Ticket.cs" />
     <Compile Include="SdkException.cs" />
     <Compile Include="SmsCommand\SmsCommand.cs" />
     <Compile Include="SmsCommand\SmsResult.cs" />
