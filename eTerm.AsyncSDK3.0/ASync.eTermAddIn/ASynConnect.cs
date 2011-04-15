@@ -272,7 +272,17 @@ namespace ASync.eTermAddIn {
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void lstSession_SelectedIndexChanged(object sender, EventArgs e) {
-            if (lstSession.SelectedItems.Count != 1) return;
+            if (lstSession.SelectedItems.Count != 1) {
+                btnDispose.Enabled = false;
+                btnInsert.Enabled = false;
+                btnSessionEdit.Enabled = false;
+                btnDelete.Enabled = false;
+                return; 
+            }
+            btnDelete.Enabled = true;
+            btnDispose.Enabled = true;
+            btnInsert.Enabled = true;
+            btnSessionEdit.Enabled = true;
             ConnectSetup Setup = lstSession.SelectedItems[0].Tag as ConnectSetup;
             if (string.IsNullOrEmpty(Setup.userName) || AsyncStackNet.Instance.ASyncSetup.AsynCollection == null || AsyncStackNet.Instance.ASyncSetup.AsynCollection.Count == 0) return;
             if (AsyncStackNet.Instance.ASyncSetup.AsynCollection[
