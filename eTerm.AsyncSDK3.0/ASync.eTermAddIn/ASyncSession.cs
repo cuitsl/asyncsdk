@@ -52,7 +52,7 @@ namespace ASync.eTermAddIn {
         private void lstSession_ItemChecked(object sender, ItemCheckedEventArgs e) {
             int checkCount = 0;
             foreach (ListViewItem item in this.lstSession.Items) {
-                checkCount = item.Checked ? checkCount + 1 : checkCount;
+                checkCount = item.Selected ? checkCount + 1 : checkCount;
             }
             btnSessionEdit.Enabled = checkCount == 1;
             btnDelete.Enabled = checkCount > 0;
@@ -67,7 +67,7 @@ namespace ASync.eTermAddIn {
         private void btnDelete_Click(object sender, EventArgs e) {
             if (MessageBox.Show("操作不可恢复，确实要继续吗？", "系统提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
                 foreach (ListViewItem item in this.lstSession.Items) {
-                    if (!item.Checked) continue;
+                    if (!item.Selected) continue;
                     AsyncStackNet.Instance.ASyncSetup.SessionCollection.Remove(new TSessionSetup() { SessionCode=item.Name });
                 }
                 btnSave_Click(null, EventArgs.Empty);
@@ -96,7 +96,7 @@ namespace ASync.eTermAddIn {
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnSessionEdit_Click(object sender, EventArgs e) {
             foreach (ListViewItem item in this.lstSession.Items) {
-                if (!item.Checked) continue;
+                if (!item.Selected) continue;
                 TSessionSetup Setup = item.Tag as TSessionSetup;
                 PanelSession.Tag = Setup;
                 txtDescription.Text = Setup.Description;
@@ -143,6 +143,7 @@ namespace ASync.eTermAddIn {
                 this.comboTree1.DataSource = AsyncStackNet.Instance.ASyncSetup.SessionCollection[
                     AsyncStackNet.Instance.ASyncSetup.SessionCollection.IndexOf(new TSessionSetup(Setup.SessionCode))].Traffics;
                 //PanelSession.act
+                tabControl1.SelectedTab = tabItem2;
                 break;
             }
         }
