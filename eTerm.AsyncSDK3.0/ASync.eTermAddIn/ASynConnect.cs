@@ -346,7 +346,7 @@ namespace ASync.eTermAddIn {
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void lstSession_DoubleClick(object sender, EventArgs e) {
-            lstSession_SelectedIndexChanged(null, EventArgs.Empty);
+            btnSessionEdit_Click(null, EventArgs.Empty);
         }
         
     }
