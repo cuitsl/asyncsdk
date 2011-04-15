@@ -50,13 +50,24 @@ namespace eTerm.ASynClientSDK {
         protected override ASyncResult ResultAdapter(string Msg) {
 
             PNRInfo PnrInfoResult= new AnalysisPRN(__pnr, Msg).ParsePNR();
-
-            Msg = string.Join("\r", Msg.Split(new char[]{'\0'}, StringSplitOptions.RemoveEmptyEntries));
-            RTResult Rt = new RTResult();
-            ParseContract(Rt, Msg);
-            ParseGroup(Rt, Msg);
-            ParsePassager(Rt, Msg);
-            ParseSeg(Rt, Msg);
+            RTResult Rt = new RTResult() { getAirSegs=new List<PNRAirSegResult>(), getPassengers=new List<PNRPassengerResult>() };
+            foreach (Passenger p in PnrInfoResult.PassengerList) {
+                Rt.getPassengers.Add(new PNRPassengerResult() { 
+                 getName=p.FullName,
+                  IdentityNo=p.DocumentNo
+                });
+            }
+            foreach (Segment seg in PnrInfoResult.SegmentList) {
+                Rt.getAirSegs.Add(new PNRAirSegResult() { 
+                 getAirNo=string.Format(@"{0}{1}",seg.Airline,seg.FltNo),
+                  getDepartureTime=string.Format(@"{1} {0}",seg.DepartureTime.Insert(2,":"),seg.Date),
+                 getArrivalTime = string.Format(@"{1} {0}", seg.ArrivalTime.Insert(2,":"), seg.Date),
+                    getFltClass=seg.Carbin,
+                     getOrgCity=seg.DepartureAirport,
+                      getDesCity=seg.ArrivalAirport,
+                       getActionCode=seg.Ticket
+                });
+            }
             return Rt;
         }
 
