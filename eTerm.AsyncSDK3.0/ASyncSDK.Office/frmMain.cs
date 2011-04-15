@@ -733,6 +733,7 @@ Encoding.GetEncoding(@"gb2312").GetString(e.Session.UnOutPakcet(e.InPacket)),
                     {
                         
                         dockAddIn.Visible = true;
+                        dockAddIn.Selected = true;
                         dockAddIn.Control.Controls.Clear();
                         if (!string.IsNullOrEmpty(((sender as ButtonItem).Tag as BaseAddIn).ImageIcon))
                             dockAddIn.Image = (sender as ButtonItem).Image;

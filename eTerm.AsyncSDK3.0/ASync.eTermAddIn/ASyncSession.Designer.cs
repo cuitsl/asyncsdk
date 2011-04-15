@@ -52,6 +52,8 @@
             this.labelX6 = new DevComponents.DotNetBar.LabelX();
             this.txtDescription = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX5 = new DevComponents.DotNetBar.LabelX();
+            this.chkAllowRepeat = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.labelX11 = new DevComponents.DotNetBar.LabelX();
             this.chkIsOpen = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
             this.txtExpire = new DevComponents.Editors.IntegerInput();
@@ -83,8 +85,6 @@
             this.columnHeader9 = new DevComponents.AdvTree.ColumnHeader();
             this.columnHeader10 = new DevComponents.AdvTree.ColumnHeader();
             this.columnHeader11 = new DevComponents.AdvTree.ColumnHeader();
-            this.labelX11 = new DevComponents.DotNetBar.LabelX();
-            this.chkAllowRepeat = new DevComponents.DotNetBar.Controls.CheckBoxX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.PanelSession.SuspendLayout();
@@ -99,8 +99,8 @@
             // tabControl1
             // 
             this.tabControl1.CanReorderTabs = true;
-            this.tabControl1.Controls.Add(this.PanelSession);
             this.tabControl1.Controls.Add(this.tabControlPanel1);
+            this.tabControl1.Controls.Add(this.PanelSession);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -485,6 +485,36 @@
             this.labelX5.TabIndex = 8;
             this.labelX5.Text = "用户说明：";
             // 
+            // chkAllowRepeat
+            // 
+            // 
+            // 
+            // 
+            this.chkAllowRepeat.BackgroundStyle.Class = "";
+            this.chkAllowRepeat.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkAllowRepeat.Location = new System.Drawing.Point(88, 188);
+            this.chkAllowRepeat.Name = "chkAllowRepeat";
+            this.chkAllowRepeat.Size = new System.Drawing.Size(58, 23);
+            this.chkAllowRepeat.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkAllowRepeat.TabIndex = 7;
+            this.chkAllowRepeat.Text = "是/否";
+            // 
+            // labelX11
+            // 
+            this.labelX11.AutoSize = true;
+            this.labelX11.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX11.BackgroundStyle.Class = "";
+            this.labelX11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX11.Location = new System.Drawing.Point(18, 193);
+            this.labelX11.Name = "labelX11";
+            this.labelX11.Size = new System.Drawing.Size(68, 16);
+            this.labelX11.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX11.TabIndex = 6;
+            this.labelX11.Text = "重复登录：";
+            // 
             // chkIsOpen
             // 
             // 
@@ -713,7 +743,6 @@
             // 
             this.lstSession.Border.Class = "ListViewBorder";
             this.lstSession.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lstSession.CheckBoxes = true;
             this.lstSession.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
@@ -816,36 +845,6 @@
             this.columnHeader11.Name = "columnHeader11";
             this.columnHeader11.Text = "4";
             this.columnHeader11.Width.Absolute = 150;
-            // 
-            // labelX11
-            // 
-            this.labelX11.AutoSize = true;
-            this.labelX11.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX11.BackgroundStyle.Class = "";
-            this.labelX11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX11.Location = new System.Drawing.Point(18, 193);
-            this.labelX11.Name = "labelX11";
-            this.labelX11.Size = new System.Drawing.Size(68, 16);
-            this.labelX11.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.labelX11.TabIndex = 6;
-            this.labelX11.Text = "重复登录：";
-            // 
-            // chkAllowRepeat
-            // 
-            // 
-            // 
-            // 
-            this.chkAllowRepeat.BackgroundStyle.Class = "";
-            this.chkAllowRepeat.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkAllowRepeat.Location = new System.Drawing.Point(88, 188);
-            this.chkAllowRepeat.Name = "chkAllowRepeat";
-            this.chkAllowRepeat.Size = new System.Drawing.Size(58, 23);
-            this.chkAllowRepeat.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkAllowRepeat.TabIndex = 7;
-            this.chkAllowRepeat.Text = "是/否";
             // 
             // ASyncSession
             // 
