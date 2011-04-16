@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace eTerm.ASynClientSDK.Utils {
     /// <summary>
@@ -268,6 +270,33 @@ namespace eTerm.ASynClientSDK.Utils {
         }
 
         #endregion IConverting
+
+        /// <summary>
+        /// 日期转换工具（20MAY11-->2011-03-2;20MAY-->2011-03-20）.
+        /// </summary>
+        /// <param name="DateString">The date string.</param>
+        /// <returns></returns>
+        public static string InitialsDateCast(string DateString) {
+            string[] partten = new string[] { 
+                @"(\d{2})([A-Z]{3})",
+                //@"(\d{2})([A-Z]{3})(\d{2})",
+                @"(\d{2})([A-Z]{3})\s+(\d{2}\:\d{2})",
+                //@"(\d{2})([A-Z]{3})(\d2{2})\s+(\d{2}\:\d{2})"
+            };
+            StringBuilder returnValue = new StringBuilder();
+            foreach (string p in partten) {
+                if (!Regex.IsMatch(DateString, p, RegexOptions.IgnoreCase | RegexOptions.Multiline)) continue;
+                Match m = Regex.Match(DateString, p, RegexOptions.IgnoreCase | RegexOptions.Multiline);
+                returnValue.Append(DateTime.Now.Year.ToString()).Append(@"-");
+                returnValue.Append(new CultureInfo("en-GB", false).DateTimeFormat.MonthNames
+                                                .Select<string, string>(M => (M.Length > 0 ? M.Substring(0, 3).ToUpper() : ""))
+                                                .ToList<string>().IndexOf(m.Groups[2].Value)).Append(@"-");
+                returnValue.Append(m.Groups[1].Value);
+                if (m.Groups.Count == 3)
+                    returnValue.Append(" ").Append(m.Groups[3].Value);
+            }
+            return returnValue.ToString();
+        }
 
         /// <summary>
         /// 字符串转换成枚举
