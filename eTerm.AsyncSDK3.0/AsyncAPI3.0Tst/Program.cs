@@ -18,7 +18,7 @@ namespace AsyncAPI3._0Tst {
     class Program {
         static void Main(string[] args) {
             RTCommand Rt = new RTCommand();
-            Rt.retrieve(@"JDK006");
+            Rt.retrieve(@"HYF126");
 
             Console.ReadLine();
 
