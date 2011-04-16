@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using eTerm.ASynClientSDK.Base;
 using eTerm.ASynClientSDK;
+using eTerm.ASynClientSDK.Utils;
 
 namespace eTerm.ASynClientSDK {
     /// <summary>
@@ -60,14 +61,16 @@ namespace eTerm.ASynClientSDK {
             foreach (Segment seg in PnrInfoResult.SegmentList) {
                 Rt.getAirSegs.Add(new PNRAirSegResult() { 
                  getAirNo=string.Format(@"{0}{1}",seg.Airline,seg.FltNo),
-                  getDepartureTime=string.Format(@"{1} {0}",seg.DepartureTime.Insert(2,":"),seg.Date),
-                 getArrivalTime = string.Format(@"{1} {0}", seg.ArrivalTime.Insert(2,":"), seg.Date),
-                    getFltClass=seg.Carbin,
+                  getDepartureTime=ConvertUtil.InitialsDateCast( string.Format(@"{1} {0}",seg.DepartureTime.Insert(2,":"),seg.Date)),
+                 getArrivalTime = ConvertUtil.InitialsDateCast(string.Format(@"{1} {0}", seg.ArrivalTime.Insert(2,":"), seg.Date)),
                      getOrgCity=seg.DepartureAirport,
                       getDesCity=seg.ArrivalAirport,
-                       getActionCode=seg.Ticket
+                       getActionCode=seg.Ticket,
+                        getFltClass=seg.Carbin,
                 });
             }
+            Rt.TKTL = PnrInfoResult.TKTL;
+            //PnrInfoResult.
             return Rt;
         }
 
