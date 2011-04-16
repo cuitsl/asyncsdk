@@ -230,7 +230,7 @@ namespace ASync.eTermAddIn {
         /// </summary>
         /// <value>The name of the button.</value>
         public override string ButtonName {
-            get { return "eTerm帐号管理"; }
+            get { return "用户管理"; }
         }
 
         /// <summary>
