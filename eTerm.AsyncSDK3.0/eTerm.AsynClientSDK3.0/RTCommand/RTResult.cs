@@ -56,7 +56,7 @@ namespace eTerm.ASynClientSDK {
         /// 出票时限.
         /// </summary>
         /// <value>The tk tl.</value>
-        public string TkTl { get; set; }
+        public string TKTL { get; set; }
 
         /// <summary>
         /// 出票时限.
