@@ -290,7 +290,7 @@ namespace eTerm.ASynClientSDK.Utils {
                 returnValue.Append(DateTime.Now.Year.ToString()).Append(@"-");
                 returnValue.Append(new CultureInfo("en-GB", false).DateTimeFormat.MonthNames
                                                 .Select<string, string>(M => (M.Length > 0 ? M.Substring(0, 3).ToUpper() : ""))
-                                                .ToList<string>().IndexOf(m.Groups[2].Value)).Append(@"-");
+                                                .ToList<string>().IndexOf(m.Groups[2].Value)+1).Append(@"-");
                 returnValue.Append(m.Groups[1].Value);
                 if (m.Groups.Count == 3)
                     returnValue.Append(" ").Append(m.Groups[3].Value);
