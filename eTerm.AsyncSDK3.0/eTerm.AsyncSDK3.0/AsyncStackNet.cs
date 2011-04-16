@@ -147,6 +147,11 @@ namespace eTerm.AsyncSDK {
 
         #region Events
         /// <summary>
+        /// 资源连接事件.
+        /// </summary>
+        public event EventHandler<AsyncEventArgs<eTerm443Async>> OnBeginConnect;
+
+        /// <summary>
         /// 资源验证代理事件.
         /// </summary>
         public event EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Async>> OnAsyncValidated;
@@ -365,6 +370,15 @@ namespace eTerm.AsyncSDK {
                         }
                         if (this.OnAsyncTimeout != null)
                             this.OnAsyncTimeout(sender, e);
+                    }
+                );
+            #endregion
+
+            #region OnBeginConnect
+            Async.OnBeginConnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
+                    delegate(object sender, AsyncEventArgs<eTerm443Async> e) {
+                        if (this.OnBeginConnect != null)
+                            this.OnBeginConnect(sender, e);
                     }
                 );
             #endregion
