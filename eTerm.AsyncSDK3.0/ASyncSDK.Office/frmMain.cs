@@ -390,7 +390,7 @@ string.Empty,
             AsyncStackNet.Instance.OnBeginConnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e) {
                         appendASynConnect(e.Session);
-                        TASyncLog(e.Session.userName, string.Empty, @"OnAsyncConnect", @"SUCCESS");
+                        TASyncLog(e.Session.userName, string.Empty, @"OnBeginConnect", @"SUCCESS");
                     }
                 );
 
