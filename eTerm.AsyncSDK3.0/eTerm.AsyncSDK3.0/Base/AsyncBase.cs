@@ -130,6 +130,11 @@ namespace eTerm.AsyncSDK.Base {
 
         #region Events
         /// <summary>
+        /// 开始连接事件.
+        /// </summary>
+        public event EventHandler<AsyncEventArgs<T>> OnBeginConnect;
+
+        /// <summary>
         /// 已连接事件.
         /// </summary>
         public event EventHandler<AsyncEventArgs<T>> OnAsynConnect;
@@ -212,7 +217,8 @@ namespace eTerm.AsyncSDK.Base {
         public virtual void Connect() {
             AsyncSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try {
-                //AsyncSocket.Connect(this.RemoteEP);
+                if (this.OnBeginConnect != null)
+                    OnBeginConnect(this, new AsyncEventArgs<T>(this as T));
                 ReconnectCount++;
                 //if (LocalEP != null)
                 //    AsyncSocket.Bind(
