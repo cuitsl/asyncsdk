@@ -45,7 +45,7 @@ namespace ASync.eTermBuilder {
             try {
                 TEACrypter Crypter = new TEACrypter();
                 byte[] keys = TEACrypter.MD5(Encoding.Default.GetBytes(string.Format(@"{0}", this.txtCode.Text)));
-                byte[] Result = Crypter.Encrypt(Encoding.Default.GetBytes(this.txtCode.Text), keys);
+                //byte[] Result = Crypter.Encrypt(Encoding.Default.GetBytes(this.txtCode.Text), keys);
 
 
 
@@ -53,7 +53,7 @@ namespace ASync.eTermBuilder {
                 AsyncLicenceKey Key = new AsyncLicenceKey() {
                     Company = txtCompany.Text,
                     ExpireDate = this.PickerExpire.Value,
-                    Key = Result,
+                    Key = keys,
                     MaxAsync = int.Parse(txtASyncCount.Value.ToString()),
                     MaxTSession = int.Parse(txtMaxTSession.Value.ToString()),
                     AllowDatabase = chkAllowDb.Checked,
