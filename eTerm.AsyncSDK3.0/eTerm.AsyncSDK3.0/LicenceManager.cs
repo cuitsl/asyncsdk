@@ -111,7 +111,7 @@ new TimerCallback(
             byte[] buffer;
             LicenceBody=new AsyncLicenceKey();
             try {
-                __serialNumber = GetCpuSN().Replace(@":",string.Empty);
+                __serialNumber = GetCpuSN();
                 //string SingleKey = string.Format(@"{0}", __serialNumber);
                 __identification = Identification;
                 __secreteKey = TEACrypter.MD5(Encoding.Default.GetBytes(__serialNumber));
@@ -120,7 +120,7 @@ new TimerCallback(
                     buffer = new byte[fs.Length];
                     br.Read(buffer, 0, buffer.Length);
                     LicenceBody = LicenceBody.DeXmlSerialize(__secreteKey, buffer);
-                    __flag = CompareBytes(new TEACrypter().Decrypt(LicenceBody.Key, __secreteKey), Encoding.Default.GetBytes(__serialNumber));
+                    __flag = CompareBytes(LicenceBody.Key, __secreteKey);
                     __flag =__flag&& LicenceBody.ExpireDate >= DateTime.Now;
                     __flag = __flag && LicenceBody.RemainingMinutes > 0;
                 }
