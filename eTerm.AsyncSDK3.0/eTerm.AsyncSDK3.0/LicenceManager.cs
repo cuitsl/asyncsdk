@@ -53,16 +53,23 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         /// <returns></returns>
         private string GetCpuSN() {
-            string MoAddress = " ";
+            ManagementClass cimobject = new ManagementClass("Win32_Processor");
+            ManagementObjectCollection moc = cimobject.GetInstances();
+            StringBuilder sb = new StringBuilder();
+            foreach (ManagementObject mo in moc) {
+                sb.Append(mo.Properties["ProcessorId"].Value.ToString().Replace(":", string.Empty).Replace(" ", string.Empty));
+            }
+
+            //string MoAddress = " ";
             using (ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration")) {
                 ManagementObjectCollection moc2 = mc.GetInstances();
                 foreach (ManagementObject mo in moc2) {
                     if ((bool)mo["IPEnabled"] == true)
-                        MoAddress = mo["MacAddress"].ToString();
+                        sb.Append( mo["MacAddress"].ToString().Replace(@":",string.Empty));
                     mo.Dispose();
                 }
             }
-            return MoAddress.ToString();
+            return sb.ToString();
         }
 
         /// <summary>
@@ -105,15 +112,15 @@ new TimerCallback(
             LicenceBody=new AsyncLicenceKey();
             try {
                 __serialNumber = GetCpuSN().Replace(@":",string.Empty);
-                string SingleKey = string.Format(@"{0}", __serialNumber);
+                //string SingleKey = string.Format(@"{0}", __serialNumber);
                 __identification = Identification;
-                __secreteKey = TEACrypter.MD5(Encoding.Default.GetBytes(SingleKey));
+                __secreteKey = TEACrypter.MD5(Encoding.Default.GetBytes(__serialNumber));
                 using (FileStream fs = new FileStream(Identification, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) {
                     BinaryReader br = new BinaryReader(fs);
                     buffer = new byte[fs.Length];
                     br.Read(buffer, 0, buffer.Length);
                     LicenceBody = LicenceBody.DeXmlSerialize(__secreteKey, buffer);
-                    __flag = CompareBytes(new TEACrypter().Decrypt(LicenceBody.Key, __secreteKey), Encoding.Default.GetBytes(SingleKey));
+                    __flag = CompareBytes(new TEACrypter().Decrypt(LicenceBody.Key, __secreteKey), Encoding.Default.GetBytes(__serialNumber));
                     __flag =__flag&& LicenceBody.ExpireDate >= DateTime.Now;
                     __flag = __flag && LicenceBody.RemainingMinutes > 0;
                 }
