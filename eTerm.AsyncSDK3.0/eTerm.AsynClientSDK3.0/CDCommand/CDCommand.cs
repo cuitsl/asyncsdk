@@ -35,18 +35,30 @@ namespace eTerm.ASynClientSDK {
         #endregion
 
         /// <summary>
+        /// 获取机场信息.
+        /// </summary>
+        /// <example>
+        /// CDResult Cr = Cp.Commit("SHA") as CDResult;
+        /// </example>
+        /// <param name="Code">The code.</param>
+        /// <returns></returns>
+        public ASyncResult Commit(string Code) {
+            return base.GetSyncResult(string.Format(@"CD:{0}", Code));
+        }
+
+        /// <summary>
         /// 指令结果解析适配器.
         /// </summary>
         /// <param name="Msg">指令结果集合.</param>
         /// <returns></returns>
         protected override ASyncResult ResultAdapter(string Msg) {
             CDResult CdResult = new CDResult();
-            MatchCollection m = Regex.Matches(Msg, @"([A-Z\s\/]+\,)", RegexOptions.IgnoreCase | RegexOptions.Multiline);
-            if (m.Count == 0) return CdResult;
-            CdResult.ShortName = m[1].Groups[1].Value;
-            CdResult.FullName = m[3].Groups[1].Value;
-            CdResult.CityCode = m[4].Groups[1].Value;
-            CdResult.CountryCode = m[5].Groups[1].Value;
+            MatchCollection m = Regex.Matches(Msg, @"([A-Z\s\/]+)\,", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+            if (m.Count == 0&&m.Count<5) return CdResult;
+            CdResult.ShortName = m[0].Groups[1].Value;
+            CdResult.FullName = m[2].Groups[1].Value;
+            CdResult.CityCode = m[3].Groups[1].Value;
+            CdResult.CountryCode = m[4].Groups[1].Value;
             return CdResult;
         }
     }
