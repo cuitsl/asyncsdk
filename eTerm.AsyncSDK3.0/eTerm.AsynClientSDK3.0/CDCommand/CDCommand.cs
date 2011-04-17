@@ -14,5 +14,34 @@ namespace eTerm.ASynClientSDK {
     /// </summary>
     public sealed class CDCommand : ASynCommand {
 
+        #region 构造函数
+        /// <summary>
+        /// 使用定义配置项构造连接.
+        /// </summary>
+        /// <param name="address">服务器地址.</param>
+        /// <param name="port">服务器端口.</param>
+        /// <param name="userName">授权用户名.</param>
+        /// <param name="userPass">授权用户密码.</param>
+        /// <param name="groupCode">授权用户分组.</param>
+        public CDCommand(string address, int port, string userName, string userPass, string groupCode) {
+
+        }
+
+        /// <summary>
+        /// 使用配置文件配置项构造连接.
+        /// </summary>
+        public CDCommand() : base() { }
+        #endregion
+
+        /// <summary>
+        /// 指令结果解析适配器.
+        /// </summary>
+        /// <param name="Msg">指令结果集合.</param>
+        /// <returns></returns>
+        protected override ASyncResult ResultAdapter(string Msg) {
+            CDResult CdResult = new CDResult();
+
+            return CdResult;
+        }
     }
 }

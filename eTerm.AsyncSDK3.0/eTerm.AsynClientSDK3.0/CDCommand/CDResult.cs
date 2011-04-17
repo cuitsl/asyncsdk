@@ -4,6 +4,6 @@ using System.Linq;
 using System.Text;
 
 namespace eTerm.ASynClientSDK {
-    class CDResult {
+    public sealed class CDResult:ASyncResult {
     }
 }
