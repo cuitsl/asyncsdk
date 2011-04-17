@@ -97,20 +97,21 @@ new TimerCallback(
         /// Validates the net.
         /// </summary>
         /// <returns></returns>
-        public bool ValidateNet(string Identification) {
+        private bool ValidateNet(string Identification) {
             __flag = true;
             byte[] buffer;
             LicenceBody=new AsyncLicenceKey();
             try {
                 __serialNumber = GetCpuSN();
+                string SingleKey = string.Format(@"{0}{1}", __serialNumber, @"3048ljLKJ337204YLuF47381&36!$**(@");
                 __identification = Identification;
-                __secreteKey = TEACrypter.MD5(Encoding.Default.GetBytes(string.Format(@"{0}{1}", __serialNumber, @"3048ljLKJ337204YLuF47381&36!$**(@")));
+                __secreteKey = TEACrypter.MD5(Encoding.Default.GetBytes(SingleKey));
                 using (FileStream fs = new FileStream(Identification, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) {
                     BinaryReader br = new BinaryReader(fs);
                     buffer = new byte[fs.Length];
                     br.Read(buffer, 0, buffer.Length);
                     LicenceBody = LicenceBody.DeXmlSerialize(__secreteKey, buffer);
-                    __flag = CompareBytes(new TEACrypter().Decrypt(LicenceBody.Key, __secreteKey), Encoding.Default.GetBytes(string.Format(@"{0}{1}", __serialNumber, @"3048ljLKJ337204YLuF47381&36!$**(@")));
+                    __flag = CompareBytes(new TEACrypter().Decrypt(LicenceBody.Key, __secreteKey), Encoding.Default.GetBytes(SingleKey));
                     __flag =__flag&& LicenceBody.ExpireDate >= DateTime.Now;
                     __flag = __flag && LicenceBody.RemainingMinutes > 0;
                 }
