@@ -67,6 +67,8 @@
     <Compile Include="Base\ASyncBase.cs" />
     <Compile Include="Base\ASynCommand.cs" />
     <Compile Include="Base\ASyncPNCommand.cs" />
+    <Compile Include="CDCommand\CDCommand.cs" />
+    <Compile Include="CDCommand\CDResult.cs" />
     <Compile Include="CollectionBase.cs" />
     <Compile Include="Config\ConfigException.cs" />
     <Compile Include="Config\ConfigHelper.cs" />
