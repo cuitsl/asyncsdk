@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using eTerm.ASynClientSDK.Base;
+using System.Text.RegularExpressions;
 
 namespace eTerm.ASynClientSDK {
     /// <summary>
@@ -40,7 +41,12 @@ namespace eTerm.ASynClientSDK {
         /// <returns></returns>
         protected override ASyncResult ResultAdapter(string Msg) {
             CDResult CdResult = new CDResult();
-
+            MatchCollection m = Regex.Matches(Msg, @"([A-Z\s\/]+\,)", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+            if (m.Count == 0) return CdResult;
+            CdResult.ShortName = m[1].Groups[1].Value;
+            CdResult.FullName = m[3].Groups[1].Value;
+            CdResult.CityCode = m[4].Groups[1].Value;
+            CdResult.CountryCode = m[5].Groups[1].Value;
             return CdResult;
         }
     }
