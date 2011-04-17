@@ -22,6 +22,12 @@ namespace eTerm.ASynClientSDK {
         public string PnrCode { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether this instance is cancel.
+        /// </summary>
+        /// <value><c>true</c> if this instance is cancel; otherwise, <c>false</c>.</value>
+        public bool IsCancel { get; set; }
+
+        /// <summary>
         /// 获取所有联系组 .
         /// </summary>
         /// <value>The get contacts.</value>

@@ -217,13 +217,13 @@ namespace eTerm.AsyncSDK.Base {
         public virtual void Connect() {
             AsyncSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try {
-                if (this.OnBeginConnect != null)
-                    OnBeginConnect(this, new AsyncEventArgs<T>(this as T));
                 ReconnectCount++;
                 //if (LocalEP != null)
                 //    AsyncSocket.Bind(
                 AsyncSocket.BeginConnect(this.RemoteEP, new AsyncCallback(delegate(IAsyncResult iar) {
                     try {
+                        if (this.OnBeginConnect != null)
+                            OnBeginConnect(this, new AsyncEventArgs<T>(this as T));
                         Socket clientSocket = (Socket)iar.AsyncState;
                         clientSocket.EndConnect(iar);
                         if (clientSocket.Connected)
