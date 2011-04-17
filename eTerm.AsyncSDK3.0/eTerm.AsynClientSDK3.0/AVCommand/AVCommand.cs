@@ -152,6 +152,7 @@ namespace eTerm.ASynClientSDK {
             foreach (Match m in Regex.Matches(itemString.Substring(
                 Regex.Match(itemString, @"\s[A-Z]{2}\#").Index,
                 itemString.Length - Regex.Match(itemString, @"\s[A-Z]{2}\#").Index), @"[A-Z](\d|A)\s", RegexOptions.Multiline | RegexOptions.IgnoreCase)) {
+                if (avItem.getCabins.Contains<AvItemCabinChar>(new AvItemCabinChar() { getCode = m.Value[0].ToString() })) continue;
                 avItem.getCabins.Add(new AvItemCabinChar(m.Value[0].ToString(), m.Value[1].ToString()) { });
             }
             return avItem;

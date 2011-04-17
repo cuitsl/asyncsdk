@@ -69,6 +69,7 @@ namespace eTerm.ASynClientSDK {
                         getFltClass=seg.Carbin,
                 });
             }
+            Rt.IsCancel = PnrInfoResult.Cancel;
             Rt.TKTL = PnrInfoResult.TKTL;
             //PnrInfoResult.
             return Rt;
@@ -107,70 +108,6 @@ namespace eTerm.ASynClientSDK {
             RTResult Result=base.GetSyncResult(string.Format(@"RT:{0}", pnrno)) as RTResult;
             Result.PnrCode = pnrno;
             return Result;
-        }
-        #endregion
-
-        #region 分析旅客组
-        /// <summary>
-        /// Parses the passager.
-        /// </summary>
-        /// <param name="Rt">The rt.</param>
-        /// <param name="Msg">The MSG.</param>
-        private void ParsePassager(RTResult Rt, string Msg) {
-            Rt.getPassengers =new List<PNRPassengerResult>();
-            int IndexOf = 1;
-            foreach (Match m in Regex.Matches(Msg.Replace("\0", "\r"), @"(\d+\.(([A-Z]+\/[A-Z]+)|([\u4e00-\u9fa5]+))\s*(NI)?\s*)+" + this.__pnr, RegexOptions.IgnoreCase | RegexOptions.Multiline)) {
-                foreach (Capture c in m.Groups[2].Captures) {
-                    string IdentityNo = string.Empty;
-                    if (Regex.IsMatch(Msg, @"\d+\.SSR\s+FOID\s+([A-Z0-9]{2})\s([A-Z]{2}\d+)\s+NI([A-Z0-9]+)\/[P" + (IndexOf).ToString()+"]", RegexOptions.IgnoreCase | RegexOptions.Multiline))
-                        IdentityNo = Regex.Match(Msg, @"\d+\.SSR\s+FOID\s+([A-Z0-9]{2})\s([A-Z]{2}\d+)\s+NI([A-Z0-9]+)\/[P"+(IndexOf++).ToString()+"]", RegexOptions.Multiline | RegexOptions.IgnoreCase).Groups[3].Value;
-                    Rt.getPassengers.Add(new PNRPassengerResult(c.Value) { IdentityNo=IdentityNo });
-                }
-            }
-        }
-        #endregion
-
-        #region 分析航段组
-        /// <summary>
-        /// Parses the seg.
-        /// </summary>
-        /// <param name="Rt">The rt.</param>
-        /// <param name="Msg">The MSG.</param>
-        private void ParseSeg(RTResult Rt, string Msg) {
-            Rt.getAirSegs = new List<PNRAirSegResult>();
-            foreach (Match m in Regex.Matches(Msg.Replace("\0", "\r"), @"\d+\.\s+(\w{2}\d+)\s+([A-Z])\s+([A-Z]{2}\d{2}[A-Z]{3})\s+([A-Z]{3})([A-Z]{3})\s+(\w{3})\s+(\d{4})\s+(\d{4})\s+", RegexOptions.IgnoreCase | RegexOptions.Multiline)) {
-                PNRAirSegResult seg = new PNRAirSegResult();
-                seg.getActionCode = m.Groups[6].Value;
-                seg.getAirNo = m.Groups[1].Value;
-                seg.getArrivalTime = string.Format(@"{0} {1}", m.Groups[3].Value, m.Groups[8].Value.Insert(2,":"));
-                seg.getDepartureTime = string.Format(@"{0} {1}", m.Groups[3].Value, m.Groups[7].Value.Insert(2, ":"));
-                seg.getDesCity = m.Groups[5].Value;
-                seg.getFltClass = m.Groups[2].Value;
-                seg.getOrgCity = m.Groups[4].Value;
-                Rt.getAirSegs.Add(seg);
-            }
-        }
-        #endregion
-
-        #region 联系组
-        /// <summary>
-        /// Parses the contract.
-        /// </summary>
-        /// <param name="Rt">The rt.</param>
-        /// <param name="Msg">The MSG.</param>
-        private void ParseContract(RTResult Rt, string Msg) {
-
-        }
-        #endregion
-
-        #region 分析团队标识组
-        /// <summary>
-        /// Parses the group.
-        /// </summary>
-        /// <param name="Rt">The rt.</param>
-        /// <param name="Msg">The MSG.</param>
-        private void ParseGroup(RTResult Rt, string Msg) {
-
         }
         #endregion
     }
