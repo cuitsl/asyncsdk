@@ -26,6 +26,7 @@ namespace eTerm.ASynClientSDK {
 
         #region 变量定义
         private string queryDate = string.Empty;
+        private string __AvCommand = string.Empty;
         AVResult avResult = new AVResult();
         #endregion
 
@@ -60,6 +61,7 @@ namespace eTerm.ASynClientSDK {
         /// <param name="SynCmd">eTerm实质指令.</param>
         /// <returns></returns>
         protected override ASyncResult GetSyncResult(string SynCmd) {
+            __AvCommand = SynCmd;
             return base.GetSyncResult(SynCmd);
         }
 
@@ -69,220 +71,31 @@ namespace eTerm.ASynClientSDK {
         /// <param name="Msg">指令结果集合.</param>
         /// <returns></returns>
         protected override ASyncResult ResultAdapter(string Msg) {
-            AVResult result = SyncParseAVH(Msg) as AVResult;
-            foreach (AvItem item in result.AvSegment) {
-                item.getCabins.Reverse();
+            AVResult result = new AVResult();
+            foreach (Flight seg in new AnalysisAVH().ParseAVH(this.__AvCommand, Msg).Flights) {
+                AvItem AvSegment = new AvItem() { 
+                 getAirline=seg.FlightNO,
+                  getArritime=seg.ArrivalTime,
+                   getCarrier=seg.Airline,
+                    getDeptime=seg.DepartureTime,
+                     getDstcity=seg.ArrivalAirport,
+                      getMeal=seg.Meal.Trim().Length>0,
+                       getPlanestyle=seg.AircraftType,
+                        getOrgcity=seg.DepartureAirport,
+                         getStopnumber=int.Parse( seg.Stop),
+                          isCodeShare=seg.CodeShare,
+                           getLink=seg.Connect
+                };
+                foreach (FlightCarbin carbin in seg.Carbins) {
+                    AvSegment.getCabins.Add(new AvItemCabinChar() {
+                         getCode=carbin.Carbin,
+                          getAvalibly=carbin.Number,
+                    });
+                }
+                result.AvSegment.Add(AvSegment);
             }
             return result;
         }
         #endregion
-
-        #region 结果分析
-        /// <summary>
-        /// Syncs the parse AVH.
-        /// </summary>
-        /// <param name="szResult">The sz result.</param>
-        /// <returns></returns>
-        private ASyncResult SyncParseAVH(string szResult) {
-            //有效的分页数据
-            foreach (string s in szResult.Split(new char[] { '\0' }, StringSplitOptions.RemoveEmptyEntries)) {
-                if (!Regex.IsMatch(s, queryDate + @"(\d{2})?\("))
-                    continue;
-                foreach (string avItemStr in getAvItemStringArray(s)) {
-                    AvItem Item = new AvItem();
-                    try {
-                        Item = getAvItem(avItemStr);
-                    }
-                    catch { continue; }
-                    if (avResult.AvSegment.Contains(Item) || string.IsNullOrEmpty(Item.getAirline))
-                        continue;
-                    if (avResult.AvSegment.Contains(Item))
-                        continue;
-                    avResult.AvSegment.Add(Item);
-                }
-            }
-            return avResult;
-        }
-
-        /// <summary>
-        /// Gets the av item.
-        /// </summary>
-        /// <param name="itemString">The item string.</param>
-        /// <returns></returns>
-        private List<string> getAvItemStringArray(string itemString) {
-            List<string> items = new List<string>();
-            MatchCollection matchs = new Regex(@"(^\d(.{1,}))|(^>(.{1,}))", RegexOptions.Multiline | RegexOptions.IgnoreCase).Matches(itemString.Replace("\r", "\r\n")); //Regex.Matches(itemString, @"(^\d(.{1,}))|(^>(.{1,}))");
-            foreach(Match m in  new Regex(@"(^\d(.{1,}))|(^>(.{1,}))", RegexOptions.Multiline | RegexOptions.IgnoreCase).Matches(itemString.Replace("\r", "\r\n"))){ //Regex.Matches(itemString, @"(^\d(.{1,}))|(^>(.{1,}))")
-                items.Add(m.Value);
-            }
-                
-            //for (int i = 0; i < matchs.Count; i++) {
-            //    try {
-            //        items.Add(string.Format("{0}{1}", matchs[i].Value.PadRight(80, ' '), matchs[++i].Value.PadRight(80, ' ')));
-            //    }
-            //    catch { }
-            //}
-            return items;
-        }
-
-        /// <summary>
-        /// Gets the av item.
-        /// </summary>
-        /// <param name="itemString">The item string.</param>
-        /// <returns></returns>
-        private AvItem getAvItem(string itemString) {
-            AvItem avItem = new AvItem();
-            avItem.getAirline = Regex.Match(itemString, @"(\s|\*)([A-Z]|\d)[A-Z]\d{1,}").Value;
-            avItem.isCodeShare = avItem.getAirline.StartsWith("*");
-            avItem.getAirline = avItem.getAirline.Substring(1);
-            avItem.getCarrier = avItem.getAirline.Substring(0, 2);
-            avItem.getDeptime = Regex.Matches(itemString, @"\s\d{4}\+?\d?\s")[0].Value.Trim().Insert(2,":");
-            avItem.getArritime = Regex.Matches(itemString, @"\s\d{4}\+?\d?\s")[1].Value.Trim().Substring(0, 4).Insert(2,":");
-            avItem.getOrgcity = Regex.Match(itemString, @"\s[A-Z]{6}\s").Value.Trim().Substring(0, 3);
-            avItem.getDstcity = Regex.Match(itemString, @"\s[A-Z]{6}\s").Value.Trim().Substring(3);
-            avItem.getLink = Regex.Match(itemString, @"\s[A-Z]{2}\#").Value.Trim();
-            avItem.getDepdate = queryDate;
-            avItem.getPlanestyle = Regex.Match(itemString, @"\s\d{3}\s").Value.Trim();
-            if (Regex.Matches(itemString, @"\s\d{4}\+?\d?\s")[1].Value.Trim().IndexOf("+") > 0) {
-                avItem.getArridate = (int.Parse(Regex.Match(queryDate, @"\d{1,}").Value) + 1).ToString("D2") + Regex.Match(queryDate, "[A-Z]{1,}").Value;
-            }
-            else
-                avItem.getArridate = queryDate;
-            avItem.getCabins = new List<AvItemCabinChar>();
-            foreach (Match m in Regex.Matches(itemString.Substring(
-                Regex.Match(itemString, @"\s[A-Z]{2}\#").Index,
-                itemString.Length - Regex.Match(itemString, @"\s[A-Z]{2}\#").Index), @"[A-Z](\d|A)\s", RegexOptions.Multiline | RegexOptions.IgnoreCase)) {
-                if (avItem.getCabins.Contains<AvItemCabinChar>(new AvItemCabinChar() { getCode = m.Value[0].ToString() })) continue;
-                avItem.getCabins.Add(new AvItemCabinChar(m.Value[0].ToString(), m.Value[1].ToString()) { });
-            }
-            return avItem;
-        }
-
-        #endregion
-
-
-        #region 查询方法
-        /// <summary>
-        ///  查询指定日期和城市间的实时航班信息,包含转飞航班.
-        /// </summary>
-        /// <param name="org">起飞城市三字代码.</param>
-        /// <param name="dst">到达城市三字代码.</param>
-        /// <param name="date">查询日期.</param>
-        /// <param name="airline">航空公司.</param>
-        /// <returns></returns>
-        public ASyncResult getAvailability(string org, string dst, DateTime date, string airline) {
-            avResult.getDate = date;
-            avResult.getOrg = org;
-            avResult.getDst = dst;
-            return this.getAvailability(org, dst, string.Format(@"{0}{1}", date.Day.ToString("D2"), getDateString(date)), airline, true, true);
-        }
-
-        /// <summary>
-        /// 查询指定日期和城市间的实时航班信息,包含转飞航班.
-        /// </summary>
-        /// <param name="org">起飞城市三字代码.</param>
-        /// <param name="dst">到达城市三字代码.</param>
-        /// <param name="date">查询日期.</param>
-        /// <returns></returns>
-        public ASyncResult getAvailability(string org, string dst, DateTime date) {
-            avResult.getDate = date;
-            avResult.getOrg = org;
-            avResult.getDst = dst;
-            return this.getAvailability(org, dst, string.Format(@"{0}{1}", date.Day.ToString("D2"), getDateString(date)), string.Empty, true, true);
-        }
-
-        /// <summary>
-        /// 查询指定日期和城市间的实时航班信息.
-        /// </summary>
-        /// <param name="org">起飞城市三字代码.</param>
-        /// <param name="dst">到达城市三字代码.</param>
-        /// <param name="date">查询日期.</param>
-        /// <param name="airline">航空公司.</param>
-        /// <param name="direct">是否只查询直达航班.</param>
-        /// <returns></returns>
-        public ASyncResult getAvailability(string org, string dst, DateTime date, string airline, bool direct) {
-            avResult.getDate = date;
-            avResult.getOrg = org;
-            avResult.getDst = dst;
-            return this.getAvailability(org, dst, string.Format(@"{0}{1}", date.Day.ToString("D2"), getDateString(date)), airline, direct, true);
-        }
-
-        /// <summary>
-        ///   查询指定日期和城市间的实时航班信息.
-        /// </summary>
-        /// <param name="org">起飞城市三字代码.</param>
-        /// <param name="dst">到达城市三字代码.</param>
-        /// <param name="date">查询日期.</param>
-        /// <param name="airline">航空公司.</param>
-        /// <param name="direct">是否只查询直达航班.</param>
-        /// <param name="e_ticket">是否只查询支持电子客户票航班.</param>
-        /// <returns></returns>
-        public ASyncResult getAvailability(string org, string dst, DateTime date, string airline, bool direct, bool e_ticket) {
-            avResult.getDate = date;
-            avResult.getOrg = org;
-            avResult.getDst = dst;
-            return this.getAvailability(org, dst, string.Format(@"{0}{1}", date.Day.ToString("D2"), getDateString(date)), airline, direct, e_ticket);
-        }
-
-
-        /// <summary>
-        /// 查询指定航班号和日期的航班信息.
-        /// </summary>
-        /// <param name="airline">航空公司.</param>
-        /// <param name="date">查询日期.</param>
-        /// <returns></returns>
-        //public SyncResult getAvailability(string airline, string date) {
-        //    return this.getAvailability(string.Empty,string.Empty, date, airline, false, true);
-        //}
-
-        /// <summary>
-        ///  查询指定日期和城市间的实时航班信息,包含转飞航班.
-        /// </summary>
-        /// <param name="org">起飞城市三字代码.</param>
-        /// <param name="dst">到达城市三字代码.</param>
-        /// <param name="date">查询日期(10JUL).</param>
-        /// <param name="airline">航空公司.</param>
-        /// <returns></returns>
-        public ASyncResult getAvailability(string org, string dst, string date, string airline) {
-            return this.getAvailability(org, dst, date, airline, true, true);
-        }
-
-        /// <summary>
-        /// 查询指定日期和城市间的实时航班信息.
-        /// </summary>
-        /// <param name="org">起飞城市三字代码.</param>
-        /// <param name="dst">到达城市三字代码.</param>
-        /// <param name="date">查询日期(10JUL).</param>
-        /// <param name="airline">航空公司.</param>
-        /// <param name="direct">是否只查询直达航班.</param>
-        /// <returns></returns>
-        public ASyncResult getAvailability(string org, string dst, string date, string airline, bool direct) {
-            return this.getAvailability(org, dst, date, airline, direct, true);
-        }
-
-        /// <summary>
-        ///   查询指定日期和城市间的实时航班信息.
-        /// </summary>
-        /// <param name="org">起飞城市三字代码.</param>
-        /// <param name="dst">到达城市三字代码.</param>
-        /// <param name="date">查询日期(10JUL).</param>
-        /// <param name="airline">航空公司.</param>
-        /// <param name="direct">是否只查询直达航班.</param>
-        /// <param name="e_ticket">是否只查询支持电子客户票航班.</param>
-        /// <returns></returns>
-        public ASyncResult getAvailability(string org, string dst, string date, string airline, bool direct, bool e_ticket) {
-            string avCommand = string.Format(@"AV:H/{0}{1}/{2}{3}{4}{5}"
-                , org
-                , dst
-                , date
-                , string.IsNullOrEmpty(airline) ? string.Empty : "/" + airline
-                , direct ? "/D" : string.Empty
-                , e_ticket ? "" : ""
-                );
-            this.queryDate = Regex.Match(avCommand, @"\d{2,2}[A-Z]{3,3}", RegexOptions.Singleline).Value;
-            return base.GetSyncResult(avCommand);
-        }
-        #endregion
-
     }
 }
