@@ -78,9 +78,9 @@ namespace eTerm.ASynClientSDK {
             foreach (Flight seg in new AnalysisAVH().ParseAVH(this.__AvCommand, Msg).Flights) {
                 AvItem AvSegment = new AvItem() { 
                  getAirline=seg.FlightNO,
-                  getArritime=seg.ArrivalTime,
+                  getArritime=seg.ArrivalTime.Insert(2,":"),
                    getCarrier=seg.Airline,
-                    getDeptime=seg.DepartureTime,
+                 getDeptime = seg.DepartureTime.Insert(2, ":"),
                      getDstcity=seg.ArrivalAirport,
                       getMeal=seg.Meal.Trim().Length>0,
                        getPlanestyle=seg.AircraftType,
