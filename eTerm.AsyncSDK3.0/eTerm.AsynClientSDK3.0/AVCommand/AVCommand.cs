@@ -85,6 +85,8 @@ namespace eTerm.ASynClientSDK {
                          getStopnumber=int.Parse( seg.Stop),
                           isCodeShare=seg.CodeShare,
                            getLink=seg.Connect,
+                            getDepdate=queryDate,
+                            getArridate=queryDate,
                             getCabins=new List<AvItemCabinChar>(),
                 };
                 foreach (FlightCarbin carbin in seg.Carbins) {
