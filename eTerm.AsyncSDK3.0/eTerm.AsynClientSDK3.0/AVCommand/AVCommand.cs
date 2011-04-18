@@ -97,5 +97,128 @@ namespace eTerm.ASynClientSDK {
             return result;
         }
         #endregion
+
+        #region 查询方法
+        /// <summary>
+        ///  查询指定日期和城市间的实时航班信息,包含转飞航班.
+        /// </summary>
+        /// <param name="org">起飞城市三字代码.</param>
+        /// <param name="dst">到达城市三字代码.</param>
+        /// <param name="date">查询日期.</param>
+        /// <param name="airline">航空公司.</param>
+        /// <returns></returns>
+        public ASyncResult getAvailability(string org, string dst, DateTime date, string airline) {
+            avResult.getDate = date;
+            avResult.getOrg = org;
+            avResult.getDst = dst;
+            return this.getAvailability(org, dst, string.Format(@"{0}{1}", date.Day.ToString("D2"), getDateString(date)), airline, true, true);
+        }
+
+        /// <summary>
+        /// 查询指定日期和城市间的实时航班信息,包含转飞航班.
+        /// </summary>
+        /// <param name="org">起飞城市三字代码.</param>
+        /// <param name="dst">到达城市三字代码.</param>
+        /// <param name="date">查询日期.</param>
+        /// <returns></returns>
+        public ASyncResult getAvailability(string org, string dst, DateTime date) {
+            avResult.getDate = date;
+            avResult.getOrg = org;
+            avResult.getDst = dst;
+            return this.getAvailability(org, dst, string.Format(@"{0}{1}", date.Day.ToString("D2"), getDateString(date)), string.Empty, true, true);
+        }
+
+        /// <summary>
+        /// 查询指定日期和城市间的实时航班信息.
+        /// </summary>
+        /// <param name="org">起飞城市三字代码.</param>
+        /// <param name="dst">到达城市三字代码.</param>
+        /// <param name="date">查询日期.</param>
+        /// <param name="airline">航空公司.</param>
+        /// <param name="direct">是否只查询直达航班.</param>
+        /// <returns></returns>
+        public ASyncResult getAvailability(string org, string dst, DateTime date, string airline, bool direct) {
+            avResult.getDate = date;
+            avResult.getOrg = org;
+            avResult.getDst = dst;
+            return this.getAvailability(org, dst, string.Format(@"{0}{1}", date.Day.ToString("D2"), getDateString(date)), airline, direct, true);
+        }
+
+        /// <summary>
+        ///   查询指定日期和城市间的实时航班信息.
+        /// </summary>
+        /// <param name="org">起飞城市三字代码.</param>
+        /// <param name="dst">到达城市三字代码.</param>
+        /// <param name="date">查询日期.</param>
+        /// <param name="airline">航空公司.</param>
+        /// <param name="direct">是否只查询直达航班.</param>
+        /// <param name="e_ticket">是否只查询支持电子客户票航班.</param>
+        /// <returns></returns>
+        public ASyncResult getAvailability(string org, string dst, DateTime date, string airline, bool direct, bool e_ticket) {
+            avResult.getDate = date;
+            avResult.getOrg = org;
+            avResult.getDst = dst;
+            return this.getAvailability(org, dst, string.Format(@"{0}{1}", date.Day.ToString("D2"), getDateString(date)), airline, direct, e_ticket);
+        }
+
+
+        /// <summary>
+        /// 查询指定航班号和日期的航班信息.
+        /// </summary>
+        /// <param name="airline">航空公司.</param>
+        /// <param name="date">查询日期.</param>
+        /// <returns></returns>
+        //public SyncResult getAvailability(string airline, string date) {
+        //    return this.getAvailability(string.Empty,string.Empty, date, airline, false, true);
+        //}
+
+        /// <summary>
+        ///  查询指定日期和城市间的实时航班信息,包含转飞航班.
+        /// </summary>
+        /// <param name="org">起飞城市三字代码.</param>
+        /// <param name="dst">到达城市三字代码.</param>
+        /// <param name="date">查询日期(10JUL).</param>
+        /// <param name="airline">航空公司.</param>
+        /// <returns></returns>
+        public ASyncResult getAvailability(string org, string dst, string date, string airline) {
+            return this.getAvailability(org, dst, date, airline, true, true);
+        }
+
+        /// <summary>
+        /// 查询指定日期和城市间的实时航班信息.
+        /// </summary>
+        /// <param name="org">起飞城市三字代码.</param>
+        /// <param name="dst">到达城市三字代码.</param>
+        /// <param name="date">查询日期(10JUL).</param>
+        /// <param name="airline">航空公司.</param>
+        /// <param name="direct">是否只查询直达航班.</param>
+        /// <returns></returns>
+        public ASyncResult getAvailability(string org, string dst, string date, string airline, bool direct) {
+            return this.getAvailability(org, dst, date, airline, direct, true);
+        }
+
+        /// <summary>
+        ///   查询指定日期和城市间的实时航班信息.
+        /// </summary>
+        /// <param name="org">起飞城市三字代码.</param>
+        /// <param name="dst">到达城市三字代码.</param>
+        /// <param name="date">查询日期(10JUL).</param>
+        /// <param name="airline">航空公司.</param>
+        /// <param name="direct">是否只查询直达航班.</param>
+        /// <param name="e_ticket">是否只查询支持电子客户票航班.</param>
+        /// <returns></returns>
+        public ASyncResult getAvailability(string org, string dst, string date, string airline, bool direct, bool e_ticket) {
+            string avCommand = string.Format(@"AV:H/{0}{1}/{2}{3}{4}{5}"
+                , org
+                , dst
+                , date
+                , string.IsNullOrEmpty(airline) ? string.Empty : "/" + airline
+                , direct ? "/D" : string.Empty
+                , e_ticket ? "" : ""
+                );
+            this.queryDate = Regex.Match(avCommand, @"\d{2,2}[A-Z]{3,3}", RegexOptions.Singleline).Value;
+            return base.GetSyncResult(avCommand);
+        }
+        #endregion
     }
 }
