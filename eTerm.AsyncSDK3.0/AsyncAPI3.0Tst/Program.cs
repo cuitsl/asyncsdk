@@ -17,6 +17,7 @@ namespace AsyncAPI3._0Tst {
     class Program {
         static void Main(string[] args) {
             AVResult result= new AVCommand().getAvailability(@"SHA", @"PEK", DateTime.Now.AddDays(10)) as AVResult;
+            Console.Write(result.getItemamount);
             Console.ReadLine();
 
         }
