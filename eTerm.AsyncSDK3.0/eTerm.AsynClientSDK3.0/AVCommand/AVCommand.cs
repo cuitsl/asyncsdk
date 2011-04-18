@@ -71,7 +71,7 @@ namespace eTerm.ASynClientSDK {
         /// <param name="Msg">指令结果集合.</param>
         /// <returns></returns>
         protected override ASyncResult ResultAdapter(string Msg) {
-            AVResult result = new AVResult();
+            AVResult result = new AVResult() {  AvSegment=new List<AvItem>()};
             foreach (Flight seg in new AnalysisAVH().ParseAVH(this.__AvCommand, Msg).Flights) {
                 AvItem AvSegment = new AvItem() { 
                  getAirline=seg.FlightNO,
@@ -84,7 +84,8 @@ namespace eTerm.ASynClientSDK {
                         getOrgcity=seg.DepartureAirport,
                          getStopnumber=int.Parse( seg.Stop),
                           isCodeShare=seg.CodeShare,
-                           getLink=seg.Connect
+                           getLink=seg.Connect,
+                            getCabins=new List<AvItemCabinChar>(),
                 };
                 foreach (FlightCarbin carbin in seg.Carbins) {
                     AvSegment.getCabins.Add(new AvItemCabinChar() {
