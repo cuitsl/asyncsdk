@@ -16,9 +16,7 @@ using eTerm.ASynClientSDK;
 namespace AsyncAPI3._0Tst {
     class Program {
         static void Main(string[] args) {
-            CDCommand Cd = new CDCommand();
-            CDResult Result= Cd.Commit("SHA") as CDResult;
-            Console.WriteLine(Result.FullName);
+            AVResult result= new AVCommand().getAvailability(@"SHA", @"PEK", DateTime.Now.AddDays(10)) as AVResult;
             Console.ReadLine();
 
         }
