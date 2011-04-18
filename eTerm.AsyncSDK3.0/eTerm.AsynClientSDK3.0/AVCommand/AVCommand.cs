@@ -27,7 +27,10 @@ namespace eTerm.ASynClientSDK {
         #region 变量定义
         private string queryDate = string.Empty;
         private string __AvCommand = string.Empty;
+        private DateTime? orgDate;
         AVResult avResult = new AVResult();
+        private string orgCity = string.Empty;
+        private string destCity = string.Empty;
         #endregion
 
 
@@ -71,7 +74,7 @@ namespace eTerm.ASynClientSDK {
         /// <param name="Msg">指令结果集合.</param>
         /// <returns></returns>
         protected override ASyncResult ResultAdapter(string Msg) {
-            AVResult result = new AVResult() {  AvSegment=new List<AvItem>()};
+            AVResult result = new AVResult() { getDate=this.orgDate, getDst=this.destCity, getOrg=orgCity,  AvSegment=new List<AvItem>()};
             foreach (Flight seg in new AnalysisAVH().ParseAVH(this.__AvCommand, Msg).Flights) {
                 AvItem AvSegment = new AvItem() { 
                  getAirline=seg.FlightNO,
@@ -128,6 +131,7 @@ namespace eTerm.ASynClientSDK {
             avResult.getDate = date;
             avResult.getOrg = org;
             avResult.getDst = dst;
+            orgDate = date;
             return this.getAvailability(org, dst, string.Format(@"{0}{1}", date.Day.ToString("D2"), getDateString(date)), string.Empty, true, true);
         }
 
@@ -219,6 +223,8 @@ namespace eTerm.ASynClientSDK {
                 , direct ? "/D" : string.Empty
                 , e_ticket ? "" : ""
                 );
+            this.orgCity = org;
+            this.destCity = dst;
             this.queryDate = Regex.Match(avCommand, @"\d{2,2}[A-Z]{3,3}", RegexOptions.Singleline).Value;
             return base.GetSyncResult(avCommand);
         }
