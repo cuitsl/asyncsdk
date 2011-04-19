@@ -92,7 +92,7 @@ namespace eTerm.ASynClientSDK {
                             getArridate=queryDate,
                             getCabins=new List<AvItemCabinChar>(),
                 };
-                foreach (FlightCarbin carbin in seg.Carbins) {
+                foreach (FlightCarbin carbin in seg.Carbins.Where<FlightCarbin>(CARBIN=>@"123456789A".IndexOf(CARBIN.Number)>=0)) {
                     AvSegment.getCabins.Add(new AvItemCabinChar() {
                          getCode=carbin.Carbin,
                           getAvalibly=carbin.Number,
