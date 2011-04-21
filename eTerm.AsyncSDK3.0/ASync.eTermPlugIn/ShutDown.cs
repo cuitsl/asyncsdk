@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 using eTerm.AsyncSDK;
 using System.Runtime.InteropServices;
 namespace ASync.eTermPlugIn {
-    [AfterASynCommand("!MySDK", IsSystem = true)]
+    [AfterASynCommand("!ShutDown", IsSystem = true)]
     public sealed class ShutDown : BaseASyncPlugIn {
 
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
