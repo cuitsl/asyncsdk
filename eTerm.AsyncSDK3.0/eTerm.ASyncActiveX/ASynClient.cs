@@ -59,7 +59,7 @@ namespace eTerm.ASyncActiveX {
 
                         textEditorControlWrapper1.ActiveTextAreaControl.TextArea.KeyUp += new KeyEventHandler(
                                 delegate(object sender1, KeyEventArgs e1) {
-                                    if (e1.KeyValue == 27) {
+                                    if (e1.Shift&& e1.KeyValue == 13) {
                                         textEditorControlWrapper1.ActiveTextAreaControl.TextArea.InsertString(SOE.ToString());
                                         return;
                                     }
