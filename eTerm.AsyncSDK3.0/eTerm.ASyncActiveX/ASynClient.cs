@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 
 
 namespace eTerm.ASyncActiveX {
-    [Guid("636B8CE1-7512-464C-B63C-FC75BDCA21DB"), ProgId("eTerm.ASyncActiveX.ASynClient"), ComVisible(true)]
+    [Guid("7FCBBFE7-C95D-488E-B1A7-7978BB9E08C5"), ProgId("eTerm.ASyncActiveX.ASynClient"), ComVisible(true)]
     public partial class ASynClient : UserControl, IObjectSafety {
         public ASynClient() {
             InitializeComponent();
