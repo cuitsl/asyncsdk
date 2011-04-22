@@ -11,6 +11,7 @@ using ICSharpCode.TextEditor.Document;
 using eTerm.AsyncSDK.Net;
 using eTerm.AsyncSDK;
 using System.Text.RegularExpressions;
+using eTerm.AsyncSDK.Util;
 
 
 namespace eTerm.ASyncActiveX {
@@ -76,11 +77,77 @@ namespace eTerm.ASyncActiveX {
                                     foreach (char keyValue in Command.ToCharArray().Reverse<char>()) {
                                         sbCmd.Append(keyValue);
                                     }
-                                    this.__ClientSocket.SendPacket(sbCmd.Replace("\r\n","\r").ToString());
+                                    this.__ClientSocket.SendPacket(EnCodeBuffer(GbToUsas(sbCmd.Replace("\r\n", "\r").ToString())));
                                 }
                             );
                     }
                 );
+        }
+        #endregion
+
+        #region 编码
+        /// <summary>
+        /// 编码需发送的数据包.
+        /// </summary>
+        /// <param name="buffer">The buffer.</param>
+        /// <returns></returns>
+        private byte[] EnCodeBuffer(byte[] buffer) {
+            //byte len;
+            byte[] bytes1;
+            List<byte> Command = new List<byte>();
+            bytes1 = new byte[2];
+            bytes1[0] = 1;
+            Command.AddRange(bytes1);
+            bytes1 = BitConverter.GetBytes((ushort)((0x13 + buffer.Length) + 2));
+            Array.Reverse(bytes1);
+            Command.AddRange(bytes1);
+            //协议兼容
+            //O157F4A1  O74523A1    O7452281    O7452291
+            //Int32 tmp = Int32.Parse(this.RID, System.Globalization.NumberStyles.HexNumber);
+            //Int32 tmp1 = 1; //Int32.Parse(base.userName.Substring(base.userName.Length - 1, 1), System.Globalization.NumberStyles.HexNumber);
+            Command.AddRange(new byte[] { 0, 0, 0, 0x01, this.__ClientSocket.SID, this.__ClientSocket.RID, 0x70, 0x02, 0x1b, 0x0B, 0x2C, 0x20, 0, 0x0f, 0x1e });
+            //len = Convert.ToByte((int)((0x13 + buffer.Length) + 2));
+            Command.AddRange(buffer);
+            Command.AddRange(new byte[] { 0x20, 0x03 });
+
+
+            return Command.ToArray();
+        }
+
+
+        /// <summary>
+        /// 中文编码到Usas转换.
+        /// </summary>
+        /// <param name="inputString">输入字符串.</param>
+        /// <returns></returns>
+        protected virtual byte[] GbToUsas(string inputString) {
+            StringBuilder sb = new StringBuilder(inputString);
+            foreach (Match m in Regex.Matches(inputString, @"[\u4e00-\u9fa5]+")) {
+                sb.Replace(m.Value, string.Format(@"{0}{1}", Cn2PyUtil.FullConvert(m.Value), m.Value));
+            }
+
+            byte[] org = Encoding.GetEncoding("gb2312").GetBytes(sb.ToString());
+            List<byte> result = new List<byte>();
+            bool flag = false;
+            foreach (byte b in org) {
+                if (!flag && b > 128) {
+                    result.AddRange(new byte[] { 0x1B, 0x0E });
+                    flag = true;
+                }
+                else if (flag && b <= 128) {
+                    result.AddRange(new byte[] { 0x1B, 0x0F });
+                    flag = false;
+                }
+                if (flag) {
+                    result.Add((byte)(b - 128));
+                }
+                else {
+                    result.Add(b);
+                }
+            }
+            if (flag)
+                result.AddRange(new byte[] { 0x1B, 0x0F });
+            return result.ToArray();
         }
         #endregion
 
