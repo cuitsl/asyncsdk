@@ -29,11 +29,14 @@ namespace eTerm.ASyncActiveX {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textEditorControlWrapper1 = new eTerm.ASyncActiveX.TextEditorControlWrapper();
+            this.button1 = new System.Windows.Forms.Button();
+            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(10, 10);
             this.groupBox1.Name = "groupBox1";
@@ -56,29 +59,29 @@ namespace eTerm.ASyncActiveX {
             // 
             // textEditorControlWrapper1
             // 
-            // 
-            // textEditorControlWrapper1
-            // 
-            this.textEditorControlWrapper1.BackColor = SystemColors.Control;
-            this.textEditorControlWrapper1.Dock = DockStyle.Fill;
-            this.textEditorControlWrapper1.ForeColor = SystemColors.ControlText;
-            this.textEditorControlWrapper1.Location = new Point(0, 0);
+            this.textEditorControlWrapper1.BackColor = System.Drawing.SystemColors.Control;
+            this.textEditorControlWrapper1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textEditorControlWrapper1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.textEditorControlWrapper1.IsReadOnly = false;
+            this.textEditorControlWrapper1.Location = new System.Drawing.Point(3, 16);
+            this.textEditorControlWrapper1.Name = "textEditorControlWrapper1";
             this.textEditorControlWrapper1.SelectedText = "";
             this.textEditorControlWrapper1.SelectionStart = 0;
-            this.textEditorControlWrapper1.ShowEOLMarkers = true;
-            this.textEditorControlWrapper1.ShowInvalidLines = false;
             this.textEditorControlWrapper1.ShowLineNumbers = false;
-            this.textEditorControlWrapper1.ShowSpaces = true;
-            this.textEditorControlWrapper1.ShowTabs = true;
-            this.textEditorControlWrapper1.ShowVRuler = true;
-
-            this.textEditorControlWrapper1.Document.HighlightingStrategy = HighlightingStrategyFactory.CreateHighlightingStrategy("BAT");
-            this.textEditorControlWrapper1.ShowEOLMarkers = false;
-            this.textEditorControlWrapper1.ShowHRuler = false;
             this.textEditorControlWrapper1.ShowMatchingBracket = false;
             this.textEditorControlWrapper1.ShowVRuler = false;
-            this.textEditorControlWrapper1.ShowSpaces = false;
-            this.textEditorControlWrapper1.ShowTabs = false;
+            this.textEditorControlWrapper1.Size = new System.Drawing.Size(618, 352);
+            this.textEditorControlWrapper1.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(543, 19);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ASynClient
             // 
@@ -89,6 +92,7 @@ namespace eTerm.ASyncActiveX {
             this.Name = "ASynClient";
             this.Padding = new System.Windows.Forms.Padding(10);
             this.Size = new System.Drawing.Size(644, 441);
+            this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -99,5 +103,6 @@ namespace eTerm.ASyncActiveX {
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private TextEditorControlWrapper textEditorControlWrapper1;
+        private Button button1;
     }
 }
