@@ -164,13 +164,13 @@ namespace eTerm.ASyncActiveX {
                 return;
             }
             try {
-                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Select();
                 textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Line = RowNumber - 0x20;
                 textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Column = 0x00;
                 textEditorControlWrapper1.ActiveTextAreaControl.TextArea.InsertString(PacketString); ;
                 this.textEditorControlWrapper1.Enabled = flag;
-                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Line = RowNumber - 0x20 + Regex.Matches(PacketString, "\r", RegexOptions.Multiline | RegexOptions.IgnoreCase).Count;
-                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Column = 0x10;
+                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Line = RowNumber - 0x20 + Regex.Matches(PacketString, "\r", RegexOptions.Multiline | RegexOptions.IgnoreCase).Count+1;
+                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Column = 0x00;
+                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Select();
                 
             }
             catch { }
