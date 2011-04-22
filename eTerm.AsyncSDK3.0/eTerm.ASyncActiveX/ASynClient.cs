@@ -290,7 +290,7 @@ namespace eTerm.ASyncActiveX {
                     else {
                         //激活配置
                         //PacketPush(@"认证成功", true, 0x00, 0x00);
-                        this.__ClientSocket = new eTerm443Async(this.txtAddress.Text, int.Parse(this.txtPort.Value.ToString()), this.txtUserName.Text.Trim(), this.txtPassword.Text.Trim(), 0x00, 0x00) { IsSsl = false };
+                        this.__ClientSocket = new eTerm443Async(this.txtAddress.Text, int.Parse(this.txtPort.Value.ToString()), this.txtUserName.Text.Trim(), this.txtPassword.Text.Trim(), 0x00, 0x00) { IsSsl = chkIsSsl.Checked };
                         this.__ClientSocket.OnAsynConnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                                 delegate(object sender1, AsyncEventArgs<eTerm443Async> e1)
                                 {
@@ -318,7 +318,7 @@ namespace eTerm.ASyncActiveX {
                                     ResetButton(true);
                                 }
                             );
-                        this.__ClientSocket.Connect(this.txtAddress.Text, int.Parse(this.txtPort.Value.ToString()), false);
+                        this.__ClientSocket.Connect(this.txtAddress.Text, int.Parse(this.txtPort.Value.ToString()), chkIsSsl.Checked);
                     }
                 }
                 catch (Exception ex) {

@@ -39,6 +39,7 @@ namespace eTerm.ASyncActiveX {
             this.btnConnect = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textEditorControlWrapper1 = new eTerm.ASyncActiveX.TextEditorControlWrapper();
+            this.chkIsSsl = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).BeginInit();
@@ -58,16 +59,17 @@ namespace eTerm.ASyncActiveX {
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 9;
+            this.tableLayoutPanel1.ColumnCount = 10;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtAddress, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 2, 0);
@@ -77,6 +79,7 @@ namespace eTerm.ASyncActiveX {
             this.tableLayoutPanel1.Controls.Add(this.lblUserPass, 6, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtPassword, 7, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnConnect, 8, 0);
+            this.tableLayoutPanel1.Controls.Add(this.chkIsSsl, 9, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -96,7 +99,7 @@ namespace eTerm.ASyncActiveX {
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(83, 3);
+            this.txtAddress.Location = new System.Drawing.Point(67, 3);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(110, 20);
             this.txtAddress.TabIndex = 1;
@@ -105,7 +108,7 @@ namespace eTerm.ASyncActiveX {
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(203, 0);
+            this.label2.Location = new System.Drawing.Point(187, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 0;
@@ -113,7 +116,7 @@ namespace eTerm.ASyncActiveX {
             // 
             // txtPort
             // 
-            this.txtPort.Location = new System.Drawing.Point(283, 3);
+            this.txtPort.Location = new System.Drawing.Point(251, 3);
             this.txtPort.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -136,7 +139,7 @@ namespace eTerm.ASyncActiveX {
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(363, 0);
+            this.label3.Location = new System.Drawing.Point(331, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 0;
@@ -144,7 +147,7 @@ namespace eTerm.ASyncActiveX {
             // 
             // txtUserName
             // 
-            this.txtUserName.Location = new System.Drawing.Point(443, 3);
+            this.txtUserName.Location = new System.Drawing.Point(395, 3);
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(74, 20);
             this.txtUserName.TabIndex = 1;
@@ -153,7 +156,7 @@ namespace eTerm.ASyncActiveX {
             // lblUserPass
             // 
             this.lblUserPass.AutoSize = true;
-            this.lblUserPass.Location = new System.Drawing.Point(523, 0);
+            this.lblUserPass.Location = new System.Drawing.Point(475, 0);
             this.lblUserPass.Name = "lblUserPass";
             this.lblUserPass.Size = new System.Drawing.Size(43, 13);
             this.lblUserPass.TabIndex = 0;
@@ -161,7 +164,7 @@ namespace eTerm.ASyncActiveX {
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(603, 3);
+            this.txtPassword.Location = new System.Drawing.Point(539, 3);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(74, 20);
@@ -171,7 +174,7 @@ namespace eTerm.ASyncActiveX {
             // btnConnect
             // 
             this.btnConnect.AutoSize = true;
-            this.btnConnect.Location = new System.Drawing.Point(683, 3);
+            this.btnConnect.Location = new System.Drawing.Point(619, 3);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(93, 23);
             this.btnConnect.TabIndex = 3;
@@ -207,6 +210,16 @@ namespace eTerm.ASyncActiveX {
             this.textEditorControlWrapper1.Size = new System.Drawing.Size(802, 359);
             this.textEditorControlWrapper1.TabIndex = 0;
             // 
+            // chkIsSsl
+            // 
+            this.chkIsSsl.AutoSize = true;
+            this.chkIsSsl.Location = new System.Drawing.Point(739, 3);
+            this.chkIsSsl.Name = "chkIsSsl";
+            this.chkIsSsl.Size = new System.Drawing.Size(50, 17);
+            this.chkIsSsl.TabIndex = 4;
+            this.chkIsSsl.Text = "安全";
+            this.chkIsSsl.UseVisualStyleBackColor = true;
+            // 
             // ASynClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -240,5 +253,6 @@ namespace eTerm.ASyncActiveX {
         private Label lblUserPass;
         private TextBox txtPassword;
         private Button btnConnect;
+        private CheckBox chkIsSsl;
     }
 }
