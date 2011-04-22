@@ -59,25 +59,32 @@ namespace eTerm.ASyncActiveX {
                         this.textEditorControlWrapper1.Enabled = false;
 
                         textEditorControlWrapper1.ActiveTextAreaControl.TextArea.KeyUp += new KeyEventHandler(
-                                delegate(object sender1, KeyEventArgs e1) {
+                                delegate(object sender1, KeyEventArgs e1)
+                                {
                                     if (e1.KeyValue == 27) {
                                         textEditorControlWrapper1.ActiveTextAreaControl.TextArea.InsertString(SOE.ToString());
                                         return;
                                     }
-                                    if (!(e1.Shift && e1.KeyValue == 13)) return;
-                                    StringBuilder sbCmd = new StringBuilder();
-                                    foreach (char keyValue in
-                                                            from key in textEditorControlWrapper1.Text.ToCharArray().Reverse<char>()
-                                                            select key) {
-                                        if (keyValue == SOE) break;
-                                        sbCmd.Append(keyValue);
+                                    if (
+                                        (e1.Shift && e1.KeyValue == 13)
+                                        ||
+                                        (e1.Control && e1.KeyValue == 13)
+                                        ) {
+                                        //if (!(e1.Control && e1.KeyValue == 13)) return;
+                                        StringBuilder sbCmd = new StringBuilder();
+                                        foreach (char keyValue in
+                                                                from key in textEditorControlWrapper1.Text.ToCharArray().Reverse<char>()
+                                                                select key) {
+                                            if (keyValue == SOE) break;
+                                            sbCmd.Append(keyValue);
+                                        }
+                                        string Command = sbCmd.ToString();
+                                        sbCmd = new StringBuilder();
+                                        foreach (char keyValue in Command.ToCharArray().Reverse<char>()) {
+                                            sbCmd.Append(keyValue);
+                                        }
+                                        this.__ClientSocket.SendPacket(EnCodeBuffer(GbToUsas(sbCmd.Replace("\r\n", "\r").ToString())));
                                     }
-                                    string Command=sbCmd.ToString();
-                                    sbCmd=new StringBuilder();
-                                    foreach (char keyValue in Command.ToCharArray().Reverse<char>()) {
-                                        sbCmd.Append(keyValue);
-                                    }
-                                    this.__ClientSocket.SendPacket(EnCodeBuffer(GbToUsas(sbCmd.Replace("\r\n", "\r").ToString())));
                                 }
                             );
                     }
@@ -243,9 +250,9 @@ namespace eTerm.ASyncActiveX {
                 return;
             }
             try {
-                this.btnConnect.Tag = flag ? this.__ClientSocket : null;
-                this.btnConnect.Text = !flag ? @"断开服务器(&X)" : @"连接服务器(&C)";
-                //this.btnConnect.Enabled = flag;
+                //this.btnConnect.Tag = flag ? this.__ClientSocket : null;
+                //this.btnConnect.Text = !flag ? @"断开服务器(&X)" : @"连接服务器(&C)";
+                this.btnConnect.Enabled = flag;
             }
             catch { }
         }
