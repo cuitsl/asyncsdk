@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using ICSharpCode.TextEditor.Document;
 using eTerm.AsyncSDK.Net;
+using eTerm.AsyncSDK;
 
 
 namespace eTerm.ASyncActiveX {
@@ -125,5 +126,41 @@ namespace eTerm.ASyncActiveX {
             return Rslt;
         }
         #endregion
+
+        #region UI Thread
+        public delegate void PacketPushCallback(string PacketString);
+
+        /// <summary>
+        /// Packets the push callback.
+        /// </summary>
+        /// <param name="PacketString">The packet string.</param>
+        private void PacketPush(string PacketString) {
+            if (this.InvokeRequired) {
+                this.BeginInvoke(new PacketPushCallback(PacketPush), PacketString);
+                return;
+            }
+            try {
+                this.textEditorControlWrapper1.Text = PacketString;
+            }
+            catch { }
+        }
+        #endregion
+
+        private void button1_Click(object sender, EventArgs e) {
+            eTerm.AsyncSDK.LicenceManager.Instance.BeginValidate(new AsyncCallback(delegate(IAsyncResult iar) {
+                try {
+                    if (!eTerm.AsyncSDK.LicenceManager.Instance.EndValidate(iar)) {
+                        PacketPush(@"认证失败");
+                    }
+                    else {
+                        //激活配置
+                        PacketPush(@"认证成功");
+                    }
+                }
+                catch (Exception ex) {
+                    MessageBox.Show(ex.Message, "错误提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }), @"C:\Program Files (x86)\eTerm共享服务器3.2\Key.Bin");
+        }
     }
 }
