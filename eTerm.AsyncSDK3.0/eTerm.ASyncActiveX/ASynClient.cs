@@ -165,7 +165,7 @@ namespace eTerm.ASyncActiveX {
                         this.__ClientSocket.OnValidated += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Async>>(
                                 delegate(object sender1, AsyncEventArgs<eTerm443Packet, eTerm443Async> e1) {
                                     PacketPush(string.Format(@"会话{0}认证完成", e1.Session.SessionId));
-                                    e1.Session.SendPacket(@"AVH/SHAPEK+/D");
+                                    e1.Session.SendPacket(@"FD:SHACSX");
                                 }
                             );
                         this.__ClientSocket.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>>(
@@ -186,17 +186,6 @@ namespace eTerm.ASyncActiveX {
                     MessageBox.Show(ex.Message, "错误提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }), @"D:\SouceCode\Personal\eTerm.AsyncSDK3.0\ASyncSDK.Office\bin\Release\Key.Bin");
-        }
-
-        private void textEditorControlWrapper1_KeyUp(object sender, KeyEventArgs e) {
-            if (e.KeyValue == 123) {                //F12
-                //TabPage tab = this.connectTabs.TabPages[this.connectTabs.SelectedIndex];
-                this.__ClientSocket.SendPacket(@"FD:SHAPEK");
-            }
-            else if (e.KeyValue == 27) {          //ESC 
-                //TabPage tab = this.connectTabs.TabPages[this.connectTabs.SelectedIndex];
-                //TextEditorControl textBox = tab.Controls[0] as TextEditorControl;
-            }
         }
     }
 }
