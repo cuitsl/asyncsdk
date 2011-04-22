@@ -179,13 +179,24 @@ namespace eTerm.ASyncActiveX {
                                     PacketPush(string.Format(@"会话{0}连接断开", e1.Session.SessionId));
                                 }
                             );
-                        this.__ClientSocket.Connect();
+                        this.__ClientSocket.Connect(@"www.1tkt.com", 350,false);
                     }
                 }
                 catch (Exception ex) {
                     MessageBox.Show(ex.Message, "错误提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }), @"D:\SouceCode\Personal\eTerm.AsyncSDK3.0\ASyncSDK.Office\bin\Release\Key.Bin");
+        }
+
+        private void textEditorControlWrapper1_KeyUp(object sender, KeyEventArgs e) {
+            if (e.KeyValue == 123) {                //F12
+                //TabPage tab = this.connectTabs.TabPages[this.connectTabs.SelectedIndex];
+                this.__ClientSocket.SendPacket(@"FD:SHAPEK");
+            }
+            else if (e.KeyValue == 27) {          //ESC 
+                //TabPage tab = this.connectTabs.TabPages[this.connectTabs.SelectedIndex];
+                //TextEditorControl textBox = tab.Controls[0] as TextEditorControl;
+            }
         }
     }
 }
