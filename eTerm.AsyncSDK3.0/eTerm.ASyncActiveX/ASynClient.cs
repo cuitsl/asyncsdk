@@ -56,7 +56,6 @@ namespace eTerm.ASyncActiveX {
         }
         #endregion
 
-
         #region IObjectSafety
 
         private const string _IID_IDispatch = "{00020400-0000-0000-C000-000000000046}";
@@ -170,7 +169,6 @@ namespace eTerm.ASyncActiveX {
             catch { }
         }
         #endregion
-
 
         #region 连接方法
         /// <summary>
