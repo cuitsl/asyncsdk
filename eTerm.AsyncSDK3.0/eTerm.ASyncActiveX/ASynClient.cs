@@ -18,7 +18,7 @@ namespace eTerm.ASyncActiveX {
 
             this.Load += new EventHandler(
                     delegate(object sender, EventArgs e) {
-                        /*
+                        
                         this.textEditorControlWrapper1.BackColor = SystemColors.Control;
                         this.textEditorControlWrapper1.Dock = DockStyle.Fill;
                         this.textEditorControlWrapper1.ForeColor = SystemColors.ControlText;
@@ -39,7 +39,7 @@ namespace eTerm.ASyncActiveX {
                         this.textEditorControlWrapper1.ShowVRuler = false;
                         this.textEditorControlWrapper1.ShowSpaces = false;
                         this.textEditorControlWrapper1.ShowTabs = false;
-                        */
+                        
                     }
                 );
         }

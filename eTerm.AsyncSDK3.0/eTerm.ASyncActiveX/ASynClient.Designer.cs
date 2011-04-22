@@ -25,7 +25,7 @@
         private void InitializeComponent() {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textEditorControl1 = new ICSharpCode.TextEditor.TextEditorControl();
+            this.textEditorControlWrapper1 = new eTerm.ASyncActiveX.TextEditorControlWrapper();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,7 +41,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.textEditorControl1);
+            this.groupBox2.Controls.Add(this.textEditorControlWrapper1);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(10, 60);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(10);
@@ -51,18 +51,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "指令区";
             // 
-            // textEditorControl1
+            // textEditorControlWrapper1
             // 
-            this.textEditorControl1.BackColor = System.Drawing.Color.Black;
-            this.textEditorControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textEditorControl1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.textEditorControl1.IsReadOnly = false;
-            this.textEditorControl1.Location = new System.Drawing.Point(3, 16);
-            this.textEditorControl1.Name = "textEditorControl1";
-            this.textEditorControl1.Padding = new System.Windows.Forms.Padding(10);
-            this.textEditorControl1.Size = new System.Drawing.Size(618, 352);
-            this.textEditorControl1.TabIndex = 0;
-            this.textEditorControl1.Text = "textEditorControl1";
+            this.textEditorControlWrapper1.IsReadOnly = false;
+            this.textEditorControlWrapper1.Location = new System.Drawing.Point(329, 143);
+            this.textEditorControlWrapper1.Name = "textEditorControlWrapper1";
+            this.textEditorControlWrapper1.SelectedText = "";
+            this.textEditorControlWrapper1.SelectionStart = 0;
+            this.textEditorControlWrapper1.Size = new System.Drawing.Size(100, 100);
+            this.textEditorControlWrapper1.TabIndex = 0;
+            this.textEditorControlWrapper1.Text = "textEditorControlWrapper1";
             // 
             // ASynClient
             // 
@@ -82,6 +80,6 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private ICSharpCode.TextEditor.TextEditorControl textEditorControl1;
+        private TextEditorControlWrapper textEditorControlWrapper1;
     }
 }
