@@ -185,7 +185,7 @@ namespace eTerm.ASyncActiveX {
                 catch (Exception ex) {
                     MessageBox.Show(ex.Message, "错误提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }), @"C:\Program Files (x86)\eTerm共享服务器3.2\Key.Bin");
+            }), @"D:\SouceCode\Personal\eTerm.AsyncSDK3.0\ASyncSDK.Office\bin\Release\Key.Bin");
         }
     }
 }

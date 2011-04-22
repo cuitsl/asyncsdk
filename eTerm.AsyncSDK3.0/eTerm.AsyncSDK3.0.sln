@@ -44,8 +44,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eTerm.ASyncActiveX", "eTerm
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "eTerm.ASynClientSetup", "eTerm.ASynClientSetup\eTerm.ASynClientSetup.vdproj", "{9E581FCD-A7A2-47F7-AC8A-F22EEEB90647}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinActivex", "WinActivex\WinActivex.csproj", "{5DEEB843-FDDD-4CDE-9DC2-118A9E8ECC12}"
-EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -114,10 +112,6 @@ Global
 		{242BD4A4-B8DF-4339-8EE7-D71C7959615C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9E581FCD-A7A2-47F7-AC8A-F22EEEB90647}.Debug|Any CPU.ActiveCfg = Debug
 		{9E581FCD-A7A2-47F7-AC8A-F22EEEB90647}.Release|Any CPU.ActiveCfg = Release
-		{5DEEB843-FDDD-4CDE-9DC2-118A9E8ECC12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5DEEB843-FDDD-4CDE-9DC2-118A9E8ECC12}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5DEEB843-FDDD-4CDE-9DC2-118A9E8ECC12}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5DEEB843-FDDD-4CDE-9DC2-118A9E8ECC12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
