@@ -8,17 +8,21 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using ICSharpCode.TextEditor.Document;
+using eTerm.AsyncSDK.Net;
 
 
 namespace eTerm.ASyncActiveX {
     [Guid("7FCBBFE7-C95D-488E-B1A7-7978BB9E08C5"), ProgId("eTerm.ASyncActiveX.ASynClient"), ComVisible(true)]
     public partial class ASynClient : UserControl, IObjectSafety {
+
+        private eTerm443Async __ClientSocket;
+
         public ASynClient() {
             InitializeComponent();
 
             this.Load += new EventHandler(
                     delegate(object sender, EventArgs e) {
-                        
+                        this.textEditorControlWrapper1.Text = string.Empty;
                         this.textEditorControlWrapper1.BackColor = SystemColors.Control;
                         this.textEditorControlWrapper1.Dock = DockStyle.Fill;
                         this.textEditorControlWrapper1.ForeColor = Color.Green;
