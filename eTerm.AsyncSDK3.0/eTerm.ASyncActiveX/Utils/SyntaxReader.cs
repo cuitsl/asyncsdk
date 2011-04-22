@@ -110,7 +110,7 @@ namespace eTerm.ASyncActiveX
 
         private void LoadXMLDocuments()
         {
-            Stream manifestResourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("QueryCommander.QCTextEditor.SQLReservedWords.xml");
+            Stream manifestResourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream("eTerm.ASyncActiveX.SQLReservedWords.xml");
             this.xmlReservedWords = new XmlDocument();
             this.xmlReservedWords.Load(manifestResourceStream);
             this.xmlNodeList = this.xmlReservedWords.GetElementsByTagName("SQLReservedWords");
