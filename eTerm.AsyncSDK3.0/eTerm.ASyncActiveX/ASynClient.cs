@@ -148,7 +148,12 @@ namespace eTerm.ASyncActiveX {
         }
         #endregion
 
-        private void button1_Click(object sender, EventArgs e) {
+        /// <summary>
+        /// Handles the Click event of the btnConnect control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void btnConnect_Click(object sender, EventArgs e) {
             eTerm.AsyncSDK.LicenceManager.Instance.BeginValidate(new AsyncCallback(delegate(IAsyncResult iar) {
                 try {
                     if (!eTerm.AsyncSDK.LicenceManager.Instance.EndValidate(iar)) {
@@ -157,7 +162,7 @@ namespace eTerm.ASyncActiveX {
                     else {
                         //激活配置
                         PacketPush(@"认证成功",true);
-                        this.__ClientSocket = new eTerm443Async(@"asyncsdk.gicp.net", 350, @"guzm", @"guzm", 0x00, 0x00) { IsSsl = false };
+                        this.__ClientSocket = new eTerm443Async(this.txtAddress.Text,int.Parse( this.txtPort.Value.ToString()), this.txtUserName.Text.Trim(), this.txtPassword.Text.Trim(), 0x00, 0x00) { IsSsl = false };
                         this.__ClientSocket.OnAsynConnect+=new EventHandler<AsyncEventArgs<eTerm443Async>>(
                                 delegate(object sender1,AsyncEventArgs<eTerm443Async> e1){
                                     PacketPush(string.Format(@"会话{0}开始连接", e1.Session.SessionId),false);
