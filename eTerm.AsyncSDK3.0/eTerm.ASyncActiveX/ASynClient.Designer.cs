@@ -189,6 +189,7 @@ namespace eTerm.ASyncActiveX {
             this.btnConnect.TabIndex = 3;
             this.btnConnect.Text = "连接服务器(&C)";
             this.btnConnect.UseVisualStyleBackColor = true;
+            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
             // textEditorControlWrapper1
             // 
