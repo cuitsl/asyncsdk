@@ -1,5 +1,5 @@
 ﻿namespace eTerm.ASyncActiveX {
-    partial class UserControl1 {
+    partial class ASynClient {
         /// <summary>
         /// Required designer variable.
         /// </summary>
