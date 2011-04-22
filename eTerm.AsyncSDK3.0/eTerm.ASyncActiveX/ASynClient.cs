@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using ICSharpCode.TextEditor.Document;
 
 
 namespace eTerm.ASyncActiveX {
@@ -14,6 +15,33 @@ namespace eTerm.ASyncActiveX {
     public partial class ASynClient : UserControl, IObjectSafety {
         public ASynClient() {
             InitializeComponent();
+
+            this.Load += new EventHandler(
+                    delegate(object sender, EventArgs e) {
+                        /*
+                        this.textEditorControlWrapper1.BackColor = SystemColors.Control;
+                        this.textEditorControlWrapper1.Dock = DockStyle.Fill;
+                        this.textEditorControlWrapper1.ForeColor = SystemColors.ControlText;
+                        this.textEditorControlWrapper1.Location = new Point(0, 0);
+                        this.textEditorControlWrapper1.SelectedText = "";
+                        this.textEditorControlWrapper1.SelectionStart = 0;
+                        this.textEditorControlWrapper1.ShowEOLMarkers = true;
+                        this.textEditorControlWrapper1.ShowInvalidLines = false;
+                        this.textEditorControlWrapper1.ShowLineNumbers = false;
+                        this.textEditorControlWrapper1.ShowSpaces = true;
+                        this.textEditorControlWrapper1.ShowTabs = true;
+                        this.textEditorControlWrapper1.ShowVRuler = true;
+
+                        this.textEditorControlWrapper1.Document.HighlightingStrategy = HighlightingStrategyFactory.CreateHighlightingStrategy("BAT");
+                        this.textEditorControlWrapper1.ShowEOLMarkers = false;
+                        this.textEditorControlWrapper1.ShowHRuler = false;
+                        this.textEditorControlWrapper1.ShowMatchingBracket = false;
+                        this.textEditorControlWrapper1.ShowVRuler = false;
+                        this.textEditorControlWrapper1.ShowSpaces = false;
+                        this.textEditorControlWrapper1.ShowTabs = false;
+                        */
+                    }
+                );
         }
 
 
