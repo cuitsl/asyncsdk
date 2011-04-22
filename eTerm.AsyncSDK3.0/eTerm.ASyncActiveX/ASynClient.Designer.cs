@@ -27,9 +27,9 @@ namespace eTerm.ASyncActiveX {
         /// </summary>
         private void InitializeComponent() {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textEditorControlWrapper1 = new eTerm.ASyncActiveX.TextEditorControlWrapper();
-            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -44,6 +44,16 @@ namespace eTerm.ASyncActiveX {
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "服务器信息";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(543, 19);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox2
             // 
@@ -72,16 +82,7 @@ namespace eTerm.ASyncActiveX {
             this.textEditorControlWrapper1.ShowVRuler = false;
             this.textEditorControlWrapper1.Size = new System.Drawing.Size(618, 352);
             this.textEditorControlWrapper1.TabIndex = 0;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(543, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.textEditorControlWrapper1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textEditorControlWrapper1_KeyUp);
             // 
             // ASynClient
             // 
