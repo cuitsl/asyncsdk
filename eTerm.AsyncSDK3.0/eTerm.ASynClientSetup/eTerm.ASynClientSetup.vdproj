@@ -21,7 +21,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_BDA07BE21159F4F2F622B9D05C8EC510"
+        "MsmKey" = "8:_A942FDE990EFDC1AEF931C12DE4378C7"
+        "OwnerKey" = "8:_3078FE2BB46D4359A8BD87546FCB7FFA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BEEF2A34EAFDFDD2A794907492E9E166"
         "OwnerKey" = "8:_3078FE2BB46D4359A8BD87546FCB7FFA"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -34,12 +40,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_BDA07BE21159F4F2F622B9D05C8EC510"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_3078FE2BB46D4359A8BD87546FCB7FFA"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -47,6 +47,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_DD87CAD990B2057B0161131F4746FB05"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_A942FDE990EFDC1AEF931C12DE4378C7"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -74,6 +80,19 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:http://asyncsdk.gicp.net"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Net.Framework.3.5.SP1"
+                    {
+                    "Name" = "8:.NET Framework 3.5 SP1"
+                    "ProductCode" = "8:Microsoft.Net.Framework.3.5.SP1"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
             }
         }
         "Release"
@@ -91,6 +110,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -120,20 +147,20 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BDA07BE21159F4F2F622B9D05C8EC510"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A942FDE990EFDC1AEF931C12DE4378C7"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:eTerm.ASynClientSDK, Version=3.2.0.9201, Culture=neutral, PublicKeyToken=812ee83a73caaa79, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:eTerm.AsyncSDK, Version=3.2.0.9201, Culture=neutral, PublicKeyToken=ab9f30c4b7887c28, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_BDA07BE21159F4F2F622B9D05C8EC510"
+                    "_A942FDE990EFDC1AEF931C12DE4378C7"
                     {
-                    "Name" = "8:eTerm.ASynClientSDK.dll"
+                    "Name" = "8:eTerm.AsyncSDK.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:eTerm.ASynClientSDK.dll"
+            "SourcePath" = "8:eTerm.AsyncSDK.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A80A769C8901448CBD9A81FB23B1F331"
@@ -147,6 +174,26 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BEEF2A34EAFDFDD2A794907492E9E166"
+            {
+            "SourcePath" = "8:eTerm.ASyncActiveX.tlb"
+            "TargetName" = "8:eTerm.ASyncActiveX.tlb"
+            "Tag" = "8:"
+            "Folder" = "8:_A80A769C8901448CBD9A81FB23B1F331"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:2"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
@@ -338,6 +385,56 @@
             {
                 "Keys"
                 {
+                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_0366734375634D6BB6DC962922A67D4D"
+                    {
+                    "Name" = "8:CLSID"
+                    "Condition" = "8:"
+                    "AlwaysCreate" = "11:FALSE"
+                    "DeleteAtUninstall" = "11:FALSE"
+                    "Transitive" = "11:FALSE"
+                        "Keys"
+                        {
+                            "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_50EA9B9AF0EA4BEEA50A6DEFAA7549A5"
+                            {
+                            "Name" = "8:7FCBBFE7-C95D-488E-B1A7-7978BB9E08C5"
+                            "Condition" = "8:"
+                            "AlwaysCreate" = "11:FALSE"
+                            "DeleteAtUninstall" = "11:FALSE"
+                            "Transitive" = "11:FALSE"
+                                "Keys"
+                                {
+                                    "{60EA8692-D2D5-43EB-80DC-7906BF13D6EF}:_1363590390B24C1F86D5EEAEB843A3B2"
+                                    {
+                                    "Name" = "8:InstalledVersion"
+                                    "Condition" = "8:"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "DeleteAtUninstall" = "11:FALSE"
+                                    "Transitive" = "11:FALSE"
+                                        "Keys"
+                                        {
+                                        }
+                                        "Values"
+                                        {
+                                            "{ADCFDA98-8FDD-45E4-90BC-E3D20B029870}:_068A8D9997E14042871CAFB80B79FD86"
+                                            {
+                                            "Name" = "8:"
+                                            "Condition" = "8:"
+                                            "Transitive" = "11:FALSE"
+                                            "ValueTypes" = "3:1"
+                                            "Value" = "8:1,0,1,0"
+                                            }
+                                        }
+                                    }
+                                }
+                                "Values"
+                                {
+                                }
+                            }
+                        }
+                        "Values"
+                        {
+                        }
+                    }
                 }
             }
             "HKU"
