@@ -172,6 +172,12 @@ namespace eTerm.ASyncActiveX {
                                     PacketPush(Encoding.GetEncoding("gb2312").GetString(e1.Session.UnOutPakcet(e1.InPacket)));
                                 }
                             );
+                        this.__ClientSocket.OnAsyncDisconnect+=new EventHandler<AsyncEventArgs<eTerm443Async>>(
+                                delegate(object sender1, AsyncEventArgs<eTerm443Async> e1)
+                                {
+                                    PacketPush(string.Format(@"会话{0}连接断开", e1.Session.SessionId));
+                                }
+                            );
                         this.__ClientSocket.Connect();
                     }
                 }
