@@ -59,11 +59,11 @@ namespace eTerm.ASyncActiveX {
 
                         textEditorControlWrapper1.ActiveTextAreaControl.TextArea.KeyUp += new KeyEventHandler(
                                 delegate(object sender1, KeyEventArgs e1) {
-                                    if (e1.Shift&& e1.KeyValue == 13) {
+                                    if (e1.KeyValue == 27) {
                                         textEditorControlWrapper1.ActiveTextAreaControl.TextArea.InsertString(SOE.ToString());
                                         return;
                                     }
-                                    if (e1.KeyValue != 123) return;
+                                    if (!(e1.Shift && e1.KeyValue == 13)) return;
                                     StringBuilder sbCmd = new StringBuilder();
                                     foreach (char keyValue in
                                                             from key in textEditorControlWrapper1.Text.ToCharArray().Reverse<char>()
