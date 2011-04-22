@@ -20,6 +20,8 @@ namespace eTerm.ASyncActiveX {
 
         private eTerm443Async __ClientSocket;
 
+        private const char SOE = '';
+
         #region 构造函数
         /// <summary>
         /// Initializes a new instance of the <see cref="ASynClient"/> class.
@@ -44,6 +46,8 @@ namespace eTerm.ASyncActiveX {
                         this.textEditorControlWrapper1.ShowTabs = true;
                         this.textEditorControlWrapper1.ShowVRuler = true;
 
+                        this.textEditorControlWrapper1.Font = new Font(@"Consolas", 12, FontStyle.Regular);
+
                         this.textEditorControlWrapper1.Document.HighlightingStrategy = HighlightingStrategyFactory.CreateHighlightingStrategy("BAT");
                         this.textEditorControlWrapper1.ShowEOLMarkers = false;
                         this.textEditorControlWrapper1.ShowHRuler = false;
@@ -52,6 +56,29 @@ namespace eTerm.ASyncActiveX {
                         this.textEditorControlWrapper1.ShowSpaces = false;
                         this.textEditorControlWrapper1.ShowTabs = false;
                         this.textEditorControlWrapper1.Enabled = false;
+
+                        textEditorControlWrapper1.ActiveTextAreaControl.TextArea.KeyUp += new KeyEventHandler(
+                                delegate(object sender1, KeyEventArgs e1) {
+                                    if (e1.KeyValue == 27) {
+                                        textEditorControlWrapper1.ActiveTextAreaControl.TextArea.InsertString(SOE.ToString());
+                                        return;
+                                    }
+                                    if (e1.KeyValue != 123) return;
+                                    StringBuilder sbCmd = new StringBuilder();
+                                    foreach (char keyValue in
+                                                            from key in textEditorControlWrapper1.Text.ToCharArray().Reverse<char>()
+                                                            select key) {
+                                        if (keyValue == SOE) break;
+                                        sbCmd.Append(keyValue);
+                                    }
+                                    string Command=sbCmd.ToString();
+                                    sbCmd=new StringBuilder();
+                                    foreach (char keyValue in Command.ToCharArray().Reverse<char>()) {
+                                        sbCmd.Append(keyValue);
+                                    }
+                                    this.__ClientSocket.SendPacket(sbCmd.Replace("\r\n","\r").ToString());
+                                }
+                            );
                     }
                 );
         }
@@ -164,12 +191,13 @@ namespace eTerm.ASyncActiveX {
                 return;
             }
             try {
-                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Line = RowNumber - 0x20;
+                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.InsertString("\r");
+                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Line = textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Line + 1;
                 textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Column = 0x00;
-                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.InsertString(PacketString); ;
+                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.InsertString(PacketString + SOE);
                 this.textEditorControlWrapper1.Enabled = flag;
-                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Line = RowNumber - 0x20 + Regex.Matches(PacketString, "\r", RegexOptions.Multiline | RegexOptions.IgnoreCase).Count+1;
-                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Column = 0x00;
+                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Line = textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Line  + Regex.Matches(PacketString, "\r", RegexOptions.Multiline | RegexOptions.IgnoreCase).Count+1;
+                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Column = 1;
                 textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Select();
                 
             }
