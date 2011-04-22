@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using ICSharpCode.TextEditor.Document;
 using eTerm.AsyncSDK.Net;
 using eTerm.AsyncSDK;
+using System.Text.RegularExpressions;
 
 
 namespace eTerm.ASyncActiveX {
@@ -163,8 +164,14 @@ namespace eTerm.ASyncActiveX {
                 return;
             }
             try {
-                this.textEditorControlWrapper1.Text = PacketString;
+                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Select();
+                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Line = RowNumber - 0x20;
+                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Column = 0x00;
+                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.InsertString(PacketString); ;
                 this.textEditorControlWrapper1.Enabled = flag;
+                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Line = RowNumber - 0x20 + Regex.Matches(PacketString, "\r", RegexOptions.Multiline | RegexOptions.IgnoreCase).Count;
+                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Column = 0x10;
+                
             }
             catch { }
         }
@@ -183,22 +190,22 @@ namespace eTerm.ASyncActiveX {
                 try {
                     ResetButton(false);
                     if (!eTerm.AsyncSDK.LicenceManager.Instance.EndValidate(iar)) {
-                        PacketPush(@"认证失败", false, 0x00, 0x00);
+                        //PacketPush(@"认证失败", false, 0x00, 0x00);
                     }
                     else {
                         //激活配置
-                        PacketPush(@"认证成功", true, 0x00, 0x00);
+                        //PacketPush(@"认证成功", true, 0x00, 0x00);
                         this.__ClientSocket = new eTerm443Async(this.txtAddress.Text, int.Parse(this.txtPort.Value.ToString()), this.txtUserName.Text.Trim(), this.txtPassword.Text.Trim(), 0x00, 0x00) { IsSsl = false };
                         this.__ClientSocket.OnAsynConnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                                 delegate(object sender1, AsyncEventArgs<eTerm443Async> e1)
                                 {
-                                    PacketPush(string.Format(@"会话{0}开始连接", e1.Session.SessionId), false, 0x00, 0x00);
+                                    //PacketPush(string.Format(@"会话{0}开始连接", e1.Session.SessionId), false, 0x00, 0x00);
                                 }
                             );
                         this.__ClientSocket.OnValidated += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Async>>(
                                 delegate(object sender1, AsyncEventArgs<eTerm443Packet, eTerm443Async> e1)
                                 {
-                                    PacketPush(string.Format(@"会话{0}认证完成", e1.Session.SessionId), true, 0x00, 0x00);
+                                    //PacketPush(string.Format(@"会话{0}认证完成", e1.Session.SessionId), true, 0x00, 0x00);
                                     ResetButton(false);
                                     e1.Session.SendPacket(@"FD:SHACSX");
                                 }
@@ -206,13 +213,13 @@ namespace eTerm.ASyncActiveX {
                         this.__ClientSocket.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>>(
                                 delegate(object sender1, AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> e1)
                                 {
-                                    PacketPush(Encoding.GetEncoding("gb2312").GetString(e1.Session.UnOutPakcet(e1.InPacket)), true, 0x00, 0x00);
+                                    PacketPush(Encoding.GetEncoding("gb2312").GetString(e1.Session.UnOutPakcet(e1.InPacket)), true, e1.InPacket.OriginalBytes[0x0e], e1.InPacket.OriginalBytes[0x0f]);
                                 }
                             );
                         this.__ClientSocket.OnAsyncDisconnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                                 delegate(object sender1, AsyncEventArgs<eTerm443Async> e1)
                                 {
-                                    PacketPush(string.Format(@"会话{0}连接断开", e1.Session.SessionId), false, 0x00, 0x00);
+                                    //PacketPush(string.Format(@"会话{0}连接断开", e1.Session.SessionId), false, 0x00, 0x00);
                                     ResetButton(true);
                                 }
                             );
