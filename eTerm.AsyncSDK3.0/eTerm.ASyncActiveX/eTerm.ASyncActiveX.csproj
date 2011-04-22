@@ -34,9 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="eTerm.ASynClientSDK, Version=3.2.0.9201, Culture=neutral, PublicKeyToken=812ee83a73caaa79, processorArchitecture=MSIL">
+    <Reference Include="eTerm.AsyncSDK, Version=3.2.0.9201, Culture=neutral, PublicKeyToken=ab9f30c4b7887c28, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Reference\eTerm.ASynClientSDK.dll</HintPath>
+      <HintPath>..\Reference\eTerm.AsyncSDK.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.TextEditor, Version=3.0.0.3800, Culture=neutral, PublicKeyToken=4d61825e8dd49f1a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
