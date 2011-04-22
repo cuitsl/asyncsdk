@@ -155,6 +155,24 @@ namespace eTerm.ASyncActiveX {
                     else {
                         //激活配置
                         PacketPush(@"认证成功");
+                        this.__ClientSocket = new eTerm443Async(@"www.1tkt.com", 350, @"gtt", @"031188", 0x00, 0x00) { IsSsl = false };
+                        this.__ClientSocket.OnAsynConnect+=new EventHandler<AsyncEventArgs<eTerm443Async>>(
+                                delegate(object sender1,AsyncEventArgs<eTerm443Async> e1){
+                                    PacketPush(string.Format(@"会话{0}开始连接", e1.Session.SessionId));
+                                }
+                            );
+                        this.__ClientSocket.OnValidated += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Async>>(
+                                delegate(object sender1, AsyncEventArgs<eTerm443Packet, eTerm443Async> e1) {
+                                    PacketPush(string.Format(@"会话{0}认证完成", e1.Session.SessionId));
+                                    e1.Session.SendPacket(@"AVH/SHAPEK+/D");
+                                }
+                            );
+                        this.__ClientSocket.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>>(
+                                delegate(object sender1, AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> e1) {
+                                    PacketPush(Encoding.GetEncoding("gb2312").GetString(e1.Session.UnOutPakcet(e1.InPacket)));
+                                }
+                            );
+                        this.__ClientSocket.Connect();
                     }
                 }
                 catch (Exception ex) {
