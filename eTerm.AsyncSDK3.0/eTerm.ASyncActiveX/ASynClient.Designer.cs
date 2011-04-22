@@ -27,7 +27,6 @@ namespace eTerm.ASyncActiveX {
         /// </summary>
         private void InitializeComponent() {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.txtAddress = new System.Windows.Forms.TextBox();
@@ -38,11 +37,12 @@ namespace eTerm.ASyncActiveX {
             this.lblUserPass = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.btnConnect = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textEditorControlWrapper1 = new eTerm.ASyncActiveX.TextEditorControlWrapper();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -55,18 +55,6 @@ namespace eTerm.ASyncActiveX {
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "服务器信息";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.textEditorControlWrapper1);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(10, 60);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(10);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(808, 378);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "指令区";
             // 
             // tableLayoutPanel1
             // 
@@ -182,7 +170,7 @@ namespace eTerm.ASyncActiveX {
             // 
             // btnConnect
             // 
-            this.btnConnect.AutoEllipsis = true;
+            this.btnConnect.AutoSize = true;
             this.btnConnect.Location = new System.Drawing.Point(683, 3);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(93, 23);
@@ -190,6 +178,18 @@ namespace eTerm.ASyncActiveX {
             this.btnConnect.Text = "连接服务器(&C)";
             this.btnConnect.UseVisualStyleBackColor = true;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.textEditorControlWrapper1);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(10, 60);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(10);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(808, 378);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "指令区";
             // 
             // textEditorControlWrapper1
             // 
@@ -217,10 +217,10 @@ namespace eTerm.ASyncActiveX {
             this.Padding = new System.Windows.Forms.Padding(10);
             this.Size = new System.Drawing.Size(828, 448);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).EndInit();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
