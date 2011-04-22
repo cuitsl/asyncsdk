@@ -82,7 +82,6 @@ namespace eTerm.ASyncActiveX {
             this.textEditorControlWrapper1.ShowVRuler = false;
             this.textEditorControlWrapper1.Size = new System.Drawing.Size(618, 352);
             this.textEditorControlWrapper1.TabIndex = 0;
-            this.textEditorControlWrapper1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textEditorControlWrapper1_KeyUp);
             // 
             // ASynClient
             // 
