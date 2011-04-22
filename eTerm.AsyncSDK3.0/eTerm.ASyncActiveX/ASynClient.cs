@@ -235,7 +235,7 @@ namespace eTerm.ASyncActiveX {
                                 {
                                     //PacketPush(string.Format(@"会话{0}认证完成", e1.Session.SessionId), true, 0x00, 0x00);
                                     ResetButton(false);
-                                    e1.Session.SendPacket(@"FD:SHACSX");
+                                    //e1.Session.SendPacket(@"FD:SHACSX");
                                 }
                             );
                         this.__ClientSocket.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>>(
