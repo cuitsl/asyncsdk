@@ -14,6 +14,7 @@ using eTerm.AsyncSDK;
 
 namespace eTerm.ASyncActiveX {
     [Guid("7FCBBFE7-C95D-488E-B1A7-7978BB9E08C5"), ProgId("eTerm.ASyncActiveX.ASynClient"), ComVisible(true)]
+    [ToolboxItem(true)]
     public partial class ASynClient : UserControl, IObjectSafety {
 
         private eTerm443Async __ClientSocket;
