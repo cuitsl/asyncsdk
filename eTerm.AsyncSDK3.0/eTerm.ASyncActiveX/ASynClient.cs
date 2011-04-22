@@ -21,7 +21,7 @@ namespace eTerm.ASyncActiveX {
                         
                         this.textEditorControlWrapper1.BackColor = SystemColors.Control;
                         this.textEditorControlWrapper1.Dock = DockStyle.Fill;
-                        this.textEditorControlWrapper1.ForeColor = SystemColors.ControlText;
+                        this.textEditorControlWrapper1.ForeColor = Color.Green;
                         this.textEditorControlWrapper1.Location = new Point(0, 0);
                         this.textEditorControlWrapper1.SelectedText = "";
                         this.textEditorControlWrapper1.SelectionStart = 0;
