@@ -45,7 +45,7 @@ namespace eTerm.ASyncActiveX {
                         this.textEditorControlWrapper1.ShowVRuler = false;
                         this.textEditorControlWrapper1.ShowSpaces = false;
                         this.textEditorControlWrapper1.ShowTabs = false;
-                        
+                        this.textEditorControlWrapper1.Enabled = false;
                     }
                 );
         }
@@ -129,19 +129,20 @@ namespace eTerm.ASyncActiveX {
         #endregion
 
         #region UI Thread
-        public delegate void PacketPushCallback(string PacketString);
+        public delegate void PacketPushCallback(string PacketString,bool flag);
 
         /// <summary>
         /// Packets the push callback.
         /// </summary>
         /// <param name="PacketString">The packet string.</param>
-        private void PacketPush(string PacketString) {
+        private void PacketPush(string PacketString,bool flag) {
             if (this.InvokeRequired) {
-                this.BeginInvoke(new PacketPushCallback(PacketPush), PacketString);
+                this.BeginInvoke(new PacketPushCallback(PacketPush), PacketString, flag);
                 return;
             }
             try {
                 this.textEditorControlWrapper1.Text = PacketString;
+                this.textEditorControlWrapper1.Enabled = flag;
             }
             catch { }
         }
@@ -151,32 +152,32 @@ namespace eTerm.ASyncActiveX {
             eTerm.AsyncSDK.LicenceManager.Instance.BeginValidate(new AsyncCallback(delegate(IAsyncResult iar) {
                 try {
                     if (!eTerm.AsyncSDK.LicenceManager.Instance.EndValidate(iar)) {
-                        PacketPush(@"认证失败");
+                        PacketPush(@"认证失败",false);
                     }
                     else {
                         //激活配置
-                        PacketPush(@"认证成功");
-                        this.__ClientSocket = new eTerm443Async(@"www.1tkt.com", 350, @"gtt", @"031188", 0x00, 0x00) { IsSsl = false };
+                        PacketPush(@"认证成功",true);
+                        this.__ClientSocket = new eTerm443Async(@"asyncsdk.gicp.net", 350, @"guzm", @"guzm", 0x00, 0x00) { IsSsl = false };
                         this.__ClientSocket.OnAsynConnect+=new EventHandler<AsyncEventArgs<eTerm443Async>>(
                                 delegate(object sender1,AsyncEventArgs<eTerm443Async> e1){
-                                    PacketPush(string.Format(@"会话{0}开始连接", e1.Session.SessionId));
+                                    PacketPush(string.Format(@"会话{0}开始连接", e1.Session.SessionId),false);
                                 }
                             );
                         this.__ClientSocket.OnValidated += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Async>>(
                                 delegate(object sender1, AsyncEventArgs<eTerm443Packet, eTerm443Async> e1) {
-                                    PacketPush(string.Format(@"会话{0}认证完成", e1.Session.SessionId));
+                                    PacketPush(string.Format(@"会话{0}认证完成", e1.Session.SessionId),true);
                                     e1.Session.SendPacket(@"FD:SHACSX");
                                 }
                             );
                         this.__ClientSocket.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async>>(
                                 delegate(object sender1, AsyncEventArgs<eTerm443Packet, eTerm443Packet, eTerm443Async> e1) {
-                                    PacketPush(Encoding.GetEncoding("gb2312").GetString(e1.Session.UnOutPakcet(e1.InPacket)));
+                                    PacketPush(Encoding.GetEncoding("gb2312").GetString(e1.Session.UnOutPakcet(e1.InPacket)),true);
                                 }
                             );
                         this.__ClientSocket.OnAsyncDisconnect+=new EventHandler<AsyncEventArgs<eTerm443Async>>(
                                 delegate(object sender1, AsyncEventArgs<eTerm443Async> e1)
                                 {
-                                    PacketPush(string.Format(@"会话{0}连接断开", e1.Session.SessionId));
+                                    PacketPush(string.Format(@"会话{0}连接断开", e1.Session.SessionId),false);
                                 }
                             );
                         this.__ClientSocket.Connect(@"www.1tkt.com", 350,false);
