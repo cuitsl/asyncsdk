@@ -187,5 +187,7 @@ namespace eTerm.ASyncActiveX {
                 }
             }), @"D:\SouceCode\Personal\eTerm.AsyncSDK3.0\ASyncSDK.Office\bin\Release\Key.Bin");
         }
+
+
     }
 }
