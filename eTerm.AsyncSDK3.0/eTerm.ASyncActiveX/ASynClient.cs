@@ -154,6 +154,7 @@ namespace eTerm.ASyncActiveX {
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnConnect_Click(object sender, EventArgs e) {
+            this.btnConnect.Enabled = false;
             eTerm.AsyncSDK.LicenceManager.Instance.BeginValidate(new AsyncCallback(delegate(IAsyncResult iar) {
                 try {
                     if (!eTerm.AsyncSDK.LicenceManager.Instance.EndValidate(iar)) {
