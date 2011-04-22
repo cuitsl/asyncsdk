@@ -243,7 +243,9 @@ namespace eTerm.ASyncActiveX {
                 return;
             }
             try {
-                this.btnConnect.Enabled = flag;
+                this.btnConnect.Tag = flag ? this.__ClientSocket : null;
+                this.btnConnect.Text = !flag ? @"断开服务器(&X)" : @"连接服务器(&C)";
+                //this.btnConnect.Enabled = flag;
             }
             catch { }
         }
@@ -279,7 +281,7 @@ namespace eTerm.ASyncActiveX {
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnConnect_Click(object sender, EventArgs e) {
-            //this.btnConnect.Enabled = false;
+            if (this.btnConnect.Tag != null) { this.__ClientSocket.Close(); return; }
             eTerm.AsyncSDK.LicenceManager.Instance.BeginValidate(new AsyncCallback(delegate(IAsyncResult iar)
             {
                 try {
@@ -291,6 +293,10 @@ namespace eTerm.ASyncActiveX {
                         //激活配置
                         //PacketPush(@"认证成功", true, 0x00, 0x00);
                         this.__ClientSocket = new eTerm443Async(this.txtAddress.Text, int.Parse(this.txtPort.Value.ToString()), this.txtUserName.Text.Trim(), this.txtPassword.Text.Trim(), 0x00, 0x00) { IsSsl = chkIsSsl.Checked };
+                        this.__ClientSocket.TSessionReconnectValidate = new eTerm.AsyncSDK.Base.AsyncBase<eTerm443Async, eTerm443Packet>.ValidateTSessionCallback(delegate(eTerm443Packet Packet, eTerm443Async Connect)
+                        {
+                            return false;
+                        });
                         this.__ClientSocket.OnAsynConnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                                 delegate(object sender1, AsyncEventArgs<eTerm443Async> e1)
                                 {

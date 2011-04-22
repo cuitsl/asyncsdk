@@ -37,9 +37,9 @@ namespace eTerm.ASyncActiveX {
             this.lblUserPass = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.btnConnect = new System.Windows.Forms.Button();
+            this.chkIsSsl = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textEditorControlWrapper1 = new eTerm.ASyncActiveX.TextEditorControlWrapper();
-            this.chkIsSsl = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).BeginInit();
@@ -68,8 +68,8 @@ namespace eTerm.ASyncActiveX {
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtAddress, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 2, 0);
@@ -78,8 +78,8 @@ namespace eTerm.ASyncActiveX {
             this.tableLayoutPanel1.Controls.Add(this.txtUserName, 5, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblUserPass, 6, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtPassword, 7, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnConnect, 8, 0);
-            this.tableLayoutPanel1.Controls.Add(this.chkIsSsl, 9, 0);
+            this.tableLayoutPanel1.Controls.Add(this.chkIsSsl, 8, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnConnect, 9, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -174,13 +174,23 @@ namespace eTerm.ASyncActiveX {
             // btnConnect
             // 
             this.btnConnect.AutoSize = true;
-            this.btnConnect.Location = new System.Drawing.Point(619, 3);
+            this.btnConnect.Location = new System.Drawing.Point(683, 3);
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(93, 23);
+            this.btnConnect.Size = new System.Drawing.Size(116, 23);
             this.btnConnect.TabIndex = 3;
             this.btnConnect.Text = "连接服务器(&C)";
             this.btnConnect.UseVisualStyleBackColor = true;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
+            // 
+            // chkIsSsl
+            // 
+            this.chkIsSsl.AutoSize = true;
+            this.chkIsSsl.Location = new System.Drawing.Point(619, 3);
+            this.chkIsSsl.Name = "chkIsSsl";
+            this.chkIsSsl.Size = new System.Drawing.Size(50, 17);
+            this.chkIsSsl.TabIndex = 4;
+            this.chkIsSsl.Text = "安全";
+            this.chkIsSsl.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -209,16 +219,6 @@ namespace eTerm.ASyncActiveX {
             this.textEditorControlWrapper1.ShowVRuler = false;
             this.textEditorControlWrapper1.Size = new System.Drawing.Size(802, 359);
             this.textEditorControlWrapper1.TabIndex = 0;
-            // 
-            // chkIsSsl
-            // 
-            this.chkIsSsl.AutoSize = true;
-            this.chkIsSsl.Location = new System.Drawing.Point(739, 3);
-            this.chkIsSsl.Name = "chkIsSsl";
-            this.chkIsSsl.Size = new System.Drawing.Size(50, 17);
-            this.chkIsSsl.TabIndex = 4;
-            this.chkIsSsl.Text = "安全";
-            this.chkIsSsl.UseVisualStyleBackColor = true;
             // 
             // ASynClient
             // 
