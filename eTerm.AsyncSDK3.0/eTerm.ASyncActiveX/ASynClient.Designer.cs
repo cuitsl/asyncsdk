@@ -39,10 +39,10 @@ namespace eTerm.ASyncActiveX {
             this.chkIsSsl = new System.Windows.Forms.CheckBox();
             this.btnConnect = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textEditorControlWrapper1 = new eTerm.ASyncActiveX.TextEditorControlWrapper();
             this.txtKeyStatus = new System.Windows.Forms.StatusStrip();
             this.txtRowNumber = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtColumnNumber = new System.Windows.Forms.ToolStripStatusLabel();
-            this.textEditorControlWrapper1 = new eTerm.ASyncActiveX.TextEditorControlWrapper();
             this.txtKeyBordStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -209,6 +209,22 @@ namespace eTerm.ASyncActiveX {
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "指令区";
             // 
+            // textEditorControlWrapper1
+            // 
+            this.textEditorControlWrapper1.BackColor = System.Drawing.SystemColors.Control;
+            this.textEditorControlWrapper1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textEditorControlWrapper1.ForeColor = System.Drawing.Color.Lime;
+            this.textEditorControlWrapper1.IsReadOnly = false;
+            this.textEditorControlWrapper1.Location = new System.Drawing.Point(3, 16);
+            this.textEditorControlWrapper1.Name = "textEditorControlWrapper1";
+            this.textEditorControlWrapper1.SelectedText = "";
+            this.textEditorControlWrapper1.SelectionStart = 0;
+            this.textEditorControlWrapper1.ShowLineNumbers = false;
+            this.textEditorControlWrapper1.ShowMatchingBracket = false;
+            this.textEditorControlWrapper1.ShowVRuler = false;
+            this.textEditorControlWrapper1.Size = new System.Drawing.Size(802, 359);
+            this.textEditorControlWrapper1.TabIndex = 0;
+            // 
             // txtKeyStatus
             // 
             this.txtKeyStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -229,22 +245,6 @@ namespace eTerm.ASyncActiveX {
             // 
             this.txtColumnNumber.Name = "txtColumnNumber";
             this.txtColumnNumber.Size = new System.Drawing.Size(0, 17);
-            // 
-            // textEditorControlWrapper1
-            // 
-            this.textEditorControlWrapper1.BackColor = System.Drawing.SystemColors.Control;
-            this.textEditorControlWrapper1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textEditorControlWrapper1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.textEditorControlWrapper1.IsReadOnly = false;
-            this.textEditorControlWrapper1.Location = new System.Drawing.Point(3, 16);
-            this.textEditorControlWrapper1.Name = "textEditorControlWrapper1";
-            this.textEditorControlWrapper1.SelectedText = "";
-            this.textEditorControlWrapper1.SelectionStart = 0;
-            this.textEditorControlWrapper1.ShowLineNumbers = false;
-            this.textEditorControlWrapper1.ShowMatchingBracket = false;
-            this.textEditorControlWrapper1.ShowVRuler = false;
-            this.textEditorControlWrapper1.Size = new System.Drawing.Size(802, 359);
-            this.textEditorControlWrapper1.TabIndex = 0;
             // 
             // txtKeyBordStatus
             // 
