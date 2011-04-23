@@ -21,7 +21,7 @@ namespace eTerm.ASyncActiveX {
 
         private eTerm443Async __ClientSocket;
 
-        private const char SOE = '';
+        private const char SOE = '▶';
 
         #region 构造函数
         /// <summary>
@@ -47,7 +47,7 @@ namespace eTerm.ASyncActiveX {
                         this.textEditorControlWrapper1.ShowTabs = true;
                         this.textEditorControlWrapper1.ShowVRuler = true;
 
-                        this.textEditorControlWrapper1.Font = new Font(@"Consolas", 12, FontStyle.Regular);
+                        this.textEditorControlWrapper1.Font = new Font(@"宋体", 12, FontStyle.Regular);
 
                         this.textEditorControlWrapper1.Document.HighlightingStrategy = HighlightingStrategyFactory.CreateHighlightingStrategy("BAT");
                         this.textEditorControlWrapper1.ShowEOLMarkers = false;
