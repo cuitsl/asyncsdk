@@ -39,7 +39,7 @@ namespace eTerm.ASyncActiveX {
             this.chkIsSsl = new System.Windows.Forms.CheckBox();
             this.btnConnect = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textEditorControlWrapper1 = new eTerm.ASyncActiveX.TextEditorControlWrapper();
+            this.textEditorControlWrapper1 = new ICSharpCode.TextEditor.TextEditorControl();
             this.txtKeyStatus = new System.Windows.Forms.StatusStrip();
             this.txtRowNumber = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtColumnNumber = new System.Windows.Forms.ToolStripStatusLabel();
@@ -211,19 +211,14 @@ namespace eTerm.ASyncActiveX {
             // 
             // textEditorControlWrapper1
             // 
-            this.textEditorControlWrapper1.BackColor = System.Drawing.SystemColors.Control;
             this.textEditorControlWrapper1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textEditorControlWrapper1.ForeColor = System.Drawing.Color.Lime;
             this.textEditorControlWrapper1.IsReadOnly = false;
             this.textEditorControlWrapper1.Location = new System.Drawing.Point(3, 16);
             this.textEditorControlWrapper1.Name = "textEditorControlWrapper1";
-            this.textEditorControlWrapper1.SelectedText = "";
-            this.textEditorControlWrapper1.SelectionStart = 0;
-            this.textEditorControlWrapper1.ShowLineNumbers = false;
-            this.textEditorControlWrapper1.ShowMatchingBracket = false;
-            this.textEditorControlWrapper1.ShowVRuler = false;
             this.textEditorControlWrapper1.Size = new System.Drawing.Size(802, 359);
             this.textEditorControlWrapper1.TabIndex = 0;
+            this.textEditorControlWrapper1.Text = "textEditorControl1";
             // 
             // txtKeyStatus
             // 
@@ -279,7 +274,6 @@ namespace eTerm.ASyncActiveX {
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private TextEditorControlWrapper textEditorControlWrapper1;
         private TableLayoutPanel tableLayoutPanel1;
         private Label label1;
         private TextBox txtAddress;
@@ -295,5 +289,6 @@ namespace eTerm.ASyncActiveX {
         private ToolStripStatusLabel txtRowNumber;
         private ToolStripStatusLabel txtColumnNumber;
         private ToolStripStatusLabel txtKeyBordStatus;
+        private ICSharpCode.TextEditor.TextEditorControl textEditorControlWrapper1;
     }
 }
