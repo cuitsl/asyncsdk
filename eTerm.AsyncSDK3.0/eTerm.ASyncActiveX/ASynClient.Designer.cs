@@ -36,14 +36,19 @@ namespace eTerm.ASyncActiveX {
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.lblUserPass = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
-            this.btnConnect = new System.Windows.Forms.Button();
             this.chkIsSsl = new System.Windows.Forms.CheckBox();
+            this.btnConnect = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtKeyStatus = new System.Windows.Forms.StatusStrip();
+            this.txtRowNumber = new System.Windows.Forms.ToolStripStatusLabel();
+            this.txtColumnNumber = new System.Windows.Forms.ToolStripStatusLabel();
             this.textEditorControlWrapper1 = new eTerm.ASyncActiveX.TextEditorControlWrapper();
+            this.txtKeyBordStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).BeginInit();
             this.groupBox2.SuspendLayout();
+            this.txtKeyStatus.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -171,6 +176,16 @@ namespace eTerm.ASyncActiveX {
             this.txtPassword.TabIndex = 1;
             this.txtPassword.Text = "guzm";
             // 
+            // chkIsSsl
+            // 
+            this.chkIsSsl.AutoSize = true;
+            this.chkIsSsl.Location = new System.Drawing.Point(619, 3);
+            this.chkIsSsl.Name = "chkIsSsl";
+            this.chkIsSsl.Size = new System.Drawing.Size(50, 17);
+            this.chkIsSsl.TabIndex = 4;
+            this.chkIsSsl.Text = "安全";
+            this.chkIsSsl.UseVisualStyleBackColor = true;
+            // 
             // btnConnect
             // 
             this.btnConnect.AutoSize = true;
@@ -181,16 +196,6 @@ namespace eTerm.ASyncActiveX {
             this.btnConnect.Text = "连接服务器(&C)";
             this.btnConnect.UseVisualStyleBackColor = true;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
-            // 
-            // chkIsSsl
-            // 
-            this.chkIsSsl.AutoSize = true;
-            this.chkIsSsl.Location = new System.Drawing.Point(619, 3);
-            this.chkIsSsl.Name = "chkIsSsl";
-            this.chkIsSsl.Size = new System.Drawing.Size(50, 17);
-            this.chkIsSsl.TabIndex = 4;
-            this.chkIsSsl.Text = "安全";
-            this.chkIsSsl.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -203,6 +208,27 @@ namespace eTerm.ASyncActiveX {
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "指令区";
+            // 
+            // txtKeyStatus
+            // 
+            this.txtKeyStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.txtRowNumber,
+            this.txtColumnNumber,
+            this.txtKeyBordStatus});
+            this.txtKeyStatus.Location = new System.Drawing.Point(10, 416);
+            this.txtKeyStatus.Name = "txtKeyStatus";
+            this.txtKeyStatus.Size = new System.Drawing.Size(808, 22);
+            this.txtKeyStatus.TabIndex = 2;
+            // 
+            // txtRowNumber
+            // 
+            this.txtRowNumber.Name = "txtRowNumber";
+            this.txtRowNumber.Size = new System.Drawing.Size(0, 17);
+            // 
+            // txtColumnNumber
+            // 
+            this.txtColumnNumber.Name = "txtColumnNumber";
+            this.txtColumnNumber.Size = new System.Drawing.Size(0, 17);
             // 
             // textEditorControlWrapper1
             // 
@@ -220,10 +246,18 @@ namespace eTerm.ASyncActiveX {
             this.textEditorControlWrapper1.Size = new System.Drawing.Size(802, 359);
             this.textEditorControlWrapper1.TabIndex = 0;
             // 
+            // txtKeyBordStatus
+            // 
+            this.txtKeyBordStatus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.txtKeyBordStatus.ForeColor = System.Drawing.Color.Blue;
+            this.txtKeyBordStatus.Name = "txtKeyBordStatus";
+            this.txtKeyBordStatus.Size = new System.Drawing.Size(0, 17);
+            // 
             // ASynClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.txtKeyStatus);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "ASynClient";
@@ -234,7 +268,10 @@ namespace eTerm.ASyncActiveX {
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).EndInit();
             this.groupBox2.ResumeLayout(false);
+            this.txtKeyStatus.ResumeLayout(false);
+            this.txtKeyStatus.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -254,5 +291,9 @@ namespace eTerm.ASyncActiveX {
         private TextBox txtPassword;
         private Button btnConnect;
         private CheckBox chkIsSsl;
+        private StatusStrip txtKeyStatus;
+        private ToolStripStatusLabel txtRowNumber;
+        private ToolStripStatusLabel txtColumnNumber;
+        private ToolStripStatusLabel txtKeyBordStatus;
     }
 }
