@@ -271,10 +271,10 @@ namespace eTerm.ASyncActiveX {
                     textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Line = 0;
                     textEditorControlWrapper1.Text = string.Empty;
                 }
-                //textEditorControlWrapper1.ActiveTextAreaControl.TextArea.InsertString("\r");
+                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.InsertString("\r");
                 textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Line = textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Line + 1;
                 textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Column = 0x00;
-                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.InsertString(PacketString + SOE);
+                textEditorControlWrapper1.ActiveTextAreaControl.TextArea.InsertString(PacketString.Replace("\r\r",string.Empty) + SOE);
                 this.textEditorControlWrapper1.Enabled = flag;
                 textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Line = textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Line  + Regex.Matches(PacketString, "\r", RegexOptions.Multiline | RegexOptions.IgnoreCase).Count+1;
                 textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Column = 1;
