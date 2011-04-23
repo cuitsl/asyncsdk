@@ -61,6 +61,8 @@ namespace eTerm.ASyncActiveX {
                         textEditorControlWrapper1.ActiveTextAreaControl.TextArea.KeyUp += new KeyEventHandler(
                                 delegate(object sender1, KeyEventArgs e1)
                                 {
+                                    this.txtColumnNumber.Text = string.Format(@"列：{0}", textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Column);
+                                    this.txtRowNumber.Text = string.Format(@"行：{0}", textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Line);
                                     if (e1.KeyValue == 27) {
                                         textEditorControlWrapper1.ActiveTextAreaControl.TextArea.InsertString(SOE.ToString());
                                         return;
@@ -84,6 +86,7 @@ namespace eTerm.ASyncActiveX {
                                             sbCmd.Append(keyValue);
                                         }
                                         this.__ClientSocket.SendPacket(EnCodeBuffer(GbToUsas(sbCmd.Replace("\r\n", "\r").ToString())));
+                                        txtKeyBordStatus.Text = @"等待接收";
                                     }
                                 }
                             );
@@ -279,6 +282,9 @@ namespace eTerm.ASyncActiveX {
                 textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Line = textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Line  + Regex.Matches(PacketString, "\r", RegexOptions.Multiline | RegexOptions.IgnoreCase).Count+1;
                 textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Column = 1;
                 textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Select();
+                this.txtColumnNumber.Text = string.Format(@"列：{0}", textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Column);
+                this.txtRowNumber.Text = string.Format(@"行：{0}", textEditorControlWrapper1.ActiveTextAreaControl.TextArea.Caret.Line);
+                txtKeyBordStatus.Text = @"键盘可用";
                 
             }
             catch { }
