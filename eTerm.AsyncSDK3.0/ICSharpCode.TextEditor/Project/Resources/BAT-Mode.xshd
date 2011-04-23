@@ -4,7 +4,7 @@
 <SyntaxDefinition name = "BAT" extensions = ".bat">
 
 	<Environment> 
-		<Default      color = "Yellow" bgcolor = "Black"/>
+		<Default      color = "Lime" bgcolor = "Black"/>
 		<Selection    color = "White" bgcolor = "Purple"/>
 		<VRuler       color = "Green"/>
 		<InvalidLines color = "Red"/>
