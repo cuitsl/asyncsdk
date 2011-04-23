@@ -38,10 +38,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Reference\eTerm.AsyncSDK.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.TextEditor, Version=3.0.0.3800, Culture=neutral, PublicKeyToken=4d61825e8dd49f1a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Reference\ICSharpCode.TextEditor.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -76,6 +72,12 @@
     <EmbeddedResource Include="ASynClient.resx">
       <DependentUpon>ASynClient.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ICSharpCode.TextEditor\Project\ICSharpCode.TextEditor.csproj">
+      <Project>{2D18BE89-D210-49EB-A9DD-2246FBB3DF6D}</Project>
+      <Name>ICSharpCode.TextEditor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
