@@ -339,7 +339,7 @@ namespace eTerm.AsyncSDK.Net {
                         break;
                     case 0x62:
                     case 0x03:
-                    case 0x1E:
+                    //case 0x1E:
                     case 0x1B:
                     case 0x00:
                         break;
@@ -349,6 +349,9 @@ namespace eTerm.AsyncSDK.Net {
                                     continue;
                             }
                             //UnPacketResult.Add(0x0D);
+                        break;
+                    case 0x1E:
+                        UnPacketResult.AddRange(Encoding.GetEncoding(@"gb2312").GetBytes("▶"));
                         break;
                     case 0x0E:
                         while (true) {
