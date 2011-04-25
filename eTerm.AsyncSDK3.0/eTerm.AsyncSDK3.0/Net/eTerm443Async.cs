@@ -359,6 +359,7 @@ namespace eTerm.AsyncSDK.Net {
                             UsasToGb(ref ch[0], ref ch[1]);
                             ColumnNumber++;
                             UnPacketResult.AddRange(new byte[] { ch[0], ch[1] });
+                            if (ColumnNumber % 80 == 0) UnPacketResult.Add(0x0D);
                         }
                         break;
                     default:
