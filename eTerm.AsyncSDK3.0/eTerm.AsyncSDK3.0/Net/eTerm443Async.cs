@@ -348,8 +348,8 @@ namespace eTerm.AsyncSDK.Net {
                                     UnPacketResult.Add(0x20);
                                     continue;
                             }
-                            //UnPacketResult.Add(0x0D);
-                        break;
+                            if (ColumnNumber % 80 == 0) { UnPacketResult.Add(0x0D); ColumnNumber = 0; }
+                            break;
                     case 0x0E:
                         while (true) {
                             byte[] ch = new byte[] { lpsBuf[++nIndex], lpsBuf[++nIndex] };
@@ -365,9 +365,9 @@ namespace eTerm.AsyncSDK.Net {
                     default:
                         ColumnNumber++;
                         UnPacketResult.Add(lpsBuf[nIndex]);
+                        if (ColumnNumber % 80 == 0) { UnPacketResult.Add(0x0D); ColumnNumber = 0; }
                         break;
                 }
-                if (ColumnNumber % 80 == 0) UnPacketResult.Add(0x0D);
             }
             return UnPacketResult.ToArray();
         }
