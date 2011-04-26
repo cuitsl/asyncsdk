@@ -198,6 +198,7 @@ namespace eTerm.ASynClientSDK.Base {
         protected virtual byte[] Unpacket(byte[] lpsBuf) {
             List<byte> UnPacketResult = new List<byte>();
             ushort nIndex = 18;
+            uint ColumnNumber = 0;
             ushort maxLength = BitConverter.ToUInt16(new byte[] { lpsBuf[3], lpsBuf[2] }, 0);
             while (nIndex++ < maxLength) {
                 if (nIndex >= lpsBuf.Length) break;
@@ -205,12 +206,20 @@ namespace eTerm.ASynClientSDK.Base {
                     case 0x1C:                          //红色标记
                     case 0x1D:
                         UnPacketResult.Add(0x20);
+                        ColumnNumber++;
                         break;
                     case 0x62:
                     case 0x03:
                     case 0x1E:
                     case 0x1B:
                     case 0x00:
+                        break;
+                    case 0x0D:
+                        while (++ColumnNumber % 80 != 0) {
+                            UnPacketResult.Add(0x20);
+                            continue;
+                        }
+                        if (ColumnNumber % 80 == 0) { UnPacketResult.Add(0x0D); ColumnNumber = 0; }
                         break;
                     case 0x0E:
                         while (true) {
@@ -219,11 +228,15 @@ namespace eTerm.ASynClientSDK.Base {
                                 break;
                             }
                             UsasToGb(ref ch[0], ref ch[1]);
+                            ColumnNumber++;
                             UnPacketResult.AddRange(new byte[] { ch[0], ch[1] });
+                            if (ColumnNumber % 80 == 0) { UnPacketResult.Add(0x0D); ColumnNumber = 0; }
                         }
                         break;
                     default:
+                        ColumnNumber++;
                         UnPacketResult.Add(lpsBuf[nIndex]);
+                        if (ColumnNumber % 80 == 0) { UnPacketResult.Add(0x0D); ColumnNumber = 0; }
                         break;
                 }
             }
