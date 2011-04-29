@@ -23,18 +23,18 @@ namespace AsyncAPI3._0Tst {
                 bw.Write(
                 new AsyncLicenceKey() {
                     AllowAfterValidate = true,
-                    AllowDatabase = true,
+                    AllowDatabase = false,
                     AllowIntercept = true,
-                    Company = @"开发测试",
+                    Company = @"良光测试授权",
                     connectionString = string.Empty,
-                    ExpireDate = DateTime.Now.AddYears(2),
-                    Key = TEACrypter.MD5(Encoding.Default.GetBytes(@"BFEBFBFF000206550026C75B7340080027000816")),
-                    MaxAsync = 10,
+                    ExpireDate = DateTime.Now.AddDays(15),
+                    Key = TEACrypter.MD5(Encoding.Default.GetBytes(@"BFEBFBFF000006FD00101834B82E001D09FF3CC0")),
+                    MaxAsync = 5,
                     MaxCommandPerMonth = 90000,
                     MaxTSession = 10,
                     providerName = @"System.Data.SqlDataClient",
                     RemainingMinutes = 400000
-                }.XmlSerialize(TEACrypter.MD5(Encoding.Default.GetBytes(@"BFEBFBFF000206550026C75B7340080027000816"))));
+                }.XmlSerialize(TEACrypter.MD5(Encoding.Default.GetBytes(@"BFEBFBFF000006FD00101834B82E001D09FF3CC0"))));
                 bw.Flush();
                 bw.Close();
             }
