@@ -71,9 +71,9 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\eTerm.AsynClientSDK3.0\eTerm.AsynClientSDK3.0.csproj">
-      <Project>{88A7ABE1-8AEB-4E8C-92C9-0FFFB8F70421}</Project>
-      <Name>eTerm.AsynClientSDK3.0</Name>
+    <ProjectReference Include="..\eTerm.AsyncSDK3.0\eTerm.AsyncSDK3.0.csproj">
+      <Project>{62D432A2-DEB0-415A-85DB-7FFDAAA5EB47}</Project>
+      <Name>eTerm.AsyncSDK3.0</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
