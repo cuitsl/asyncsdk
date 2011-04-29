@@ -218,8 +218,8 @@ namespace eTerm.AsyncSDK.Base {
             AsyncSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try {
                 ReconnectCount++;
-                //if (LocalEP != null)
-                //    AsyncSocket.Bind(
+                if (LocalEP != null)
+                    AsyncSocket.Bind(LocalEP);
                 AsyncSocket.BeginConnect(this.RemoteEP, new AsyncCallback(delegate(IAsyncResult iar) {
                     try {
                         if (this.OnBeginConnect != null)
