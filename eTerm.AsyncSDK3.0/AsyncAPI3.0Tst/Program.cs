@@ -25,16 +25,16 @@ namespace AsyncAPI3._0Tst {
                     AllowAfterValidate = true,
                     AllowDatabase = false,
                     AllowIntercept = true,
-                    Company = @"良光测试授权",
+                    Company = @"开发测试机授权",
                     connectionString = string.Empty,
                     ExpireDate = DateTime.Now.AddDays(15),
-                    Key = TEACrypter.MD5(Encoding.Default.GetBytes(@"BFEBFBFF000006FD00101834B82E001D09FF3CC0")),
+                    Key = TEACrypter.MD5(Encoding.Default.GetBytes(@"BFEBFBFF000206550026C75B7340")),
                     MaxAsync = 5,
                     MaxCommandPerMonth = 90000,
                     MaxTSession = 10,
                     providerName = @"System.Data.SqlDataClient",
                     RemainingMinutes = 400000
-                }.XmlSerialize(TEACrypter.MD5(Encoding.Default.GetBytes(@"BFEBFBFF000006FD00101834B82E001D09FF3CC0"))));
+                }.XmlSerialize(TEACrypter.MD5(Encoding.Default.GetBytes(@"BFEBFBFF000206550026C75B7340"))));
                 bw.Flush();
                 bw.Close();
             }
