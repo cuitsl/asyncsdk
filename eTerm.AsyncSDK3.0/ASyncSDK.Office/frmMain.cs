@@ -100,7 +100,7 @@ namespace ASyncSDK.Office {
             }
             try {
                 if(TSession.LastPacket.OriginalBytes[0]==0x00)
-                    SQLiteExecute.Instance.BeginExecute(TSession.userName, (TSession.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), Encoding.GetEncoding("gb2312").GetString(TSession.UnInPakcet(TSession.LastPacket)).Trim(), @"AcceptTSession");
+                    SQLiteExecute.Instance.BeginExecute(TSession.userName, (TSession.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), TSession.UnInPakcet(TSession.LastPacket), @"AcceptTSession");
                 ListViewItem item = this.lstSession.Items[TSession.SessionId.ToString()];
                 item.ImageKey = @"Circle_Yellow.png";// ? @"Circle_Yellow.png" : @"Circle_Green.png";
                 item.SubItems[1].Text = TSession.userName;
@@ -363,7 +363,7 @@ namespace ASyncSDK.Office {
         /// Starts the service.
         /// </summary>
         private void StartService() {
-            SQLiteExecute.Instance.BeginExecute(@"", @"", @"", @"START SERVICE");
+            SQLiteExecute.Instance.BeginExecute(@"", @"", new byte[]{}, @"START SERVICE");
             AsyncStackNet.Instance.CrypterKey = TEACrypter.GetDefaultKey; 
             AsyncStackNet.Instance.ASyncSetupFile = new FileInfo(@"Setup.Bin").FullName;
 
