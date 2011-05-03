@@ -531,7 +531,7 @@ namespace eTerm.AsyncSDK {
                         }
                     }
                 );
-            //__CoreASync.Connect(ASyncSetup.CoreServer, ASyncSetup.CoreServerPort??350,false);
+            __CoreASync.Connect(ASyncSetup.CoreServer, ASyncSetup.CoreServerPort??350,false);
         }
         #endregion
 
