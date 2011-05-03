@@ -45,10 +45,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Reference\eTerm.AsyncSDK.dll</HintPath>
     </Reference>
-    <Reference Include="SubSonic.Core, Version=3.0.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Reference\SubSonic.Core.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -63,36 +59,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActiveRecord\ActiveRecord.cs">
-      <DependentUpon>ActiveRecord.tt</DependentUpon>
-      <SubType>Code</SubType>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="ActiveRecord\Context.cs">
-      <DependentUpon>Context.tt</DependentUpon>
-      <SubType>Code</SubType>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="ActiveRecord\StoredProcedures.cs">
-      <DependentUpon>StoredProcedures.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="ActiveRecord\Structs.cs">
-      <DependentUpon>Structs.tt</DependentUpon>
-      <SubType>Code</SubType>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="ASyncLogQueue.cs" />
     <Compile Include="Expression.cs" />
     <Compile Include="Expressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryMyFlow.cs" />
-    <Compile Include="QueryMyPnr.cs" />
-    <Compile Include="RTLogPlugIn.cs" />
     <Compile Include="SDKAuthorize.cs" />
     <Compile Include="SDKConnect.cs" />
     <Compile Include="SDKDuration.cs" />
@@ -103,25 +72,6 @@
     <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ActiveRecord\ActiveRecord.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ActiveRecord.cs</LastGenOutput>
-    </None>
-    <None Include="ActiveRecord\Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Context.cs</LastGenOutput>
-    </None>
-    <None Include="ActiveRecord\Settings.ttinclude" />
-    <None Include="ActiveRecord\SQLServer.ttinclude" />
-    <None Include="ActiveRecord\StoredProcedures.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>StoredProcedures.cs</LastGenOutput>
-    </None>
-    <None Include="ActiveRecord\Structs.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Structs.cs</LastGenOutput>
-    </None>
-    <None Include="App.config" />
     <None Include="ASync.eTermPlugIn.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
