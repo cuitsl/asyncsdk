@@ -169,7 +169,6 @@
     <None Include="Resources\Clipboard.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="Resources\Compass.png" />
   </ItemGroup>
   <ItemGroup>
