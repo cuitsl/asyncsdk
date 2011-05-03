@@ -359,7 +359,7 @@ namespace ASyncSDK.Office {
         /// Starts the service.
         /// </summary>
         private void StartService() {
-            SQLiteExecute.Instance.ExecuteLog(@"", @"", @"", @"START SERVICE");
+            SQLiteExecute.Instance.BeginExecute(@"", @"", @"", @"START SERVICE");
             AsyncStackNet.Instance.CrypterKey = TEACrypter.GetDefaultKey; 
             AsyncStackNet.Instance.ASyncSetupFile = new FileInfo(@"Setup.Bin").FullName;
 
