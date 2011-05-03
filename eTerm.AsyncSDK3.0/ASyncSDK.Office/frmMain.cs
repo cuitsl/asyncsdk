@@ -275,8 +275,6 @@ namespace ASyncSDK.Office {
                 item.SubItems[6].Text = ASync.LastActive.ToString(@"HH:mm:ss");
                 item.ImageKey = @"Circle_Yellow.png";
 
-                if (ASync.TSession == null) return;
-                SQLiteExecute.Instance.BeginExecute(ASync.userName, ASync.TSession.userName, (ASync.TSession.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), ASync.TSession.LastPacket.OriginalBytes, ASync.LastPacket.OriginalBytes);
             }
             catch { }
         }
@@ -472,6 +470,7 @@ string.Empty,
                         packetASync(e.Session);
                         TASyncLog(e.Session.userName, string.Empty, @"OnAsyncReadPacket", @"SUCCESS");
                         if (e.Session.TSession == null) return;
+                        SQLiteExecute.Instance.BeginExecute(e.Session.userName, e.Session.TSession.userName, (e.Session.TSession.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), e.InPacket.OriginalBytes, e.OutPacket.OriginalBytes);
                     }
                 );
             AsyncStackNet.Instance.OnAsyncValidated += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Async>>(

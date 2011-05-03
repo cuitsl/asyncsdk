@@ -10,6 +10,9 @@ using System.Runtime.Remoting.Contexts;
 using System.Transactions;
 using eTerm.AsyncSDK;
 using eTerm.AsyncSDK.Util;
+using ASyncSDK.Office;
+using System.Data;
+using System.Data.Common;
 
 
 
@@ -18,25 +21,11 @@ using eTerm.AsyncSDK.Util;
 namespace AsyncAPI3._0Tst {
     class Program {
         static void Main(string[] args) {
-            using (FileStream fs = new FileStream(@"C:\Key.Bin", FileMode.OpenOrCreate)) {
-                BinaryWriter bw = new BinaryWriter(fs);
-                bw.Write(
-                new AsyncLicenceKey() {
-                    AllowAfterValidate = true,
-                    AllowDatabase = false,
-                    AllowIntercept = true,
-                    Company = @"开发测试机授权",
-                    connectionString = string.Empty,
-                    ExpireDate = DateTime.Now.AddDays(15),
-                    Key = TEACrypter.MD5(Encoding.Default.GetBytes(@"BFEBFBFF000206550026C75B7340")),
-                    MaxAsync = 5,
-                    MaxCommandPerMonth = 90000,
-                    MaxTSession = 10,
-                    providerName = @"System.Data.SqlDataClient",
-                    RemainingMinutes = 400000
-                }.XmlSerialize(TEACrypter.MD5(Encoding.Default.GetBytes(@"BFEBFBFF000206550026C75B7340"))));
-                bw.Flush();
-                bw.Close();
+            SQLiteDatabase Db = new SQLiteDatabase(new FileInfo(@"D:\SouceCode\Personal\eTerm.AsyncSDK3.0\ASyncSDK.Office\bin\Release\SQLiteDb.s3db").FullName);
+            DbCommand dbCommand = Db.GetSqlStringCommand(@"select * from SQLiteLog201105 order by TLogId DESC");
+            IDataReader DR = dbCommand.ExecuteReader();
+            while (DR.Read()) {
+                Console.WriteLine(string.Format(@"InPacket:{0} Bytes OutPacket:{1} Bytes", (DR[4] as byte[]).Length, (DR[5] as byte[]).Length));
             }
             Console.ReadLine();
 
