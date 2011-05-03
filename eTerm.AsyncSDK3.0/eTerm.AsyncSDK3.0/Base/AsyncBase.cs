@@ -206,7 +206,7 @@ namespace eTerm.AsyncSDK.Base {
                     break;
                 }
                 catch (System.Exception x) {
-                    throw x;
+                    //throw x;
                 }
             }
         }

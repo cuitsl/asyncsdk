@@ -57,6 +57,7 @@ namespace ASyncSDK.Office {
                 return;
             }
             try {
+                //SQLiteExecute.Instance.BeginExecute(TSession.userName, (TSession.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), @"", @"DisconnectTSession");
                 this.lstSession.Items.Remove(this.lstSession.Items[TSession.SessionId.ToString()]);
             }
             catch { }
@@ -82,6 +83,7 @@ namespace ASyncSDK.Office {
                 @"00:00:00"
             }, @"Circle_Yellow.png") { Name = TSession.SessionId.ToString() };
                 item.Tag = TSession;
+                //SQLiteExecute.Instance.BeginExecute(TSession.userName, (TSession.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), @"", @"AcceptTSession");
                 this.lstSession.Items.Add(item);
             }
             catch { }
@@ -97,6 +99,8 @@ namespace ASyncSDK.Office {
                 return;
             }
             try {
+                if(TSession.LastPacket.OriginalBytes[0]==0x00)
+                    SQLiteExecute.Instance.BeginExecute(TSession.userName, (TSession.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), Encoding.GetEncoding("gb2312").GetString(TSession.UnInPakcet(TSession.LastPacket)).Trim(), @"AcceptTSession");
                 ListViewItem item = this.lstSession.Items[TSession.SessionId.ToString()];
                 item.ImageKey = @"Circle_Yellow.png";// ? @"Circle_Yellow.png" : @"Circle_Green.png";
                 item.SubItems[1].Text = TSession.userName;
@@ -431,7 +435,7 @@ string.Empty,
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
                         disconnectASync(e.Session);
-                        SQLiteExecute.Instance.BeginExecute(e.Session.userName,(e.Session.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), @"", @"AsyncDisconnect");
+                        //SQLiteExecute.Instance.BeginExecute(e.Session.userName,(e.Session.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), @"", @"AsyncDisconnect");
                         TASyncLog(e.Session.userName, string.Empty, @"OnAsyncDisconnect", @"SUCCESS");
                     }
                 );
@@ -443,8 +447,8 @@ string.Empty,
                         TSessionLog(string.IsNullOrEmpty(e.Session.userName) ? e.Session.SessionId.ToString() : e.Session.userName,
 string.Empty,
 @"OnTSessionPacketSent", @"SUCCESS");
-                        if (string.IsNullOrEmpty(e.Session.userName)) return;
-                        SQLiteExecute.Instance.BeginExecute(e.Session.userName, (e.Session.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), Encoding.GetEncoding(@"gb2312").GetString(e.Session.UnInPakcet(e.OutPacket)), @"TSessionPacketSent");
+                        //if (string.IsNullOrEmpty(e.Session.userName)) return;
+                        //SQLiteExecute.Instance.BeginExecute(e.Session.userName, (e.Session.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), Encoding.GetEncoding(@"gb2312").GetString(e.Session.UnInPakcet(e.OutPacket)), @"TSessionPacketSent");
                     }
                 );
 
