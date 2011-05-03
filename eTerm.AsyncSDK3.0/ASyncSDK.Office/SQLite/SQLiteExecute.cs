@@ -123,16 +123,17 @@ namespace ASyncSDK.Office
 CREATE TABLE [SQLiteLog{0}] (
     [TLogId] INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT,
     [TSession] NVARCHAR(50)  NOT NULL,
+    [TASync]    NVARCHAR(50)  NOT NULL,
     [TargetIp] NVARCHAR(50)  NOT NULL,
-    [TData]  BLOB   NULL,
-    [TLogDate] DATE  NOT NULL,
-    [TLogType] NVARCHAR(25)  NULL
+    [TInPacket]  BLOB   NULL,
+    [TOutPacket]  BLOB   NULL,
+    [TLogDate] DATE  NOT NULL
 );
 
 CREATE INDEX [IDX_SQLiteLog{0}_] ON [SQLiteLog{0}](
     [TSession]  ASC,
-    [TLogDate]  ASC,
-    [TLogType]  ASC
+    [TASync]  ASC,
+    [TLogDate]  ASC
 );
 ", Current.ToString(@"yyyyMM"))).ExecuteNonQuery() ;
             return false;
