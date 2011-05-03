@@ -54,6 +54,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.66.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -83,6 +84,12 @@
     </Compile>
     <Compile Include="ASyncGroup.Designer.cs">
       <DependentUpon>ASyncGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ASyncLogViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ASyncLogViewer.Designer.cs">
+      <DependentUpon>ASyncLogViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="ASyncPlugIn.cs">
       <SubType>UserControl</SubType>
@@ -117,6 +124,8 @@
     <Compile Include="SinglePlugIn.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="SQLite\Database.cs" />
+    <Compile Include="SQLite\SQLiteExecute.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
     <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
   </ItemGroup>
@@ -129,6 +138,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ASyncGroup.resx">
       <DependentUpon>ASyncGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ASyncLogViewer.resx">
+      <DependentUpon>ASyncLogViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ASyncPlugIn.resx">
       <DependentUpon>ASyncPlugIn.cs</DependentUpon>
