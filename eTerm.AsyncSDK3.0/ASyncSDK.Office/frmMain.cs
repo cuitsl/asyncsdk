@@ -431,6 +431,7 @@ string.Empty,
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
                         disconnectASync(e.Session);
+                        SQLiteExecute.Instance.BeginExecute(e.Session.userName,(e.Session.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), @"", @"AsyncDisconnect");
                         TASyncLog(e.Session.userName, string.Empty, @"OnAsyncDisconnect", @"SUCCESS");
                     }
                 );
@@ -442,6 +443,8 @@ string.Empty,
                         TSessionLog(string.IsNullOrEmpty(e.Session.userName) ? e.Session.SessionId.ToString() : e.Session.userName,
 string.Empty,
 @"OnTSessionPacketSent", @"SUCCESS");
+                        if (string.IsNullOrEmpty(e.Session.userName)) return;
+                        SQLiteExecute.Instance.BeginExecute(e.Session.userName, (e.Session.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), Encoding.GetEncoding(@"gb2312").GetString(e.Session.UnInPakcet(e.OutPacket)), @"TSessionPacketSent");
                     }
                 );
 
