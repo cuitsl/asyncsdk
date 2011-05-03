@@ -23,7 +23,7 @@ namespace ASyncSDK.Office
         /// <summary>
         /// 执行代理
         /// </summary>
-        public delegate void InvokeSQLiteDbCommand(string TSession, string TSessionIp, byte[] TData, string TLogType);
+        public delegate void InvokeSQLiteDbCommand(string TSession, string TASync, string TSessionIp, byte[] TInPacket, byte[] TOutPacket);
 
 
         #region 构造函数
@@ -47,11 +47,11 @@ namespace ASyncSDK.Office
         /// <param name="TData">The T data.</param>
         /// <param name="TLogType">Type of the T log.</param>
         /// <returns></returns>
-        public IAsyncResult BeginExecute(string TSession, string TSessionIp, byte[] TData, string TLogType)
+        public IAsyncResult BeginExecute(string TSession, string TASync, string TSessionIp, byte[] TInPacket, byte[] TOutPacket)
         {
             try
             {
-                return __Execute.BeginInvoke(TSession, TSessionIp, TData, TLogType, new AsyncCallback(delegate(IAsyncResult iar)
+                return __Execute.BeginInvoke(TSession,TASync, TSessionIp, TInPacket,TOutPacket, new AsyncCallback(delegate(IAsyncResult iar)
                                     {
                                         EndExecute(iar);
                                     }), null);
@@ -87,16 +87,18 @@ namespace ASyncSDK.Office
         /// <param name="TSessionIp">The T session ip.</param>
         /// <param name="TData">The T data.</param>
         /// <param name="TLogType">Type of the T log.</param>
-        private void ExecuteLog(string TSession, string TSessionIp, byte[] TData, string TLogType) {
+        private void ExecuteLog(string TSession, string TASync, string TSessionIp, byte[] TInPacket, byte[] TOutPacket)
+        {
             DbCommand sqliteCommand = __sqliteDb.GetSqlStringCommand(string.Format(@"
-    INSERT INTO {0}([TSession],[TargetIp],[TData],[TLogDate],[TLogType]) 
-                    VALUES(?,?,?,?,?)
+    INSERT INTO {0}([TSession],[TASync],[TargetIp],[TInPacket],[TOutPacket],[TLogDate]) 
+                    VALUES(?,?,?,?,?,?)
 ", this.__CurrentTable));
             __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.String, TSession);
+            __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.String, TASync);
             __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.String, TSessionIp);
-            __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.String, TData);
+            __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.Binary, TInPacket);
+            __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.Binary, TOutPacket);
             __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.DateTime, DateTime.Now);
-            __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.String, TLogType);
             sqliteCommand.ExecuteNonQuery();
         }
         #endregion
