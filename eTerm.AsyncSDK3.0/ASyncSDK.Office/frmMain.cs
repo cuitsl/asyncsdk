@@ -470,7 +470,7 @@ string.Empty,
                         packetASync(e.Session);
                         TASyncLog(e.Session.userName, string.Empty, @"OnAsyncReadPacket", @"SUCCESS");
                         if (e.Session.TSession == null) return;
-                        SQLiteExecute.Instance.BeginExecute(e.Session.userName, e.Session.TSession.userName, (e.Session.TSession.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), e.InPacket.OriginalBytes, e.OutPacket.OriginalBytes);
+                        SQLiteExecute.Instance.BeginExecute(e.Session.userName, e.Session.TSession.userName, (e.Session.TSession.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), e.OutPacket.OriginalBytes, e.InPacket.OriginalBytes);
                     }
                 );
             AsyncStackNet.Instance.OnAsyncValidated += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Async>>(
