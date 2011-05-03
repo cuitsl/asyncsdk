@@ -121,19 +121,19 @@ namespace ASyncSDK.Office
             if (ExistLogTable(Current)) return true;
             __sqliteDb.GetSqlStringCommand( string.Format(@"
 CREATE TABLE [SQLiteLog{0}] (
-[TLogId] INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT,
-[TSession] NVARCHAR(50)  NOT NULL,
-[TargetIp] NVARCHAR(50)  NOT NULL,
-[TData]  BLOB   NULL,
-[TLogDate] DATE  NOT NULL,
-[TLogType] NVARCHAR(25)  NULL
-)
+    [TLogId] INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT,
+    [TSession] NVARCHAR(50)  NOT NULL,
+    [TargetIp] NVARCHAR(50)  NOT NULL,
+    [TData]  BLOB   NULL,
+    [TLogDate] DATE  NOT NULL,
+    [TLogType] NVARCHAR(25)  NULL
+);
 
 CREATE INDEX [IDX_SQLiteLog{0}_] ON [SQLiteLog{0}](
-[TSession]  ASC,
-[TLogDate]  ASC,
-[TLogType]  ASC
-)
+    [TSession]  ASC,
+    [TLogDate]  ASC,
+    [TLogType]  ASC
+);
 ", Current.ToString(@"yyyyMM"))).ExecuteNonQuery() ;
             return false;
         }
