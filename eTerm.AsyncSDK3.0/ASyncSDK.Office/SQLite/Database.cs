@@ -6,13 +6,13 @@ using System.IO;
 
 namespace ASyncSDK.Office
 {
-    public class Database
+    public class SQLiteDatabase
     {
         /// <summary>
         ///   构造函数
         /// </summary>
         /// <param name="dataSource">数据文件</param>
-        public Database(string dataSource)
+        public SQLiteDatabase(string dataSource)
             : this(dataSource, false, true)
         {
         }
@@ -23,7 +23,7 @@ namespace ASyncSDK.Office
         /// <param name="dataSource">数据文件</param>
         /// <param name="readOnly">是否只读</param>
         /// <param name="pooling">是否使用连接池</param>
-        public Database(string dataSource, bool readOnly, bool pooling)
+        public SQLiteDatabase(string dataSource, bool readOnly, bool pooling)
         {
             if (!File.Exists(dataSource))
             {

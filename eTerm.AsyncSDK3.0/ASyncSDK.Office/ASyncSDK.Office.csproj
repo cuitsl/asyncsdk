@@ -110,6 +110,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="SQLite\Database.cs" />
+    <Compile Include="SQLite\SQLiteExecute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Flag1_Green.png" />
