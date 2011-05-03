@@ -50,10 +50,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Reference\eTerm.AsyncSDK.dll</HintPath>
     </Reference>
-    <Reference Include="SubSonic.Core, Version=3.0.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Reference\SubSonic.Core.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -70,26 +66,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActiveRecord\ActiveRecord.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ActiveRecord.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ActiveRecord\Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ActiveRecord\StoredProcedures.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StoredProcedures.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ActiveRecord\Structs.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Structs.tt</DependentUpon>
-    </Compile>
     <Compile Include="ASyncAbout.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -107,12 +83,6 @@
     </Compile>
     <Compile Include="ASyncGroup.Designer.cs">
       <DependentUpon>ASyncGroup.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ASyncLogViewer.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ASyncLogViewer.Designer.cs">
-      <DependentUpon>ASyncLogViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="ASyncPlugIn.cs">
       <SubType>UserControl</SubType>
@@ -160,9 +130,6 @@
     <EmbeddedResource Include="ASyncGroup.resx">
       <DependentUpon>ASyncGroup.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ASyncLogViewer.resx">
-      <DependentUpon>ASyncLogViewer.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ASyncPlugIn.resx">
       <DependentUpon>ASyncPlugIn.cs</DependentUpon>
     </EmbeddedResource>
@@ -202,24 +169,6 @@
     <None Include="Resources\Clipboard.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ActiveRecord\ActiveRecord.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ActiveRecord.cs</LastGenOutput>
-    </None>
-    <None Include="ActiveRecord\Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Context.cs</LastGenOutput>
-    </None>
-    <None Include="ActiveRecord\Settings.ttinclude" />
-    <None Include="ActiveRecord\SQLServer.ttinclude" />
-    <None Include="ActiveRecord\StoredProcedures.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>StoredProcedures.cs</LastGenOutput>
-    </None>
-    <None Include="ActiveRecord\Structs.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Structs.cs</LastGenOutput>
-    </None>
     <None Include="App.config" />
     <None Include="Resources\Compass.png" />
   </ItemGroup>
