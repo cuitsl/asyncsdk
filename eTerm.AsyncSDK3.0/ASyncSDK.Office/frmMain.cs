@@ -276,7 +276,7 @@ namespace ASyncSDK.Office {
                 item.ImageKey = @"Circle_Yellow.png";
 
                 if (ASync.TSession == null) return;
-                SQLiteExecute.Instance.BeginExecute(ASync.userName,ASync.TSession.userName, (ASync.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(),ASync.TSession.LastPacket.OriginalBytes,ASync.LastPacket.OriginalBytes);
+                SQLiteExecute.Instance.BeginExecute(ASync.userName, ASync.TSession.userName, (ASync.TSession.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), ASync.TSession.LastPacket.OriginalBytes, ASync.LastPacket.OriginalBytes);
             }
             catch { }
         }
