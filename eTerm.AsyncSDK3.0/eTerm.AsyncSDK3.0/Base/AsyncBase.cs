@@ -195,19 +195,20 @@ namespace eTerm.AsyncSDK.Base {
             if (port < 1) {
                 throw new ArgumentException("Argument 'port' value must be >= 1.");
             }
-
+            try {
             IPAddress[] ips = System.Net.Dns.GetHostAddresses(host);
             for (int i = 0; i < ips.Length; i++) {
-                try {
+                
                     //Connect(null, new IPEndPoint(ips[i], port), ssl);
                     this.RemoteEP = new IPEndPoint(ips[i], port);
                     this.IsSsl = ssl;
                     Connect();
                     break;
                 }
-                catch (System.Exception x) {
-                    //throw x;
-                }
+            }
+            catch (System.Exception x)
+            {
+                //throw x;
             }
         }
 

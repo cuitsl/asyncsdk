@@ -570,7 +570,7 @@ Encoding.GetEncoding(@"gb2312").GetString(e.Session.UnOutPakcet(e.InPacket)),
                         }
                     }
                     catch (Exception ex) {
-                        MessageBox.Show(string.Format(@"{0}\r\n{1}", ex.Message,ex.StackTrace), "错误提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(string.Format("{0}\r\n{1}", ex.Message,ex.StackTrace), "错误提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }), new FileInfo(@"Key.Bin").FullName);
             if(Directory.Exists(AsyncStackNet.Instance.ASyncSetup.PlugInPath))
