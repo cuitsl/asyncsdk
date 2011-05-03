@@ -17,7 +17,14 @@ namespace ASyncSDK.Office
         private static readonly SQLiteExecute __instance = new SQLiteExecute();
         private SQLiteDatabase __sqliteDb;
         private string __CurrentTable = string.Empty;
+        private InvokeSQLiteDbCommand __Execute;
         #endregion
+
+        /// <summary>
+        /// 执行代理
+        /// </summary>
+        public delegate void InvokeSQLiteDbCommand(string TSession, string TSessionIp, string TData, string TLogType);
+
 
         #region 构造函数
         /// <summary>
@@ -27,10 +34,52 @@ namespace ASyncSDK.Office
             __dbString = new FileInfo(@"SQLiteDb.s3db").FullName;
             __sqliteDb = new SQLiteDatabase(__dbString);
             BuildLogTable(DateTime.Now);
+            __Execute = new InvokeSQLiteDbCommand(ExecuteLog);
         }
         #endregion
 
         #region 写日志
+        /// <summary>
+        /// 开始线程.
+        /// </summary>
+        /// <param name="TSession">The T session.</param>
+        /// <param name="TSessionIp">The T session ip.</param>
+        /// <param name="TData">The T data.</param>
+        /// <param name="TLogType">Type of the T log.</param>
+        /// <returns></returns>
+        public IAsyncResult BeginExecute(string TSession, string TSessionIp, string TData, string TLogType)
+        {
+            try
+            {
+                return __Execute.BeginInvoke(TSession, TSessionIp, TData, TLogType, new AsyncCallback(delegate(IAsyncResult iar)
+                                    {
+                                        EndExecute(iar);
+                                    }), null);
+            }
+            catch { }
+            return null;
+        }
+
+        /// <summary>
+        /// Ends the execute.
+        /// </summary>
+        /// <param name="iar">The iar.</param>
+        private void EndExecute(IAsyncResult iar) {
+            if (iar == null) return;
+            try
+            {
+                __Execute.EndInvoke(iar);
+                iar.AsyncWaitHandle.Close();
+            }
+            catch
+            {
+                // Hide inside method invoking stack 
+                //throw e;
+            }
+        }
+
+
+
         /// <summary>
         /// Executes the log.
         /// </summary>
@@ -38,7 +87,7 @@ namespace ASyncSDK.Office
         /// <param name="TSessionIp">The T session ip.</param>
         /// <param name="TData">The T data.</param>
         /// <param name="TLogType">Type of the T log.</param>
-        public void ExecuteLog(string TSession, string TSessionIp, string TData, string TLogType) {
+        private void ExecuteLog(string TSession, string TSessionIp, string TData, string TLogType) {
             DbCommand sqliteCommand = __sqliteDb.GetSqlStringCommand(string.Format(@"
     INSERT INTO {0}([TSession],[TargetIp],[TData],[TLogDate],[TLogType]) 
                     VALUES(?,?,?,?,?)
