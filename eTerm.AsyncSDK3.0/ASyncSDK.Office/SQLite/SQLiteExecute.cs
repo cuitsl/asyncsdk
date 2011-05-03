@@ -23,7 +23,7 @@ namespace ASyncSDK.Office
         /// <summary>
         /// 执行代理
         /// </summary>
-        public delegate void InvokeSQLiteDbCommand(string TSession, string TSessionIp, string TData, string TLogType);
+        public delegate void InvokeSQLiteDbCommand(string TSession, string TSessionIp, byte[] TData, string TLogType);
 
 
         #region 构造函数
@@ -47,7 +47,7 @@ namespace ASyncSDK.Office
         /// <param name="TData">The T data.</param>
         /// <param name="TLogType">Type of the T log.</param>
         /// <returns></returns>
-        public IAsyncResult BeginExecute(string TSession, string TSessionIp, string TData, string TLogType)
+        public IAsyncResult BeginExecute(string TSession, string TSessionIp, byte[] TData, string TLogType)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace ASyncSDK.Office
         /// <param name="TSessionIp">The T session ip.</param>
         /// <param name="TData">The T data.</param>
         /// <param name="TLogType">Type of the T log.</param>
-        private void ExecuteLog(string TSession, string TSessionIp, string TData, string TLogType) {
+        private void ExecuteLog(string TSession, string TSessionIp, byte[] TData, string TLogType) {
             DbCommand sqliteCommand = __sqliteDb.GetSqlStringCommand(string.Format(@"
     INSERT INTO {0}([TSession],[TargetIp],[TData],[TLogDate],[TLogType]) 
                     VALUES(?,?,?,?,?)
@@ -124,7 +124,7 @@ CREATE TABLE [SQLiteLog{0}] (
 [TLogId] INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT,
 [TSession] NVARCHAR(50)  NOT NULL,
 [TargetIp] NVARCHAR(50)  NOT NULL,
-[TData]  NVARCHAR(2048)   NULL,
+[TData]  BLOB   NULL,
 [TLogDate] DATE  NOT NULL,
 [TLogType] NVARCHAR(25)  NULL
 )
