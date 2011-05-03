@@ -41,6 +41,7 @@ namespace ASyncSDK.Office {
                                 btnItem
                             });
                         }
+                            this.btnStart_Click(null, EventArgs.Empty);
                     }
                 );
         }
@@ -121,7 +122,7 @@ namespace ASyncSDK.Office {
                 return;
             }
             try {
-                SQLiteExecute.Instance.BeginExecute(TSession.userName, (TSession.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), TSession.LastPacket.OriginalBytes, @"TSessionSent");
+                //SQLiteExecute.Instance.BeginExecute(TSession.userName, (TSession.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), TSession.LastPacket.OriginalBytes, @"TSessionSent");
                 ListViewItem item = this.lstSession.Items[TSession.SessionId.ToString()];
                 item.ImageKey = @"Circle_Green.png";// ? @"Circle_Yellow.png" : @"Circle_Green.png";
                 item.SubItems[1].Text = TSession.userName;
@@ -266,7 +267,8 @@ namespace ASyncSDK.Office {
                 return;
             }
             try {
-                SQLiteExecute.Instance.BeginExecute(ASync.userName, (ASync.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), ASync.LastPacket.OriginalBytes, @"ASynDisconnect");
+                SQLiteExecute.Instance.BeginExecute(ASync.userName, (ASync.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(),
+                    ASync.TotalCount>4? ASync.LastPacket.OriginalBytes:new byte[]{}, @"ASyncReadPacket");
                 string SessionId = string.Format(@"{0}{1}{2}", ASync.RemoteEP.ToString(), ASync.userName, ASync.IsSsl);
                 ListViewItem item = this.lstAsync.Items[SessionId];
                 item.SubItems[2].Text =string.Format(@"{0} KBytes", ASync.TotalBytes.ToString(@"f2"));
