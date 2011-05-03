@@ -25,7 +25,7 @@ namespace AsyncAPI3._0Tst {
             DbCommand dbCommand = Db.GetSqlStringCommand(@"select * from SQLiteLog201105 order by TLogId DESC");
             IDataReader DR = dbCommand.ExecuteReader();
             while (DR.Read()) {
-                Console.WriteLine(string.Format(@"InPacket:{0} Bytes OutPacket:{1} Bytes", (DR[4] as byte[]).Length, (DR[5] as byte[]).Length));
+                Console.WriteLine(string.Format(@"InPacket:{0} Bytes OutPacket:{1} Bytes On {2}", (DR[4] as byte[]).Length, (DR[5] as byte[]).Length,DR[6] as DateTime?));
             }
             Console.ReadLine();
 
