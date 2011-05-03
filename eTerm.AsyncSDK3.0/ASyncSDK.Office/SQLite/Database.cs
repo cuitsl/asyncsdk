@@ -8,6 +8,8 @@ namespace ASyncSDK.Office
 {
     public class SQLiteDatabase
     {
+        SQLiteConnection __Conn;
+
         /// <summary>
         ///   构造函数
         /// </summary>
@@ -37,6 +39,8 @@ namespace ASyncSDK.Office
                 Pooling = pooling
             };
             ConnectionString = sb.ToString();
+            __Conn = new SQLiteConnection(ConnectionString);
+            __Conn.Open();
         }
 
         /// <summary>
@@ -56,7 +60,7 @@ namespace ASyncSDK.Office
                 throw new ArgumentException("查询字符串不能为空。");
             }
 
-            DbCommand command = new SQLiteCommand(query) { CommandType = CommandType.Text };
+            DbCommand command = new SQLiteCommand(query) { CommandType = CommandType.Text, Connection = __Conn };
             return command;
         }
 

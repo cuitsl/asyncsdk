@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Data.Common;
 
 namespace ASyncSDK.Office
 {
@@ -25,6 +26,29 @@ namespace ASyncSDK.Office
         private SQLiteExecute() {
             __dbString = new FileInfo(@"SQLiteDb.s3db").FullName;
             __sqliteDb = new SQLiteDatabase(__dbString);
+            BuildLogTable(DateTime.Now);
+        }
+        #endregion
+
+        #region 写日志
+        /// <summary>
+        /// Executes the log.
+        /// </summary>
+        /// <param name="TSession">The T session.</param>
+        /// <param name="TSessionIp">The T session ip.</param>
+        /// <param name="TData">The T data.</param>
+        /// <param name="TLogType">Type of the T log.</param>
+        public void ExecuteLog(string TSession, string TSessionIp, string TData, string TLogType) {
+            DbCommand sqliteCommand = __sqliteDb.GetSqlStringCommand(string.Format(@"
+    INSERT INTO {0}([TSession],[TargetIp],[TData],[TLogDate],[TLogType]) 
+                    VALUES(?,?,?,?,?)
+", this.__CurrentTable));
+            __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.String, TSession);
+            __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.String, TSessionIp);
+            __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.String, TData);
+            __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.DateTime, DateTime.Now);
+            __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.String, TLogType);
+            sqliteCommand.ExecuteNonQuery();
         }
         #endregion
 
@@ -35,7 +59,7 @@ namespace ASyncSDK.Office
         /// <param name="Current">The current.</param>
         /// <returns></returns>
         private bool ExistLogTable(DateTime Current) {
-            return ((int)__sqliteDb.GetSqlStringCommand(string.Format(@"SELECT COUNT(*) FROM sqlite_master where type='table' and name='SQLiteLog{0}';", Current.ToString(@"yyyyMM"))).ExecuteScalar())>0;
+            return ((long)__sqliteDb.GetSqlStringCommand(string.Format(@"SELECT COUNT(*) FROM sqlite_master where type='table' and name='SQLiteLog{0}';", Current.ToString(@"yyyyMM"))).ExecuteScalar())>0;
         }
 
         /// <summary>
@@ -46,7 +70,7 @@ namespace ASyncSDK.Office
         private bool BuildLogTable(DateTime Current) {
             __CurrentTable = string.Format(@"SQLiteLog{0}", Current.ToString(@"yyyyMM"));
             if (ExistLogTable(Current)) return true;
-            string.Format(@"
+            __sqliteDb.GetSqlStringCommand( string.Format(@"
 CREATE TABLE [SQLiteLog{0}] (
 [TLogId] INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT,
 [TSession] NVARCHAR(50)  NOT NULL,
@@ -55,7 +79,7 @@ CREATE TABLE [SQLiteLog{0}] (
 [TLogDate] DATE  NOT NULL,
 [TLogType] NVARCHAR(25)  NULL
 )
-", Current.ToString(@"yyyyMM"));
+", Current.ToString(@"yyyyMM"))).ExecuteNonQuery() ;
             return false;
         }
         #endregion
