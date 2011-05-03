@@ -47,36 +47,13 @@ namespace ASync.eTermAddIn {
         /// </summary>
         private void QueryLog() {
             listViewEx1.Items.Clear();
-            ContextInstance.Instance.providerName = LicenceManager.Instance.LicenceBody.providerName;
-            ContextInstance.Instance.connectionString = LicenceManager.Instance.LicenceBody.connectionString;
-            int RecordCount= Async_Log.Find(Log =>
-                    (string.IsNullOrEmpty(comboBoxEx1.Text.Trim()) ? true : Log.ClientSession == comboBoxEx1.Text.Trim())
-                    &&
-                    (string.IsNullOrEmpty(comboBoxEx2.Text.Trim()) ? true : Log.eTermSession == comboBoxEx2.Text.Trim())
-                    &&
-                    (string.IsNullOrEmpty(textBoxX1.Text.Trim()) ? true : Log.ASynCommand.Contains(textBoxX1.Text.Trim()))
-                    &&
-                    Log.LogDate >= dateTimeInput1.Value
-                    &&
-                    Log.LogDate <= dateTimeInput2.Value).Count<Async_Log>();
-            slider1.Maximum = RecordCount % 30 == 0 ? RecordCount / 30 : RecordCount / 30 + 1;
-            slider1.Text = string.Format(@"总记录数：{0} 页次：{1} /{2}", RecordCount, this.slider1.Value, slider1.Maximum);
-            foreach (Async_Log log in Async_Log.Find(Log =>
-                    (string.IsNullOrEmpty(comboBoxEx1.Text.Trim()) ? true : Log.ClientSession == comboBoxEx1.Text.Trim())
-                    &&
-                    (string.IsNullOrEmpty(comboBoxEx2.Text.Trim()) ? true : Log.eTermSession == comboBoxEx2.Text.Trim())
-                    &&
-                    (string.IsNullOrEmpty(textBoxX1.Text.Trim()) ? true : Log.ASynCommand.Contains(textBoxX1.Text.Trim()))
-                    &&
-                    Log.LogDate >= dateTimeInput1.Value
-                    &&
-                    Log.LogDate <= dateTimeInput2.Value).OrderByDescending < Async_Log,DateTime?>(Log=>Log.LogDate).Skip<Async_Log>((this.slider1.Value-1)*30).Take<Async_Log>(30)) {
+            foreach (SQLiteLog log in SQLiteExecute.Instance.PacketSQLiteLog(string.Empty, string.Empty, null, null, null)) {
                 ListViewItem logItem = new ListViewItem(new string[] { 
-                    log.Id.ToString(),
-                    log.ClientSession.ToString(),
-                    log.eTermSession.ToString(),
-                    log.ASynCommand,
-                    log.LogDate.Value.ToString(@"yyyy-MM-dd HH:mm:ss")
+                    string.Empty,
+                    log.TSession.ToString(),
+                    log.TASync.ToString(),
+                    log.DbCommand,
+                    log.DbDate.ToString(@"yyyy-MM-dd HH:mm:ss")
                 });
                 logItem.Tag = log;
                 listViewEx1.Items.Add(logItem);
@@ -89,9 +66,6 @@ namespace ASync.eTermAddIn {
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void btnQuery_Click(object sender, EventArgs e) {
-            if (!LicenceManager.Instance.LicenceBody.AllowDatabase)
-                throw new Exception(@"授权不允许使用数据库，请联系开发商获取对应的授权！");
-            //pageNavigator1.pa
             QueryLog();
             tabControl2.SelectedTab = tabItem1;
         }
@@ -119,7 +93,7 @@ namespace ASync.eTermAddIn {
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void listViewEx1_SelectedIndexChanged(object sender, EventArgs e) {
             if (this.listViewEx1.SelectedItems.Count != 1) return;
-            this.richTextBox1.Text = string.Format("☉{0}\r{1}", (this.listViewEx1.SelectedItems[0].Tag as Async_Log).ASynCommand, (this.listViewEx1.SelectedItems[0].Tag as Async_Log).ASyncResult);
+            this.richTextBox1.Text = string.Format("☉{0}\r{1}", ((SQLiteLog)this.listViewEx1.SelectedItems[0].Tag).DbCommand, ((SQLiteLog)this.listViewEx1.SelectedItems[0].Tag).DbResult);
             tabControl2.SelectedTab = tabItem3;
         }
 
