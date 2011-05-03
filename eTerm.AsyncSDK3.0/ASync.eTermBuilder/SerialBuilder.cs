@@ -12,8 +12,16 @@ using eTerm.AsyncSDK;
 
 namespace ASync.eTermBuilder {
     public partial class SerialBuilder : BaseAddIn {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SerialBuilder"/> class.
+        /// </summary>
         public SerialBuilder() {
             InitializeComponent();
+            this.Load += new EventHandler(
+                    delegate(object sender, EventArgs e) {
+                        this.pictureBox1.Image = CaptchaUtil.Generate(StringUtil.GenUniqueString());
+                    }
+                );
         }
 
         /// <summary>
