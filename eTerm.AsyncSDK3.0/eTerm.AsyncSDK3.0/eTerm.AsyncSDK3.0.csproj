@@ -47,6 +47,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -91,6 +92,7 @@
     <Compile Include="Smtp\Smtp.cs" />
     <Compile Include="Smtp\SmtpConfig.cs" />
     <Compile Include="Smtp\SmtpException.cs" />
+    <Compile Include="Util\CaptchaUtil.cs" />
     <Compile Include="Util\Cn2PyUtil.cs" />
     <Compile Include="Net\eTerm350Async.cs" />
     <Compile Include="Net\eTerm443Async.cs" />
