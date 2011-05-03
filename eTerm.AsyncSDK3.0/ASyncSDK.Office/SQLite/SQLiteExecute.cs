@@ -128,6 +128,12 @@ CREATE TABLE [SQLiteLog{0}] (
 [TLogDate] DATE  NOT NULL,
 [TLogType] NVARCHAR(25)  NULL
 )
+
+CREATE INDEX [IDX_SQLiteLog{0}_] ON [SQLiteLog{0}](
+[TSession]  ASC,
+[TLogDate]  ASC,
+[TLogType]  ASC
+)
 ", Current.ToString(@"yyyyMM"))).ExecuteNonQuery() ;
             return false;
         }
