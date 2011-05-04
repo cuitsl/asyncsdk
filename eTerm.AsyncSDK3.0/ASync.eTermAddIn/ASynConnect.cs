@@ -27,16 +27,17 @@ namespace ASync.eTermAddIn {
                                 group = AsyncStackNet.Instance.ASyncSetup.GroupCollection[
                                     AsyncStackNet.Instance.ASyncSetup.GroupCollection.IndexOf(new SDKGroup() {groupCode=Setup.GroupCode })];
                             ListViewItem Item = new ListViewItem(new string[] {
+                                Setup.ToString(),
                                 Setup.userName,
                                 string.Format(@"{0}:{1}",Setup.Address,Setup.Port.ToString()),
                                 Setup.IsSsl.ToString(),
-                                Setup.IsOpen.ToString(),
+                                Setup.IsOpen?"正常":"停用",
                                 Setup.SiText,
                                 Setup.OfficeCode,
                                 group==null?"未分组":group.groupName,
                                 (Setup.TSessionType??CertificationType.Address)== CertificationType.Address?@"地址认证":@"用户认证"
                             });
-                            Item.Name = Setup.userName;
+                            Item.Name = Setup.ToString();
                             Item.Tag = Setup;
                             this.lstSession.Items.Add(Item);
                         }
@@ -93,7 +94,7 @@ namespace ASync.eTermAddIn {
                 if (!item.Selected) continue;
                 ConnectSetup Setup = item.Tag as ConnectSetup;
                 this.PanelSession.Tag = Setup;
-                this.txtAddress.Value = Setup.Address;
+                this.txtAddress.Text = Setup.Address;
                 this.txtPassword.Text = Setup.userPass;
                 this.txtPort.Value = Setup.Port;
 
@@ -189,9 +190,9 @@ namespace ASync.eTermAddIn {
             { 
                  LocalIp=ipLocalIp.Value,
                   TSessionType=radPassword.Checked?CertificationType.Password:CertificationType.Address,
-                 Address=txtAddress.Value,
+                 Address=txtAddress.Text,
                   IsOpen =chkIsOpen.Checked,
-                 userName = radPassword.Checked ? txtSessionName.Text : StringUtil.GenUniqueString(),
+                 userName = string.IsNullOrEmpty(txtSessionName.Text) ? StringUtil.GenUniqueString() : txtSessionName.Text,
                     IsSsl=chkIsSsl.Checked,
                      Port=txtPort.Value,
                        SiText=txtSIText.Text,
