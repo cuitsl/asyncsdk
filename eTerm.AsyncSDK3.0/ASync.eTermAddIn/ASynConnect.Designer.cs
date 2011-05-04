@@ -825,6 +825,7 @@
             this.lstSession.Border.Class = "ListViewBorder";
             this.lstSession.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lstSession.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader9,
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader8,
@@ -832,8 +833,7 @@
             this.columnHeader4,
             this.columnHeader7,
             this.columnHeader5,
-            this.columnHeader6,
-            this.columnHeader9});
+            this.columnHeader6});
             this.contextMenuBar1.SetContextMenuEx(this.lstSession, this.buttonItem1);
             this.lstSession.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstSession.FullRowSelect = true;
