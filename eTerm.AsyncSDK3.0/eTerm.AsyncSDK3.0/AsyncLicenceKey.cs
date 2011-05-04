@@ -52,6 +52,12 @@ namespace eTerm.AsyncSDK {
         public bool AllowDatabase { get; set; }
 
         /// <summary>
+        /// 是否允许日志.
+        /// </summary>
+        /// <value>The allow db log.</value>
+        public bool? AllowDbLog { get; set; }
+
+        /// <summary>
         /// 是否启用指令后续插件处理(启用将损耗一定的处理性能).
         /// </summary>
         /// <value><c>true</c> if [allow after validate]; otherwise, <c>false</c>.</value>
