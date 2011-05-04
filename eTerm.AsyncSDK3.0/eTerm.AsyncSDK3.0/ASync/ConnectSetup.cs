@@ -22,6 +22,13 @@ namespace eTerm.AsyncSDK {
         /// <value>The name of the group.</value>
         public string groupName { get; set; }
 
+
+        /// <summary>
+        /// Gets or sets the group regex.
+        /// </summary>
+        /// <value>The group regex.</value>
+        public string groupRegex { get; set; }
+
         /// <summary>
         /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
         /// </summary>
