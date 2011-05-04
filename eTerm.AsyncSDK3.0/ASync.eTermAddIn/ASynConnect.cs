@@ -27,7 +27,6 @@ namespace ASync.eTermAddIn {
                                 group = AsyncStackNet.Instance.ASyncSetup.GroupCollection[
                                     AsyncStackNet.Instance.ASyncSetup.GroupCollection.IndexOf(new SDKGroup() {groupCode=Setup.GroupCode })];
                             ListViewItem Item = new ListViewItem(new string[] {
-                                Setup.ToString(),
                                 Setup.userName,
                                 string.Format(@"{0}:{1}",Setup.Address,Setup.Port.ToString()),
                                 Setup.IsSsl.ToString(),
@@ -35,7 +34,8 @@ namespace ASync.eTermAddIn {
                                 Setup.SiText,
                                 Setup.OfficeCode,
                                 group==null?"未分组":group.groupName,
-                                (Setup.TSessionType??CertificationType.Address)== CertificationType.Address?@"地址认证":@"用户认证"
+                                (Setup.TSessionType??CertificationType.Address)== CertificationType.Address?@"地址认证":@"用户认证",
+                                Setup.ToString()
                             });
                             Item.Name = Setup.ToString();
                             Item.Tag = Setup;
@@ -136,13 +136,13 @@ namespace ASync.eTermAddIn {
                     }
 
                 PanelSession.Enabled = true;
-                if (!AsyncStackNet.Instance.ASyncSetup.AsynCollection.Contains(new ConnectSetup(Setup.Address,Setup.userName)))
+                if (!AsyncStackNet.Instance.ASyncSetup.AsynCollection.Contains(new ConnectSetup() { SID=Setup.SID, RID=Setup.RID }))
                     return;
                 this.comboTree1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
                 this.comboTree1.ValueMember = @"MonthString";
                 this.comboTree1.DisplayMembers = @"MonthString,Traffic,UpdateDate";
                 this.comboTree1.DataSource = AsyncStackNet.Instance.ASyncSetup.AsynCollection[
-                    AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup(Setup.Address, Setup.userName))].Traffics;
+                    AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup() { SID = Setup.SID, RID = Setup.RID })].Traffics;
                 tabControl1.SelectedTab = tabItem2;
 
                 //PanelSession.Show();
@@ -264,10 +264,10 @@ namespace ASync.eTermAddIn {
             ConnectSetup Setup = PanelSession.Tag as ConnectSetup;
             if (string.IsNullOrEmpty(Setup.userName) || AsyncStackNet.Instance.ASyncSetup.AsynCollection == null || AsyncStackNet.Instance.ASyncSetup.AsynCollection.Count == 0) return;
             if (AsyncStackNet.Instance.ASyncSetup.AsynCollection[
-                AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup(Setup.Address, Setup.userName))].Traffics == null)
+                AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup() { SID = Setup.SID, RID = Setup.RID })].Traffics == null)
                 return;
             this.comboTree1.DataSource = AsyncStackNet.Instance.ASyncSetup.AsynCollection[
-                AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup(Setup.Address, Setup.userName))].Traffics;
+                AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup() { SID = Setup.SID, RID = Setup.RID })].Traffics;
         }
 
         /// <summary>
@@ -275,26 +275,26 @@ namespace ASync.eTermAddIn {
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void lstSession_SelectedIndexChanged(object sender, EventArgs e) {
-            if (lstSession.SelectedItems.Count != 1) {
-                btnDispose.Enabled = false;
-                btnInsert.Enabled = false;
-                btnSessionEdit.Enabled = false;
-                btnDelete.Enabled = false;
-                return; 
-            }
-            btnDelete.Enabled = true;
-            btnDispose.Enabled = true;
-            btnInsert.Enabled = true;
-            btnSessionEdit.Enabled = true;
-            ConnectSetup Setup = lstSession.SelectedItems[0].Tag as ConnectSetup;
-            if (string.IsNullOrEmpty(Setup.userName) || AsyncStackNet.Instance.ASyncSetup.AsynCollection == null || AsyncStackNet.Instance.ASyncSetup.AsynCollection.Count == 0) return;
-            if (AsyncStackNet.Instance.ASyncSetup.AsynCollection[
-                AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup(Setup.Address, Setup.userName))].Traffics == null)
-                return;
-            this.comboTree1.DataSource = AsyncStackNet.Instance.ASyncSetup.AsynCollection[
-                AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup(Setup.Address, Setup.userName))].Traffics;
-        }
+        //private void lstSession_SelectedIndexChanged(object sender, EventArgs e) {
+        //    if (lstSession.SelectedItems.Count != 1) {
+        //        btnDispose.Enabled = false;
+        //        btnInsert.Enabled = false;
+        //        btnSessionEdit.Enabled = false;
+        //        btnDelete.Enabled = false;
+        //        return; 
+        //    }
+        //    btnDelete.Enabled = true;
+        //    btnDispose.Enabled = true;
+        //    btnInsert.Enabled = true;
+        //    btnSessionEdit.Enabled = true;
+        //    ConnectSetup Setup = lstSession.SelectedItems[0].Tag as ConnectSetup;
+        //    if (string.IsNullOrEmpty(Setup.userName) || AsyncStackNet.Instance.ASyncSetup.AsynCollection == null || AsyncStackNet.Instance.ASyncSetup.AsynCollection.Count == 0) return;
+        //    if (AsyncStackNet.Instance.ASyncSetup.AsynCollection[
+        //        AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup() { SID = Setup.SID, RID = Setup.RID })].Traffics == null)
+        //        return;
+        //    this.comboTree1.DataSource = AsyncStackNet.Instance.ASyncSetup.AsynCollection[
+        //        AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup() { SID = Setup.SID, RID = Setup.RID })].Traffics;
+        //}
 
         /// <summary>
         /// Handles the Click event of the btnClearTraffic control.
@@ -305,7 +305,7 @@ namespace ASync.eTermAddIn {
             ConnectSetup Setup = lstSession.SelectedItems[0].Tag as ConnectSetup;
             if(this.comboTree1.SelectedValue.ToString()==DateTime.Now.ToString(@"yyyyMM")){MessageBox.Show(@"当月流量统计不允许清除！",@"操作错误", MessageBoxButtons.OK, MessageBoxIcon.Error); return;}
             List<SocketTraffic> Traffics= AsyncStackNet.Instance.ASyncSetup.AsynCollection[
-                AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup(Setup.Address, Setup.userName))].Traffics;
+                AsyncStackNet.Instance.ASyncSetup.AsynCollection.IndexOf(new ConnectSetup() { SID = Setup.SID, RID = Setup.RID })].Traffics;
             Traffics.RemoveAt(Traffics.IndexOf(new SocketTraffic() { MonthString = this.comboTree1.SelectedValue.ToString() }));
             AsyncStackNet.Instance.BeginRateUpdate(new AsyncCallback(delegate(IAsyncResult iar)
             {
