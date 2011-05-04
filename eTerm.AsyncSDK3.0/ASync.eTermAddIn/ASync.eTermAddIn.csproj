@@ -79,12 +79,6 @@
     <Compile Include="ASyncAuthorize.Designer.cs">
       <DependentUpon>ASyncAuthorize.cs</DependentUpon>
     </Compile>
-    <Compile Include="ASyncLogViewer.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ASyncLogViewer.Designer.cs">
-      <DependentUpon>ASyncLogViewer.cs</DependentUpon>
-    </Compile>
     <Compile Include="ASyncPlugIn.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -129,9 +123,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ASyncAuthorize.resx">
       <DependentUpon>ASyncAuthorize.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ASyncLogViewer.resx">
-      <DependentUpon>ASyncLogViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ASyncPlugIn.resx">
       <DependentUpon>ASyncPlugIn.cs</DependentUpon>
