@@ -185,10 +185,9 @@ namespace ASync.eTermAddIn {
             };
 
             Setup.Traffics = (PanelSession.Tag as TSessionSetup).Traffics;
-            Setup.SpecialIntervalList = string.Empty;
-            foreach (object item in this.listBox1.Items) {
-                Setup.SpecialIntervalList += string.Format(@"^{0},", item.GetType().GetProperty("Interval").GetValue(item, null).ToString().Replace(@" ",string.Empty)
-                    , Regex.Match(item.GetType().GetProperty("Interval").GetValue(comboBoxEx2.SelectedItem, null).ToString(), @"\s+(\d+$)", RegexOptions.IgnoreCase | RegexOptions.Multiline).Groups[2].Value);
+            foreach (TSessionSetup item in this.listBox1.Items)
+            {
+                Setup.SpecialIntervalList += string.Format(@"^{0}|{1},", item.SessionCode,item.GroupCode);
             }
             this.listBox1.Items.Clear();
             foreach (string Cmd in this.lstCmd.Items) {
@@ -371,9 +370,9 @@ namespace ASync.eTermAddIn {
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void buttonX2_Click(object sender, EventArgs e)
         {
-            foreach (object item in this.listBox1.SelectedItems)
-                this.listBox1.Items.Remove(item);
+            for (int i = 0; i < this.listBox1.SelectedItems.Count; i++)
+                this.listBox1.Items.Remove(this.listBox1.SelectedItems[i]);
         }
-        
+
     }
 }
