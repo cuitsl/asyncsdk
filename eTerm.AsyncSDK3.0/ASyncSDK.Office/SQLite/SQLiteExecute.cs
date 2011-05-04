@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Data.Common;
+using eTerm.AsyncSDK;
 
 namespace ASyncSDK.Office
 {
@@ -89,6 +90,7 @@ namespace ASyncSDK.Office
         /// <param name="TLogType">Type of the T log.</param>
         private void ExecuteLog(string TSession, string TASync, string TSessionIp, byte[] TInPacket, byte[] TOutPacket)
         {
+            if (!(AsyncStackNet.Instance.ASyncSetup.AllowLog??false)) return;
             DbCommand sqliteCommand = __sqliteDb.GetSqlStringCommand(string.Format(@"
     INSERT INTO {0}([TSession],[TASync],[TargetIp],[TInPacket],[TOutPacket],[TLogDate]) 
                     VALUES(?,?,?,?,?,?)

@@ -469,7 +469,7 @@ string.Empty,
                     {
                         packetASync(e.Session);
                         TASyncLog(e.Session.userName, string.Empty, @"OnAsyncReadPacket", @"SUCCESS");
-                        if (e.Session.TSession == null) return;
+                        if (e.Session.TSession == null||!(LicenceManager.Instance.LicenceBody.AllowDbLog??false)) return;
                         SQLiteExecute.Instance.BeginExecute(e.Session.userName, e.Session.TSession.userName, (e.Session.TSession.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), e.OutPacket.OriginalBytes, e.InPacket.OriginalBytes);
                     }
                 );
