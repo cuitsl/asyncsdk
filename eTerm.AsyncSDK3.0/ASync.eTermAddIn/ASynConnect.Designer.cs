@@ -63,7 +63,6 @@
             this.labelX7 = new DevComponents.DotNetBar.LabelX();
             this.txtOfficeCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX6 = new DevComponents.DotNetBar.LabelX();
-            this.txtAddress = new DevComponents.Editors.IpAddressInput();
             this.chkIsSsl = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.labelX10 = new DevComponents.DotNetBar.LabelX();
             this.labelX9 = new DevComponents.DotNetBar.LabelX();
@@ -83,6 +82,8 @@
             this.tabItem2 = new DevComponents.DotNetBar.TabItem(this.components);
             this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.textBoxX2 = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.columnHeader9 = new System.Windows.Forms.ColumnHeader();
+            this.txtAddress = new DevComponents.DotNetBar.Controls.TextBoxX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
@@ -91,7 +92,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ipLocalIp)).BeginInit();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAddress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.integerInput2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).BeginInit();
             this.SuspendLayout();
@@ -106,7 +106,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedTabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.tabControl1.SelectedTabIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(699, 520);
+            this.tabControl1.Size = new System.Drawing.Size(811, 509);
             this.tabControl1.Style = DevComponents.DotNetBar.eTabStripStyle.Office2007Document;
             this.tabControl1.TabIndex = 1;
             this.tabControl1.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
@@ -122,7 +122,7 @@
             this.tabControlPanel1.Location = new System.Drawing.Point(0, 23);
             this.tabControlPanel1.Name = "tabControlPanel1";
             this.tabControlPanel1.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanel1.Size = new System.Drawing.Size(699, 497);
+            this.tabControlPanel1.Size = new System.Drawing.Size(811, 486);
             this.tabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(254)))));
             this.tabControlPanel1.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(188)))), ((int)(((byte)(227)))));
             this.tabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -235,20 +235,21 @@
             this.lstSession.Border.Class = "ListViewBorder";
             this.lstSession.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lstSession.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader9,
             this.columnHeader1,
             this.columnHeader2,
+            this.columnHeader8,
             this.columnHeader3,
             this.columnHeader4,
             this.columnHeader7,
             this.columnHeader5,
-            this.columnHeader6,
-            this.columnHeader8});
+            this.columnHeader6});
             this.contextMenuBar1.SetContextMenuEx(this.lstSession, this.buttonItem1);
             this.lstSession.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstSession.FullRowSelect = true;
             this.lstSession.Location = new System.Drawing.Point(1, 1);
             this.lstSession.Name = "lstSession";
-            this.lstSession.Size = new System.Drawing.Size(697, 495);
+            this.lstSession.Size = new System.Drawing.Size(809, 484);
             this.lstSession.TabIndex = 0;
             this.lstSession.UseCompatibleStateImageBehavior = false;
             this.lstSession.View = System.Windows.Forms.View.Details;
@@ -257,44 +258,52 @@
             // 
             // columnHeader1
             // 
+            this.columnHeader1.DisplayIndex = 0;
             this.columnHeader1.Text = "登录帐号";
             this.columnHeader1.Width = 71;
             // 
             // columnHeader2
             // 
+            this.columnHeader2.DisplayIndex = 1;
             this.columnHeader2.Text = "主机地址";
             this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader2.Width = 122;
             // 
             // columnHeader3
             // 
+            this.columnHeader3.DisplayIndex = 2;
             this.columnHeader3.Text = "是否安全连接";
             this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader3.Width = 90;
             // 
             // columnHeader4
             // 
+            this.columnHeader4.DisplayIndex = 3;
             this.columnHeader4.Text = "是否启用";
             this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader4.Width = 73;
             // 
             // columnHeader7
             // 
+            this.columnHeader7.DisplayIndex = 4;
             this.columnHeader7.Text = "SI";
             this.columnHeader7.Width = 85;
             // 
             // columnHeader5
             // 
+            this.columnHeader5.DisplayIndex = 5;
             this.columnHeader5.Text = "OfficeCode";
             this.columnHeader5.Width = 76;
             // 
             // columnHeader6
             // 
+            this.columnHeader6.DisplayIndex = 6;
             this.columnHeader6.Text = "所属分组";
             this.columnHeader6.Width = 120;
             // 
             // columnHeader8
             // 
+            this.columnHeader8.DisplayIndex = 7;
             this.columnHeader8.Text = "认证方式";
             this.columnHeader8.Width = 95;
             // 
@@ -307,6 +316,7 @@
             // PanelSession
             // 
             this.PanelSession.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.PanelSession.Controls.Add(this.txtAddress);
             this.PanelSession.Controls.Add(this.textBoxX2);
             this.PanelSession.Controls.Add(this.textBoxX1);
             this.PanelSession.Controls.Add(this.ipLocalIp);
@@ -323,7 +333,6 @@
             this.PanelSession.Controls.Add(this.labelX7);
             this.PanelSession.Controls.Add(this.txtOfficeCode);
             this.PanelSession.Controls.Add(this.labelX6);
-            this.PanelSession.Controls.Add(this.txtAddress);
             this.PanelSession.Controls.Add(this.chkIsSsl);
             this.PanelSession.Controls.Add(this.labelX10);
             this.PanelSession.Controls.Add(this.labelX9);
@@ -345,7 +354,7 @@
             this.PanelSession.Location = new System.Drawing.Point(0, 23);
             this.PanelSession.Name = "PanelSession";
             this.PanelSession.Padding = new System.Windows.Forms.Padding(1);
-            this.PanelSession.Size = new System.Drawing.Size(699, 497);
+            this.PanelSession.Size = new System.Drawing.Size(811, 486);
             this.PanelSession.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(254)))));
             this.PanelSession.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(188)))), ((int)(((byte)(227)))));
             this.PanelSession.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -372,6 +381,7 @@
             this.ipLocalIp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.ipLocalIp.TabIndex = 33;
             this.ipLocalIp.Visible = false;
+            this.ipLocalIp.WatermarkText = "认证本地IP";
             // 
             // labelX15
             // 
@@ -444,7 +454,7 @@
             // 
             this.btnClearTraffic.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnClearTraffic.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnClearTraffic.Location = new System.Drawing.Point(378, 237);
+            this.btnClearTraffic.Location = new System.Drawing.Point(436, 237);
             this.btnClearTraffic.Name = "btnClearTraffic";
             this.btnClearTraffic.Size = new System.Drawing.Size(78, 23);
             this.btnClearTraffic.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -490,16 +500,16 @@
             this.flowLayoutPanel1.Controls.Add(this.btnSingleSave);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(1, 451);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(1, 440);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(697, 45);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(809, 45);
             this.flowLayoutPanel1.TabIndex = 27;
             // 
             // btnSingleSave
             // 
             this.btnSingleSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnSingleSave.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnSingleSave.Location = new System.Drawing.Point(601, 3);
+            this.btnSingleSave.Location = new System.Drawing.Point(713, 3);
             this.btnSingleSave.Name = "btnSingleSave";
             this.btnSingleSave.Size = new System.Drawing.Size(93, 23);
             this.btnSingleSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -518,9 +528,10 @@
             this.comboTree1.ButtonDropDown.Visible = true;
             this.comboTree1.Location = new System.Drawing.Point(96, 237);
             this.comboTree1.Name = "comboTree1";
-            this.comboTree1.Size = new System.Drawing.Size(276, 23);
+            this.comboTree1.Size = new System.Drawing.Size(334, 23);
             this.comboTree1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.comboTree1.TabIndex = 26;
+            this.comboTree1.WatermarkText = "当前月份流理不可清理";
             // 
             // labelX11
             // 
@@ -546,9 +557,10 @@
             this.comboBoxEx1.ItemHeight = 14;
             this.comboBoxEx1.Location = new System.Drawing.Point(96, 209);
             this.comboBoxEx1.Name = "comboBoxEx1";
-            this.comboBoxEx1.Size = new System.Drawing.Size(121, 20);
+            this.comboBoxEx1.Size = new System.Drawing.Size(142, 20);
             this.comboBoxEx1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.comboBoxEx1.TabIndex = 24;
+            this.comboBoxEx1.WatermarkText = "授权可用方可用";
             // 
             // labelX7
             // 
@@ -578,6 +590,7 @@
             this.txtOfficeCode.Name = "txtOfficeCode";
             this.txtOfficeCode.Size = new System.Drawing.Size(142, 20);
             this.txtOfficeCode.TabIndex = 22;
+            this.txtOfficeCode.WatermarkText = "配置Office号";
             // 
             // labelX6
             // 
@@ -594,22 +607,6 @@
             this.labelX6.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.labelX6.TabIndex = 21;
             this.labelX6.Text = "OfficeCode：";
-            // 
-            // txtAddress
-            // 
-            this.txtAddress.AutoOverwrite = true;
-            // 
-            // 
-            // 
-            this.txtAddress.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.txtAddress.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtAddress.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.txtAddress.ButtonFreeText.Visible = true;
-            this.txtAddress.Location = new System.Drawing.Point(96, 79);
-            this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(142, 20);
-            this.txtAddress.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.txtAddress.TabIndex = 20;
             // 
             // chkIsSsl
             // 
@@ -763,8 +760,9 @@
             this.integerInput2.MinValue = 0;
             this.integerInput2.Name = "integerInput2";
             this.integerInput2.ShowUpDown = true;
-            this.integerInput2.Size = new System.Drawing.Size(88, 20);
+            this.integerInput2.Size = new System.Drawing.Size(87, 20);
             this.integerInput2.TabIndex = 5;
+            this.integerInput2.WatermarkText = "月可用指令数";
             // 
             // txtPort
             // 
@@ -781,7 +779,7 @@
             this.txtPort.ShowUpDown = true;
             this.txtPort.Size = new System.Drawing.Size(49, 20);
             this.txtPort.TabIndex = 5;
-            this.txtPort.Value = 443;
+            this.txtPort.Value = 350;
             // 
             // labelX3
             // 
@@ -811,6 +809,7 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(142, 20);
             this.txtPassword.TabIndex = 3;
+            this.txtPassword.WatermarkText = "配置密码";
             // 
             // labelX2
             // 
@@ -891,13 +890,31 @@
             this.textBoxX2.TabIndex = 34;
             this.textBoxX2.WatermarkText = "RID";
             // 
+            // columnHeader9
+            // 
+            this.columnHeader9.DisplayIndex = 8;
+            this.columnHeader9.Text = "编号";
+            // 
+            // txtAddress
+            // 
+            // 
+            // 
+            // 
+            this.txtAddress.Border.Class = "TextBoxBorder";
+            this.txtAddress.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtAddress.Location = new System.Drawing.Point(96, 78);
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(142, 20);
+            this.txtAddress.TabIndex = 35;
+            this.txtAddress.WatermarkText = "域名或IP";
+            // 
             // ASynConnect
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl1);
             this.Name = "ASynConnect";
-            this.Size = new System.Drawing.Size(699, 520);
+            this.Size = new System.Drawing.Size(811, 509);
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabControlPanel1.ResumeLayout(false);
@@ -908,7 +925,6 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtAddress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.integerInput2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).EndInit();
             this.ResumeLayout(false);
@@ -947,7 +963,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private DevComponents.DotNetBar.Controls.CheckBoxX chkIsSsl;
         private DevComponents.DotNetBar.LabelX labelX8;
-        private DevComponents.Editors.IpAddressInput txtAddress;
         private DevComponents.DotNetBar.ItemContainer itemContainer4;
         private DevComponents.DotNetBar.ButtonItem btnDispose;
         private DevComponents.DotNetBar.LabelX labelX6;
@@ -976,6 +991,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private DevComponents.DotNetBar.Controls.TextBoxX textBoxX1;
         private DevComponents.DotNetBar.Controls.TextBoxX textBoxX2;
+        private System.Windows.Forms.ColumnHeader columnHeader9;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtAddress;
 
     }
 }

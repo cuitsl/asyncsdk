@@ -95,12 +95,12 @@ namespace ASync.eTermAddIn {
                 txtFlow.Value =int.Parse( Setup.FlowRate.ToString());
                 PanelSession.Tag = Setup;
                 comboBoxEx3.Items.Clear();
-                comboBoxEx1.Items.Clear();
+                lstCmd.Items.Clear();
                 chkAllowRepeat.Checked = Setup.AllowDuplicate ?? false;
                 comboBoxEx3.ValueMember = "SessionCode";
                 comboBoxEx3.DisplayMember = "Description";
                 foreach (string Cmd in Setup.TSessionForbidCmd)
-                    this.comboBoxEx1.Items.Add(Cmd);
+                    this.lstCmd.Items.Add(Cmd);
 
 
                 comboBoxEx2.Items.Clear();
@@ -190,7 +190,7 @@ namespace ASync.eTermAddIn {
                 Setup.SpecialIntervalList += string.Format(@"^{0}|{1},", item.SessionCode, item.SessionPass);
             }
 
-            foreach (string Cmd in this.comboBoxEx1.Items) {
+            foreach (string Cmd in this.lstCmd.Items) {
                 Setup.TSessionForbidCmd.Add(Cmd);
             }
             if (!AsyncStackNet.Instance.ASyncSetup.SessionCollection.Contains(Setup))
@@ -203,26 +203,9 @@ namespace ASync.eTermAddIn {
             this.OnLoad(EventArgs.Empty);
         }
 
-        /// <summary>
-        /// Handles the Click event of the btnAddSingle control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void btnAddSingle_Click(object sender, EventArgs e) {
-            this.comboBoxEx1.Items.Add(this.comboBoxEx1.Text);
-            this.comboBoxEx1.Text = string.Empty;
-        }
+        
 
-        /// <summary>
-        /// Handles the Click event of the btnDeleteSingleCmd control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void btnDeleteSingleCmd_Click(object sender, EventArgs e) {
-            if (!(this.comboBoxEx1.SelectedIndex >= 0)) return;
-            this.comboBoxEx1.Items.RemoveAt(this.comboBoxEx1.SelectedIndex);
-        }
-
+       
 
         
         /// <summary>
@@ -340,6 +323,28 @@ namespace ASync.eTermAddIn {
             btnInsert.Enabled = true;
             btnSessionEdit.Enabled = true;
 
+        }
+
+        /// <summary>
+        /// Handles the Click event of the btnAddRegCommand control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void btnAddRegCommand_Click(object sender, EventArgs e)
+        {
+            this.lstCmd.Items.Add(txtRegCmd.Text.Trim());
+        }
+
+        /// <summary>
+        /// Handles the Click event of the btnRemoveCommand control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void btnRemoveCommand_Click(object sender, EventArgs e)
+        {
+            foreach (object item in this.lstCmd.SelectedItems) {
+                this.lstCmd.Items.Remove(item);
+            }
         }
         
     }

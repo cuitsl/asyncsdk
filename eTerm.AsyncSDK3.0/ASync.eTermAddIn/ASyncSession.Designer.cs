@@ -25,22 +25,11 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new DevComponents.DotNetBar.TabControl();
-            this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
-            this.contextMenuBar1 = new DevComponents.DotNetBar.ContextMenuBar();
-            this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
-            this.btnSessionEdit = new DevComponents.DotNetBar.ButtonItem();
-            this.itemContainer1 = new DevComponents.DotNetBar.ItemContainer();
-            this.btnDelete = new DevComponents.DotNetBar.ButtonItem();
-            this.itemContainer2 = new DevComponents.DotNetBar.ItemContainer();
-            this.btnInsert = new DevComponents.DotNetBar.ButtonItem();
-            this.lstSession = new DevComponents.DotNetBar.Controls.ListViewEx();
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
-            this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
             this.PanelSession = new DevComponents.DotNetBar.TabControlPanel();
+            this.txtRegCmd = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.btnRemoveCommand = new DevComponents.DotNetBar.ButtonX();
+            this.btnAddRegCommand = new DevComponents.DotNetBar.ButtonX();
+            this.lstCmd = new System.Windows.Forms.ListBox();
             this.btnClearTraffic = new DevComponents.DotNetBar.ButtonX();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnSingleSave = new DevComponents.DotNetBar.ButtonX();
@@ -56,13 +45,8 @@
             this.comboBoxEx3 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.labelX9 = new DevComponents.DotNetBar.LabelX();
             this.comboBoxEx2 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.labelX12 = new DevComponents.DotNetBar.LabelX();
             this.labelX8 = new DevComponents.DotNetBar.LabelX();
-            this.btnDeleteCommand = new DevComponents.DotNetBar.ButtonX();
-            this.btnAddSingle = new DevComponents.DotNetBar.ButtonItem();
-            this.itemContainer5 = new DevComponents.DotNetBar.ItemContainer();
-            this.btnDeleteSingleCmd = new DevComponents.DotNetBar.ButtonItem();
-            this.comboBoxEx1 = new DevComponents.DotNetBar.Controls.ComboBoxEx();
-            this.labelX7 = new DevComponents.DotNetBar.LabelX();
             this.txtFlow = new DevComponents.Editors.IntegerInput();
             this.labelX6 = new DevComponents.DotNetBar.LabelX();
             this.txtDescription = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -78,6 +62,21 @@
             this.txtSessionName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.tabItem2 = new DevComponents.DotNetBar.TabItem(this.components);
+            this.tabControlPanel1 = new DevComponents.DotNetBar.TabControlPanel();
+            this.contextMenuBar1 = new DevComponents.DotNetBar.ContextMenuBar();
+            this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
+            this.btnSessionEdit = new DevComponents.DotNetBar.ButtonItem();
+            this.itemContainer1 = new DevComponents.DotNetBar.ItemContainer();
+            this.btnDelete = new DevComponents.DotNetBar.ButtonItem();
+            this.itemContainer2 = new DevComponents.DotNetBar.ItemContainer();
+            this.btnInsert = new DevComponents.DotNetBar.ButtonItem();
+            this.lstSession = new DevComponents.DotNetBar.Controls.ListViewEx();
+            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
+            this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
             this.itemContainer4 = new DevComponents.DotNetBar.ItemContainer();
             this.itemContainer7 = new DevComponents.DotNetBar.ItemContainer();
             this.buttonItem5 = new DevComponents.DotNetBar.ButtonItem();
@@ -87,20 +86,20 @@
             this.columnHeader11 = new DevComponents.AdvTree.ColumnHeader();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
-            this.tabControlPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).BeginInit();
             this.PanelSession.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFlow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtExpire)).BeginInit();
+            this.tabControlPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.CanReorderTabs = true;
-            this.tabControl1.Controls.Add(this.tabControlPanel1);
             this.tabControl1.Controls.Add(this.PanelSession);
+            this.tabControl1.Controls.Add(this.tabControlPanel1);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -113,6 +112,533 @@
             this.tabControl1.Tabs.Add(this.tabItem1);
             this.tabControl1.Tabs.Add(this.tabItem2);
             this.tabControl1.SelectedTabChanged += new DevComponents.DotNetBar.TabStrip.SelectedTabChangedEventHandler(this.tabControl1_SelectedTabChanged);
+            // 
+            // PanelSession
+            // 
+            this.PanelSession.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.PanelSession.Controls.Add(this.txtRegCmd);
+            this.PanelSession.Controls.Add(this.btnRemoveCommand);
+            this.PanelSession.Controls.Add(this.btnAddRegCommand);
+            this.PanelSession.Controls.Add(this.lstCmd);
+            this.PanelSession.Controls.Add(this.btnClearTraffic);
+            this.PanelSession.Controls.Add(this.flowLayoutPanel1);
+            this.PanelSession.Controls.Add(this.comboTree1);
+            this.PanelSession.Controls.Add(this.labelX10);
+            this.PanelSession.Controls.Add(this.contextMenuBar2);
+            this.PanelSession.Controls.Add(this.comboBoxEx3);
+            this.PanelSession.Controls.Add(this.labelX9);
+            this.PanelSession.Controls.Add(this.comboBoxEx2);
+            this.PanelSession.Controls.Add(this.labelX12);
+            this.PanelSession.Controls.Add(this.labelX8);
+            this.PanelSession.Controls.Add(this.txtFlow);
+            this.PanelSession.Controls.Add(this.labelX6);
+            this.PanelSession.Controls.Add(this.txtDescription);
+            this.PanelSession.Controls.Add(this.labelX5);
+            this.PanelSession.Controls.Add(this.chkAllowRepeat);
+            this.PanelSession.Controls.Add(this.labelX11);
+            this.PanelSession.Controls.Add(this.chkIsOpen);
+            this.PanelSession.Controls.Add(this.labelX4);
+            this.PanelSession.Controls.Add(this.txtExpire);
+            this.PanelSession.Controls.Add(this.labelX3);
+            this.PanelSession.Controls.Add(this.txtPassword);
+            this.PanelSession.Controls.Add(this.labelX2);
+            this.PanelSession.Controls.Add(this.txtSessionName);
+            this.PanelSession.Controls.Add(this.labelX1);
+            this.PanelSession.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PanelSession.Enabled = false;
+            this.PanelSession.Location = new System.Drawing.Point(0, 23);
+            this.PanelSession.Name = "PanelSession";
+            this.PanelSession.Padding = new System.Windows.Forms.Padding(1);
+            this.PanelSession.Size = new System.Drawing.Size(636, 415);
+            this.PanelSession.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(254)))));
+            this.PanelSession.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(188)))), ((int)(((byte)(227)))));
+            this.PanelSession.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.PanelSession.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(165)))), ((int)(((byte)(199)))));
+            this.PanelSession.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
+                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
+            this.PanelSession.Style.GradientAngle = 90;
+            this.PanelSession.TabIndex = 2;
+            this.PanelSession.TabItem = this.tabItem2;
+            // 
+            // txtRegCmd
+            // 
+            // 
+            // 
+            // 
+            this.txtRegCmd.Border.Class = "TextBoxBorder";
+            this.txtRegCmd.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtRegCmd.Location = new System.Drawing.Point(318, 145);
+            this.txtRegCmd.Name = "txtRegCmd";
+            this.txtRegCmd.Size = new System.Drawing.Size(97, 20);
+            this.txtRegCmd.TabIndex = 33;
+            this.txtRegCmd.WatermarkText = "被禁指令字符";
+            // 
+            // btnRemoveCommand
+            // 
+            this.btnRemoveCommand.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnRemoveCommand.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnRemoveCommand.Location = new System.Drawing.Point(355, 207);
+            this.btnRemoveCommand.Name = "btnRemoveCommand";
+            this.btnRemoveCommand.Size = new System.Drawing.Size(36, 23);
+            this.btnRemoveCommand.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnRemoveCommand.TabIndex = 32;
+            this.btnRemoveCommand.Text = "<<";
+            this.btnRemoveCommand.Click += new System.EventHandler(this.btnRemoveCommand_Click);
+            // 
+            // btnAddRegCommand
+            // 
+            this.btnAddRegCommand.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnAddRegCommand.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnAddRegCommand.Location = new System.Drawing.Point(355, 176);
+            this.btnAddRegCommand.Name = "btnAddRegCommand";
+            this.btnAddRegCommand.Size = new System.Drawing.Size(36, 23);
+            this.btnAddRegCommand.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnAddRegCommand.TabIndex = 32;
+            this.btnAddRegCommand.Text = ">>";
+            this.btnAddRegCommand.Click += new System.EventHandler(this.btnAddRegCommand_Click);
+            // 
+            // lstCmd
+            // 
+            this.lstCmd.FormattingEnabled = true;
+            this.lstCmd.Location = new System.Drawing.Point(421, 147);
+            this.lstCmd.Name = "lstCmd";
+            this.lstCmd.Size = new System.Drawing.Size(195, 108);
+            this.lstCmd.TabIndex = 31;
+            // 
+            // btnClearTraffic
+            // 
+            this.btnClearTraffic.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnClearTraffic.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnClearTraffic.Location = new System.Drawing.Point(421, 262);
+            this.btnClearTraffic.Name = "btnClearTraffic";
+            this.btnClearTraffic.Size = new System.Drawing.Size(78, 23);
+            this.btnClearTraffic.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnClearTraffic.TabIndex = 30;
+            this.btnClearTraffic.Text = "清除（&D）";
+            this.btnClearTraffic.Click += new System.EventHandler(this.btnClearTraffic_Click);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel1.Controls.Add(this.btnSingleSave);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(1, 368);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(634, 46);
+            this.flowLayoutPanel1.TabIndex = 23;
+            // 
+            // btnSingleSave
+            // 
+            this.btnSingleSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnSingleSave.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
+            this.btnSingleSave.Location = new System.Drawing.Point(540, 3);
+            this.btnSingleSave.Name = "btnSingleSave";
+            this.btnSingleSave.Size = new System.Drawing.Size(91, 23);
+            this.btnSingleSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnSingleSave.TabIndex = 11;
+            this.btnSingleSave.Text = "保存用户（&U）";
+            this.btnSingleSave.Click += new System.EventHandler(this.btnSingleSave_Click);
+            // 
+            // comboTree1
+            // 
+            this.comboTree1.BackColor = System.Drawing.SystemColors.Window;
+            // 
+            // 
+            // 
+            this.comboTree1.BackgroundStyle.Class = "TextBoxBorder";
+            this.comboTree1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.comboTree1.ButtonDropDown.Visible = true;
+            this.comboTree1.Location = new System.Drawing.Point(87, 262);
+            this.comboTree1.Name = "comboTree1";
+            this.comboTree1.Size = new System.Drawing.Size(328, 23);
+            this.comboTree1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.comboTree1.TabIndex = 22;
+            this.comboTree1.WatermarkText = "月份指令流量计";
+            // 
+            // labelX10
+            // 
+            this.labelX10.AutoSize = true;
+            this.labelX10.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX10.BackgroundStyle.Class = "";
+            this.labelX10.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX10.Location = new System.Drawing.Point(19, 262);
+            this.labelX10.Name = "labelX10";
+            this.labelX10.Size = new System.Drawing.Size(68, 16);
+            this.labelX10.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX10.TabIndex = 21;
+            this.labelX10.Text = "指令流量：";
+            // 
+            // contextMenuBar2
+            // 
+            this.contextMenuBar2.AntiAlias = true;
+            this.contextMenuBar2.DockSide = DevComponents.DotNetBar.eDockSide.Document;
+            this.contextMenuBar2.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItem2});
+            this.contextMenuBar2.Location = new System.Drawing.Point(510, 203);
+            this.contextMenuBar2.Name = "contextMenuBar2";
+            this.contextMenuBar2.Size = new System.Drawing.Size(75, 27);
+            this.contextMenuBar2.Stretch = true;
+            this.contextMenuBar2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.contextMenuBar2.TabIndex = 20;
+            this.contextMenuBar2.TabStop = false;
+            this.contextMenuBar2.Text = "contextMenuBar2";
+            // 
+            // buttonItem2
+            // 
+            this.buttonItem2.AutoExpandOnClick = true;
+            this.buttonItem2.Name = "buttonItem2";
+            this.buttonItem2.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.btnDeleteSpecial,
+            this.itemContainer6,
+            this.itemContainer8,
+            this.btnNewSpecial});
+            this.buttonItem2.Text = "时限修改项";
+            // 
+            // btnDeleteSpecial
+            // 
+            this.btnDeleteSpecial.Name = "btnDeleteSpecial";
+            this.btnDeleteSpecial.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.Del);
+            this.btnDeleteSpecial.Text = "删除(&D)";
+            this.btnDeleteSpecial.Click += new System.EventHandler(this.btnDeleteSpecial_Click);
+            // 
+            // itemContainer6
+            // 
+            // 
+            // 
+            // 
+            this.itemContainer6.BackgroundStyle.Class = "";
+            this.itemContainer6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemContainer6.Name = "itemContainer6";
+            this.itemContainer6.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItem3});
+            // 
+            // buttonItem3
+            // 
+            this.buttonItem3.Name = "buttonItem3";
+            this.buttonItem3.SplitButton = true;
+            this.buttonItem3.Text = "-";
+            // 
+            // itemContainer8
+            // 
+            // 
+            // 
+            // 
+            this.itemContainer8.BackgroundStyle.Class = "";
+            this.itemContainer8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemContainer8.Name = "itemContainer8";
+            // 
+            // btnNewSpecial
+            // 
+            this.btnNewSpecial.Name = "btnNewSpecial";
+            this.btnNewSpecial.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlRight);
+            this.btnNewSpecial.Text = "新增(&N)";
+            this.btnNewSpecial.Click += new System.EventHandler(this.btnNewSpecial_Click);
+            // 
+            // comboBoxEx3
+            // 
+            this.contextMenuBar2.SetContextMenuEx(this.comboBoxEx3, this.buttonItem2);
+            this.comboBoxEx3.DisplayMember = "Text";
+            this.comboBoxEx3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboBoxEx3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.comboBoxEx3.FormattingEnabled = true;
+            this.comboBoxEx3.IntegralHeight = false;
+            this.comboBoxEx3.ItemHeight = 13;
+            this.comboBoxEx3.Location = new System.Drawing.Point(257, 44);
+            this.comboBoxEx3.Name = "comboBoxEx3";
+            this.comboBoxEx3.Size = new System.Drawing.Size(359, 97);
+            this.comboBoxEx3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.comboBoxEx3.TabIndex = 19;
+            this.comboBoxEx3.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty;
+            this.comboBoxEx3.WatermarkText = "添加格式：AV|20；保存后方可添加";
+            // 
+            // labelX9
+            // 
+            this.labelX9.AutoSize = true;
+            // 
+            // 
+            // 
+            this.labelX9.BackgroundStyle.Class = "";
+            this.labelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX9.Location = new System.Drawing.Point(257, 22);
+            this.labelX9.Name = "labelX9";
+            this.labelX9.Size = new System.Drawing.Size(93, 16);
+            this.labelX9.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX9.TabIndex = 18;
+            this.labelX9.Text = "特殊指令时限：";
+            // 
+            // comboBoxEx2
+            // 
+            this.comboBoxEx2.DisplayMember = "Text";
+            this.comboBoxEx2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboBoxEx2.FormattingEnabled = true;
+            this.comboBoxEx2.ItemHeight = 14;
+            this.comboBoxEx2.Location = new System.Drawing.Point(87, 227);
+            this.comboBoxEx2.Name = "comboBoxEx2";
+            this.comboBoxEx2.Size = new System.Drawing.Size(142, 20);
+            this.comboBoxEx2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.comboBoxEx2.TabIndex = 17;
+            this.comboBoxEx2.WatermarkText = "授权后方可使用";
+            // 
+            // labelX12
+            // 
+            this.labelX12.AutoSize = true;
+            this.labelX12.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX12.BackgroundStyle.Class = "";
+            this.labelX12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX12.Location = new System.Drawing.Point(257, 147);
+            this.labelX12.Name = "labelX12";
+            this.labelX12.Size = new System.Drawing.Size(68, 16);
+            this.labelX12.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX12.TabIndex = 16;
+            this.labelX12.Text = "禁用指令：";
+            // 
+            // labelX8
+            // 
+            this.labelX8.AutoSize = true;
+            this.labelX8.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX8.BackgroundStyle.Class = "";
+            this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX8.Location = new System.Drawing.Point(18, 227);
+            this.labelX8.Name = "labelX8";
+            this.labelX8.Size = new System.Drawing.Size(68, 16);
+            this.labelX8.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX8.TabIndex = 16;
+            this.labelX8.Text = "所属分组：";
+            // 
+            // txtFlow
+            // 
+            // 
+            // 
+            // 
+            this.txtFlow.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.txtFlow.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtFlow.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.txtFlow.Location = new System.Drawing.Point(88, 162);
+            this.txtFlow.MaxValue = 100000;
+            this.txtFlow.MinValue = 10;
+            this.txtFlow.Name = "txtFlow";
+            this.txtFlow.ShowUpDown = true;
+            this.txtFlow.Size = new System.Drawing.Size(58, 20);
+            this.txtFlow.TabIndex = 12;
+            this.txtFlow.Value = 500;
+            this.txtFlow.WatermarkText = "月指令量";
+            // 
+            // labelX6
+            // 
+            this.labelX6.AutoSize = true;
+            this.labelX6.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX6.BackgroundStyle.Class = "";
+            this.labelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX6.Location = new System.Drawing.Point(6, 165);
+            this.labelX6.Name = "labelX6";
+            this.labelX6.Size = new System.Drawing.Size(81, 16);
+            this.labelX6.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX6.TabIndex = 11;
+            this.labelX6.Text = "指令月流量：";
+            // 
+            // txtDescription
+            // 
+            // 
+            // 
+            // 
+            this.txtDescription.Border.Class = "TextBoxBorder";
+            this.txtDescription.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtDescription.Location = new System.Drawing.Point(88, 301);
+            this.txtDescription.Multiline = true;
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(528, 40);
+            this.txtDescription.TabIndex = 9;
+            this.txtDescription.WatermarkText = "区分用户用途";
+            // 
+            // labelX5
+            // 
+            this.labelX5.AutoSize = true;
+            this.labelX5.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX5.BackgroundStyle.Class = "";
+            this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX5.Location = new System.Drawing.Point(18, 301);
+            this.labelX5.Name = "labelX5";
+            this.labelX5.Size = new System.Drawing.Size(68, 16);
+            this.labelX5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX5.TabIndex = 8;
+            this.labelX5.Text = "用户说明：";
+            // 
+            // chkAllowRepeat
+            // 
+            // 
+            // 
+            // 
+            this.chkAllowRepeat.BackgroundStyle.Class = "";
+            this.chkAllowRepeat.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkAllowRepeat.Location = new System.Drawing.Point(88, 188);
+            this.chkAllowRepeat.Name = "chkAllowRepeat";
+            this.chkAllowRepeat.Size = new System.Drawing.Size(58, 23);
+            this.chkAllowRepeat.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkAllowRepeat.TabIndex = 7;
+            this.chkAllowRepeat.Text = "是/否";
+            // 
+            // labelX11
+            // 
+            this.labelX11.AutoSize = true;
+            this.labelX11.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX11.BackgroundStyle.Class = "";
+            this.labelX11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX11.Location = new System.Drawing.Point(18, 193);
+            this.labelX11.Name = "labelX11";
+            this.labelX11.Size = new System.Drawing.Size(68, 16);
+            this.labelX11.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX11.TabIndex = 6;
+            this.labelX11.Text = "重复登录：";
+            // 
+            // chkIsOpen
+            // 
+            // 
+            // 
+            // 
+            this.chkIsOpen.BackgroundStyle.Class = "";
+            this.chkIsOpen.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.chkIsOpen.Location = new System.Drawing.Point(88, 130);
+            this.chkIsOpen.Name = "chkIsOpen";
+            this.chkIsOpen.Size = new System.Drawing.Size(58, 23);
+            this.chkIsOpen.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.chkIsOpen.TabIndex = 7;
+            this.chkIsOpen.Text = "是/否";
+            // 
+            // labelX4
+            // 
+            this.labelX4.AutoSize = true;
+            this.labelX4.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX4.BackgroundStyle.Class = "";
+            this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX4.Location = new System.Drawing.Point(18, 135);
+            this.labelX4.Name = "labelX4";
+            this.labelX4.Size = new System.Drawing.Size(68, 16);
+            this.labelX4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX4.TabIndex = 6;
+            this.labelX4.Text = "用户状态：";
+            // 
+            // txtExpire
+            // 
+            // 
+            // 
+            // 
+            this.txtExpire.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.txtExpire.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtExpire.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.txtExpire.Location = new System.Drawing.Point(88, 94);
+            this.txtExpire.MaxValue = 200;
+            this.txtExpire.MinValue = 2;
+            this.txtExpire.Name = "txtExpire";
+            this.txtExpire.ShowUpDown = true;
+            this.txtExpire.Size = new System.Drawing.Size(58, 20);
+            this.txtExpire.TabIndex = 5;
+            this.txtExpire.Value = 10;
+            this.txtExpire.WatermarkText = "指令时限";
+            // 
+            // labelX3
+            // 
+            this.labelX3.AutoSize = true;
+            this.labelX3.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX3.BackgroundStyle.Class = "";
+            this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX3.Location = new System.Drawing.Point(18, 97);
+            this.labelX3.Name = "labelX3";
+            this.labelX3.Size = new System.Drawing.Size(68, 16);
+            this.labelX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX3.TabIndex = 4;
+            this.labelX3.Text = "用户时限：";
+            // 
+            // txtPassword
+            // 
+            // 
+            // 
+            // 
+            this.txtPassword.Border.Class = "TextBoxBorder";
+            this.txtPassword.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtPassword.Location = new System.Drawing.Point(87, 57);
+            this.txtPassword.MaxLength = 16;
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '*';
+            this.txtPassword.Size = new System.Drawing.Size(142, 20);
+            this.txtPassword.TabIndex = 3;
+            this.txtPassword.WatermarkText = "eTerm客户端登录密码";
+            // 
+            // labelX2
+            // 
+            this.labelX2.AutoSize = true;
+            this.labelX2.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX2.BackgroundStyle.Class = "";
+            this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX2.Location = new System.Drawing.Point(18, 61);
+            this.labelX2.Name = "labelX2";
+            this.labelX2.Size = new System.Drawing.Size(68, 16);
+            this.labelX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX2.TabIndex = 2;
+            this.labelX2.Text = "用户密码：";
+            // 
+            // txtSessionName
+            // 
+            // 
+            // 
+            // 
+            this.txtSessionName.Border.Class = "TextBoxBorder";
+            this.txtSessionName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtSessionName.Location = new System.Drawing.Point(87, 17);
+            this.txtSessionName.MaxLength = 16;
+            this.txtSessionName.Name = "txtSessionName";
+            this.txtSessionName.Size = new System.Drawing.Size(142, 20);
+            this.txtSessionName.TabIndex = 1;
+            this.txtSessionName.WatermarkText = "eTerm客户端登录帐号";
+            // 
+            // labelX1
+            // 
+            this.labelX1.AutoSize = true;
+            this.labelX1.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX1.BackgroundStyle.Class = "";
+            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX1.Location = new System.Drawing.Point(18, 20);
+            this.labelX1.Name = "labelX1";
+            this.labelX1.Size = new System.Drawing.Size(68, 16);
+            this.labelX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX1.TabIndex = 0;
+            this.labelX1.Text = "用户帐号：";
+            // 
+            // tabItem2
+            // 
+            this.tabItem2.AttachedControl = this.PanelSession;
+            this.tabItem2.Name = "tabItem2";
+            this.tabItem2.Text = "用户信息修改";
             // 
             // tabControlPanel1
             // 
@@ -267,535 +793,6 @@
             this.tabItem1.Name = "tabItem1";
             this.tabItem1.Text = "用户管理";
             // 
-            // PanelSession
-            // 
-            this.PanelSession.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.PanelSession.Controls.Add(this.btnClearTraffic);
-            this.PanelSession.Controls.Add(this.flowLayoutPanel1);
-            this.PanelSession.Controls.Add(this.comboTree1);
-            this.PanelSession.Controls.Add(this.labelX10);
-            this.PanelSession.Controls.Add(this.contextMenuBar2);
-            this.PanelSession.Controls.Add(this.comboBoxEx3);
-            this.PanelSession.Controls.Add(this.labelX9);
-            this.PanelSession.Controls.Add(this.comboBoxEx2);
-            this.PanelSession.Controls.Add(this.labelX8);
-            this.PanelSession.Controls.Add(this.btnDeleteCommand);
-            this.PanelSession.Controls.Add(this.comboBoxEx1);
-            this.PanelSession.Controls.Add(this.labelX7);
-            this.PanelSession.Controls.Add(this.txtFlow);
-            this.PanelSession.Controls.Add(this.labelX6);
-            this.PanelSession.Controls.Add(this.txtDescription);
-            this.PanelSession.Controls.Add(this.labelX5);
-            this.PanelSession.Controls.Add(this.chkAllowRepeat);
-            this.PanelSession.Controls.Add(this.labelX11);
-            this.PanelSession.Controls.Add(this.chkIsOpen);
-            this.PanelSession.Controls.Add(this.labelX4);
-            this.PanelSession.Controls.Add(this.txtExpire);
-            this.PanelSession.Controls.Add(this.labelX3);
-            this.PanelSession.Controls.Add(this.txtPassword);
-            this.PanelSession.Controls.Add(this.labelX2);
-            this.PanelSession.Controls.Add(this.txtSessionName);
-            this.PanelSession.Controls.Add(this.labelX1);
-            this.PanelSession.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelSession.Enabled = false;
-            this.PanelSession.Location = new System.Drawing.Point(0, 23);
-            this.PanelSession.Name = "PanelSession";
-            this.PanelSession.Padding = new System.Windows.Forms.Padding(1);
-            this.PanelSession.Size = new System.Drawing.Size(636, 415);
-            this.PanelSession.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(254)))));
-            this.PanelSession.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(188)))), ((int)(((byte)(227)))));
-            this.PanelSession.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.PanelSession.Style.BorderColor.Color = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(165)))), ((int)(((byte)(199)))));
-            this.PanelSession.Style.BorderSide = ((DevComponents.DotNetBar.eBorderSide)(((DevComponents.DotNetBar.eBorderSide.Left | DevComponents.DotNetBar.eBorderSide.Right)
-                        | DevComponents.DotNetBar.eBorderSide.Bottom)));
-            this.PanelSession.Style.GradientAngle = 90;
-            this.PanelSession.TabIndex = 2;
-            this.PanelSession.TabItem = this.tabItem2;
-            // 
-            // btnClearTraffic
-            // 
-            this.btnClearTraffic.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnClearTraffic.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnClearTraffic.Location = new System.Drawing.Point(369, 262);
-            this.btnClearTraffic.Name = "btnClearTraffic";
-            this.btnClearTraffic.Size = new System.Drawing.Size(78, 23);
-            this.btnClearTraffic.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnClearTraffic.TabIndex = 30;
-            this.btnClearTraffic.Text = "清除（&D）";
-            this.btnClearTraffic.Click += new System.EventHandler(this.btnClearTraffic_Click);
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
-            this.flowLayoutPanel1.Controls.Add(this.btnSingleSave);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(1, 368);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(634, 46);
-            this.flowLayoutPanel1.TabIndex = 23;
-            // 
-            // btnSingleSave
-            // 
-            this.btnSingleSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnSingleSave.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnSingleSave.Location = new System.Drawing.Point(540, 3);
-            this.btnSingleSave.Name = "btnSingleSave";
-            this.btnSingleSave.Size = new System.Drawing.Size(91, 23);
-            this.btnSingleSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnSingleSave.TabIndex = 11;
-            this.btnSingleSave.Text = "保存用户（&U）";
-            this.btnSingleSave.Click += new System.EventHandler(this.btnSingleSave_Click);
-            // 
-            // comboTree1
-            // 
-            this.comboTree1.BackColor = System.Drawing.SystemColors.Window;
-            // 
-            // 
-            // 
-            this.comboTree1.BackgroundStyle.Class = "TextBoxBorder";
-            this.comboTree1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.comboTree1.ButtonDropDown.Visible = true;
-            this.comboTree1.Location = new System.Drawing.Point(87, 262);
-            this.comboTree1.Name = "comboTree1";
-            this.comboTree1.Size = new System.Drawing.Size(276, 23);
-            this.comboTree1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.comboTree1.TabIndex = 22;
-            // 
-            // labelX10
-            // 
-            this.labelX10.AutoSize = true;
-            this.labelX10.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX10.BackgroundStyle.Class = "";
-            this.labelX10.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX10.Location = new System.Drawing.Point(19, 262);
-            this.labelX10.Name = "labelX10";
-            this.labelX10.Size = new System.Drawing.Size(68, 16);
-            this.labelX10.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.labelX10.TabIndex = 21;
-            this.labelX10.Text = "指令流量：";
-            // 
-            // contextMenuBar2
-            // 
-            this.contextMenuBar2.AntiAlias = true;
-            this.contextMenuBar2.DockSide = DevComponents.DotNetBar.eDockSide.Document;
-            this.contextMenuBar2.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItem2});
-            this.contextMenuBar2.Location = new System.Drawing.Point(510, 203);
-            this.contextMenuBar2.Name = "contextMenuBar2";
-            this.contextMenuBar2.Size = new System.Drawing.Size(75, 27);
-            this.contextMenuBar2.Stretch = true;
-            this.contextMenuBar2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.contextMenuBar2.TabIndex = 20;
-            this.contextMenuBar2.TabStop = false;
-            this.contextMenuBar2.Text = "contextMenuBar2";
-            // 
-            // buttonItem2
-            // 
-            this.buttonItem2.AutoExpandOnClick = true;
-            this.buttonItem2.Name = "buttonItem2";
-            this.buttonItem2.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnDeleteSpecial,
-            this.itemContainer6,
-            this.itemContainer8,
-            this.btnNewSpecial});
-            this.buttonItem2.Text = "时限修改项";
-            // 
-            // btnDeleteSpecial
-            // 
-            this.btnDeleteSpecial.Name = "btnDeleteSpecial";
-            this.btnDeleteSpecial.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.Del);
-            this.btnDeleteSpecial.Text = "删除(&D)";
-            this.btnDeleteSpecial.Click += new System.EventHandler(this.btnDeleteSpecial_Click);
-            // 
-            // itemContainer6
-            // 
-            // 
-            // 
-            // 
-            this.itemContainer6.BackgroundStyle.Class = "";
-            this.itemContainer6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.itemContainer6.Name = "itemContainer6";
-            this.itemContainer6.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItem3});
-            // 
-            // buttonItem3
-            // 
-            this.buttonItem3.Name = "buttonItem3";
-            this.buttonItem3.SplitButton = true;
-            this.buttonItem3.Text = "-";
-            // 
-            // itemContainer8
-            // 
-            // 
-            // 
-            // 
-            this.itemContainer8.BackgroundStyle.Class = "";
-            this.itemContainer8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.itemContainer8.Name = "itemContainer8";
-            // 
-            // btnNewSpecial
-            // 
-            this.btnNewSpecial.Name = "btnNewSpecial";
-            this.btnNewSpecial.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlRight);
-            this.btnNewSpecial.Text = "新增(&N)";
-            this.btnNewSpecial.Click += new System.EventHandler(this.btnNewSpecial_Click);
-            // 
-            // comboBoxEx3
-            // 
-            this.contextMenuBar2.SetContextMenuEx(this.comboBoxEx3, this.buttonItem2);
-            this.comboBoxEx3.DisplayMember = "Text";
-            this.comboBoxEx3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.comboBoxEx3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
-            this.comboBoxEx3.FormattingEnabled = true;
-            this.comboBoxEx3.IntegralHeight = false;
-            this.comboBoxEx3.ItemHeight = 13;
-            this.comboBoxEx3.Location = new System.Drawing.Point(257, 44);
-            this.comboBoxEx3.Name = "comboBoxEx3";
-            this.comboBoxEx3.Size = new System.Drawing.Size(359, 97);
-            this.comboBoxEx3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.comboBoxEx3.TabIndex = 19;
-            this.comboBoxEx3.WatermarkBehavior = DevComponents.DotNetBar.eWatermarkBehavior.HideNonEmpty;
-            this.comboBoxEx3.WatermarkText = "特殊指令时限";
-            // 
-            // labelX9
-            // 
-            this.labelX9.AutoSize = true;
-            // 
-            // 
-            // 
-            this.labelX9.BackgroundStyle.Class = "";
-            this.labelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX9.Location = new System.Drawing.Point(257, 22);
-            this.labelX9.Name = "labelX9";
-            this.labelX9.Size = new System.Drawing.Size(93, 16);
-            this.labelX9.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.labelX9.TabIndex = 18;
-            this.labelX9.Text = "特殊指令时限：";
-            // 
-            // comboBoxEx2
-            // 
-            this.comboBoxEx2.DisplayMember = "Text";
-            this.comboBoxEx2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.comboBoxEx2.FormattingEnabled = true;
-            this.comboBoxEx2.ItemHeight = 14;
-            this.comboBoxEx2.Location = new System.Drawing.Point(324, 162);
-            this.comboBoxEx2.Name = "comboBoxEx2";
-            this.comboBoxEx2.Size = new System.Drawing.Size(142, 20);
-            this.comboBoxEx2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.comboBoxEx2.TabIndex = 17;
-            // 
-            // labelX8
-            // 
-            this.labelX8.AutoSize = true;
-            this.labelX8.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX8.BackgroundStyle.Class = "";
-            this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX8.Location = new System.Drawing.Point(255, 164);
-            this.labelX8.Name = "labelX8";
-            this.labelX8.Size = new System.Drawing.Size(68, 16);
-            this.labelX8.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.labelX8.TabIndex = 16;
-            this.labelX8.Text = "所属分组：";
-            // 
-            // btnDeleteCommand
-            // 
-            this.btnDeleteCommand.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnDeleteCommand.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnDeleteCommand.Image = global::ASync.eTermAddIn.Properties.Resources.Lock;
-            this.btnDeleteCommand.Location = new System.Drawing.Point(257, 212);
-            this.btnDeleteCommand.Name = "btnDeleteCommand";
-            this.btnDeleteCommand.Size = new System.Drawing.Size(106, 41);
-            this.btnDeleteCommand.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnDeleteCommand.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.btnAddSingle,
-            this.itemContainer5,
-            this.btnDeleteSingleCmd});
-            this.btnDeleteCommand.TabIndex = 15;
-            this.btnDeleteCommand.Text = "修改";
-            // 
-            // btnAddSingle
-            // 
-            this.btnAddSingle.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnAddSingle.GlobalItem = false;
-            this.btnAddSingle.Name = "btnAddSingle";
-            this.btnAddSingle.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.Ctrl1);
-            this.btnAddSingle.Text = "添加（&1）";
-            this.btnAddSingle.Click += new System.EventHandler(this.btnAddSingle_Click);
-            // 
-            // itemContainer5
-            // 
-            // 
-            // 
-            // 
-            this.itemContainer5.BackgroundStyle.Class = "";
-            this.itemContainer5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.itemContainer5.Name = "itemContainer5";
-            // 
-            // btnDeleteSingleCmd
-            // 
-            this.btnDeleteSingleCmd.ColorTable = DevComponents.DotNetBar.eButtonColor.Office2007WithBackground;
-            this.btnDeleteSingleCmd.GlobalItem = false;
-            this.btnDeleteSingleCmd.Name = "btnDeleteSingleCmd";
-            this.btnDeleteSingleCmd.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.Ctrl2);
-            this.btnDeleteSingleCmd.Text = "删除（&2）";
-            this.btnDeleteSingleCmd.Click += new System.EventHandler(this.btnDeleteSingleCmd_Click);
-            // 
-            // comboBoxEx1
-            // 
-            this.comboBoxEx1.DisplayMember = "Text";
-            this.comboBoxEx1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.comboBoxEx1.FormattingEnabled = true;
-            this.comboBoxEx1.ItemHeight = 14;
-            this.comboBoxEx1.Location = new System.Drawing.Point(87, 223);
-            this.comboBoxEx1.Name = "comboBoxEx1";
-            this.comboBoxEx1.Size = new System.Drawing.Size(142, 20);
-            this.comboBoxEx1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.comboBoxEx1.TabIndex = 14;
-            // 
-            // labelX7
-            // 
-            this.labelX7.AutoSize = true;
-            this.labelX7.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX7.BackgroundStyle.Class = "";
-            this.labelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX7.Location = new System.Drawing.Point(18, 225);
-            this.labelX7.Name = "labelX7";
-            this.labelX7.Size = new System.Drawing.Size(68, 16);
-            this.labelX7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.labelX7.TabIndex = 13;
-            this.labelX7.Text = "禁用指令：";
-            // 
-            // txtFlow
-            // 
-            // 
-            // 
-            // 
-            this.txtFlow.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.txtFlow.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtFlow.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.txtFlow.Location = new System.Drawing.Point(88, 162);
-            this.txtFlow.MaxValue = 100000;
-            this.txtFlow.MinValue = 10;
-            this.txtFlow.Name = "txtFlow";
-            this.txtFlow.ShowUpDown = true;
-            this.txtFlow.Size = new System.Drawing.Size(58, 20);
-            this.txtFlow.TabIndex = 12;
-            this.txtFlow.Value = 500;
-            // 
-            // labelX6
-            // 
-            this.labelX6.AutoSize = true;
-            this.labelX6.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX6.BackgroundStyle.Class = "";
-            this.labelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX6.Location = new System.Drawing.Point(6, 165);
-            this.labelX6.Name = "labelX6";
-            this.labelX6.Size = new System.Drawing.Size(81, 16);
-            this.labelX6.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.labelX6.TabIndex = 11;
-            this.labelX6.Text = "指令月流量：";
-            // 
-            // txtDescription
-            // 
-            // 
-            // 
-            // 
-            this.txtDescription.Border.Class = "TextBoxBorder";
-            this.txtDescription.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtDescription.Location = new System.Drawing.Point(88, 301);
-            this.txtDescription.Multiline = true;
-            this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(528, 40);
-            this.txtDescription.TabIndex = 9;
-            this.txtDescription.WatermarkText = "区分用户用途";
-            // 
-            // labelX5
-            // 
-            this.labelX5.AutoSize = true;
-            this.labelX5.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX5.BackgroundStyle.Class = "";
-            this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX5.Location = new System.Drawing.Point(18, 301);
-            this.labelX5.Name = "labelX5";
-            this.labelX5.Size = new System.Drawing.Size(68, 16);
-            this.labelX5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.labelX5.TabIndex = 8;
-            this.labelX5.Text = "用户说明：";
-            // 
-            // chkAllowRepeat
-            // 
-            // 
-            // 
-            // 
-            this.chkAllowRepeat.BackgroundStyle.Class = "";
-            this.chkAllowRepeat.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkAllowRepeat.Location = new System.Drawing.Point(88, 188);
-            this.chkAllowRepeat.Name = "chkAllowRepeat";
-            this.chkAllowRepeat.Size = new System.Drawing.Size(58, 23);
-            this.chkAllowRepeat.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkAllowRepeat.TabIndex = 7;
-            this.chkAllowRepeat.Text = "是/否";
-            // 
-            // labelX11
-            // 
-            this.labelX11.AutoSize = true;
-            this.labelX11.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX11.BackgroundStyle.Class = "";
-            this.labelX11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX11.Location = new System.Drawing.Point(18, 193);
-            this.labelX11.Name = "labelX11";
-            this.labelX11.Size = new System.Drawing.Size(68, 16);
-            this.labelX11.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.labelX11.TabIndex = 6;
-            this.labelX11.Text = "重复登录：";
-            // 
-            // chkIsOpen
-            // 
-            // 
-            // 
-            // 
-            this.chkIsOpen.BackgroundStyle.Class = "";
-            this.chkIsOpen.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.chkIsOpen.Location = new System.Drawing.Point(88, 130);
-            this.chkIsOpen.Name = "chkIsOpen";
-            this.chkIsOpen.Size = new System.Drawing.Size(58, 23);
-            this.chkIsOpen.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.chkIsOpen.TabIndex = 7;
-            this.chkIsOpen.Text = "是/否";
-            // 
-            // labelX4
-            // 
-            this.labelX4.AutoSize = true;
-            this.labelX4.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX4.BackgroundStyle.Class = "";
-            this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX4.Location = new System.Drawing.Point(18, 135);
-            this.labelX4.Name = "labelX4";
-            this.labelX4.Size = new System.Drawing.Size(68, 16);
-            this.labelX4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.labelX4.TabIndex = 6;
-            this.labelX4.Text = "用户状态：";
-            // 
-            // txtExpire
-            // 
-            // 
-            // 
-            // 
-            this.txtExpire.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.txtExpire.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtExpire.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.txtExpire.Location = new System.Drawing.Point(88, 94);
-            this.txtExpire.MaxValue = 200;
-            this.txtExpire.MinValue = 2;
-            this.txtExpire.Name = "txtExpire";
-            this.txtExpire.ShowUpDown = true;
-            this.txtExpire.Size = new System.Drawing.Size(58, 20);
-            this.txtExpire.TabIndex = 5;
-            this.txtExpire.Value = 2;
-            // 
-            // labelX3
-            // 
-            this.labelX3.AutoSize = true;
-            this.labelX3.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX3.BackgroundStyle.Class = "";
-            this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX3.Location = new System.Drawing.Point(18, 97);
-            this.labelX3.Name = "labelX3";
-            this.labelX3.Size = new System.Drawing.Size(68, 16);
-            this.labelX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.labelX3.TabIndex = 4;
-            this.labelX3.Text = "用户时限：";
-            // 
-            // txtPassword
-            // 
-            // 
-            // 
-            // 
-            this.txtPassword.Border.Class = "TextBoxBorder";
-            this.txtPassword.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtPassword.Location = new System.Drawing.Point(87, 57);
-            this.txtPassword.MaxLength = 16;
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(142, 20);
-            this.txtPassword.TabIndex = 3;
-            // 
-            // labelX2
-            // 
-            this.labelX2.AutoSize = true;
-            this.labelX2.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX2.BackgroundStyle.Class = "";
-            this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX2.Location = new System.Drawing.Point(18, 61);
-            this.labelX2.Name = "labelX2";
-            this.labelX2.Size = new System.Drawing.Size(68, 16);
-            this.labelX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.labelX2.TabIndex = 2;
-            this.labelX2.Text = "用户密码：";
-            // 
-            // txtSessionName
-            // 
-            // 
-            // 
-            // 
-            this.txtSessionName.Border.Class = "TextBoxBorder";
-            this.txtSessionName.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtSessionName.Location = new System.Drawing.Point(87, 17);
-            this.txtSessionName.MaxLength = 16;
-            this.txtSessionName.Name = "txtSessionName";
-            this.txtSessionName.Size = new System.Drawing.Size(142, 20);
-            this.txtSessionName.TabIndex = 1;
-            // 
-            // labelX1
-            // 
-            this.labelX1.AutoSize = true;
-            this.labelX1.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX1.BackgroundStyle.Class = "";
-            this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX1.Location = new System.Drawing.Point(18, 20);
-            this.labelX1.Name = "labelX1";
-            this.labelX1.Size = new System.Drawing.Size(68, 16);
-            this.labelX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.labelX1.TabIndex = 0;
-            this.labelX1.Text = "用户帐号：";
-            // 
-            // tabItem2
-            // 
-            this.tabItem2.AttachedControl = this.PanelSession;
-            this.tabItem2.Name = "tabItem2";
-            this.tabItem2.Text = "用户信息修改";
-            // 
             // itemContainer4
             // 
             // 
@@ -856,14 +853,14 @@
             this.Size = new System.Drawing.Size(636, 438);
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).EndInit();
             this.tabControl1.ResumeLayout(false);
-            this.tabControlPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).EndInit();
             this.PanelSession.ResumeLayout(false);
             this.PanelSession.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFlow)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtExpire)).EndInit();
+            this.tabControlPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.contextMenuBar1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -900,12 +897,6 @@
         private DevComponents.DotNetBar.Controls.TextBoxX txtDescription;
         private DevComponents.Editors.IntegerInput txtFlow;
         private DevComponents.DotNetBar.LabelX labelX6;
-        private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx1;
-        private DevComponents.DotNetBar.LabelX labelX7;
-        private DevComponents.DotNetBar.ButtonX btnDeleteCommand;
-        private DevComponents.DotNetBar.ButtonItem btnAddSingle;
-        private DevComponents.DotNetBar.ItemContainer itemContainer5;
-        private DevComponents.DotNetBar.ButtonItem btnDeleteSingleCmd;
         private DevComponents.DotNetBar.Controls.ComboBoxEx comboBoxEx2;
         private DevComponents.DotNetBar.LabelX labelX8;
         private DevComponents.DotNetBar.LabelX labelX9;
@@ -931,6 +922,11 @@
         private DevComponents.DotNetBar.ButtonX btnClearTraffic;
         private DevComponents.DotNetBar.Controls.CheckBoxX chkAllowRepeat;
         private DevComponents.DotNetBar.LabelX labelX11;
+        private System.Windows.Forms.ListBox lstCmd;
+        private DevComponents.DotNetBar.LabelX labelX12;
+        private DevComponents.DotNetBar.ButtonX btnRemoveCommand;
+        private DevComponents.DotNetBar.ButtonX btnAddRegCommand;
+        private DevComponents.DotNetBar.Controls.TextBoxX txtRegCmd;
 
     }
 }
