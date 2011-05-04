@@ -27,6 +27,7 @@ namespace ASync.eTermAddIn {
                                 group = AsyncStackNet.Instance.ASyncSetup.GroupCollection[
                                     AsyncStackNet.Instance.ASyncSetup.GroupCollection.IndexOf(new SDKGroup() {groupCode=Setup.GroupCode })];
                             ListViewItem Item = new ListViewItem(new string[] {
+                                Setup.ToString(),
                                 Setup.userName,
                                 string.Format(@"{0}:{1}",Setup.Address,Setup.Port.ToString()),
                                 Setup.IsSsl.ToString(),
@@ -35,7 +36,6 @@ namespace ASync.eTermAddIn {
                                 Setup.OfficeCode,
                                 group==null?"未分组":group.groupName,
                                 (Setup.TSessionType??CertificationType.Address)== CertificationType.Address?@"地址认证":@"用户认证",
-                                Setup.ToString()
                             });
                             Item.Name = Setup.ToString();
                             Item.Tag = Setup;

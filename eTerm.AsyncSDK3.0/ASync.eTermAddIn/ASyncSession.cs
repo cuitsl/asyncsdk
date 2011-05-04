@@ -40,7 +40,7 @@ namespace ASync.eTermAddIn {
                             Item.Tag = Setup;
                             this.lstSession.Items.Add(Item);
                             this.comboTree1.Nodes.Clear();
-                            comboBoxEx3.Items.Clear();
+                            listBox1.Items.Clear();
                         }
                     });
         }
@@ -94,11 +94,11 @@ namespace ASync.eTermAddIn {
                 chkIsOpen.Checked = Setup.IsOpen;
                 txtFlow.Value =int.Parse( Setup.FlowRate.ToString());
                 PanelSession.Tag = Setup;
-                comboBoxEx3.Items.Clear();
+                listBox1.Items.Clear();
                 lstCmd.Items.Clear();
                 chkAllowRepeat.Checked = Setup.AllowDuplicate ?? false;
-                comboBoxEx3.ValueMember = "SessionCode";
-                comboBoxEx3.DisplayMember = "Description";
+                listBox1.ValueMember = "SessionCode";
+                listBox1.DisplayMember = "Description";
                 foreach (string Cmd in Setup.TSessionForbidCmd)
                     this.lstCmd.Items.Add(Cmd);
 
@@ -110,7 +110,7 @@ namespace ASync.eTermAddIn {
                 }
                 if (!string.IsNullOrEmpty(Setup.SpecialIntervalList)) {
                     foreach (Match m in Regex.Matches(Setup.SpecialIntervalList, @"\^([A-Z0-9]+)\|(\d+)\,", RegexOptions.IgnoreCase | RegexOptions.Multiline)) {
-                        comboBoxEx3.Items.Add(new TSessionSetup() { SessionCode = m.Groups[1].Value, Description = string.Format(@"{1} {0}", m.Groups[2].Value, m.Groups[1].Value), SessionPass =m.Groups[2].Value });
+                        listBox1.Items.Add(new TSessionSetup() { SessionCode = m.Groups[1].Value, GroupCode = m.Groups[2].Value, Description = string.Format(@"{0}    {1}", m.Groups[1].Value, m.Groups[2].Value) });
 
                     }
                 }
@@ -185,11 +185,12 @@ namespace ASync.eTermAddIn {
             };
 
             Setup.Traffics = (PanelSession.Tag as TSessionSetup).Traffics;
-
-            foreach (TSessionSetup item in this.comboBoxEx3.Items) {
-                Setup.SpecialIntervalList += string.Format(@"^{0}|{1},", item.SessionCode, item.SessionPass);
+            Setup.SpecialIntervalList = string.Empty;
+            foreach (object item in this.listBox1.Items) {
+                Setup.SpecialIntervalList += string.Format(@"^{0},", item.GetType().GetProperty("Interval").GetValue(item, null).ToString().Replace(@" ",string.Empty)
+                    , Regex.Match(item.GetType().GetProperty("Interval").GetValue(comboBoxEx2.SelectedItem, null).ToString(), @"\s+(\d+$)", RegexOptions.IgnoreCase | RegexOptions.Multiline).Groups[2].Value);
             }
-
+            this.listBox1.Items.Clear();
             foreach (string Cmd in this.lstCmd.Items) {
                 Setup.TSessionForbidCmd.Add(Cmd);
             }
@@ -229,9 +230,10 @@ namespace ASync.eTermAddIn {
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void btnDeleteSpecial_Click(object sender, EventArgs e) {
-            this.comboBoxEx3.Items.RemoveAt(this.comboBoxEx3.SelectedIndex);
-        }
+        //private void btnDeleteSpecial_Click(object sender, EventArgs e)
+        //{
+        //    this.comboBoxEx3.Items.RemoveAt(this.comboBoxEx3.SelectedIndex);
+        //}
 
         /*
         /// <summary>
@@ -255,16 +257,16 @@ namespace ASync.eTermAddIn {
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void btnNewSpecial_Click(object sender, EventArgs e) {
-            TSessionSetup setup = PanelSession.Tag as TSessionSetup;
-            if (!Regex.IsMatch(this.comboBoxEx3.Text, @"^([A-Z0-9]+)\|(\d+)", RegexOptions.Multiline | RegexOptions.IgnoreCase)) {
-                MessageBox.Show(@"输入格式不正确，正确格式为：SS|25", @"格式错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            Match m = Regex.Match(this.comboBoxEx3.Text, @"^([A-Z0-9]+)\|(\d+)", RegexOptions.Multiline | RegexOptions.IgnoreCase);
-            this.comboBoxEx3.Items.Add(new TSessionSetup() { SessionCode = m.Groups[1].Value, Description = string.Format(@"{1} {0}", m.Groups[2].Value, m.Groups[1].Value), SessionPass = m.Groups[2].Value });
+        //private void btnNewSpecial_Click(object sender, EventArgs e) {
+        //    TSessionSetup setup = PanelSession.Tag as TSessionSetup;
+        //    if (!Regex.IsMatch(this.comboBoxEx3.Text, @"^([A-Z0-9]+)\|(\d+)", RegexOptions.Multiline | RegexOptions.IgnoreCase)) {
+        //        MessageBox.Show(@"输入格式不正确，正确格式为：SS|25", @"格式错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        return;
+        //    }
+        //    Match m = Regex.Match(this.comboBoxEx3.Text, @"^([A-Z0-9]+)\|(\d+)", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+        //    this.comboBoxEx3.Items.Add(new TSessionSetup() { SessionCode = m.Groups[1].Value, Description = string.Format(@"{1} {0}", m.Groups[2].Value, m.Groups[1].Value), SessionPass = m.Groups[2].Value });
             
-        }
+        //}
 
         /// <summary>
         /// Handles the SelectedTabChanged event of the tabControl1 control.
@@ -312,6 +314,11 @@ namespace ASync.eTermAddIn {
             btnSessionEdit_Click(null, EventArgs.Empty);
         }
 
+        /// <summary>
+        /// Handles the SelectedIndexChanged event of the lstSession control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void lstSession_SelectedIndexChanged(object sender, EventArgs e) {
             if (lstSession.SelectedItems.Count != 1) {
                 btnDelete.Enabled = false;
@@ -345,6 +352,27 @@ namespace ASync.eTermAddIn {
             foreach (object item in this.lstCmd.SelectedItems) {
                 this.lstCmd.Items.Remove(item);
             }
+        }
+
+        /// <summary>
+        /// Handles the Click event of the buttonX1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void buttonX1_Click(object sender, EventArgs e)
+        {
+            this.listBox1.Items.Add(new TSessionSetup() { Description = string.Format(@"{0}   {1}", textBoxX1.Text.Trim(), integerInput1.Value), GroupCode = integerInput1.Value.ToString(), SessionCode = textBoxX1.Text.Trim() });
+        }
+
+        /// <summary>
+        /// Handles the Click event of the buttonX2 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void buttonX2_Click(object sender, EventArgs e)
+        {
+            foreach (object item in this.listBox1.SelectedItems)
+                this.listBox1.Items.Remove(item);
         }
         
     }
