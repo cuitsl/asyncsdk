@@ -21,6 +21,9 @@ using System.Data.Common;
 namespace AsyncAPI3._0Tst {
     class Program {
         static void Main(string[] args) {
+
+            Console.Write((char)16);
+
             SQLiteDatabase Db = new SQLiteDatabase(new FileInfo(@"D:\SouceCode\Personal\eTerm.AsyncSDK3.0\ASyncSDK.Office\bin\Release\SQLiteDb.s3db").FullName);
             DbCommand dbCommand = Db.GetSqlStringCommand(@"select * from SQLiteLog201105 order by TLogId DESC limit 0,5");
             IDataReader DR = dbCommand.ExecuteReader();
