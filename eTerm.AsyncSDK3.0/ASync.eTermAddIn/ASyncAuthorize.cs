@@ -20,13 +20,14 @@ namespace ASync.eTermAddIn {
             this.Load += new EventHandler(
                     delegate(object sender, EventArgs e) {
                         this.txtCompany.Text = LicenceManager.Instance.LicenceBody.Company;
-                        this.txtDbString.Text = LicenceManager.Instance.LicenceBody.connectionString;
+                        //this.txtDbString.Text = LicenceManager.Instance.LicenceBody.connectionString;
                         this.txtExpire.Value = LicenceManager.Instance.LicenceBody.ExpireDate;
                         this.txtMaxASync.Value = LicenceManager.Instance.LicenceBody.MaxAsync;
                         this.txtMaxSession.Value = LicenceManager.Instance.LicenceBody.MaxTSession;
                         this.chkOpenDb.Checked = LicenceManager.Instance.LicenceBody.AllowDatabase;
                         this.txtCode.Text = LicenceManager.Instance.SerialNumber;
                         this.txtRemainMinutes.Value = LicenceManager.Instance.LicenceBody.RemainingMinutes;
+                        this.checkBoxX1.Checked = LicenceManager.Instance.LicenceBody.AllowDbLog ?? false;
                     }
                 );
         }

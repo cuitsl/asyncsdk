@@ -31,11 +31,9 @@
             this.labelX9 = new DevComponents.DotNetBar.LabelX();
             this.txtCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX8 = new DevComponents.DotNetBar.LabelX();
-            this.txtDbString = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.chkOpenDb = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.txtMaxSession = new DevComponents.Editors.IntegerInput();
             this.txtMaxASync = new DevComponents.Editors.IntegerInput();
-            this.labelX7 = new DevComponents.DotNetBar.LabelX();
             this.labelX6 = new DevComponents.DotNetBar.LabelX();
             this.labelX5 = new DevComponents.DotNetBar.LabelX();
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
@@ -48,6 +46,8 @@
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.labelX7 = new DevComponents.DotNetBar.LabelX();
+            this.checkBoxX1 = new DevComponents.DotNetBar.Controls.CheckBoxX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
@@ -80,7 +80,7 @@
             this.tabControlPanel1.Controls.Add(this.labelX9);
             this.tabControlPanel1.Controls.Add(this.txtCode);
             this.tabControlPanel1.Controls.Add(this.labelX8);
-            this.tabControlPanel1.Controls.Add(this.txtDbString);
+            this.tabControlPanel1.Controls.Add(this.checkBoxX1);
             this.tabControlPanel1.Controls.Add(this.chkOpenDb);
             this.tabControlPanel1.Controls.Add(this.txtMaxSession);
             this.tabControlPanel1.Controls.Add(this.txtMaxASync);
@@ -189,19 +189,6 @@
             this.labelX8.TabIndex = 15;
             this.labelX8.Text = "机器码：";
             // 
-            // txtDbString
-            // 
-            // 
-            // 
-            // 
-            this.txtDbString.Border.Class = "TextBoxBorder";
-            this.txtDbString.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtDbString.Location = new System.Drawing.Point(123, 257);
-            this.txtDbString.Name = "txtDbString";
-            this.txtDbString.ReadOnly = true;
-            this.txtDbString.Size = new System.Drawing.Size(427, 20);
-            this.txtDbString.TabIndex = 14;
-            // 
             // chkOpenDb
             // 
             // 
@@ -248,22 +235,6 @@
             this.txtMaxASync.ShowUpDown = true;
             this.txtMaxASync.Size = new System.Drawing.Size(60, 20);
             this.txtMaxASync.TabIndex = 11;
-            // 
-            // labelX7
-            // 
-            this.labelX7.AutoSize = true;
-            this.labelX7.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX7.BackgroundStyle.Class = "";
-            this.labelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX7.Location = new System.Drawing.Point(21, 262);
-            this.labelX7.Name = "labelX7";
-            this.labelX7.Size = new System.Drawing.Size(93, 16);
-            this.labelX7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.labelX7.TabIndex = 10;
-            this.labelX7.Text = "数据库连接串：";
             // 
             // labelX6
             // 
@@ -462,6 +433,37 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // labelX7
+            // 
+            this.labelX7.AutoSize = true;
+            this.labelX7.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX7.BackgroundStyle.Class = "";
+            this.labelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX7.Location = new System.Drawing.Point(45, 260);
+            this.labelX7.Name = "labelX7";
+            this.labelX7.Size = new System.Drawing.Size(68, 16);
+            this.labelX7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX7.TabIndex = 9;
+            this.labelX7.Text = "日志支持：";
+            // 
+            // checkBoxX1
+            // 
+            // 
+            // 
+            // 
+            this.checkBoxX1.BackgroundStyle.Class = "";
+            this.checkBoxX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.checkBoxX1.Enabled = false;
+            this.checkBoxX1.Location = new System.Drawing.Point(123, 260);
+            this.checkBoxX1.Name = "checkBoxX1";
+            this.checkBoxX1.Size = new System.Drawing.Size(60, 23);
+            this.checkBoxX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.checkBoxX1.TabIndex = 13;
+            this.checkBoxX1.Text = "是/否";
+            // 
             // ASyncAuthorize
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -496,16 +498,16 @@
         private DevComponents.DotNetBar.LabelX labelX4;
         private DevComponents.DotNetBar.LabelX labelX5;
         private DevComponents.DotNetBar.LabelX labelX6;
-        private DevComponents.DotNetBar.LabelX labelX7;
         private DevComponents.DotNetBar.Controls.CheckBoxX chkOpenDb;
         private DevComponents.Editors.IntegerInput txtMaxSession;
         private DevComponents.Editors.IntegerInput txtMaxASync;
-        private DevComponents.DotNetBar.Controls.TextBoxX txtDbString;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private DevComponents.DotNetBar.Controls.TextBoxX txtCode;
         private DevComponents.DotNetBar.LabelX labelX8;
         private DevComponents.DotNetBar.LabelX labelX9;
         private DevComponents.Editors.DoubleInput txtRemainMinutes;
         private DevComponents.DotNetBar.LabelX labelX10;
+        private DevComponents.DotNetBar.Controls.CheckBoxX checkBoxX1;
+        private DevComponents.DotNetBar.LabelX labelX7;
     }
 }
