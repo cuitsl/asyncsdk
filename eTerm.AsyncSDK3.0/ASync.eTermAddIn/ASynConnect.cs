@@ -115,8 +115,9 @@ namespace ASync.eTermAddIn {
                 integerInput2.Value = int.Parse((Setup.FlowRate??0.0).ToString());
                 this.txtSessionName.Text = Setup.userName;
                 this.txtSIText.Text = Setup.SiText;
-                this.integerInput1.Value =(int) Setup.SID;
-                this.integerInput3.Value = (int)Setup.RID;
+                this.textBoxX1.Text = String.Format("{0:X}", Setup.SID);
+                this.textBoxX2.Text = String.Format("{0:X}", Setup.RID);
+                //this.integerInput3.Value = (int)Setup.RID;
                 chkAutoSi.Checked = Setup.AutoSi ?? false;
                 comboBoxEx1.Items.Clear();
                 if (AsyncStackNet.Instance.ASyncSetup.GroupCollection == null) return;
@@ -182,8 +183,10 @@ namespace ASync.eTermAddIn {
             string groupCode = string.Empty;
             if (comboBoxEx1.SelectedItem != null)
                 groupCode = comboBoxEx1.SelectedItem.GetType().GetProperty("Value").GetValue(comboBoxEx1.SelectedItem, null).ToString();
-
-            ConnectSetup Setup = new ConnectSetup() { 
+            int Sid = Int32.Parse(textBoxX1.Text, System.Globalization.NumberStyles.HexNumber);
+            int Rid = Int32.Parse(textBoxX2.Text, System.Globalization.NumberStyles.HexNumber);
+            ConnectSetup Setup = new ConnectSetup()
+            { 
                  LocalIp=ipLocalIp.Value,
                   TSessionType=radPassword.Checked?CertificationType.Password:CertificationType.Address,
                  Address=txtAddress.Value,
@@ -195,8 +198,8 @@ namespace ASync.eTermAddIn {
                  GroupCode = groupCode, AutoSi=chkAutoSi.Checked,
                         OfficeCode=txtOfficeCode.Text,
                          userPass=txtPassword.Text,
-                         SID=(byte)integerInput1.Value,
-                 RID = (byte)integerInput3.Value,
+                 SID = (byte)Sid,
+                 RID = (byte)Rid,
                            FlowRate=integerInput2.Value
             };
             Setup.Traffics = (PanelSession.Tag as ConnectSetup).Traffics;
