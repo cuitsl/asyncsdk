@@ -20,7 +20,7 @@ namespace eTerm.AsyncSDK.Transfer
         /// <value>The T session version.</value>
         protected override byte TSessionVersion
         {
-            get { throw new NotImplementedException(); }
+            get { return 0x00; }
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace eTerm.AsyncSDK.Transfer
         /// <value>The after body.</value>
         public override byte[] AfterBody
         {
-            get { throw new NotImplementedException(); }
+            get { return new byte[]{}; }
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace eTerm.AsyncSDK.Transfer
         /// </summary>
         public override void GetPacketCommand()
         {
-            throw new NotImplementedException();
+
         }
 
         /// <summary>
