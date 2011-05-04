@@ -92,6 +92,7 @@
     <Compile Include="Smtp\Smtp.cs" />
     <Compile Include="Smtp\SmtpConfig.cs" />
     <Compile Include="Smtp\SmtpException.cs" />
+    <Compile Include="Transfer\TransferPacket.cs" />
     <Compile Include="Util\CaptchaUtil.cs" />
     <Compile Include="Util\Cn2PyUtil.cs" />
     <Compile Include="Net\eTerm350Async.cs" />
