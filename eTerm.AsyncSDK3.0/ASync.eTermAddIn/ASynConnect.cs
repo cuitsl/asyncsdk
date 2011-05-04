@@ -30,12 +30,12 @@ namespace ASync.eTermAddIn {
                                 Setup.ToString(),
                                 Setup.userName,
                                 string.Format(@"{0}:{1}",Setup.Address,Setup.Port.ToString()),
-                                Setup.IsSsl.ToString(),
+                                (Setup.TSessionType??CertificationType.Address)== CertificationType.Address?@"地址认证":@"用户认证",
+                                Setup.OfficeCode,
+                                Setup.IsSsl?@"是":@"否",
                                 Setup.IsOpen?"正常":"停用",
                                 Setup.SiText,
-                                Setup.OfficeCode,
-                                group==null?"未分组":group.groupName,
-                                (Setup.TSessionType??CertificationType.Address)== CertificationType.Address?@"地址认证":@"用户认证",
+                                group==null?"未分组":group.groupName
                             });
                             Item.Name = Setup.ToString();
                             Item.Tag = Setup;
