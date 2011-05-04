@@ -208,9 +208,9 @@ namespace eTerm.AsyncSDK {
         /// </exception>
         public override bool Equals(object obj) {
             return 
-                (obj as ConnectSetup).userName == this.userName
+                (obj as ConnectSetup).SID == this.SID
                 &&
-                (obj as ConnectSetup).Address==this.Address
+                (obj as ConnectSetup).RID==this.RID
                 ;
         }
 
@@ -231,7 +231,7 @@ namespace eTerm.AsyncSDK {
         /// A <see cref="System.String"/> that represents this instance.
         /// </returns>
         public override string ToString() {
-            return this.userName;
+            return string.Format(@"{0}{1}", String.Format("{0:X}", SID), String.Format("{0:X}", RID));
         }
     }
 }
