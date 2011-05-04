@@ -73,9 +73,7 @@
             this.chkAutoSi = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.chkIsOpen = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
-            this.integerInput3 = new DevComponents.Editors.IntegerInput();
             this.integerInput2 = new DevComponents.Editors.IntegerInput();
-            this.integerInput1 = new DevComponents.Editors.IntegerInput();
             this.txtPort = new DevComponents.Editors.IntegerInput();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
             this.txtPassword = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -83,6 +81,8 @@
             this.txtSessionName = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.tabItem2 = new DevComponents.DotNetBar.TabItem(this.components);
+            this.textBoxX1 = new DevComponents.DotNetBar.Controls.TextBoxX();
+            this.textBoxX2 = new DevComponents.DotNetBar.Controls.TextBoxX();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
@@ -92,17 +92,15 @@
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtAddress)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.integerInput3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.integerInput2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.integerInput1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.CanReorderTabs = true;
-            this.tabControl1.Controls.Add(this.tabControlPanel1);
             this.tabControl1.Controls.Add(this.PanelSession);
+            this.tabControl1.Controls.Add(this.tabControlPanel1);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -309,6 +307,8 @@
             // PanelSession
             // 
             this.PanelSession.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.PanelSession.Controls.Add(this.textBoxX2);
+            this.PanelSession.Controls.Add(this.textBoxX1);
             this.PanelSession.Controls.Add(this.ipLocalIp);
             this.PanelSession.Controls.Add(this.labelX15);
             this.PanelSession.Controls.Add(this.panel1);
@@ -333,9 +333,7 @@
             this.PanelSession.Controls.Add(this.chkAutoSi);
             this.PanelSession.Controls.Add(this.chkIsOpen);
             this.PanelSession.Controls.Add(this.labelX4);
-            this.PanelSession.Controls.Add(this.integerInput3);
             this.PanelSession.Controls.Add(this.integerInput2);
-            this.PanelSession.Controls.Add(this.integerInput1);
             this.PanelSession.Controls.Add(this.txtPort);
             this.PanelSession.Controls.Add(this.labelX3);
             this.PanelSession.Controls.Add(this.txtPassword);
@@ -752,22 +750,6 @@
             this.labelX4.TabIndex = 6;
             this.labelX4.Text = "配置状态：";
             // 
-            // integerInput3
-            // 
-            // 
-            // 
-            // 
-            this.integerInput3.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.integerInput3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.integerInput3.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.integerInput3.Location = new System.Drawing.Point(283, 137);
-            this.integerInput3.MaxValue = 100000;
-            this.integerInput3.MinValue = 0;
-            this.integerInput3.Name = "integerInput3";
-            this.integerInput3.ShowUpDown = true;
-            this.integerInput3.Size = new System.Drawing.Size(49, 20);
-            this.integerInput3.TabIndex = 5;
-            // 
             // integerInput2
             // 
             // 
@@ -783,22 +765,6 @@
             this.integerInput2.ShowUpDown = true;
             this.integerInput2.Size = new System.Drawing.Size(88, 20);
             this.integerInput2.TabIndex = 5;
-            // 
-            // integerInput1
-            // 
-            // 
-            // 
-            // 
-            this.integerInput1.BackgroundStyle.Class = "DateTimeInputBackground";
-            this.integerInput1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.integerInput1.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
-            this.integerInput1.Location = new System.Drawing.Point(283, 110);
-            this.integerInput1.MaxValue = 10000;
-            this.integerInput1.MinValue = 0;
-            this.integerInput1.Name = "integerInput1";
-            this.integerInput1.ShowUpDown = true;
-            this.integerInput1.Size = new System.Drawing.Size(49, 20);
-            this.integerInput1.TabIndex = 5;
             // 
             // txtPort
             // 
@@ -897,6 +863,34 @@
             this.tabItem2.Name = "tabItem2";
             this.tabItem2.Text = "配置信息修改";
             // 
+            // textBoxX1
+            // 
+            // 
+            // 
+            // 
+            this.textBoxX1.Border.Class = "TextBoxBorder";
+            this.textBoxX1.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.textBoxX1.Location = new System.Drawing.Point(271, 111);
+            this.textBoxX1.MaxLength = 2;
+            this.textBoxX1.Name = "textBoxX1";
+            this.textBoxX1.Size = new System.Drawing.Size(38, 20);
+            this.textBoxX1.TabIndex = 34;
+            this.textBoxX1.WatermarkText = "SID";
+            // 
+            // textBoxX2
+            // 
+            // 
+            // 
+            // 
+            this.textBoxX2.Border.Class = "TextBoxBorder";
+            this.textBoxX2.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.textBoxX2.Location = new System.Drawing.Point(271, 137);
+            this.textBoxX2.MaxLength = 2;
+            this.textBoxX2.Name = "textBoxX2";
+            this.textBoxX2.Size = new System.Drawing.Size(38, 20);
+            this.textBoxX2.TabIndex = 34;
+            this.textBoxX2.WatermarkText = "RID";
+            // 
             // ASynConnect
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -915,9 +909,7 @@
             this.panel1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtAddress)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.integerInput3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.integerInput2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.integerInput1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPort)).EndInit();
             this.ResumeLayout(false);
 
@@ -967,7 +959,6 @@
         private DevComponents.DotNetBar.LabelX labelX10;
         private DevComponents.DotNetBar.LabelX labelX9;
         private DevComponents.Editors.IntegerInput integerInput2;
-        private DevComponents.Editors.IntegerInput integerInput1;
         private DevComponents.DotNetBar.Controls.ComboTree comboTree1;
         private DevComponents.DotNetBar.LabelX labelX11;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
@@ -975,7 +966,6 @@
         private DevComponents.DotNetBar.LabelX labelX12;
         private DevComponents.DotNetBar.Controls.CheckBoxX chkAutoSi;
         private DevComponents.DotNetBar.LabelX labelX13;
-        private DevComponents.Editors.IntegerInput integerInput3;
         private DevComponents.DotNetBar.ButtonX btnClearTraffic;
         private DevComponents.DotNetBar.LabelX labelX14;
         private System.Windows.Forms.Panel panel1;
@@ -984,6 +974,8 @@
         private DevComponents.DotNetBar.LabelX labelX15;
         private DevComponents.Editors.IpAddressInput ipLocalIp;
         private System.Windows.Forms.ColumnHeader columnHeader8;
+        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX1;
+        private DevComponents.DotNetBar.Controls.TextBoxX textBoxX2;
 
     }
 }
