@@ -6,6 +6,9 @@ using System.Collections;
 using System.Text.RegularExpressions;
 
 namespace eTerm.ASynClientSDK {
+    /// <summary>
+    /// 税收获取指令
+    /// </summary>
     public sealed class PATFareCommand : SSCommand {
 
 
@@ -47,11 +50,17 @@ namespace eTerm.ASynClientSDK {
         public override ASyncResult Commit() {
             ASyncResult Result = null;
             base.Connect();
+            string PnrCode=string.Empty;
             SendStream(createSynCmd());
             if (Regex.IsMatch(@"一次性", ConvertResult(GetStream()), RegexOptions.IgnoreCase| RegexOptions.Multiline))
             {
                 ThreadSleep();
-                SendStream(createOneOff());
+                addAdult("胡李俊");
+                addSSR_FOID("MU", "93747237293729462", "胡李俊");
+                this.setTimelimit = airSegList[0].departureTime.AddSeconds(30 * 60);        //30分钟
+                addContact(new BookContact("SHA", "12345678", "HULIJUN"));
+                PnrCode = (Commit() as SSResult).getPnr;
+                if (!string.IsNullOrEmpty(PnrCode)) SendStream(string.Format(@"RT:{0}", PnrCode));
                 IsOneOff = true;
             }
             ThreadSleep();
@@ -62,6 +71,9 @@ namespace eTerm.ASynClientSDK {
                 return PAT.Current;
             }
             Dispose();
+            if (IsOneOff) {
+                new CPnrCommand().Commit(PnrCode);
+            }
             return Result;
         }
     }

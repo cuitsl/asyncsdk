@@ -144,7 +144,7 @@ namespace eTerm.ASynClientSDK {
         /// SSR FQTV
         /// </summary>
         private List<SSRFQTV> __airSSRFQTV = new List<SSRFQTV>();
-        private bool __IsSpecial = false;
+        //private bool __IsSpecial = false;
         #endregion
 
         #region 重写部分
@@ -162,11 +162,10 @@ namespace eTerm.ASynClientSDK {
 
         #region 属性定义
         /// <summary>
-        /// 是否为特殊预定（TRUE:则会将封口与普通指令分开执行）
+        /// Gets the air seg list.
         /// </summary>
-        //public bool IsSpecial { get { return __IsSpecial; } set { 
-        //    this.__IsSpecial = value;
-        //} }
+        /// <value>The air seg list.</value>
+        protected List<BookAirSeg> airSegList { get { return this.__airSegList; } }
         #endregion
 
         #region 分析结果
@@ -410,35 +409,6 @@ namespace eTerm.ASynClientSDK {
                     ,this.gettktNum
                     );
             }
-            return sb.ToString();
-        }
-
-        /// <summary>
-        /// 封装一次指令
-        /// </summary>
-        /// <returns></returns>
-        protected virtual string createOneOff() {
-            addAdult("胡李俊");
-            addSSR_FOID(this.__airSegList[0].getairNo.Substring(0,2), "93747237293729462", "胡李俊");
-            this.setTimelimit = this.__airSegList[0].departureTime.AddSeconds(30 * 60);
-            addContact(new BookContact("SHA", "12345678", "HULIJUN"));
-            StringBuilder sb = new StringBuilder();
-            foreach (BookAirSeg airSeg in this.__airSegList)
-            {
-                sb.AppendFormat("SS:{0} {1} {2} {3}{4} {5}{6}\r"
-                    , airSeg.getairNo
-                    , airSeg.getfltClass.ToString()
-                    , string.Format("{0}{1}{2}", airSeg.departureTime.Day.ToString("D2"), getDateString(airSeg.departureTime), airSeg.departureTime.ToString("yy"))
-                    , airSeg.getorgCity
-                    , airSeg.getdesCity
-                    , string.IsNullOrEmpty(airSeg.getactionCode) ? "NN" : airSeg.getactionCode
-                    , this.gettktNum
-                    );
-            }
-            sb.AppendLine(createPassger());
-            sb.AppendLine(createContact());
-            sb.AppendLine(createTimelimit());
-            sb.Append("@KI");
             return sb.ToString();
         }
 
