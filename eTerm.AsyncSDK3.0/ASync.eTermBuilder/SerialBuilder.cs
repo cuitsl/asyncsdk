@@ -70,7 +70,8 @@ namespace ASync.eTermBuilder {
                     providerName = this.txtProviderName.Text,
                     AllowAfterValidate = true,
                     AllowIntercept = chkAllowInter.Checked,
-                    RemainingMinutes = ((TimeSpan)(this.PickerExpire.Value - DateTime.Now)).TotalMinutes
+                    RemainingMinutes = ((TimeSpan)(this.PickerExpire.Value - DateTime.Now)).TotalMinutes,
+                    AllowDbLog = checkBox1.Checked
                 };
 
                 byte[] Buffer = Key.XmlSerialize(keys, this.txtFileName.Text);
