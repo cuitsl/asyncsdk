@@ -370,12 +370,12 @@ namespace eTerm.AsyncSDK.Net {
                         ColumnNumber++;
                         break;
                     case 0x62:
-                    //case 0x03:
-                    case 0x1E:
+                    case 0x03:
+                    //case 0x1E:
                     case 0x1B:
                     case 0x00:
                         break;
-                    case 0x03:
+                    case 0x1E:
                         UnPacketResult.Add(16);
                         ColumnNumber++;
                         break;
