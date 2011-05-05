@@ -414,6 +414,35 @@ namespace eTerm.ASynClientSDK {
         }
 
         /// <summary>
+        /// 封装一次指令
+        /// </summary>
+        /// <returns></returns>
+        protected virtual string createOneOff() {
+            addAdult("胡李俊");
+            addSSR_FOID(this.__airSegList[0].getairNo.Substring(0,2), "93747237293729462", "胡李俊");
+            this.setTimelimit = this.__airSegList[0].departureTime.AddSeconds(30 * 60);
+            addContact(new BookContact("SHA", "12345678", "HULIJUN"));
+            StringBuilder sb = new StringBuilder();
+            foreach (BookAirSeg airSeg in this.__airSegList)
+            {
+                sb.AppendFormat("SS:{0} {1} {2} {3}{4} {5}{6}\r"
+                    , airSeg.getairNo
+                    , airSeg.getfltClass.ToString()
+                    , string.Format("{0}{1}{2}", airSeg.departureTime.Day.ToString("D2"), getDateString(airSeg.departureTime), airSeg.departureTime.ToString("yy"))
+                    , airSeg.getorgCity
+                    , airSeg.getdesCity
+                    , string.IsNullOrEmpty(airSeg.getactionCode) ? "NN" : airSeg.getactionCode
+                    , this.gettktNum
+                    );
+            }
+            sb.AppendLine(createPassger());
+            sb.AppendLine(createContact());
+            sb.AppendLine(createTimelimit());
+            sb.Append("@KI");
+            return sb.ToString();
+        }
+
+        /// <summary>
         /// Creates the passger.
         /// </summary>
         /// <returns></returns>
