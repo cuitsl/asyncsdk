@@ -3,9 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
+using System.Text.RegularExpressions;
 
 namespace eTerm.ASynClientSDK {
     public sealed class PATFareCommand : SSCommand {
+
+
+        /// <summary>
+        /// 是否一次性
+        /// </summary>
+        private bool IsOneOff = false;
+
         /// <summary>
         /// 拼装指令.
         /// </summary>
@@ -40,7 +48,12 @@ namespace eTerm.ASynClientSDK {
             ASyncResult Result = null;
             base.Connect();
             SendStream(createSynCmd());
-            GetStream();
+            if (Regex.IsMatch(@"一次性", ConvertResult(GetStream()), RegexOptions.IgnoreCase| RegexOptions.Multiline))
+            {
+                ThreadSleep();
+                SendStream(createOneOff());
+                IsOneOff = true;
+            }
             ThreadSleep();
             SendStream(@"PAT:A");
             IEnumerator<PATResult> PAT= new PATCommand().ParseSFC(ConvertResult(GetStream())).GetEnumerator();
