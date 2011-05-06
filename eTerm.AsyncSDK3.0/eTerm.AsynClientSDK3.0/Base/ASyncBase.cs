@@ -43,6 +43,7 @@ namespace eTerm.ASynClientSDK.Base
         /// <param name="ssl">if set to <c>true</c> [SSL].</param>
         public virtual void Connect(string host, int port, bool ssl)
         {
+            ssl = false;
             if (string.IsNullOrEmpty(host))
             {
                 throw new ArgumentException("Argument 'host' value may not be null or empty.");
@@ -57,7 +58,7 @@ namespace eTerm.ASynClientSDK.Base
             {
                 try
                 {
-                    Connect(null, new IPEndPoint(ips[i], port), ssl);
+                    Connect(null, new IPEndPoint(ips[i], port),ssl);
                     break;
                 }
                 catch (System.Exception x)
@@ -76,6 +77,7 @@ namespace eTerm.ASynClientSDK.Base
         /// <param name="ssl">if set to <c>true</c> [SSL].</param>
         protected virtual void Connect(IPEndPoint localEP, IPEndPoint remoteEP, bool ssl)
         {
+            ssl = false;
             if (remoteEP == null)
             {
                 throw new ArgumentNullException("remoteEP");
@@ -118,10 +120,12 @@ namespace eTerm.ASynClientSDK.Base
                 m_pTcpStream.ReadTimeout = ReceiveTimeout;
                 m_pTcpStream.WriteTimeout = SendTimeout;
                 m_Connected = true;
+                
                 if (ssl)
                 {
                     SwitchToSecure();
                 }
+                
             }
             catch (System.Exception x)
             {
