@@ -21,7 +21,7 @@ namespace eTerm.ASynClientSDK {
         /// 拼装指令.
         /// </summary>
         /// <returns></returns>
-        protected override string createSynCmd() {
+        private string CreateSynCmd() {
             return string.Format("{0}"
                 , createBookAirSeg()
                 //,""//无需旅客信息可PAT
@@ -51,27 +51,35 @@ namespace eTerm.ASynClientSDK {
             ASyncResult Result = null;
             base.Connect();
             string PnrCode=string.Empty;
-            SendStream(createSynCmd());
-            if (Regex.IsMatch(@"一次性", ConvertResult(GetStream()), RegexOptions.IgnoreCase| RegexOptions.Multiline))
+            SendStream(CreateSynCmd());
+            byte[] Buffer = GetStream();
+            if (Regex.IsMatch(ConvertResult(Buffer),@"封口", RegexOptions.IgnoreCase | RegexOptions.Multiline))
             {
                 ThreadSleep();
                 addAdult("胡李俊");
-                addSSR_FOID("MU", "93747237293729462", "胡李俊");
-                this.setTimelimit = airSegList[0].departureTime.AddSeconds(30 * 60);        //30分钟
+                addSSR_FOID(base.airSegList[0].getairNo.Substring(0,2), "93747237293729462", "胡李俊");
+                this.setTimelimit = airSegList[0].departureTime.AddSeconds(30 * 60*-1);        //30分钟
                 addContact(new BookContact("SHA", "12345678", "HULIJUN"));
-                PnrCode = (Commit() as SSResult).getPnr;
-                if (!string.IsNullOrEmpty(PnrCode)) SendStream(string.Format(@"RT:{0}", PnrCode));
+                SendStream(createSynCmd());
+                Buffer = GetStream();
+                PnrCode = (base.ResultAdapter(ConvertResult(Buffer)) as SSResult).getPnr;
+                if (!string.IsNullOrEmpty(PnrCode))
+                {
+                    SendStream(string.Format(@"RT:{0}", PnrCode));
+                    GetStream();
+                }
                 IsOneOff = true;
             }
             ThreadSleep();
             SendStream(@"PAT:A");
             IEnumerator<PATResult> PAT= new PATCommand().ParseSFC(ConvertResult(GetStream())).GetEnumerator();
             while (PAT.MoveNext()) {
-                Dispose();
-                return PAT.Current;
+                //Dispose();
+                Result= PAT.Current;
+                break;
             }
             Dispose();
-            if (IsOneOff) {
+            if (IsOneOff&&!string.IsNullOrEmpty(PnrCode)) {
                 new CPnrCommand().Commit(PnrCode);
             }
             return Result;

@@ -368,7 +368,7 @@ namespace eTerm.ASynClientSDK {
                 throw new SSNameMissingException();
             if (this.setTimelimit >= this.__airSegList[0].departureTime)
                 throw new SSTktDateException();
-            ASyncResult result= GetSyncResult(this.createSynCmd());
+            ASyncResult result= GetSyncResult(createSynCmd());
             //if (this.IsSpecial)
             //    result = GetSyncResult((string.IsNullOrEmpty(this.setEnvelopType) ? "@" : this.setEnvelopType));
             return result;
