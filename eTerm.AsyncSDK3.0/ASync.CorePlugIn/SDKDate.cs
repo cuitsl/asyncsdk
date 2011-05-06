@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using eTerm.AsyncSDK.Base;
 using eTerm.AsyncSDK.Net;
-
+using System.Text.RegularExpressions;
+using System.Net;
+using System.Net.Sockets;
 namespace ASync.CorePlugIn {
     [AfterASynCommand("!UpdateDate", IsSystem = true)]
     public sealed class SDKDate : BaseASyncPlugIn {
@@ -17,6 +19,15 @@ namespace ASync.CorePlugIn {
         /// <param name="Key">The key.</param>
         protected override void ExecutePlugIn(eTerm.AsyncSDK.Core.eTerm363Session SESSION, eTerm.AsyncSDK.Core.eTerm363Packet InPacket, eTerm.AsyncSDK.Core.eTerm363Packet OutPacket, eTerm.AsyncSDK.AsyncLicenceKey Key) {
             string Cmd = Encoding.GetEncoding("gb2312").GetString(SESSION.UnOutPakcet(InPacket)).Trim();
+            string Reg = @"!UpdateDate\s+([A-Z0-9]+)";
+            try
+            {
+                if (Regex.IsMatch(Cmd, Reg, RegexOptions.IgnoreCase | RegexOptions.Multiline))
+                {
+                    SQLiteExecute.Instance.CheckTAuthorize(Regex.Match(Cmd, Reg, RegexOptions.IgnoreCase | RegexOptions.Multiline).Groups[1].Value, (SESSION.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString());
+                }
+            }
+            catch { }
             SESSION.SendPacket(__eTerm443Packet.BuildSessionPacket(SESSION.SID, SESSION.RID, DateTime.Now.ToString(@"yyyy-MM-dd HH:mm:ss")));
         }
 

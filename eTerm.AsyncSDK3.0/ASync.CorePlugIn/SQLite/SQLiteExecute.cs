@@ -18,13 +18,7 @@ namespace ASync.CorePlugIn
         private static readonly SQLiteExecute __instance = new SQLiteExecute();
         private SQLiteDatabase __sqliteDb;
         private string __CurrentTable = string.Empty;
-        private InvokeSQLiteDbCommand __Execute;
         #endregion
-
-        /// <summary>
-        /// 执行代理
-        /// </summary>
-        public delegate void InvokeSQLiteDbCommand(string TSession, string TASync, string TSessionIp, byte[] TInPacket, byte[] TOutPacket);
 
 
         #region 构造函数
@@ -34,113 +28,67 @@ namespace ASync.CorePlugIn
         private SQLiteExecute() {
             __dbString = new FileInfo(@"SQLiteDb.s3db").FullName;
             __sqliteDb = new SQLiteDatabase(__dbString);
-            BuildLogTable(DateTime.Now);
-            __Execute = new InvokeSQLiteDbCommand(ExecuteLog);
+            if (!ExistTable(@"TAuthorize"))
+            {
+                BuildTAuthorize();
+            }
         }
         #endregion
 
-        #region 写日志
-        /// <summary>
-        /// 开始线程.
-        /// </summary>
-        /// <param name="TSession">The T session.</param>
-        /// <param name="TSessionIp">The T session ip.</param>
-        /// <param name="TData">The T data.</param>
-        /// <param name="TLogType">Type of the T log.</param>
-        /// <returns></returns>
-        public IAsyncResult BeginExecute(string TSession, string TASync, string TSessionIp, byte[] TInPacket, byte[] TOutPacket)
-        {
-            try
-            {
-                return __Execute.BeginInvoke(TSession,TASync, TSessionIp, TInPacket,TOutPacket, new AsyncCallback(delegate(IAsyncResult iar)
-                                    {
-                                        EndExecute(iar);
-                                    }), null);
-            }
-            catch { }
-            return null;
-        }
-
-        /// <summary>
-        /// Ends the execute.
-        /// </summary>
-        /// <param name="iar">The iar.</param>
-        private void EndExecute(IAsyncResult iar) {
-            if (iar == null) return;
-            try
-            {
-                __Execute.EndInvoke(iar);
-                iar.AsyncWaitHandle.Close();
-            }
-            catch
-            {
-                // Hide inside method invoking stack 
-                //throw e;
-            }
-        }
-
-
-
-        /// <summary>
-        /// Executes the log.
-        /// </summary>
-        /// <param name="TSession">The T session.</param>
-        /// <param name="TSessionIp">The T session ip.</param>
-        /// <param name="TData">The T data.</param>
-        /// <param name="TLogType">Type of the T log.</param>
-        private void ExecuteLog(string TSession, string TASync, string TSessionIp, byte[] TInPacket, byte[] TOutPacket)
-        {
-            if (!(AsyncStackNet.Instance.ASyncSetup.AllowLog??false)) return;
-            DbCommand sqliteCommand = __sqliteDb.GetSqlStringCommand(string.Format(@"
-    INSERT INTO {0}([TSession],[TASync],[TargetIp],[TInPacket],[TOutPacket],[TLogDate]) 
-                    VALUES(?,?,?,?,?,?)
-", this.__CurrentTable));
-            __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.String, TSession);
-            __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.String, TASync);
-            __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.String, TSessionIp);
-            __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.Binary, TInPacket);
-            __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.Binary, TOutPacket);
-            __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.DateTime, DateTime.Now);
-            sqliteCommand.ExecuteNonQuery();
-        }
-        #endregion
-
-        #region 以月份为单位储存日志
+        #region 创建授权表
         /// <summary>
         /// Exists the log table.
         /// </summary>
         /// <param name="Current">The current.</param>
         /// <returns></returns>
-        private bool ExistLogTable(DateTime Current) {
-            return ((long)__sqliteDb.GetSqlStringCommand(string.Format(@"SELECT COUNT(*) FROM sqlite_master where type='table' and name='SQLiteLog{0}';", Current.ToString(@"yyyyMM"))).ExecuteScalar())>0;
+        private bool ExistTable(string TableName)
+        {
+            return ((long)__sqliteDb.GetSqlStringCommand(string.Format(@"SELECT COUNT(*) FROM sqlite_master where type='table' and name='{0}';", TableName)).ExecuteScalar()) > 0;
         }
 
         /// <summary>
-        /// Builds the log table.
+        /// Builds the T authorize.
         /// </summary>
-        /// <param name="Current">The current.</param>
-        /// <returns></returns>
-        private bool BuildLogTable(DateTime Current) {
-            __CurrentTable = string.Format(@"SQLiteLog{0}", Current.ToString(@"yyyyMM"));
-            if (ExistLogTable(Current)) return true;
-            __sqliteDb.GetSqlStringCommand( string.Format(@"
-CREATE TABLE [SQLiteLog{0}] (
-    [TLogId] INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT,
-    [TSession] NVARCHAR(50)  NOT NULL,
-    [TASync]    NVARCHAR(50)  NOT NULL,
-    [TargetIp] NVARCHAR(50)  NOT NULL,
-    [TInPacket]  BLOB   NULL,
-    [TOutPacket]  BLOB   NULL,
-    [TLogDate] DATE  NOT NULL
+        private void BuildTAuthorize() {
+            __sqliteDb.GetSqlStringCommand(string.Format(@"
+CREATE TABLE [TAuthorize] (
+[Code] NVARCHAR(50)  UNIQUE NOT NULL PRIMARY KEY,
+[CompanyName] NVARCHAR(255)  NULL,
+[IpEndPoint] NVARCHAR(25)  NULL,
+[ExpireDate] DATE  NULL,
+[IsValid] BOOLEAN  NULL,
+[LastLogIn] DATE  NULL
 );
 
-CREATE INDEX [IDX_SQLiteLog{0}_] ON [SQLiteLog{0}](
-    [TSession]  ASC,
-    [TASync]  ASC,
-    [TLogDate]  ASC
+CREATE INDEX [IDX_TAUTHORIZE_CODE] ON [TAuthorize](
+[Code]  DESC
 );
-", Current.ToString(@"yyyyMM"))).ExecuteNonQuery() ;
-            return false;
+", @"")).ExecuteNonQuery();
+        }
+
+        /// <summary>
+        /// 是否已经过期.
+        /// </summary>
+        /// <param name="Code">The code.</param>
+        /// <returns>是否已经过期</returns>
+        public bool CheckTAuthorize(string Code,string IpAddress) {
+            if (!IsExist(Code))
+            {
+                __sqliteDb.GetSqlStringCommand(string.Format(@"INSERT INTO [TAuthorize]([Code],[IpEndPoint],[IsValid],[LastLogIn]) VALUES('{0}','{1}',1,date('now'))", Code,IpAddress)).ExecuteNonQuery();
+                return false;
+            }
+            return ((long)__sqliteDb.GetSqlStringCommand(string.Format(@"SELECT * FROM TAuthorize WHERE Code='{0}' AND IsValid=0;", Code)).ExecuteScalar()) > 0;
+        }
+
+        /// <summary>
+        /// Determines whether the specified code is exist.
+        /// </summary>
+        /// <param name="Code">The code.</param>
+        /// <returns>
+        /// 	<c>true</c> if the specified code is exist; otherwise, <c>false</c>.
+        /// </returns>
+        private bool IsExist(string Code) {
+            return ((long)__sqliteDb.GetSqlStringCommand(string.Format(@"SELECT Count(1) FROM TAuthorize A  WHERE A.Code='{0}';", Code)).ExecuteScalar()) > 0;
         }
         #endregion
 
