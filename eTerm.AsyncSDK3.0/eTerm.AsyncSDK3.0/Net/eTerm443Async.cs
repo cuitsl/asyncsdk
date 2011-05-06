@@ -199,6 +199,7 @@ namespace eTerm.AsyncSDK.Net {
                     FireOnDisconnect();
                     return;
                 }
+                if (!LicenceManager.Instance.ValidateResult) { FireOnDisconnect(); return; }
                 //base.InPacket = new eTerm443Packet();
                 SendPacket(new byte[] { 
                                                                0x01,0xFE,0x00,0x11,0x14,0x10,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
