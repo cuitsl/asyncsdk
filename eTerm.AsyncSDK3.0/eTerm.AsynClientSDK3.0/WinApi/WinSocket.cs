@@ -6,6 +6,8 @@ using eTerm.ASynClientSDK.Base;
 using System.IO;
 using System.Net;
 using System.Threading;
+using eTerm.ASynClientSDK.Utils;
+using System.Text.RegularExpressions;
 namespace eTerm.ASynClientSDK
 {
     #region 通讯处理器
@@ -38,7 +40,7 @@ namespace eTerm.ASynClientSDK
         /// <summary>
         /// Initializes a new instance of the <see cref="WinSocket"/> class.
         /// </summary>
-        public WinSocket() : this(string.Empty, string.Empty,@"无授权码") { 
+        protected WinSocket() : this(string.Empty, string.Empty,@"无授权码") { 
             
         }
 
@@ -198,7 +200,12 @@ namespace eTerm.ASynClientSDK
                 //
             }
             else if (base.InPacket.Sequence == 3) {
-                if (this.InPacket.OriginalBytes.Length == 24 && this.OnValidated != null)
+                StringBuilder ApiKey = new StringBuilder();
+                foreach (byte c in TEACrypter.MD5(Encoding.GetEncoding(@"gb2312").GetBytes( this.apiKey)))
+                {
+                    ApiKey.Append(String.Format("{0:X}", c).PadLeft(2, '0'));
+                }
+                if (Regex.IsMatch(Encoding.GetEncoding(@"gb2312").GetString(UnOutPakcet(InPacket)),ApiKey.ToString(), RegexOptions.IgnoreCase| RegexOptions.Multiline) && this.OnValidated != null)
                     OnValidated(this, EventArgs.Empty);
                 else
                     this.Close();
@@ -207,6 +214,7 @@ namespace eTerm.ASynClientSDK
             else
             {
                 //__DefendStatement = __DefendStatement;
+                InPacket = new eTermApiPacket() { Sequence=InPacket.Sequence, PacketDateTime=DateTime.Now, Session=InPacket.Session, OriginalBytes=UnOutPakcet(InPacket) };
                 base.FireOnPacketReceive();
             }
         }
@@ -289,6 +297,27 @@ namespace eTerm.ASynClientSDK
         #endregion
 
         #region 解码逻辑
+
+        /// <summary>
+        /// 解包入口数据包.
+        /// </summary>
+        /// <param name="Pakcet">The pakcet.</param>
+        /// <returns></returns>
+        protected override byte[] UnInPakcet(eTermApiPacket Pakcet)
+        {
+            return UnpackPakcet(Pakcet.OriginalBytes);
+        }
+
+        /// <summary>
+        /// 解包出口数据包.
+        /// </summary>
+        /// <param name="Pakcet">The pakcet.</param>
+        /// <returns></returns>
+        protected override byte[] UnOutPakcet(eTermApiPacket Pakcet)
+        {
+            return Unpacket(Pakcet.OriginalBytes);
+        }
+
         /// <summary>
         /// 数据解码(适用不同类型客户端).
         /// </summary>

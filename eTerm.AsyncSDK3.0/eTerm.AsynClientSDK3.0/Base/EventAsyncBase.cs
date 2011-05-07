@@ -89,7 +89,7 @@ namespace eTerm.ASynClientSDK.Base {
         /// </summary>
         /// <param name="Pakcet">The pakcet.</param>
         /// <returns></returns>
-        public virtual byte[] UnInPakcet(P Pakcet) {
+        protected virtual byte[] UnInPakcet(P Pakcet) {
             return Pakcet.OriginalBytes;
         }
 
@@ -104,7 +104,8 @@ namespace eTerm.ASynClientSDK.Base {
         /// </summary>
         /// <param name="Pakcet">The pakcet.</param>
         /// <returns></returns>
-        public virtual byte[] UnOutPakcet(P Pakcet) {
+        protected virtual byte[] UnOutPakcet(P Pakcet)
+        {
             return Pakcet.OriginalBytes;
         }
 
