@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace eTerm.AsyncSDK.Base {
+namespace eTerm.ASynClientSDK.Base
+{
     /// <summary>
     /// 数据包基类
     /// <remarks>

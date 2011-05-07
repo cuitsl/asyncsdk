@@ -9,8 +9,7 @@ using System.Net.Security;
 using System.Threading;
 using System.Security.Cryptography.X509Certificates;
 using System.Runtime.InteropServices;
-using eTerm.AsyncSDK.Net;
-namespace eTerm.AsyncSDK.Base {
+namespace eTerm.ASynClientSDK.Base {
     /// <summary>
     /// 可连接会话基类
     /// </summary>
@@ -238,7 +237,7 @@ namespace eTerm.AsyncSDK.Base {
                         WriteLog(ex);
 #endif
                     }
-                    catch (Exception ex) {
+                    catch (System.Exception ex) {
 #if DEBUG
                         WriteLog(ex);
 #endif
@@ -246,7 +245,8 @@ namespace eTerm.AsyncSDK.Base {
                 }), AsyncSocket);
                 
             }
-            catch (Exception ex) {
+            catch (System.Exception ex)
+            {
 #if DEBUG
                         WriteLog(ex);
 #endif
@@ -295,7 +295,8 @@ namespace eTerm.AsyncSDK.Base {
                 showSslInfo(this.RemoteEP.Address.ToString(), _sslStream, true);
 #endif
             }
-            catch (Exception ex) {
+            catch (System.Exception ex)
+            {
 #if DEBUG
                         WriteLog(ex);
 #endif
@@ -330,8 +331,9 @@ namespace eTerm.AsyncSDK.Base {
         /// <summary>
         /// Initializes a new instance of the <see cref="AsyncBase&lt;T, P&gt;"/> class.
         /// </summary>
-        public AsyncBase() {
-            if (!LicenceManager.Instance.ValidateResult) throw new OverflowException(__eTerm443Packet.AUTHERROR_MES);
+        public EventAsyncBase()
+        {
+            //if (!LicenceManager.Instance.ValidateResult) throw new OverflowException(__eTerm443Packet.AUTHERROR_MES);
             this.ObligatoryReconnect = true;
         }
         #endregion
@@ -439,7 +441,8 @@ namespace eTerm.AsyncSDK.Base {
                         WriteLog(ex);
 #endif
             }
-            catch (Exception ex) {
+            catch (System.Exception ex)
+            {
 #if DEBUG
                         WriteLog(ex);
 #endif
@@ -523,7 +526,8 @@ namespace eTerm.AsyncSDK.Base {
                         WriteLog(ex);
 #endif
             }
-            catch (Exception ex) {  // 读 socket 异常，关闭该会话，系统不认为是错误（这种错误可能太多）
+            catch (System.Exception ex)
+            {  // 读 socket 异常，关闭该会话，系统不认为是错误（这种错误可能太多）
                 //throw;
 #if DEBUG
                         WriteLog(ex);
@@ -565,7 +569,8 @@ namespace eTerm.AsyncSDK.Base {
                         WriteLog(ex);
 #endif
             }
-            catch (Exception ex) {
+            catch (System.Exception ex)
+            {
 #if DEBUG
                         WriteLog(ex);
 #endif
