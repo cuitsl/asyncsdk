@@ -71,6 +71,9 @@
     <Compile Include="Base\ASyncBase.cs" />
     <Compile Include="Base\ASynCommand.cs" />
     <Compile Include="Base\ASyncPNCommand.cs" />
+    <Compile Include="Base\EventAsyncBase.cs" />
+    <Compile Include="Base\_Packet.cs" />
+    <Compile Include="Base\_Session.cs" />
     <Compile Include="CDCommand\CDCommand.cs" />
     <Compile Include="CDCommand\CDResult.cs" />
     <Compile Include="CollectionBase.cs" />
