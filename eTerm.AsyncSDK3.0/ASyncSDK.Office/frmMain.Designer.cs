@@ -84,7 +84,6 @@
             this.columnHeader19 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader20 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader21 = new System.Windows.Forms.ColumnHeader();
-            this.panelDockContainer3 = new DevComponents.DotNetBar.PanelDockContainer();
             this.panelDockContainer2 = new DevComponents.DotNetBar.PanelDockContainer();
             this.lstTSessionLog = new System.Windows.Forms.ListView();
             this.columnHeader10 = new System.Windows.Forms.ColumnHeader();
@@ -93,6 +92,7 @@
             this.columnHeader13 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader14 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader15 = new System.Windows.Forms.ColumnHeader();
+            this.panelDockContainer3 = new DevComponents.DotNetBar.PanelDockContainer();
             this.dockContainerItem6 = new DevComponents.DotNetBar.DockContainerItem();
             this.dockContainerItem5 = new DevComponents.DotNetBar.DockContainerItem();
             this.dockContainerItem1 = new DevComponents.DotNetBar.DockContainerItem();
@@ -102,6 +102,11 @@
             this.statusServer = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.lableLocalIp = new System.Windows.Forms.ToolStripStatusLabel();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btnRestore = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnClose = new System.Windows.Forms.ToolStripMenuItem();
             this.ribbonControl1.SuspendLayout();
             this.ribbonPanel1.SuspendLayout();
             this.ribbonPanel2.SuspendLayout();
@@ -114,6 +119,7 @@
             this.panelDockContainer1.SuspendLayout();
             this.panelDockContainer2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // styleManager1
@@ -805,19 +811,6 @@
             this.columnHeader21.Text = "会话时间";
             this.columnHeader21.Width = 122;
             // 
-            // panelDockContainer3
-            // 
-            this.panelDockContainer3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Windows7;
-            this.panelDockContainer3.Location = new System.Drawing.Point(6, 31);
-            this.panelDockContainer3.Name = "panelDockContainer3";
-            this.panelDockContainer3.Size = new System.Drawing.Size(775, 500);
-            this.panelDockContainer3.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelDockContainer3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
-            this.panelDockContainer3.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
-            this.panelDockContainer3.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
-            this.panelDockContainer3.Style.GradientAngle = 90;
-            this.panelDockContainer3.TabIndex = 10;
-            // 
             // panelDockContainer2
             // 
             this.panelDockContainer2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Windows7;
@@ -883,6 +876,19 @@
             this.columnHeader15.Text = "会话时间";
             this.columnHeader15.Width = 107;
             // 
+            // panelDockContainer3
+            // 
+            this.panelDockContainer3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Windows7;
+            this.panelDockContainer3.Location = new System.Drawing.Point(6, 31);
+            this.panelDockContainer3.Name = "panelDockContainer3";
+            this.panelDockContainer3.Size = new System.Drawing.Size(775, 500);
+            this.panelDockContainer3.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelDockContainer3.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarBackground;
+            this.panelDockContainer3.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarDockedBorder;
+            this.panelDockContainer3.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.ItemText;
+            this.panelDockContainer3.Style.GradientAngle = 90;
+            this.panelDockContainer3.TabIndex = 10;
+            // 
             // dockContainerItem6
             // 
             this.dockContainerItem6.Control = this.panelDockContainer5;
@@ -947,6 +953,45 @@
             this.lableLocalIp.Name = "lableLocalIp";
             this.lableLocalIp.Size = new System.Drawing.Size(0, 17);
             // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnRestore,
+            this.toolStripMenuItem1,
+            this.btnClose});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(154, 54);
+            // 
+            // btnRestore
+            // 
+            this.btnRestore.Image = global::ASyncSDK.Office.Properties.Resources.Shield_Blue;
+            this.btnRestore.Name = "btnRestore";
+            this.btnRestore.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.btnRestore.Size = new System.Drawing.Size(153, 22);
+            this.btnRestore.Text = "恢复(&R)";
+            this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(150, 6);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Image = global::ASyncSDK.Office.Properties.Resources.Power__Yellow;
+            this.btnClose.Name = "btnClose";
+            this.btnClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
+            this.btnClose.Size = new System.Drawing.Size(153, 22);
+            this.btnClose.Text = "退出(&E)";
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -959,7 +1004,6 @@
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "eTerm共享服务器   V3.2";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.ribbonControl1.ResumeLayout(false);
             this.ribbonControl1.PerformLayout();
             this.ribbonPanel1.ResumeLayout(false);
@@ -974,6 +1018,7 @@
             this.panelDockContainer2.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1058,6 +1103,11 @@
         private System.Windows.Forms.ColumnHeader columnHeader25;
         private DevComponents.DotNetBar.ItemContainer itemContainer2;
         private DevComponents.DotNetBar.ButtonItem btnManualConnect;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem btnRestore;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem btnClose;
 
     }
 }
