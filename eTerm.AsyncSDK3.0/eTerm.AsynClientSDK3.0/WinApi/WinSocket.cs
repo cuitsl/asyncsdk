@@ -40,8 +40,8 @@ namespace eTerm.ASynClientSDK
         /// <summary>
         /// Initializes a new instance of the <see cref="WinSocket"/> class.
         /// </summary>
-        protected WinSocket() : this(string.Empty, string.Empty,@"无授权码") { 
-            
+        public WinSocket() : this(string.Empty, string.Empty,@"无授权码") {
+            throw new NullReferenceException(@"无法使用该构造函数");
         }
 
 
