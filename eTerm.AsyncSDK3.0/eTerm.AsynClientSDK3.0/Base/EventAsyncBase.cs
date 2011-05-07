@@ -187,7 +187,7 @@ namespace eTerm.ASynClientSDK.Base {
         /// <param name="host">The host.</param>
         /// <param name="port">The port.</param>
         /// <param name="ssl">if set to <c>true</c> [SSL].</param>
-        public virtual void Connect(string host, int port, bool ssl) {
+        public virtual void Connect(string host, int port) {
             if (string.IsNullOrEmpty(host)) {
                 throw new ArgumentException("Argument 'host' value may not be null or empty.");
             }
@@ -200,7 +200,7 @@ namespace eTerm.ASynClientSDK.Base {
                 
                     //Connect(null, new IPEndPoint(ips[i], port), ssl);
                     this.RemoteEP = new IPEndPoint(ips[i], port);
-                    this.IsSsl = ssl;
+                    //this.IsSsl = ssl;
                     Connect();
                     break;
                 }
