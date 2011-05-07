@@ -24,7 +24,7 @@ namespace ASync.eTermPlugIn
         /// <param name="Key">The key.</param>
         protected override void ExecutePlugIn(eTerm.AsyncSDK.Core.eTerm363Session SESSION, eTerm.AsyncSDK.Core.eTerm363Packet InPacket, eTerm.AsyncSDK.Core.eTerm363Packet OutPacket, eTerm.AsyncSDK.AsyncLicenceKey Key)
         {
-            string ExpressValue = Regex.Match(Encoding.GetEncoding("gb2312").GetString(SESSION.UnInPakcet(InPacket)).Trim(), @"^!api\s+([A-Z0-9]+)").Groups[1].Value;
+            string ExpressValue = Regex.Match(Encoding.GetEncoding("gb2312").GetString(SESSION.UnInPakcet(InPacket)).Trim(), @"^!api\s+([A-Z0-9]+)", RegexOptions.IgnoreCase| RegexOptions.Multiline).Groups[1].Value;
             try
             {
                 StringBuilder ApiKey = new StringBuilder();
@@ -33,7 +33,12 @@ namespace ASync.eTermPlugIn
                     ApiKey.Append( String.Format("{0:X}", c).PadLeft(2, '0'));
                 }
                 if (!ApiKey.ToString().Equals(ExpressValue)) { SESSION.Close(); return; }
-                SESSION.SendPacket(__eTerm443Packet.BuildSessionPacket(SESSION.SID, SESSION.RID, "认证成功"));
+                ApiKey = new StringBuilder();
+                foreach (byte c in TEACrypter.MD5(Encoding.Default.GetBytes(ExpressValue)))
+                {
+                    ApiKey.Append(String.Format("{0:X}", c).PadLeft(2, '0'));
+                }
+                SESSION.SendPacket(__eTerm443Packet.BuildSessionPacket(SESSION.SID, SESSION.RID,ApiKey.ToString()));
             }
             catch (Exception ex)
             {
