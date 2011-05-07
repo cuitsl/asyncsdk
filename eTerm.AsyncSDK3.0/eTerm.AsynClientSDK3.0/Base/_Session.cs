@@ -5,7 +5,8 @@ using System.Text;
 using System.Net.Sockets;
 using System.IO;
 
-namespace eTerm.AsyncSDK.Base {
+namespace eTerm.ASynClientSDK.Base
+{
     /// <summary>
     /// 客户端会话基类
     /// </summary>
@@ -146,22 +147,6 @@ namespace eTerm.AsyncSDK.Base {
         }
         #endregion
 
-        /// <summary>
-        /// 日志辅助方法.
-        /// </summary>
-        /// <param name="Message">The message.</param>
-        protected void WriteLog(Exception Message) {
-            using (FileStream fs = new FileStream(string.Format(@".\{0}.log", DateTime.Now.ToString("yyyyMMddhhmm")), FileMode.OpenOrCreate)) {
-                StreamWriter sw = new StreamWriter(fs);
-                sw.WriteLine(string.Format(@"Exception Type:{0}     DateTime:{1}
-{2}
-
-
-{3}
-----------------------------------------------------------------------", Message.GetType().FullName,DateTime.Now,Message.Message,Message.StackTrace));
-                sw.Flush();
-                sw.Close();
-            }
-        }
+       
     }
 }

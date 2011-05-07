@@ -69,6 +69,7 @@
     <Compile Include="AVCommand\Utils\FlightCarbin.cs" />
     <Compile Include="AVCommand\Utils\FlightData.cs" />
     <Compile Include="Base\ASyncBase.cs" />
+    <Compile Include="Base\AsyncEventArgs.cs" />
     <Compile Include="Base\ASynCommand.cs" />
     <Compile Include="Base\ASyncPNCommand.cs" />
     <Compile Include="Base\EventAsyncBase.cs" />
