@@ -122,7 +122,7 @@ new TimerCallback(
                     LicenceBody = LicenceBody.DeXmlSerialize(__secreteKey, buffer);
                     __flag = CompareBytes(LicenceBody.Key, __secreteKey);
                     __flag =__flag&& LicenceBody.ExpireDate >= DateTime.Now;
-                    __flag = __flag && LicenceBody.RemainingMinutes > 0;
+                    __flag = __flag || LicenceBody.RemainingMinutes > 0;
                 }
             }
             catch {
