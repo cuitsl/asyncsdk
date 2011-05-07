@@ -28,6 +28,8 @@ namespace ASyncSDK.Office {
             this.Load += new EventHandler(
                     delegate(object sender, EventArgs e)
                     {
+                        notifyIcon1.Visible = false;
+                        notifyIcon1.Text = this.Text;
                         lstAsync.Groups.AddRange(new ListViewGroup[] { group1, group2 });
                             foreach (object itemValue in Enum.GetValues(DevComponents.DotNetBar.eStyle.Windows7Blue.GetType())) {
                                 ButtonItem btnItem = new ButtonItem() { ButtonStyle = eButtonStyle.ImageAndText, Text = itemValue.ToString(), Tag=itemValue };
@@ -311,17 +313,17 @@ namespace ASyncSDK.Office {
             this.Close();
         }
 
+
         /// <summary>
-        /// Handles the FormClosing event of the frmMain control.
+        /// Raises the <see cref="E:System.Windows.Forms.Form.Closing"/> event.
         /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="System.Windows.Forms.FormClosingEventArgs"/> instance containing the event data.</param>
-        private void frmMain_FormClosing(object sender, FormClosingEventArgs e) {
-            if (MessageBox.Show("确实想退出该软件，退出后将导致客户端无法连接！", "关闭提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK) {
-                e.Cancel = false;
-                Application.ExitThread();
-            }
-            else { e.Cancel = true; }
+        /// <param name="e">A <see cref="T:System.ComponentModel.CancelEventArgs"/> that contains the event data.</param>
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            Hide();
+            this.ShowInTaskbar = false;
+            notifyIcon1.Visible = true;
+            e.Cancel = true;
         }
         #endregion
 
@@ -803,6 +805,37 @@ Encoding.GetEncoding(@"gb2312").GetString(e.Session.UnOutPakcet(e.InPacket)),
         /// </summary>
         private delegate void AppendAddInButtonDelegate(ButtonItem PlugInButton);
         #endregion
+
+        /// <summary>
+        /// Handles the Click event of the btnRestore control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void btnRestore_Click(object sender, EventArgs e)
+        {
+            this.Show();
+            notifyIcon1.Visible = false;
+        }
+
+        /// <summary>
+        /// Handles the Click event of the btnClose control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        /// <summary>
+        /// Handles the DoubleClick event of the notifyIcon1 control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void notifyIcon1_DoubleClick(object sender, EventArgs e)
+        {
+            btnRestore_Click(sender, e);
+        }
 
     }
 }
