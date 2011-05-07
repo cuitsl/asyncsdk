@@ -351,6 +351,29 @@ namespace eTerm.AsyncSDK.Net {
             return Unpacket(OriginalBytes);
         }
 
+        /// <summary>
+        /// 解包入口数据包.
+        /// </summary>
+        /// <param name="Pakcet">The pakcet.</param>
+        /// <returns></returns>
+        public override byte[] UnInPakcet(eTerm443Packet Pakcet)
+        {
+            //byte[] VPakcet = new byte[Pakcet.OriginalBytes.Length - 2 - 19];
+            //Buffer.BlockCopy(Pakcet.OriginalBytes, 19, VPakcet, 0, VPakcet.Length);
+            //return VPakcet;
+            return UnpackPakcet(Pakcet.OriginalBytes);
+        }
+
+
+        /// <summary>
+        /// 解包出口数据包.
+        /// </summary>
+        /// <param name="Pakcet">The pakcet.</param>
+        /// <returns></returns>
+        public override byte[] UnOutPakcet(eTerm443Packet Pakcet)
+        {
+            return UnpackPakcet(Pakcet.OriginalBytes);
+        }
 
         /// <summary>
         /// Unpackets the specified LPS buf.
@@ -430,28 +453,6 @@ namespace eTerm.AsyncSDK.Net {
         }
         #endregion
 
-
-        /// <summary>
-        /// 解包入口数据包.
-        /// </summary>
-        /// <param name="Pakcet">The pakcet.</param>
-        /// <returns></returns>
-        public override byte[] UnInPakcet(eTerm443Packet Pakcet) {
-            //byte[] VPakcet = new byte[Pakcet.OriginalBytes.Length - 2 - 19];
-            //Buffer.BlockCopy(Pakcet.OriginalBytes, 19, VPakcet, 0, VPakcet.Length);
-            //return VPakcet;
-            return UnpackPakcet(Pakcet.OriginalBytes);
-        }
-
-
-        /// <summary>
-        /// 解包出口数据包.
-        /// </summary>
-        /// <param name="Pakcet">The pakcet.</param>
-        /// <returns></returns>
-        public override byte[] UnOutPakcet(eTerm443Packet Pakcet) {
-            return UnpackPakcet(Pakcet.OriginalBytes);
-        }
 
     }
 }
