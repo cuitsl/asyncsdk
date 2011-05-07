@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIdentity .cs" />
     <Compile Include="Expression.cs" />
     <Compile Include="Expressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
