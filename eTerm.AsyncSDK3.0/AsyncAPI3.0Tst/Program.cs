@@ -29,10 +29,20 @@ namespace AsyncAPI3._0Tst {
                         Console.WriteLine(@"OnAsynConnect.......");
                     }
                 );
+            socket.OnBeginConnect += new EventHandler<AsyncEventArgs<WinSocket>>(
+                    delegate(object sender, AsyncEventArgs<WinSocket> e) {
+                        Console.WriteLine(@"OnBeginConnect.....");
+                    }
+                );
             socket.OnAsyncDisconnect+=new EventHandler<AsyncEventArgs<WinSocket>>(
                     delegate(object sender, AsyncEventArgs<WinSocket> e)
                     {
                         Console.WriteLine(@"OnAsyncDisconnect.......");
+                    }
+                );
+            socket.OnPacketSent += new EventHandler<AsyncEventArgs<eTermApiPacket, eTermApiPacket, WinSocket>>(
+                    delegate(object sender, AsyncEventArgs<eTermApiPacket, eTermApiPacket, WinSocket> e) {
+                        Console.WriteLine(@"OnPacketSent......");
                     }
                 );
             socket.OnReadPacket += new EventHandler<AsyncEventArgs<eTermApiPacket, eTermApiPacket, WinSocket>>(
