@@ -105,6 +105,7 @@ namespace eTerm.ASynClientSDK
         public override void SendPacket(string Packet)
         {
             SendPacket(EnCodeBuffer(Encoding.Default.GetBytes(Packet)));
+            OutPakcet = new eTermApiPacket() { OriginalBytes = Encoding.Default.GetBytes(Packet) };
         }
 
         #region 编码方法

@@ -97,7 +97,7 @@ namespace eTerm.ASynClientSDK.Base {
         /// 指令包.
         /// </summary>
         /// <value>The out pakcet.</value>
-        protected P OutPakcet { get { return this.__outPacket; } }
+        protected P OutPakcet { get { return this.__outPacket; } set { __outPacket = value; } }
 
         /// <summary>
         /// 解包出口数据包.
