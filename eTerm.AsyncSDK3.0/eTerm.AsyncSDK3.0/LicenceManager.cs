@@ -111,8 +111,7 @@ new TimerCallback(
             byte[] buffer;
             LicenceBody=new AsyncLicenceKey();
             try {
-                __serialNumber = GetCpuSN();
-                //string SingleKey = string.Format(@"{0}", __serialNumber);
+                __serialNumber =string.Format(@"{0}{1}", GetCpuSN(),TEACrypter.GetDefaultKey);
                 __identification = Identification;
                 __secreteKey = TEACrypter.MD5(Encoding.Default.GetBytes(__serialNumber));
                 using (FileStream fs = new FileStream(Identification, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) {
