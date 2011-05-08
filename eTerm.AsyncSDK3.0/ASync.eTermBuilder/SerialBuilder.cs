@@ -52,7 +52,7 @@ namespace ASync.eTermBuilder {
         private void btnBuilder_Click(object sender, EventArgs e) {
             try {
                 TEACrypter Crypter = new TEACrypter();
-                byte[] keys = TEACrypter.MD5(Encoding.Default.GetBytes(string.Format(@"{0}{1}", this.txtCode.Text,TEACrypter.GetDefaultKey)));
+                byte[] keys = TEACrypter.MD5(Encoding.Default.GetBytes(string.Format(@"{0}", this.txtCode.Text)));
                 //byte[] Result = Crypter.Encrypt(Encoding.Default.GetBytes(this.txtCode.Text), keys);
 
 
