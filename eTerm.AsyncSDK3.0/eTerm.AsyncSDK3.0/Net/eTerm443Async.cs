@@ -148,6 +148,7 @@ namespace eTerm.AsyncSDK.Net {
         /// <param name="Cmd">The CMD.</param>
         public override void SendPacket(string Cmd) {
             SendPacket(EnCodeBuffer(Encoding.Default.GetBytes(Cmd)));
+            OutPakcet = new eTerm443Packet() { OriginalBytes = Encoding.Default.GetBytes(Cmd) };
         }
         #endregion
 
@@ -361,7 +362,7 @@ namespace eTerm.AsyncSDK.Net {
             //byte[] VPakcet = new byte[Pakcet.OriginalBytes.Length - 2 - 19];
             //Buffer.BlockCopy(Pakcet.OriginalBytes, 19, VPakcet, 0, VPakcet.Length);
             //return VPakcet;
-            return UnpackPakcet(Pakcet.OriginalBytes);
+            return Pakcet.OriginalBytes;
         }
 
 

@@ -826,8 +826,8 @@ namespace eTerm.AsyncSDK {
         private void RateUpdate() {
             lock (this) {
                 ASyncSetup.XmlSerialize(CrypterKey, ASyncSetupFile);
-                LicenceManager.Instance.LicenceBody.RemainingMinutes -= (this.ASyncSetup.StatisticalFrequency ?? 10) / (1000 * 60);
-                LicenceManager.Instance.LicenceBody.XmlSerialize(LicenceManager.Instance.SecreteKey, LicenceManager.Instance.AuthorizationFile);
+                //LicenceManager.Instance.LicenceBody.RemainingMinutes -= (this.ASyncSetup.StatisticalFrequency ?? 10) / (1000 * 60);
+                //LicenceManager.Instance.LicenceBody.XmlSerialize(LicenceManager.Instance.SecreteKey, LicenceManager.Instance.AuthorizationFile);
             }
         }
 
