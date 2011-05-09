@@ -102,38 +102,87 @@ new TimerCallback(
         }
 
 
+
         /// <summary>
         /// Validates the net.
         /// </summary>
         /// <returns></returns>
-        private bool ValidateNet(string Identification) {
+        private bool ValidateNet(string Identification)
+        {
             __flag = true;
             byte[] buffer;
-            StringBuilder sb = new StringBuilder();
-            LicenceBody=new AsyncLicenceKey();
-            try {
+            LicenceBody = new AsyncLicenceKey();
+            byte[] KeyNumbers=Encoding.Default.GetBytes(@"eTermASyncSDK3.0&374028HDHUFORce0908@gmail.com#20859fk27)7361");
+            try
+            {
                 __serialNumber = GetCpuSN();
-                __secreteKey = TEACrypter.MD5(Encoding.Default.GetBytes(__serialNumber));
-                foreach (byte b in new TEACrypter().Encrypt(TEACrypter.MD5(Encoding.Default.GetBytes(__serialNumber)), TEACrypter.GetDefaultKey)) {
-                    sb.Append(String.Format("{0:X}", b).PadLeft(2, '0'));
-                }
-                __secreteKey = TEACrypter.MD5(new TEACrypter().Encrypt(Encoding.Default.GetBytes( sb.ToString()), TEACrypter.GetDefaultKey));
                 //string SingleKey = string.Format(@"{0}", __serialNumber);
                 __identification = Identification;
-                using (FileStream fs = new FileStream(Identification, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) {
+
+                StringBuilder sb = new StringBuilder();
+                foreach (byte SnByte in TEACrypter.MD5(TEACrypter.MD5(Encoding.Default.GetBytes(__serialNumber))))
+                {
+                    sb.Append(String.Format("{0:X}", SnByte).PadLeft(2, '0'));
+                }
+                __serialNumber =sb.ToString();
+
+
+                __secreteKey = TEACrypter.MD5(Encoding.Default.GetBytes(Encrypt(__serialNumber)));
+                using (FileStream fs = new FileStream(Identification, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                {
                     BinaryReader br = new BinaryReader(fs);
                     buffer = new byte[fs.Length];
                     br.Read(buffer, 0, buffer.Length);
-                    LicenceBody = LicenceBody.DeXmlSerialize(__secreteKey, buffer);
+                    LicenceBody = LicenceBody.DeXmlSerialize(KeyNumbers, buffer);
                     __flag = CompareBytes(LicenceBody.Key, __secreteKey);
-                    __flag =__flag&& LicenceBody.ExpireDate >= DateTime.Now;
-                    __flag = __flag || LicenceBody.RemainingMinutes > 0;
+                    __flag = __flag && LicenceBody.ExpireDate >= DateTime.Now;
+                    __flag = __flag && LicenceBody.RemainingMinutes > 0;
                 }
             }
-            catch {
+            catch
+            {
                 __flag = false;
             }
             return __flag;
+        }
+
+        /// <summary>
+        /// Encrypts the specified STR input.
+        /// </summary>
+        /// <param name="strInput">The STR input.</param>
+        /// <returns></returns>
+        private string Encrypt(string strInput)
+        {
+            string strFont, strEnd;
+            string strOutput;
+            char[] charFont;
+            int i, len, intFont;
+
+            len = strInput.Length;
+            //Console.WriteLine(" strInput 's length is :{0} \n", len);
+            strFont = strInput.Remove(len - 1, 1);
+            strEnd = strInput.Remove(0, len - 1);
+
+            //Console.WriteLine(" strFont is : {0} \n" , strFont);                                 
+            //Console.WriteLine(" strEnd is : {0} \n" , strEnd);                                 
+
+            charFont = strFont.ToCharArray();
+            for (i = 0; i < strFont.Length; i++)
+            {
+                intFont = (int)charFont[i] + 3;
+                //Console.WriteLine(" intFont is : {0} \n", intFont);                                 
+
+                charFont[i] = Convert.ToChar(intFont);
+                //Console.WriteLine("charFont[{0}] is : {1}\n", i, charFont[i]);                                 
+            }
+            strFont = ""; //let strFont  null
+            for (i = 0; i < charFont.Length; i++)
+            {
+                strFont += charFont[i];
+            }
+            strOutput = strEnd + strFont;
+            return strOutput;
+
         }
 
         /// <summary>
