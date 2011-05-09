@@ -109,11 +109,17 @@ new TimerCallback(
         private bool ValidateNet(string Identification) {
             __flag = true;
             byte[] buffer;
+            StringBuilder sb = new StringBuilder();
             LicenceBody=new AsyncLicenceKey();
             try {
-                __serialNumber =string.Format(@"{0}{1}", GetCpuSN(),TEACrypter.GetDefaultKey);
-                __identification = Identification;
+                __serialNumber = GetCpuSN();
                 __secreteKey = TEACrypter.MD5(Encoding.Default.GetBytes(__serialNumber));
+                foreach (byte b in new TEACrypter().Encrypt(TEACrypter.MD5(Encoding.Default.GetBytes(__serialNumber)), TEACrypter.GetDefaultKey)) {
+                    sb.Append(String.Format("{0:X}", b).PadLeft(2, '0'));
+                }
+                __secreteKey = TEACrypter.MD5(new TEACrypter().Encrypt(Encoding.Default.GetBytes( sb.ToString()), TEACrypter.GetDefaultKey));
+                //string SingleKey = string.Format(@"{0}", __serialNumber);
+                __identification = Identification;
                 using (FileStream fs = new FileStream(Identification, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) {
                     BinaryReader br = new BinaryReader(fs);
                     buffer = new byte[fs.Length];
