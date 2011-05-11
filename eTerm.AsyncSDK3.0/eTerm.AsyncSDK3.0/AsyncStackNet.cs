@@ -825,9 +825,12 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         private void RateUpdate() {
             lock (this) {
+                byte[] KeyNumbers = Encoding.Default.GetBytes(@"eTermASyncSDK3.0&374028HDHUFORce0908@gmail.com#20859fk27)7361");
                 ASyncSetup.XmlSerialize(CrypterKey, ASyncSetupFile);
-                //LicenceManager.Instance.LicenceBody.RemainingMinutes -= (this.ASyncSetup.StatisticalFrequency ?? 10) / (1000 * 60);
-                //LicenceManager.Instance.LicenceBody.XmlSerialize(LicenceManager.Instance.SecreteKey, LicenceManager.Instance.AuthorizationFile);
+                LicenceManager.Instance.LicenceBody.RemainingMinutes -= (this.ASyncSetup.StatisticalFrequency ?? 10) / (1000 * 60);
+                LicenceManager.Instance.LicenceBody.XmlSerialize(KeyNumbers, LicenceManager.Instance.AuthorizationFile);
+                if (LicenceManager.Instance.LicenceBody.RemainingMinutes <= 0 && OnSDKTimeout != null)
+                    OnSDKTimeout(this, new ErrorEventArgs(new TimeZoneNotFoundException(@"系统授权已到期，如需继续使用请从开发商获取新授权")));
             }
         }
 
