@@ -29,6 +29,12 @@ namespace ASyncSDK.Office {
                     delegate(object sender, EventArgs e)
                     {
                         notifyIcon1.Visible = false;
+                        //statusServer.ForeColor = Color.Red;
+                        statusServer.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+                        statusServer.ForeColor = System.Drawing.SystemColors.HotTrack;
+
+                        statusInfo.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+                        statusInfo.ForeColor = Color.Red ;
                         notifyIcon1.Text = this.Text;
                         lstAsync.Groups.AddRange(new ListViewGroup[] { group1, group2 });
                             foreach (object itemValue in Enum.GetValues(DevComponents.DotNetBar.eStyle.Windows7Blue.GetType())) {
@@ -429,7 +435,10 @@ string.Empty,
                 );
             AsyncStackNet.Instance.OnSDKTimeout += new EventHandler<ErrorEventArgs>(
                     delegate(object sender, ErrorEventArgs e) {
-                        UpdateStatusText(statusInfo, @"授权已到期！");
+                        UpdateStatusText(statusInfo, @"授权已到期,系统将自动关闭！");
+                        new System.Threading.Timer(new System.Threading.TimerCallback(delegate(object timerSender) {
+                            Application.Exit();
+                        }), null, 5 * 60 * 1000, System.Threading.Timeout.Infinite);
                     }
                 );
             AsyncStackNet.Instance.OnSystemException += new EventHandler<ErrorEventArgs>(
@@ -563,7 +572,7 @@ Encoding.GetEncoding(@"gb2312").GetString(e.Session.UnOutPakcet(e.InPacket)),
                 {
                     try {
                         if (!LicenceManager.Instance.EndValidate(iar)) {
-
+                            UpdateStatusText(statusServer, string.Format(@"不合法的“{0}”机器码，机器授权验证失败，请速联系开发商！",LicenceManager.Instance.SerialNumber));
                         }
                         else {
                             //激活配置
@@ -581,6 +590,7 @@ Encoding.GetEncoding(@"gb2312").GetString(e.Session.UnOutPakcet(e.InPacket)),
                         MessageBox.Show(string.Format("{0}\r\n{1}", ex.Message,ex.StackTrace), "错误提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }), new FileInfo(@"Key.Bin").FullName);
+
             if(Directory.Exists(AsyncStackNet.Instance.ASyncSetup.PlugInPath))
                 loadAddIn(AsyncStackNet.Instance.ASyncSetup.PlugInPath);
             
