@@ -92,8 +92,8 @@ namespace ASyncSDK.Office
         {
             if (!(AsyncStackNet.Instance.ASyncSetup.AllowLog??false)) return;
             DbCommand sqliteCommand = __sqliteDb.GetSqlStringCommand(string.Format(@"
-    INSERT INTO {0}([TSession],[TASync],[TargetIp],[TInPacket],[TOutPacket],[TLogDate]) 
-                    VALUES(?,?,?,?,?,?)
+    INSERT INTO {0}([TSession],[TASync],[TargetIp],[TInPacket],[TOutPacket],[TLogDate],[IsProcess]) 
+                    VALUES(?,?,?,?,?,?,?)
 ", this.__CurrentTable));
             __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.String, TSession);
             __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.String, TASync);
@@ -101,6 +101,7 @@ namespace ASyncSDK.Office
             __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.Binary, TInPacket);
             __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.Binary, TOutPacket);
             __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.DateTime, DateTime.Now);
+            __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.Boolean, false);
             sqliteCommand.ExecuteNonQuery();
         }
         #endregion
@@ -131,7 +132,8 @@ CREATE TABLE [SQLiteLog{0}] (
     [TargetIp] NVARCHAR(50)  NOT NULL,
     [TInPacket]  BLOB   NULL,
     [TOutPacket]  BLOB   NULL,
-    [TLogDate] DATE  NOT NULL
+    [TLogDate] DATETIME  NOT NULL,
+    [IsProcess] BOOLEAN NULL
 );
 
 CREATE INDEX [IDX_SQLiteLog{0}_] ON [SQLiteLog{0}](
