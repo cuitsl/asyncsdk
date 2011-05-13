@@ -98,8 +98,8 @@ namespace ASyncSDK.Office
             __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.String, TSession);
             __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.String, TASync);
             __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.String, TSessionIp);
-            __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.Binary, TInPacket);
-            __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.Binary, TOutPacket);
+            __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.String,Encoding.GetEncoding("gb2312").GetString( TInPacket));
+            __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.String, Encoding.GetEncoding("gb2312").GetString( TOutPacket));
             __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.DateTime, DateTime.Now);
             __sqliteDb.AddInParameter(sqliteCommand, System.Data.DbType.Boolean, false);
             sqliteCommand.ExecuteNonQuery();
@@ -130,8 +130,8 @@ CREATE TABLE [SQLiteLog{0}] (
     [TSession] NVARCHAR(50)  NOT NULL,
     [TASync]    NVARCHAR(50)  NOT NULL,
     [TargetIp] NVARCHAR(50)  NOT NULL,
-    [TInPacket]  BLOB   NULL,
-    [TOutPacket]  BLOB   NULL,
+    [TInPacket]  NVARCHAR(255)   NULL,
+    [TOutPacket]  NVARCHAR(2048)   NULL,
     [TLogDate] DATETIME  NOT NULL,
     [IsProcess] BOOLEAN NULL
 );
