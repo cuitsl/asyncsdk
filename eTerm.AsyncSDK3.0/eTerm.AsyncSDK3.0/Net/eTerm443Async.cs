@@ -148,7 +148,7 @@ namespace eTerm.AsyncSDK.Net {
         /// <param name="Cmd">The CMD.</param>
         public override void SendPacket(string Cmd) {
             SendPacket(EnCodeBuffer(Encoding.Default.GetBytes(Cmd)));
-            OutPakcet = new eTerm443Packet() { OriginalBytes = Encoding.Default.GetBytes(Cmd) };
+            //OutPakcet = new eTerm443Packet() { OriginalBytes = Encoding.Default.GetBytes(Cmd) };
         }
         #endregion
 
