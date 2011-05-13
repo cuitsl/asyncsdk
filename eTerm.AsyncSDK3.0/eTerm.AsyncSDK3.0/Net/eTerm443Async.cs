@@ -362,7 +362,7 @@ namespace eTerm.AsyncSDK.Net {
             //byte[] VPakcet = new byte[Pakcet.OriginalBytes.Length - 2 - 19];
             //Buffer.BlockCopy(Pakcet.OriginalBytes, 19, VPakcet, 0, VPakcet.Length);
             //return VPakcet;
-            return Pakcet.OriginalBytes;
+            return Unpacket(Pakcet.OriginalBytes);
         }
 
 
