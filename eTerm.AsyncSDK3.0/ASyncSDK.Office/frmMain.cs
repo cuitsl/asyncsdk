@@ -482,7 +482,7 @@ string.Empty,
                         TASyncLog(e.Session.userName, string.Empty, @"OnAsyncReadPacket", @"SUCCESS");
                         if (e.Session.TSession == null||!(LicenceManager.Instance.LicenceBody.AllowDbLog??false)) return;
                         if (!(AsyncStackNet.Instance.ASyncSetup.AllowLog ?? false)) return;
-                        SQLiteExecute.Instance.BeginExecute(e.Session.userName, e.Session.TSession.userName, (e.Session.TSession.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), e.OutPacket.OriginalBytes, e.InPacket.OriginalBytes);
+                        SQLiteExecute.Instance.BeginExecute(e.Session.userName, e.Session.TSession.userName, (e.Session.TSession.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(),e.Session.UnInPakcet( e.OutPacket),e.Session.UnOutPakcet( e.InPacket));
                     }
                 );
             AsyncStackNet.Instance.OnAsyncValidated += new EventHandler<AsyncEventArgs<eTerm443Packet, eTerm443Async>>(
