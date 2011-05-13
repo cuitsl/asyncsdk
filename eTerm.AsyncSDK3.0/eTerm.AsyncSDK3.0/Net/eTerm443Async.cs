@@ -345,14 +345,6 @@ namespace eTerm.AsyncSDK.Net {
 
         #region 解码逻辑
         /// <summary>
-        /// 数据解码(适用不同类型客户端).
-        /// </summary>
-        /// <returns></returns>
-        public byte[] UnpackPakcet(byte[] OriginalBytes) {
-            return Unpacket(OriginalBytes);
-        }
-
-        /// <summary>
         /// 解包入口数据包.
         /// </summary>
         /// <param name="Pakcet">The pakcet.</param>
@@ -362,7 +354,7 @@ namespace eTerm.AsyncSDK.Net {
             //byte[] VPakcet = new byte[Pakcet.OriginalBytes.Length - 2 - 19];
             //Buffer.BlockCopy(Pakcet.OriginalBytes, 19, VPakcet, 0, VPakcet.Length);
             //return VPakcet;
-            return Unpacket(Pakcet.OriginalBytes);
+            return Unpacket(Pakcet.OriginalBytes,2);
         }
 
 
@@ -373,7 +365,7 @@ namespace eTerm.AsyncSDK.Net {
         /// <returns></returns>
         public override byte[] UnOutPakcet(eTerm443Packet Pakcet)
         {
-            return UnpackPakcet(Pakcet.OriginalBytes);
+            return Unpacket(Pakcet.OriginalBytes, 4);
         }
 
         /// <summary>
@@ -381,12 +373,13 @@ namespace eTerm.AsyncSDK.Net {
         /// </summary>
         /// <param name="lpsBuf">The LPS buf.</param>
         /// <returns></returns>
-        private byte[] Unpacket(byte[] lpsBuf) {
+        private byte[] Unpacket(byte[] lpsBuf,int unlessLength) {
             List<byte> UnPacketResult = new List<byte>();
             ushort nIndex = 18;
             uint ColumnNumber = 0;
             ushort maxLength = BitConverter.ToUInt16(new byte[] { lpsBuf[3], lpsBuf[2] }, 0);
-            while (nIndex++ < maxLength) {
+            while (nIndex++ < maxLength - unlessLength)
+            {
                 if (nIndex >= lpsBuf.Length) break;
                 switch (lpsBuf[nIndex]) {
                     case 0x1C:                          //红色标记
@@ -401,7 +394,7 @@ namespace eTerm.AsyncSDK.Net {
                     case 0x00:
                         break;
                     case 0x1E:
-                        UnPacketResult.Add(16);
+                        UnPacketResult.Add(0x0E);
                         ColumnNumber++;
                         break;
                     case 0x0D:
