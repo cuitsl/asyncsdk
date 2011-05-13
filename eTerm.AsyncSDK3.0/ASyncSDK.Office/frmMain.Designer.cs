@@ -957,7 +957,6 @@
             // 
             this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Visible = true;
             this.notifyIcon1.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
             // 
             // contextMenuStrip1
@@ -967,28 +966,28 @@
             this.toolStripMenuItem1,
             this.btnClose});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(154, 54);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(155, 54);
             // 
             // btnRestore
             // 
             this.btnRestore.Image = global::ASyncSDK.Office.Properties.Resources.Shield_Blue;
             this.btnRestore.Name = "btnRestore";
             this.btnRestore.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.btnRestore.Size = new System.Drawing.Size(153, 22);
+            this.btnRestore.Size = new System.Drawing.Size(154, 22);
             this.btnRestore.Text = "恢复(&R)";
             this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(150, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(151, 6);
             // 
             // btnClose
             // 
             this.btnClose.Image = global::ASyncSDK.Office.Properties.Resources.Power__Yellow;
             this.btnClose.Name = "btnClose";
             this.btnClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.btnClose.Size = new System.Drawing.Size(153, 22);
+            this.btnClose.Size = new System.Drawing.Size(154, 22);
             this.btnClose.Text = "退出(&E)";
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
