@@ -12,7 +12,8 @@ using System.Transactions;
 using ASyncSDK.Office;
 using System.Data;
 using System.Data.Common;
-using eTerm.ASynClientSDK;
+using eTerm.AsyncSDK;
+
 
 
 
@@ -23,64 +24,43 @@ namespace AsyncAPI3._0Tst {
 
 
 
-        static WinSocket socket = new WinSocket(@"guzm", @"guzm", @"BAD494E84A25D8BCA163CD3FB8DC4511");
-        //static WinSocket socket = new WinSocket(@"guzm", @"guzm", @"92666505CE75444EE14BE2EBC2F10A60");
         static void Main(string[] args)
         {
-            EBTEtermService service = new EBTEtermService();
-            service.GetRtResult("HTQF6M");
-            /*
-            socket.OnAsynConnect += new EventHandler<AsyncEventArgs<WinSocket>>(
-                    delegate(object sender, AsyncEventArgs<WinSocket> e) {
-                        Console.WriteLine(@"OnAsynConnect.......");
-                    }
-                );
-            socket.OnBeginConnect += new EventHandler<AsyncEventArgs<WinSocket>>(
-                    delegate(object sender, AsyncEventArgs<WinSocket> e) {
-                        Console.WriteLine(@"OnBeginConnect.....");
-                    }
-                );
-            socket.OnAsyncDisconnect+=new EventHandler<AsyncEventArgs<WinSocket>>(
-                    delegate(object sender, AsyncEventArgs<WinSocket> e)
-                    {
-                        Console.WriteLine(@"OnAsyncDisconnect.......");
-                    }
-                );
-            socket.OnPacketSent += new EventHandler<AsyncEventArgs<eTermApiPacket, eTermApiPacket, WinSocket>>(
-                    delegate(object sender, AsyncEventArgs<eTermApiPacket, eTermApiPacket, WinSocket> e) {
-                        Console.WriteLine(@"OnPacketSent......");
-                    }
-                );
-            socket.OnReadPacket += new EventHandler<AsyncEventArgs<eTermApiPacket, eTermApiPacket, WinSocket>>(
-                    delegate(object sender, AsyncEventArgs<eTermApiPacket, eTermApiPacket, WinSocket> e)
-                    {
 
-                        #region 判断做下一条指令
-                        if (Regex.IsMatch(@"\+", Encoding.GetEncoding(@"gb2312").GetString(e.InPacket.OriginalBytes), RegexOptions.IgnoreCase| RegexOptions.Multiline))
-                            e.Session.SendPacket(@"PN");
-                        #endregion
-                        Console.WriteLine(string.Format(@"OnReadPacket.......
-{2}
-{0}
-[{1}]",Encoding.GetEncoding(@"gb2312").GetString( e.InPacket.OriginalBytes),e.InPacket.Sequence,Encoding.GetEncoding(@"gb2312").GetString(e.OutPacket.OriginalBytes)));
-                    }
-                );
-            socket.OnValidated += new EventHandler(
-                    delegate(object sender, EventArgs e) {
-                        Console.WriteLine(@"OnValidated.......");
-                    }
-                );
-            socket.Connect(@"asyncsdk.gicp.net", 350);
-            //socket.Connect(@"127.0.0.1", 350);
-            while (true)
-            {
-                string cmd = Console.ReadLine();
-                if (cmd.ToLower().Trim() == "exit") break;
-                socket.SendPacket(cmd);
-            }
-            */
+            FtpClient myFtp = new FtpClient(@"127.0.0.1", @"", @"");
+            myFtp.Login();
+            string[] files = myFtp.GetFileList();
+            myFtp.Download(files[0], string.Format(@"C:\{0}", files[0]));
+            //myFtp.BeginGetFileList(new AsyncCallback(delegate(IAsyncResult iar) {
+            //    foreach (string key in (iar.AsyncState as eTerm.AsyncSDK.FtpClient.GetFileListCallback).EndInvoke(iar)) {
+            //        myFtp.BeginDownload(key, new AsyncCallback(delegate(IAsyncResult iar1) {
+            //            Console.WriteLine(@"Download        {0}", key);
+            //        }));
+            //    }
+            //    iar.AsyncWaitHandle.Close();
+            //}));
+
             Console.ReadLine();
 
+        }
+
+        private delegate int MyMethod();
+        private int method()
+        {
+            Thread.Sleep(10000);
+            return 100;
+        }
+        private void MethodCompleted(IAsyncResult asyncResult)
+        {
+            if (asyncResult == null) return;
+            //textBox1.Text = (asyncResult.AsyncState as MyMethod).EndInvoke(asyncResult).ToString();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            MyMethod my = method;
+            IAsyncResult asyncResult = my.BeginInvoke(MethodCompleted, my);
         }
 
 
