@@ -945,23 +945,23 @@ namespace eTerm.AsyncSDK
 			CloseCallback ftpCallback = new CloseCallback( this.Close);
 			return ftpCallback.BeginInvoke(callback, null);
 		}
-		private delegate String[] GetFileListCallback();
+		public delegate String[] GetFileListCallback();
 		public System.IAsyncResult BeginGetFileList(  System.AsyncCallback callback )
 		{
 			GetFileListCallback ftpCallback = new GetFileListCallback( this.GetFileList);
-			return ftpCallback.BeginInvoke(callback, null);
+            return ftpCallback.BeginInvoke(callback, ftpCallback);
 		}
-		private delegate String[] GetFileListMaskCallback(String mask);
+		public delegate String[] GetFileListMaskCallback(String mask);
 		public System.IAsyncResult BeginGetFileList( String mask, System.AsyncCallback callback )
 		{
 			GetFileListMaskCallback ftpCallback = new GetFileListMaskCallback(this.GetFileList);
-			return ftpCallback.BeginInvoke(mask, callback, null);
+            return ftpCallback.BeginInvoke(mask, callback, ftpCallback);
 		}
-		private delegate Int64 GetFileSizeCallback(String fileName);
+		public delegate Int64 GetFileSizeCallback(String fileName);
 		public System.IAsyncResult BeginGetFileSize( String fileName, System.AsyncCallback callback )
 		{
 			GetFileSizeCallback ftpCallback = new GetFileSizeCallback(this.GetFileSize);
-			return ftpCallback.BeginInvoke(fileName, callback, null);
+            return ftpCallback.BeginInvoke(fileName, callback, ftpCallback);
 		}
 		private delegate void DownloadCallback(String remFileName);
 		public System.IAsyncResult BeginDownload( String remFileName, System.AsyncCallback callback )
@@ -987,19 +987,19 @@ namespace eTerm.AsyncSDK
 			DownloadFileNameFileNameResumeCallback ftpCallback = new DownloadFileNameFileNameResumeCallback(this.Download);
 			return ftpCallback.BeginInvoke(remFileName, locFileName, resume, callback, null);
 		}
-		private delegate void UploadCallback(String fileName);
+		public delegate void UploadCallback(String fileName);
 		public System.IAsyncResult BeginUpload( String fileName, System.AsyncCallback callback )
 		{
 			UploadCallback ftpCallback = new UploadCallback(this.Upload);
 			return ftpCallback.BeginInvoke(fileName, callback, null);
 		}
-		private delegate void UploadFileNameResumeCallback(String fileName,Boolean resume);
+		public delegate void UploadFileNameResumeCallback(String fileName,Boolean resume);
 		public System.IAsyncResult BeginUpload( String fileName,Boolean resume, System.AsyncCallback callback )
 		{
 			UploadFileNameResumeCallback ftpCallback = new UploadFileNameResumeCallback(this.Upload);
 			return ftpCallback.BeginInvoke(fileName, resume, callback, null);
 		}
-		private delegate void UploadDirectoryCallback(String path,Boolean recurse);
+		public delegate void UploadDirectoryCallback(String path,Boolean recurse);
 		public System.IAsyncResult BeginUploadDirectory( String path,Boolean recurse, System.AsyncCallback callback )
 		{
 			UploadDirectoryCallback ftpCallback = new UploadDirectoryCallback(this.UploadDirectory);
