@@ -398,6 +398,7 @@ namespace eTerm.ASynClientSDK {
         /// <returns></returns>
         protected virtual string createBookAirSeg() {
             StringBuilder sb = new StringBuilder();
+            string LastDestination = string.Empty;
             foreach (BookAirSeg airSeg in this.__airSegList) {
                 sb.AppendFormat("SS:{0} {1} {2} {3}{4} {5}{6}\r"
                     , airSeg.getairNo
@@ -408,6 +409,9 @@ namespace eTerm.ASynClientSDK {
                     ,string.IsNullOrEmpty( airSeg.getactionCode)?"NN":airSeg.getactionCode
                     ,this.gettktNum
                     );
+                if (!string.IsNullOrEmpty(LastDestination) && !airSeg.getorgCity.Equals(LastDestination))
+                    sb.AppendFormat(@"SA:{0}{1}", LastDestination, airSeg.getorgCity);
+                LastDestination = airSeg.getdesCity;
             }
             return sb.ToString();
         }
