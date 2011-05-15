@@ -410,7 +410,7 @@ namespace eTerm.ASynClientSDK {
                     ,this.gettktNum
                     );
                 if (!string.IsNullOrEmpty(LastDestination) && !airSeg.getorgCity.Equals(LastDestination))
-                    sb.AppendFormat(@"SA:{0}{1}", LastDestination, airSeg.getorgCity);
+                    sb.AppendFormat("SA:{0}{1}\r", LastDestination, airSeg.getorgCity);
                 LastDestination = airSeg.getdesCity;
             }
             return sb.ToString();
