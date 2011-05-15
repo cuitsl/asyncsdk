@@ -60,6 +60,7 @@ namespace eTerm.AsyncSDK
 		public FtpClient()
 		{
 		}
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -69,7 +70,7 @@ namespace eTerm.AsyncSDK
 		public FtpClient(string server, string username, string password)
 		{
 			this.server = server;
-			this.username = username;
+            this.username = string.IsNullOrEmpty(username) ? @"anonymous" : username;
 			this.password = password;
 		}
 		/// <summary>
@@ -83,8 +84,8 @@ namespace eTerm.AsyncSDK
 		public FtpClient(string server, string username, string password, int timeoutSeconds, int port)
 		{
 			this.server = server;
-			this.username = username;
-			this.password = password;
+            this.username = string.IsNullOrEmpty(username) ? @"anonymous" : username;
+            this.password = password;
 			this.timeoutSeconds = timeoutSeconds;
 			this.port = port;
 		}
