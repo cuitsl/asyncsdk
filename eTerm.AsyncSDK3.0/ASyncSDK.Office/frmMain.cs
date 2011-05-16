@@ -122,11 +122,11 @@ namespace ASyncSDK.Office {
                         UpdateStatusText(stripSvrUpdate, string.Format(@"更新{0}异常：{1}",element.Value, ex.Message));
                     }
                 }
-                UpdateStatusText(stripSvrUpdate, string.Format(@"版本更新完成，5秒钟后将重启服务端！", @""));
-                new System.Threading.Timer(delegate {
-                    Application.Exit();
-                    Application.Restart();
-                },null, 5000, 0);
+                UpdateStatusText(stripSvrUpdate, string.Format(@"文件更新完成，下次重启服务后将生效！", @""));
+                //new System.Threading.Timer(delegate {
+                //    Application.Exit();
+                //    Application.Restart();
+                //},null, 5000, 0);
                 SvrFtp.Close();
             }
             catch(Exception ex) {
@@ -549,14 +549,14 @@ string.Empty,
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
                         UpdateStatusText(lableLocalIp, string.Format(@"本机IP：{0}", (e.Session.AsyncSocket.LocalEndPoint as IPEndPoint).Address.ToString()));
-                        UpdateStatusText(statusInfo, string.Format(@"与中心服务器{{{0}:{1}}}连接已连接！", AsyncStackNet.Instance.ASyncSetup.CoreServer, AsyncStackNet.Instance.ASyncSetup.CoreServerPort));
+                        UpdateStatusText(statusInfo, string.Format(@"中心服务器连接成功！", AsyncStackNet.Instance.ASyncSetup.CoreServer, AsyncStackNet.Instance.ASyncSetup.CoreServerPort));
                     }
                 );
 
             AsyncStackNet.Instance.OnCoreDisconnect += new EventHandler<AsyncEventArgs<eTerm443Async>>(
                     delegate(object sender, AsyncEventArgs<eTerm443Async> e)
                     {
-                        UpdateStatusText(statusInfo, string.Format(@"与中心服务器{{{0}:{1}}}连接已经断开！", AsyncStackNet.Instance.ASyncSetup.CoreServer, AsyncStackNet.Instance.ASyncSetup.CoreServerPort));
+                        UpdateStatusText(statusInfo, string.Format(@"中心服务器连接已断开！", AsyncStackNet.Instance.ASyncSetup.CoreServer, AsyncStackNet.Instance.ASyncSetup.CoreServerPort));
                     }
                 );
             AsyncStackNet.Instance.OnSDKTimeout += new EventHandler<ErrorEventArgs>(
@@ -703,7 +703,7 @@ Encoding.GetEncoding(@"gb2312").GetString(e.Session.UnOutPakcet(e.InPacket)),
                         else {
                             //激活配置
                             AsyncStackNet.Instance.BeginAsync();
-                            UpdateStatusText(statusServer, string.Format(@"中心服务器为{{{0}:{1}}}", AsyncStackNet.Instance.ASyncSetup.CoreServer, AsyncStackNet.Instance.ASyncSetup.CoreServerPort));
+                            //UpdateStatusText(statusServer, string.Format(@"中心服务器为{{{0}:{1}}}", AsyncStackNet.Instance.ASyncSetup.CoreServer, AsyncStackNet.Instance.ASyncSetup.CoreServerPort));
                             if ((AsyncStackNet.Instance.ASyncSetup.AllowPlugIn ?? false)) {
                                 AsyncStackNet.Instance.BeginReflectorPlugIn(new AsyncCallback(delegate(IAsyncResult iar1)
                                 {
