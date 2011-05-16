@@ -74,9 +74,11 @@
   <ItemGroup>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="frmSender.cs">
       <SubType>Form</SubType>
@@ -88,6 +90,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSender.resx">
       <DependentUpon>frmSender.cs</DependentUpon>
@@ -252,7 +255,7 @@
   <ItemGroup>
     <Content Include="Direct Connect XP.ico" />
     <Content Include="Version.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\Flag2_Green.png" />
   </ItemGroup>
