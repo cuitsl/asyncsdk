@@ -1000,7 +1000,7 @@
             this.pbSvrUpdate.Name = "pbSvrUpdate";
             this.pbSvrUpdate.Size = new System.Drawing.Size(100, 16);
             this.pbSvrUpdate.Step = 1;
-            this.pbSvrUpdate.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.pbSvrUpdate.Style = System.Windows.Forms.ProgressBarStyle.Blocks;
             this.pbSvrUpdate.ToolTipText = "文件更新中......";
             // 
             // stripSvrUpdate
