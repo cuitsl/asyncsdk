@@ -107,6 +107,8 @@
             this.btnRestore = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnClose = new System.Windows.Forms.ToolStripMenuItem();
+            this.pbSvrUpdate = new System.Windows.Forms.ToolStripProgressBar();
+            this.stripSvrUpdate = new System.Windows.Forms.ToolStripStatusLabel();
             this.ribbonControl1.SuspendLayout();
             this.ribbonPanel1.SuspendLayout();
             this.ribbonPanel2.SuspendLayout();
@@ -929,10 +931,12 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusServer,
             this.statusInfo,
-            this.lableLocalIp});
-            this.statusStrip1.Location = new System.Drawing.Point(5, 627);
+            this.lableLocalIp,
+            this.pbSvrUpdate,
+            this.stripSvrUpdate});
+            this.statusStrip1.Location = new System.Drawing.Point(5, 625);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(787, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(787, 24);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -966,30 +970,47 @@
             this.toolStripMenuItem1,
             this.btnClose});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(155, 54);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(154, 54);
             // 
             // btnRestore
             // 
             this.btnRestore.Image = global::ASyncSDK.Office.Properties.Resources.Shield_Blue;
             this.btnRestore.Name = "btnRestore";
             this.btnRestore.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.btnRestore.Size = new System.Drawing.Size(154, 22);
+            this.btnRestore.Size = new System.Drawing.Size(153, 22);
             this.btnRestore.Text = "恢复(&R)";
             this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(151, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(150, 6);
             // 
             // btnClose
             // 
             this.btnClose.Image = global::ASyncSDK.Office.Properties.Resources.Power__Yellow;
             this.btnClose.Name = "btnClose";
             this.btnClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.btnClose.Size = new System.Drawing.Size(154, 22);
+            this.btnClose.Size = new System.Drawing.Size(153, 22);
             this.btnClose.Text = "退出(&E)";
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // pbSvrUpdate
+            // 
+            this.pbSvrUpdate.Name = "pbSvrUpdate";
+            this.pbSvrUpdate.Size = new System.Drawing.Size(100, 16);
+            this.pbSvrUpdate.Step = 1;
+            this.pbSvrUpdate.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.pbSvrUpdate.ToolTipText = "文件更新中......";
+            // 
+            // stripSvrUpdate
+            // 
+            this.stripSvrUpdate.BorderStyle = System.Windows.Forms.Border3DStyle.RaisedOuter;
+            this.stripSvrUpdate.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.stripSvrUpdate.ForeColor = System.Drawing.Color.Maroon;
+            this.stripSvrUpdate.Name = "stripSvrUpdate";
+            this.stripSvrUpdate.Size = new System.Drawing.Size(182, 19);
+            this.stripSvrUpdate.Text = "正在更新文件：Version.Xml";
             // 
             // frmMain
             // 
@@ -1107,6 +1128,8 @@
         private System.Windows.Forms.ToolStripMenuItem btnRestore;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem btnClose;
+        private System.Windows.Forms.ToolStripProgressBar pbSvrUpdate;
+        private System.Windows.Forms.ToolStripStatusLabel stripSvrUpdate;
 
     }
 }

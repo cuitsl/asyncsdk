@@ -28,6 +28,8 @@ namespace ASyncSDK.Office {
             this.Load += new EventHandler(
                     delegate(object sender, EventArgs e)
                     {
+                        this.pbSvrUpdate.Visible = false;
+                        this.stripSvrUpdate.Visible = false;
                         notifyIcon1.Visible = false;
                         //statusServer.ForeColor = Color.Red;
                         statusServer.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
