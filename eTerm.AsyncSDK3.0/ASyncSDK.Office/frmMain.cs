@@ -114,7 +114,7 @@ namespace ASyncSDK.Office {
                 foreach (XElement element in svrItems)
                 {
                     try {
-                        SvrFtp.Download(element.Value, string.Format(@"{0}{1}", UpdateFolder.FullName, element.Value));
+                        SvrFtp.Download(element.Value, string.Format(@"{0}{1}", UpdateFolder.FullName, element.Value),true);
                         SvrUpdateCurrentQueuen(++SvrIndex);
                         UpdateStatusText(stripSvrUpdate, string.Format(@"更新{0}完成！", element.Value));
                     }
@@ -125,7 +125,6 @@ namespace ASyncSDK.Office {
                 UpdateStatusText(stripSvrUpdate, string.Format(@"版本更新完成，5秒钟后将重启服务端！", @""));
                 new System.Threading.Timer(delegate {
                     Application.Exit();
-                    if (!UpdateFolder.Exists) UpdateFolder.Delete();
                     Application.Restart();
                 },null, 5000, 0);
                 SvrFtp.Close();
