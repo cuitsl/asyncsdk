@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using ASync.MiddleWare;
 using eTerm.AsyncSDK;
 using System.IO;
+using eTerm.AsyncSDK.Util;
 
 namespace ASync.eTermAddIn {
     public partial class ASyncAuthorize : BaseAddIn {
@@ -28,6 +29,10 @@ namespace ASync.eTermAddIn {
                         this.txtCode.Text = LicenceManager.Instance.SerialNumber;
                         this.txtRemainMinutes.Value = LicenceManager.Instance.LicenceBody.RemainingMinutes;
                         this.checkBoxX1.Checked = LicenceManager.Instance.LicenceBody.AllowDbLog ?? false;
+                        foreach (byte c in TEACrypter.MD5(Encoding.Default.GetBytes(LicenceManager.Instance.LicenceBody.Company))) {
+                            this.flowLayoutPanel1.Controls.Add(new TextBox() { Width = 20, Text = String.Format("{0:X}", c).PadLeft(2,'0') });
+                        }
+                        //this.txtSDKey.Text = Encoding.Default.GetString(TEACrypter.MD5(Encoding.Default.GetBytes(LicenceManager.Instance.LicenceBody.Company)));
                     }
                 );
         }

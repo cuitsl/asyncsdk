@@ -31,9 +31,11 @@
             this.labelX9 = new DevComponents.DotNetBar.LabelX();
             this.txtCode = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX8 = new DevComponents.DotNetBar.LabelX();
+            this.checkBoxX1 = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.chkOpenDb = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.txtMaxSession = new DevComponents.Editors.IntegerInput();
             this.txtMaxASync = new DevComponents.Editors.IntegerInput();
+            this.labelX7 = new DevComponents.DotNetBar.LabelX();
             this.labelX6 = new DevComponents.DotNetBar.LabelX();
             this.labelX5 = new DevComponents.DotNetBar.LabelX();
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
@@ -46,8 +48,8 @@
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.tabItem1 = new DevComponents.DotNetBar.TabItem(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.labelX7 = new DevComponents.DotNetBar.LabelX();
-            this.checkBoxX1 = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.labelX11 = new DevComponents.DotNetBar.LabelX();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabControlPanel1.SuspendLayout();
@@ -66,7 +68,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedTabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.tabControl1.SelectedTabIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(554, 340);
+            this.tabControl1.Size = new System.Drawing.Size(554, 374);
             this.tabControl1.Style = DevComponents.DotNetBar.eTabStripStyle.Office2007Document;
             this.tabControl1.TabIndex = 0;
             this.tabControl1.TabLayoutType = DevComponents.DotNetBar.eTabLayoutType.FixedWithNavigationBox;
@@ -75,6 +77,7 @@
             // 
             // tabControlPanel1
             // 
+            this.tabControlPanel1.Controls.Add(this.flowLayoutPanel1);
             this.tabControlPanel1.Controls.Add(this.labelX10);
             this.tabControlPanel1.Controls.Add(this.txtRemainMinutes);
             this.tabControlPanel1.Controls.Add(this.labelX9);
@@ -90,6 +93,7 @@
             this.tabControlPanel1.Controls.Add(this.labelX4);
             this.tabControlPanel1.Controls.Add(this.txtExpire);
             this.tabControlPanel1.Controls.Add(this.labelX3);
+            this.tabControlPanel1.Controls.Add(this.labelX11);
             this.tabControlPanel1.Controls.Add(this.txtCompany);
             this.tabControlPanel1.Controls.Add(this.labelX2);
             this.tabControlPanel1.Controls.Add(this.buttonX1);
@@ -99,7 +103,7 @@
             this.tabControlPanel1.Location = new System.Drawing.Point(0, 23);
             this.tabControlPanel1.Name = "tabControlPanel1";
             this.tabControlPanel1.Padding = new System.Windows.Forms.Padding(1);
-            this.tabControlPanel1.Size = new System.Drawing.Size(554, 317);
+            this.tabControlPanel1.Size = new System.Drawing.Size(554, 351);
             this.tabControlPanel1.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(253)))), ((int)(((byte)(254)))));
             this.tabControlPanel1.Style.BackColor2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(188)))), ((int)(((byte)(227)))));
             this.tabControlPanel1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -189,6 +193,21 @@
             this.labelX8.TabIndex = 15;
             this.labelX8.Text = "机器码：";
             // 
+            // checkBoxX1
+            // 
+            // 
+            // 
+            // 
+            this.checkBoxX1.BackgroundStyle.Class = "";
+            this.checkBoxX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.checkBoxX1.Enabled = false;
+            this.checkBoxX1.Location = new System.Drawing.Point(123, 260);
+            this.checkBoxX1.Name = "checkBoxX1";
+            this.checkBoxX1.Size = new System.Drawing.Size(60, 23);
+            this.checkBoxX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.checkBoxX1.TabIndex = 13;
+            this.checkBoxX1.Text = "是/否";
+            // 
             // chkOpenDb
             // 
             // 
@@ -235,6 +254,22 @@
             this.txtMaxASync.ShowUpDown = true;
             this.txtMaxASync.Size = new System.Drawing.Size(60, 20);
             this.txtMaxASync.TabIndex = 11;
+            // 
+            // labelX7
+            // 
+            this.labelX7.AutoSize = true;
+            this.labelX7.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX7.BackgroundStyle.Class = "";
+            this.labelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX7.Location = new System.Drawing.Point(45, 260);
+            this.labelX7.Name = "labelX7";
+            this.labelX7.Size = new System.Drawing.Size(68, 16);
+            this.labelX7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX7.TabIndex = 9;
+            this.labelX7.Text = "日志支持：";
             // 
             // labelX6
             // 
@@ -433,36 +468,29 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // labelX7
+            // labelX11
             // 
-            this.labelX7.AutoSize = true;
-            this.labelX7.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.labelX7.BackgroundStyle.Class = "";
-            this.labelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX7.Location = new System.Drawing.Point(45, 260);
-            this.labelX7.Name = "labelX7";
-            this.labelX7.Size = new System.Drawing.Size(68, 16);
-            this.labelX7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.labelX7.TabIndex = 9;
-            this.labelX7.Text = "日志支持：";
-            // 
-            // checkBoxX1
+            this.labelX11.AutoSize = true;
+            this.labelX11.BackColor = System.Drawing.Color.Transparent;
             // 
             // 
             // 
+            this.labelX11.BackgroundStyle.Class = "";
+            this.labelX11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX11.Location = new System.Drawing.Point(33, 303);
+            this.labelX11.Name = "labelX11";
+            this.labelX11.Size = new System.Drawing.Size(79, 16);
+            this.labelX11.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.labelX11.TabIndex = 3;
+            this.labelX11.Text = "SDK认证串：";
             // 
-            this.checkBoxX1.BackgroundStyle.Class = "";
-            this.checkBoxX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.checkBoxX1.Enabled = false;
-            this.checkBoxX1.Location = new System.Drawing.Point(123, 260);
-            this.checkBoxX1.Name = "checkBoxX1";
-            this.checkBoxX1.Size = new System.Drawing.Size(60, 23);
-            this.checkBoxX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.checkBoxX1.TabIndex = 13;
-            this.checkBoxX1.Text = "是/否";
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(118, 303);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(432, 34);
+            this.flowLayoutPanel1.TabIndex = 20;
             // 
             // ASyncAuthorize
             // 
@@ -470,7 +498,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl1);
             this.Name = "ASyncAuthorize";
-            this.Size = new System.Drawing.Size(554, 340);
+            this.Size = new System.Drawing.Size(554, 374);
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabControlPanel1.ResumeLayout(false);
@@ -509,5 +537,7 @@
         private DevComponents.DotNetBar.LabelX labelX10;
         private DevComponents.DotNetBar.Controls.CheckBoxX checkBoxX1;
         private DevComponents.DotNetBar.LabelX labelX7;
+        private DevComponents.DotNetBar.LabelX labelX11;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
