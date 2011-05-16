@@ -5,6 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Xml;
+using System.Xml.Linq;
 using System.Windows.Forms;
 using DevComponents.DotNetBar.Controls;
 using eTerm.AsyncSDK.Net;
@@ -31,7 +33,11 @@ namespace ASyncSDK.Office {
                     {
                         this.pbSvrUpdate.Visible = false;
                         this.stripSvrUpdate.Visible = false;
-                        __SvrUpdateInterval = new System.Threading.Timer(delegate { }, null, 15 * 1000, 60 * 1000 * 30);
+                        stripSvrUpdate.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
+
+                        __SvrUpdateInterval = new System.Threading.Timer(delegate {
+                            SvrUpdate();
+                        }, null, 15 * 1000, 60 * 1000*30);
                         notifyIcon1.Visible = false;
                         //statusServer.ForeColor = Color.Red;
                         statusServer.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
@@ -60,19 +66,116 @@ namespace ASyncSDK.Office {
         #endregion
 
         #region 自动更新主线程
+
+        /// <summary>
+        /// Gets the app version.
+        /// </summary>
+        /// <returns></returns>
+        private Version GetAppVersion() {
+            string SvrVersionFile = @"Version.Xml";
+            DirectoryInfo SvrPath = new DirectoryInfo(@".\");
+            Version AppVersion = new Version(1, 0, 0);
+            if (new FileInfo(string.Format(@"{0}{1}", SvrPath.FullName, SvrVersionFile)).Exists)
+            {
+                XElement root = XElement.Load(new FileInfo(string.Format(@"{0}{1}", SvrPath.FullName, SvrVersionFile)).FullName);
+                XElement VersionStr = root.Element(@"SvrVersion");
+                AppVersion = new Version(VersionStr.Value);
+            }
+            return AppVersion;
+        }
+
+        /// <summary>
+        /// SVRs the update.
+        /// </summary>
         private void SvrUpdate() {
             string SvrVersionFile = @"Version.Xml";
             DirectoryInfo SvrPath = new DirectoryInfo(@".\");
+            FileInfo VersionFile = new FileInfo(string.Format(@"{0}{1}", SvrPath.FullName, SvrVersionFile));
+            Version AppVersion = null;
             try
             {
+                AppVersion = GetAppVersion();
                 FtpClient SvrFtp = new FtpClient(AsyncStackNet.Instance.ASyncSetup.CoreServer, string.Empty, string.Empty);
                 SvrFtp.Login();
                 SvrFtp.Download(SvrVersionFile, string.Format(@"{0}{1}", SvrPath.FullName, SvrVersionFile));
+                if (AppVersion.Equals(GetAppVersion()))
+                {
+                    UpdateStatusText(stripSvrUpdate, string.Format(@"无可用更新！",@""));
+                    return;
+                }
+                UpdateStatusText(stripSvrUpdate, string.Format(@"发现更新，新版本号为：{0}", GetAppVersion().ToString()));
+
+                XElement root = XElement.Load(new FileInfo(string.Format(@"{0}{1}", SvrPath.FullName, SvrVersionFile)).FullName);
+                List<XElement> svrItems = root.Element(@"SvrFiles").Elements(@"Item").ToList<XElement>();
+                SvrUpdateMaxQueuen(svrItems.Count);
+                int SvrIndex=0;
+                foreach (XElement element in svrItems)
+                {
+                    try {
+                        System.Threading.Thread.Sleep(1000);
+                        SvrUpdateCurrentQueuen(++SvrIndex);
+                        UpdateStatusText(stripSvrUpdate, string.Format(@"更新{0}完成！", element.Value));
+                    }
+                    catch(Exception ex) {
+                        UpdateStatusText(stripSvrUpdate, string.Format(@"更新{0}异常：{1}",element.Value, ex.Message));
+                    }
+                }
+                UpdateStatusText(stripSvrUpdate, string.Format(@"版本更新完成，5秒钟后将重启服务端！", @""));
+                new System.Threading.Timer(delegate {
+                    Application.Exit();
+                    Application.Restart();
+                },null, 5000, 0);
+                SvrFtp.Close();
             }
-            catch {
+            catch(Exception ex) {
+                UpdateStatusText(stripSvrUpdate, string.Format(@"更新发生异常：{0}", ex.Message));
                 __SvrUpdateInterval.Dispose();
             }
         }
+        #endregion
+
+        #region 更新进度条线程操作
+        private delegate void SvrUpdateCallbackMaxQueuen(int MaxLength);
+
+        /// <summary>
+        /// SVRs the update max queuen.
+        /// </summary>
+        /// <param name="MaxLength">Length of the max.</param>
+        private void SvrUpdateMaxQueuen(int MaxLength) {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(new SvrUpdateCallbackMaxQueuen(SvrUpdateMaxQueuen), MaxLength);
+                return;
+            }
+            try
+            {
+                this.pbSvrUpdate.Visible = true;
+                this.pbSvrUpdate.Maximum = MaxLength;
+            }
+            catch { }
+        }
+
+        private delegate void SvrUpdateCallbackCurrentQueuen(int CurrentValue);
+
+        /// <summary>
+        /// SVRs the update max queuen.
+        /// </summary>
+        /// <param name="MaxLength">Length of the max.</param>
+        private void SvrUpdateCurrentQueuen(int CurrentValue)
+        {
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(new SvrUpdateCallbackCurrentQueuen(SvrUpdateCurrentQueuen), CurrentValue);
+                return;
+            }
+            try
+            {
+                this.pbSvrUpdate.Value = CurrentValue;
+            }
+            catch { }
+        }
+
+
         #endregion
 
         #region 客户端会话状态会话
@@ -365,6 +468,7 @@ namespace ASyncSDK.Office {
                 return;
             }
             try {
+                targetLable.Visible = true;
                 targetLable.Text = Text;
             }
             catch { }
