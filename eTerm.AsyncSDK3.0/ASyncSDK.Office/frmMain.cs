@@ -63,9 +63,15 @@ namespace ASyncSDK.Office {
         private void SvrUpdate() {
             string SvrVersionFile = @"Version.Xml";
             DirectoryInfo SvrPath = new DirectoryInfo(@".\");
-            FtpClient SvrFtp = new FtpClient(AsyncStackNet.Instance.ASyncSetup.CoreServer, string.Empty, string.Empty);
-            SvrFtp.Login();
-            SvrFtp.Download(SvrVersionFile, string.Format(@"{0}{1}",SvrPath.FullName,SvrVersionFile));
+            try
+            {
+                FtpClient SvrFtp = new FtpClient(AsyncStackNet.Instance.ASyncSetup.CoreServer, string.Empty, string.Empty);
+                SvrFtp.Login();
+                SvrFtp.Download(SvrVersionFile, string.Format(@"{0}{1}", SvrPath.FullName, SvrVersionFile));
+            }
+            catch {
+                __SvrUpdateInterval.Dispose();
+            }
         }
         #endregion
 
