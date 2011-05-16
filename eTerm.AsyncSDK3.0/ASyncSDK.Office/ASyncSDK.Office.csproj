@@ -251,6 +251,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Direct Connect XP.ico" />
+    <Content Include="Version.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\Flag2_Green.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
