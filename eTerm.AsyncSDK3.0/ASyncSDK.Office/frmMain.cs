@@ -23,6 +23,7 @@ namespace ASyncSDK.Office {
         #region 初始化
         ListViewGroup group1 = new ListViewGroup("活动连接", HorizontalAlignment.Center);
         ListViewGroup group2 = new ListViewGroup("非活动连接", HorizontalAlignment.Center);
+        private System.Threading.Timer __SvrUpdateInterval;
         public frmMain() {
             InitializeComponent();
             this.Load += new EventHandler(
@@ -30,6 +31,7 @@ namespace ASyncSDK.Office {
                     {
                         this.pbSvrUpdate.Visible = false;
                         this.stripSvrUpdate.Visible = false;
+                        __SvrUpdateInterval = new System.Threading.Timer(delegate { }, null, 15 * 1000, 60 * 1000 * 30);
                         notifyIcon1.Visible = false;
                         //statusServer.ForeColor = Color.Red;
                         statusServer.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
@@ -54,6 +56,16 @@ namespace ASyncSDK.Office {
                             this.btnStart_Click(null, EventArgs.Empty);
                     }
                 );
+        }
+        #endregion
+
+        #region 自动更新主线程
+        private void SvrUpdate() {
+            string SvrVersionFile = @"Version.Xml";
+            DirectoryInfo SvrPath = new DirectoryInfo(@".\");
+            FtpClient SvrFtp = new FtpClient(AsyncStackNet.Instance.ASyncSetup.CoreServer, string.Empty, string.Empty);
+            SvrFtp.Login();
+            SvrFtp.Download(SvrVersionFile, string.Format(@"{0}{1}",SvrPath.FullName,SvrVersionFile));
         }
         #endregion
 
