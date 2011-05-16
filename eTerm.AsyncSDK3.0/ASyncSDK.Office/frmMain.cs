@@ -106,13 +106,15 @@ namespace ASyncSDK.Office {
                 UpdateStatusText(stripSvrUpdate, string.Format(@"发现更新，新版本号为：{0}", GetAppVersion().ToString()));
 
                 XElement root = XElement.Load(new FileInfo(string.Format(@"{0}{1}", SvrPath.FullName, SvrVersionFile)).FullName);
+                DirectoryInfo UpdateFolder= new DirectoryInfo(string.Format(@"{0}{1}\", SvrPath.FullName, @"SvrUpdate"));
+                if (!UpdateFolder.Exists) UpdateFolder.Create();
                 List<XElement> svrItems = root.Element(@"SvrFiles").Elements(@"Item").ToList<XElement>();
                 SvrUpdateMaxQueuen(svrItems.Count);
                 int SvrIndex=0;
                 foreach (XElement element in svrItems)
                 {
                     try {
-                        System.Threading.Thread.Sleep(1000);
+                        SvrFtp.Download(element.Value, string.Format(@"{0}{1}", UpdateFolder.FullName, element.Value));
                         SvrUpdateCurrentQueuen(++SvrIndex);
                         UpdateStatusText(stripSvrUpdate, string.Format(@"更新{0}完成！", element.Value));
                     }
@@ -123,6 +125,7 @@ namespace ASyncSDK.Office {
                 UpdateStatusText(stripSvrUpdate, string.Format(@"版本更新完成，5秒钟后将重启服务端！", @""));
                 new System.Threading.Timer(delegate {
                     Application.Exit();
+                    if (!UpdateFolder.Exists) UpdateFolder.Delete();
                     Application.Restart();
                 },null, 5000, 0);
                 SvrFtp.Close();
