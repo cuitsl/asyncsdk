@@ -951,6 +951,7 @@ Encoding.GetEncoding(@"gb2312").GetString(e.Session.UnOutPakcet(e.InPacket)),
         private void btnRestore_Click(object sender, EventArgs e)
         {
             this.Show();
+            this.ShowInTaskbar = true;
             notifyIcon1.Visible = false;
         }
 
