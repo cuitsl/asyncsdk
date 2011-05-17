@@ -25,6 +25,7 @@ namespace ASyncSDK.Office {
         #region 初始化
         ListViewGroup group1 = new ListViewGroup("活动连接", HorizontalAlignment.Center);
         ListViewGroup group2 = new ListViewGroup("非活动连接", HorizontalAlignment.Center);
+        private string __resetHour = @"06";
         private System.Threading.Timer __SvrUpdateInterval;
         public frmMain() {
             InitializeComponent();
@@ -37,12 +38,24 @@ namespace ASyncSDK.Office {
 
                         __SvrUpdateInterval = new System.Threading.Timer(delegate {
                             SvrUpdate();
-                        }, null, 15 * 1000, 60 * 1000*30);
+                            SvrReset();
+                        }, null, 15 * 1000, 60 * 1000*40);
                         notifyIcon1.Visible = false;
                         //statusServer.ForeColor = Color.Red;
                         statusServer.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
                         statusServer.ForeColor = System.Drawing.SystemColors.HotTrack;
-
+                        try
+                        {
+                            string SvrVersionFile = @"Version.Xml";
+                            DirectoryInfo SvrPath = new DirectoryInfo(@".\");
+                            if (new FileInfo(string.Format(@"{0}{1}", SvrPath.FullName, SvrVersionFile)).Exists)
+                            {
+                                XElement root = XElement.Load(new FileInfo(string.Format(@"{0}{1}", SvrPath.FullName, SvrVersionFile)).FullName);
+                                XElement VersionStr = root.Element(@"SvrReset");
+                                __resetHour = VersionStr.Value;
+                            }
+                        }
+                        catch { }
                         statusInfo.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
                         statusInfo.ForeColor = Color.Red ;
                         notifyIcon1.Text = this.Text;
@@ -62,6 +75,28 @@ namespace ASyncSDK.Office {
                             this.btnStart_Click(null, EventArgs.Empty);
                     }
                 );
+        }
+        #endregion
+
+        #region 服务器重启
+        /// <summary>
+        /// SVRs the reset.
+        /// </summary>
+        private void SvrReset() {
+            if (DateTime.Now.ToString(@"HH") == __resetHour)
+            {
+                UpdateStatusText(stripSvrUpdate, string.Format(@"重启时间已到，5秒后系统将自动重新启动！", @""));
+                new System.Threading.Timer(delegate
+                {
+                    AsyncStackNet.Instance.BeginRateUpdate(new AsyncCallback(delegate(IAsyncResult iar)
+                    {
+                        AsyncStackNet.Instance.EndRateUpdate(iar);
+                        iar.AsyncWaitHandle.Close();
+                        Application.Exit();
+                        Application.Restart();
+                    }));
+                }, null, 5000, System.Threading.Timeout.Infinite);
+            }
         }
         #endregion
 
