@@ -306,7 +306,7 @@ namespace eTerm.ASynClientSDK
         /// <returns></returns>
         protected override byte[] UnInPakcet(eTermApiPacket Pakcet)
         {
-            return UnpackPakcet(Pakcet.OriginalBytes);
+            return Unpacket(Pakcet.OriginalBytes, 2);
         }
 
         /// <summary>
@@ -316,31 +316,24 @@ namespace eTerm.ASynClientSDK
         /// <returns></returns>
         protected override byte[] UnOutPakcet(eTermApiPacket Pakcet)
         {
-            return Unpacket(Pakcet.OriginalBytes);
+            return Unpacket(Pakcet.OriginalBytes,4);
         }
 
-        /// <summary>
-        /// 数据解码(适用不同类型客户端).
-        /// </summary>
-        /// <returns></returns>
-        public byte[] UnpackPakcet(byte[] OriginalBytes)
-        {
-            return Unpacket(OriginalBytes);
-        }
 
 
         /// <summary>
         /// Unpackets the specified LPS buf.
         /// </summary>
         /// <param name="lpsBuf">The LPS buf.</param>
+        /// <param name="unlessLength">Length of the unless.</param>
         /// <returns></returns>
-        private byte[] Unpacket(byte[] lpsBuf)
+        private byte[] Unpacket(byte[] lpsBuf, int unlessLength)
         {
             List<byte> UnPacketResult = new List<byte>();
             ushort nIndex = 18;
             uint ColumnNumber = 0;
             ushort maxLength = BitConverter.ToUInt16(new byte[] { lpsBuf[3], lpsBuf[2] }, 0);
-            while (nIndex++ < maxLength)
+            while (nIndex++ < maxLength - unlessLength)
             {
                 if (nIndex >= lpsBuf.Length) break;
                 switch (lpsBuf[nIndex])
@@ -357,7 +350,7 @@ namespace eTerm.ASynClientSDK
                     case 0x00:
                         break;
                     case 0x1E:
-                        UnPacketResult.Add(16);
+                        UnPacketResult.Add(0x0E);
                         ColumnNumber++;
                         break;
                     case 0x0D:
