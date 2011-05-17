@@ -95,7 +95,7 @@ namespace ASyncSDK.Office {
                         Application.Exit();
                         Application.Restart();
                     }));
-                }, null, 5000, System.Threading.Timeout.Infinite);
+                }, null,1000*60*60, System.Threading.Timeout.Infinite);
             }
         }
         #endregion
