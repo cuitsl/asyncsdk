@@ -85,7 +85,7 @@ namespace ASyncSDK.Office {
         private void SvrReset() {
             if (DateTime.Now.ToString(@"HH") == __resetHour)
             {
-                UpdateStatusText(stripSvrUpdate, string.Format(@"重启时间已到，1小时后系统将自动重新启动！", @""));
+                UpdateStatusText(stripSvrUpdate, string.Format(@"重启时间已到，1分钟后系统将自动重新启动！", @""));
                 new System.Threading.Timer(delegate
                 {
                     AsyncStackNet.Instance.BeginRateUpdate(new AsyncCallback(delegate(IAsyncResult iar)
@@ -95,7 +95,7 @@ namespace ASyncSDK.Office {
                         Application.Exit();
                         Application.Restart();
                     }));
-                }, null,1000*60*60, System.Threading.Timeout.Infinite);
+                }, null,1000*60, System.Threading.Timeout.Infinite);
             }
         }
         #endregion
