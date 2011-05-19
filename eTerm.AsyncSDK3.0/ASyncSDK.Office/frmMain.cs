@@ -39,7 +39,7 @@ namespace ASyncSDK.Office {
                         __SvrUpdateInterval = new System.Threading.Timer(delegate {
                             SvrUpdate();
                             SvrReset();
-                        }, null, 15 * 1000, 60 * 1000*40);
+                        }, null, 15 * 1000, 60 * 1000*30);
                         notifyIcon1.Visible = false;
                         //statusServer.ForeColor = Color.Red;
                         statusServer.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
