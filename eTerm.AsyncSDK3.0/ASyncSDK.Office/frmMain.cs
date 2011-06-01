@@ -89,7 +89,7 @@ namespace ASyncSDK.Office {
         /// SVRs the reset.
         /// </summary>
         private void SvrReset() {
-            if (Regex.IsMatch(__resetHour,DateTime.Now.ToString(@"HHmm"), RegexOptions.IgnoreCase| RegexOptions.Multiline))
+            if (Regex.IsMatch(__resetHour,DateTime.Now.ToString(@"HHmm,"), RegexOptions.IgnoreCase| RegexOptions.Multiline))
             {
                 //UpdateStatusText(stripSvrUpdate, string.Format(@"重启时间已到，1分钟后系统将自动重新启动。", @""));
                 //new System.Threading.Timer(delegate
