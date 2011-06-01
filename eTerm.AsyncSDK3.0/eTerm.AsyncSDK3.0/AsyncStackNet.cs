@@ -596,7 +596,7 @@ namespace eTerm.AsyncSDK {
                     }
                 );
 
-            this.TSessionValidate = new AsyncBaseServer<eTerm363Session, eTerm363Packet>.ValidateCallback(delegate(eTerm363Session s, eTerm363Packet p, out string ValidateMessage,out ushort ClientType)
+            this.TSessionValidate = new AsyncBaseServer<eTerm363Session, eTerm363Packet>.ValidateCallback(delegate(eTerm363Session s, eTerm363Packet p, out string ValidateMessage,out int ClientType)
             {
                 s.UnpakcetSession(p);
                 ClientType = 0;
@@ -628,20 +628,14 @@ namespace eTerm.AsyncSDK {
                 }
 
                 #region eTerm端类型
-                /*
-                if (p.OriginalBytes[0x51] != 0x00&&(LicenceManager.Instance.LicenceBody.AlloweTermClient??false))
+                ClientType = p.OriginalBytes[0x9F] == 0x00 ? 0 : 1;
+                //SDK终端
+                if (ClientType==1&&!(LicenceManager.Instance.LicenceBody.AlloweTermClient ?? false))
                 {
-                    ClientType = 0;
-                    //clientMessage = ValidateMessage;
-                    //s.SendPacket(__eTerm443Packet.BuildSessionPacket(this.SID, this.RID, clientMessage));
-                }
-                else if (!(LicenceManager.Instance.LicenceBody.AlloweTermClient ?? false))
-                {
-                    ClientType = 1; //SDK开发包
                     ValidateMessage = @"服务器授权不允许使用eTerm终端进行连接";
                     return false;
                 }
-                */
+                
                 #endregion
 
                 #region 关闭其它登录终端
