@@ -104,10 +104,20 @@ namespace eTerm.ASynClientSDK
         /// <param name="Packet">The packet.</param>
         public override void SendPacket(string Packet)
         {
+            if (!CanSendPacket) return;
             SendPacket(EnCodeBuffer(Encoding.Default.GetBytes(Packet)));
             OutPakcet = new eTermApiPacket() { OriginalBytes = Encoding.Default.GetBytes(Packet) };
         }
 
+
+        /// <summary>
+        /// Sends the specified packet.
+        /// </summary>
+        /// <param name="Packet">The packet.</param>
+        private void Send(string Packet) {
+            SendPacket(EnCodeBuffer(Encoding.Default.GetBytes(Packet)));
+            OutPakcet = new eTermApiPacket() { OriginalBytes = Encoding.Default.GetBytes(Packet) };
+        }
         #region 编码方法
         /// <summary>
         /// 编码需发送的数据包.
@@ -196,7 +206,7 @@ namespace eTerm.ASynClientSDK
                     this.RID = base.InPacket.OriginalBytes[9];
                 base.InPacket = new eTermApiPacket();
                 new Timer(new TimerCallback(delegate(object sender) {
-                    SendPacket(string.Format(@"!api {0}", this.apiKey));
+                    Send(string.Format(@"!api {0}", this.apiKey));
                 }), null, 500, Timeout.Infinite);
                 //
             }
@@ -206,8 +216,11 @@ namespace eTerm.ASynClientSDK
                 {
                     ApiKey.Append(String.Format("{0:X}", c).PadLeft(2, '0'));
                 }
-                if (Regex.IsMatch(Encoding.GetEncoding(@"gb2312").GetString(UnOutPakcet(InPacket)),ApiKey.ToString(), RegexOptions.IgnoreCase| RegexOptions.Multiline) && this.OnValidated != null)
+                if (Regex.IsMatch(Encoding.GetEncoding(@"gb2312").GetString(UnOutPakcet(InPacket)), ApiKey.ToString(), RegexOptions.IgnoreCase | RegexOptions.Multiline) && this.OnValidated != null)
+                {
+                    CanSendPacket = true;
                     OnValidated(this, EventArgs.Empty);
+                }
                 else
                     this.Close();
                 base.InPacket = new eTermApiPacket();
@@ -237,11 +250,11 @@ namespace eTerm.ASynClientSDK
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x20, 0x20, 0x20, 0x20, 0x33, 0x36, 0x33,
-                0x31 , 0x33 , 0x31 , 0x30 , 0x00 , 0x30 , 0x30 , 0x30 , 0x30 , 0x30 , 0x30 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00,
+                0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x01, 0, 0
              };
             Buffer.BlockCopy(Encoding.Default.GetBytes(userName.PadRight(16, '\0').ToCharArray()), 0, buffer, 0, 16);
             Buffer.BlockCopy(Encoding.Default.GetBytes(userPass.PadRight(16, '\0').ToCharArray()), 0, buffer, 16, 16);
