@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using eTerm.ASynClientSDK;
+using System.Runtime.Serialization;
 
 namespace eTerm.ASynClientSDK {
     /// <summary>
@@ -16,6 +17,7 @@ namespace eTerm.ASynClientSDK {
     /// 3.建立开放航段，必须确认的内容是航段和舱位，其他内容可以置为不确定信息，如航空公司、旅行日期。
     /// </remarks>
     /// </summary>
+    [DataContract]
     public class BookAirSeg:ASyncResult {
 
         #region 类别
@@ -105,42 +107,49 @@ namespace eTerm.ASynClientSDK {
         ///  航班号.
         /// </summary>
         /// <value>The getair no.</value>
+        [DataMember]
         public string getairNo { get;  set; }
 
         /// <summary>
         /// 舱位等级.
         /// </summary>
         /// <value>The getflt class.</value>
+        [DataMember]
         public string getfltClass { get;  set; }
 
         /// <summary>
         /// 类别，即设置为普通、开放、信息三种类别.
         /// </summary>
         /// <value>The type of the get.</value>
+        [DataMember]
         public AIRSEGTYPE getType { get;  set; }
 
         /// <summary>
         /// 行动代码.
         /// </summary>
         /// <value>The getaction code.</value>
+        [DataMember]
         public string getactionCode { get;  set; }
 
         /// <summary>
         /// 始发城市.
         /// </summary>
         /// <value>The getorg city.</value>
+        [DataMember]
         public string getorgCity { get;  set; }
 
         /// <summary>
         /// 到达城市.
         /// </summary>
         /// <value>The getdes city.</value>
+        [DataMember]
         public string getdesCity { get;  set; }
 
         /// <summary>
         /// 起飞时间.
         /// </summary>
         /// <value>The departure time.</value>
+        [DataMember]
         public DateTime departureTime { get;  set; }
     }
 }

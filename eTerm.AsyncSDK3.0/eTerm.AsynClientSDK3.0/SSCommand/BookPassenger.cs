@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using eTerm.ASynClientSDK;
+using System.Runtime.Serialization;
 
 namespace eTerm.ASynClientSDK {
 
@@ -21,35 +22,41 @@ namespace eTerm.ASynClientSDK {
     /// 中文姓名: 孙家浩
     /// ]]>
     /// </summary>
+    [DataContract]
     public class BookPassenger : ASyncResult {
         /// <summary>
         /// 身份证件类型 NI身份证，CC信用卡，PP护照.
         /// </summary>
         /// <value>The type of the id.</value>
+        [DataMember]
         public string IdType { get; internal set; }
 
         /// <summary>
         /// 对应的身份证件号码.
         /// </summary>
         /// <value>The id.</value>
+        [DataMember]
         public string Id { get; internal set; }
 
         /// <summary>
         /// 对应旅客姓名 .
         /// </summary>
         /// <value>The name.</value>
+        [DataMember]
         public string Name { get; internal set; }
 
         /// <summary>
         /// 该旅客的类别.
         /// </summary>
         /// <value>The type of the get.</value>
+        [DataMember]
         public PASSENGERTYPE getType { get; internal set; }
 
         /// <summary>
         /// 该旅客的年龄.
         /// </summary>
         /// <value>The get age.</value>
+        [DataMember]
         public int getAge { get; internal set; }
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace eTerm.ASynClientSDK
     /// <summary>
     /// 异步通信基类(适用于多线程、Windows App应用)
     /// </summary>
-    public class WinSocket:EventAsyncBase<WinSocket, eTermApiPacket>
+    public sealed class WinSocket:EventAsyncBase<WinSocket, eTermApiPacket>
     {
 
         /// <summary>

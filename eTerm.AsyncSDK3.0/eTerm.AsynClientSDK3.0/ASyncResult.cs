@@ -5,17 +5,20 @@ using System.Text;
 using System.Xml.Serialization;
 using System.Xml;
 using System.IO;
+using System.Runtime.Serialization;
 namespace eTerm.ASynClientSDK {
     /// <summary>
     /// 结果基类
     /// </summary>
     [Serializable]
+    [DataContract]
     public abstract class ASyncResult {
         /// <summary>
         /// 发送指令.
         /// </summary>
         /// <value>The A syn CMD.</value>
         [XmlIgnore]
+        [DataMember]
         public string ASynCmd { set; get; }
 
         /// <summary>
@@ -23,6 +26,7 @@ namespace eTerm.ASynClientSDK {
         /// </summary>
         /// <value>The org command.</value>
         [XmlIgnore]
+        [DataMember]
         public string OrgCommandResult { get; internal set; }
 
         /// <summary>

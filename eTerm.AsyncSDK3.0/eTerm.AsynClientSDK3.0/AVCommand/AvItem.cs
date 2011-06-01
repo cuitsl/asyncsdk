@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 using eTerm.ASynClientSDK;
+using System.Runtime.Serialization;
 
 namespace eTerm.ASynClientSDK {
 
     /// <summary>
     /// 舱位信息
     /// </summary>
-    public class AvItemCabinChar:ASyncResult {
+    [DataContract]
+    public class AvItemCabinChar : ASyncResult
+    {
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AvItemCabinChar"/> class.
@@ -29,24 +32,28 @@ namespace eTerm.ASynClientSDK {
         /// 舱位等级.
         /// </summary>
         /// <value>The get code.</value>
+        [DataMember]
         public string getCode { get; set; }
 
         /// <summary>
         /// 单程折扣.
         /// </summary>
         /// <value>The get single discount.</value>
+        [DataMember]
         public string getSingleDiscount { get; set; }
 
         /// <summary>
         /// 有效数.
         /// </summary>
         /// <value>The get avalibly.</value>
+        [DataMember]
         public string getAvalibly { get; set; }
 
         /// <summary>
         /// 舱位价格.
         /// </summary>
         /// <value>The single price.</value>
+        [DataMember]
         public string getSinglePrice { get; set; }
 
         /// <summary>
@@ -88,96 +95,113 @@ namespace eTerm.ASynClientSDK {
     /// <summary>
     /// 航班结构
     /// </summary>
-    public class AvItem:ASyncResult {
+    [DataContract]
+    public class AvItem : ASyncResult
+    {
         
         /// <summary>
         /// 得到指定AvSegment对象内包含的航班号.
         /// </summary>
         /// <value>The get airline.</value>
+        [DataMember]
         public string getAirline { get; set; }
 
         /// <summary>
         /// 如果是代码共享,获取该航班号的实际承运航班 否则无意义 使用前先使用 isCodeShare()判断是否由其他航班代码共享 .
         /// </summary>
         /// <value>The get carrier.</value>
+        [DataMember]
         public string getCarrier { get; set; }
 
         /// <summary>
         /// 得到指定AvSegment对象内包含的到达时刻的DATE型表示.
         /// </summary>
         /// <value>The get arridate.</value>
+        [DataMember]
         public string getArridate { get; set; }
 
         /// <summary>
         /// 得到指定AvSegment对象内包含的到达时间.
         /// </summary>
         /// <value>The get arritime.</value>
+        [DataMember]
         public string getArritime { get; set; }
 
         /// <summary>
         /// 得到指定AvSegment对象内包含的到达日期修正.
         /// </summary>
         /// <value>The get arritimemodify.</value>
+        [DataMember]
         public string getArritimemodify { get; set; }
 
         /// <summary>
         /// 得到指定AvSegment对象内包含的ASR支持标志.
         /// </summary>
         /// <value><c>true</c> if [get asr]; otherwise, <c>false</c>.</value>
+        [DataMember]
         public bool getAsr { get; set; }
 
         /// <summary>
         /// 得到指定AvSegment对象内包含的起飞时刻DATE表示.
         /// </summary>
         /// <value>The get depdate.</value>
+        [DataMember]
         public string getDepdate { get; set; }
 
         /// <summary>
         /// 得到指定AvSegment对象内包含的起飞时刻.
         /// </summary>
         /// <value>The get deptime.</value>
+        [DataMember]
         public string getDeptime { get; set; }
 
         /// <summary>
         /// 得到指定AvSegment对象内包含的起飞日期修正.
         /// </summary>
         /// <value>The get deptimemodify.</value>
+        [DataMember]
         public string getDeptimemodify { get; set; }
 
         /// <summary>
         /// 得到指定AvSegment对象内包含的到达城市三字码.
         /// </summary>
         /// <value>The get dstcity.</value>
+        [DataMember]
         public string getDstcity { get; set; }
 
         /// <summary>
         /// 得到指定AvSegment对象内包含的连接级别.
         /// </summary>
         /// <value>The get link.</value>
+        [DataMember]
         public string getLink { get; set; }
 
         /// <summary>
         /// 是否有餐食.
         /// </summary>
         /// <value><c>true</c> if [get meal]; otherwise, <c>false</c>.</value>
+        [DataMember]
         public bool getMeal { get; set; }
 
         /// <summary>
         /// 得到指定AvSegment对象内包含的起始城市三字码.
         /// </summary>
         /// <value>The get orgcity.</value>
+        [DataMember]
         public string getOrgcity { get; set; }
 
         /// <summary>
         /// 得到指定AvSegment对象内包含的机型.
         /// </summary>
         /// <value>The get planestyle.</value>
+        [DataMember]
         public string getPlanestyle { get; set; }
 
         /// <summary>
         ///  得到本航段的经停次数.
         /// </summary>
         /// <value>The get stopnumber.</value>
+        [DataMember]
         public int getStopnumber { get; set; }
 
         /// <summary>
@@ -186,12 +210,14 @@ namespace eTerm.ASynClientSDK {
         /// <value>
         /// 	<c>true</c> if this instance is code share; otherwise, <c>false</c>.
         /// </value>
+        [DataMember]
         public bool isCodeShare { get; set; }
 
         /// <summary>
         /// 有效舱位列表.
         /// </summary>
         /// <value>The get cabins.</value>
+        [DataMember]
         public List<AvItemCabinChar> getCabins { get; set; }
 
 

@@ -4,11 +4,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 using eTerm.ASynClientSDK;
-
+using System.Runtime.Serialization;
 namespace eTerm.ASynClientSDK {
     /// <summary>
     /// AV指令结果实体
     /// </summary>
+    [DataContract]
     public class AVResult:ASyncResult {
         #region 属性定义
         private List<AvItem> __items = new List<AvItem>();
@@ -16,12 +17,14 @@ namespace eTerm.ASynClientSDK {
         /// 航班集合.
         /// </summary>
         /// <value>The av segment.</value>
+        [DataMember]
         public List<AvItem> AvSegment { get { return this.__items; } set { this.__items = value; } }
 
         /// <summary>
         /// 得到Date类型的日期.
         /// </summary>
         /// <value>The depart date.</value>
+        [DataMember]
         public DateTime? getDate { get; set; }
 
         /// <summary>
@@ -43,12 +46,14 @@ namespace eTerm.ASynClientSDK {
         /// 得到目的城市三字代码.
         /// </summary>
         /// <value>The get DST.</value>
+        [DataMember]
         public string getDst { get; set; }
 
         /// <summary>
         /// 得到起始城市三字代码.
         /// </summary>
         /// <value>The get org.</value>
+        [DataMember]
         public string getOrg { get; set; }
 
 

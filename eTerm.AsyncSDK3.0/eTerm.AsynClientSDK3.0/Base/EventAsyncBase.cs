@@ -44,6 +44,14 @@ namespace eTerm.ASynClientSDK.Base {
         public bool IsSsl { set; get; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether this instance can send packet.
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if this instance can send packet; otherwise, <c>false</c>.
+        /// </value>
+        protected bool CanSendPacket { get; set; }
+
+        /// <summary>
         /// 远程主机地址.
         /// </summary>
         /// <value>The remote ip.</value>
@@ -287,22 +295,7 @@ namespace eTerm.ASynClientSDK.Base {
         /// </summary>
         /// <returns>是否成功切换</returns>
         protected virtual Stream GetSslStream() {
-            SslStream _sslStream = new SslStream(new NetworkStream(this.AsyncSocket,true), true, RemoteCertificateValidationCallback);
-            try {
-                _sslStream.AuthenticateAsClient("eTerm.AsyncSDK3.0");
-                if (_sslStream.IsAuthenticated)
-                    this.AsyncStream = _sslStream;
-#if DEBUG
-                showSslInfo(this.RemoteEP.Address.ToString(), _sslStream, true);
-#endif
-            }
-            catch (System.Exception ex)
-            {
-#if DEBUG
-                        WriteLog(ex);
-#endif
-            }
-            return _sslStream;
+            throw new HttpListenerException(10001,@"无法使用该方法!");
         }
 
         /// <summary>

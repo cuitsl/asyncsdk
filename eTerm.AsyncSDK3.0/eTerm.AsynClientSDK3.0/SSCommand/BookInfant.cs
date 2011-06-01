@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using eTerm.ASynClientSDK;
+using System.Runtime.Serialization;
 
 namespace eTerm.ASynClientSDK {
     /// <summary>
     /// 本类包含一个订座婴儿组信息 
     /// </summary>
+    [DataContract]
     public class BookInfant:ASyncResult {
 
         /// <summary>
@@ -30,18 +32,21 @@ namespace eTerm.ASynClientSDK {
         /// 该婴儿的生日.
         /// </summary>
         /// <value>The getbirth.</value>
+        [DataMember]
         public DateTime getbirth { get; set; }
 
         /// <summary>
         ///  携带该婴儿的旅客姓名.
         /// </summary>
         /// <value>The name of the carrier.</value>
+        [DataMember]
         public string getcarrierName { get; set; }
 
         /// <summary>
         /// 该婴儿的姓名 .
         /// </summary>
         /// <value>The getname.</value>
+        [DataMember]
         public string getname { get; set; }
 
 
