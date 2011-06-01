@@ -601,7 +601,15 @@ namespace eTerm.AsyncSDK {
                 s.UnpakcetSession(p);
                 ClientType = 0;
                 string clientMessage = string.Empty;
-                TSessionSetup TSession=ASyncSetup.SessionCollection.SingleOrDefault<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
+                TSessionSetup TSession=ASyncSetup.SessionCollection.SingleOrDefault<TSessionSetup>(Fun => 
+                    (Fun.ExpireDate!=null||Fun.ExpireDate<=DateTime.Now)
+                    &&
+                    Fun.SessionPass == s.userPass 
+                    && 
+                    Fun.SessionCode == s.userName 
+                    && 
+                    Fun.IsOpen == true
+                    );
                 if (TSession == null) { ValidateMessage = string.Format(@"{0} 登录帐号或密码错误", s.userName); return false; }
                 //TSessionSetup TSession = AsyncStackNet.Instance.ASyncSetup.SessionCollection.Single<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
                 //if (__asyncServer.TSessionCollection.Count<eTerm363Session>(Session => Session.userName == s.userName) > 1) { ValidateMessage = string.Format(@"{0} 已经在其它IP登录", s.userName); return false; }
