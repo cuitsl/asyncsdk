@@ -76,7 +76,11 @@ namespace eTerm.AsyncSDK {
         /// <value>The traffics.</value>
         public List<SocketTraffic> Traffics { get; set; }
 
-
+        /// <summary>
+        /// 到期日期.
+        /// </summary>
+        /// <value>The expire date.</value>
+        public DateTime? ExpireDate { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance is open.
