@@ -1,11 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Version>
     <SvrVersion>3.2.1020</SvrVersion>
-    <SvrReset>06</SvrReset>
-    <SvrFiles>
-        <Item>ASync.eTermAddIn.AddIn</Item>
-        <Item>ASync.eTermPlugIn.PlugIn</Item>
-        <Item>ASync.MiddleWare.dll</Item>
-        <Item>Fetion2011April.exe</Item>
-    </SvrFiles>
+    <SvrReset>0630</SvrReset>
 </Version>
