@@ -92,5 +92,11 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         /// <value>The key.</value>
         public byte[] Key { get; set; }
+
+        /// <summary>
+        /// 是否允许eTerm终端.
+        /// </summary>
+        /// <value>The allowe term client.</value>
+        public bool? AlloweTermClient { get; set; }
     }
 }

@@ -71,7 +71,7 @@ namespace eTerm.AsyncSDK.Base {
         /// 是否允许重连.
         /// </summary>
         /// <value><c>true</c> if [obligatory reconnect]; otherwise, <c>false</c>.</value>
-        internal bool ObligatoryReconnect { get; set; }
+        public bool ObligatoryReconnect {internal get; set; }
 
         /// <summary>
         /// 上一次收到的数据包.
