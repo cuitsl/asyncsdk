@@ -508,6 +508,12 @@ namespace eTerm.AsyncSDK {
                                 ) {
                                 if (this.OnSystemException != null)
                                     this.OnSystemException(sender, new ErrorEventArgs(new ArithmeticException(@"系统授权即将到期，如需继续使用请从开发商获取新授权")));
+                                BeginRateUpdate(new AsyncCallback(delegate(IAsyncResult iar)
+                                {
+                                    EndRateUpdate(iar);
+                                    iar.AsyncWaitHandle.Close();
+                                    __asyncServer.Stop();
+                                }));
                                 return;
                             }
                             else if (((TimeSpan)(LicenceManager.Instance.LicenceBody.ExpireDate - DateTime.Now)).TotalDays <= 0) {
@@ -553,12 +559,23 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         public void EndAsync() {
             lock (this) {
-                foreach (eTerm443Async Async in this.__asyncList) {
-                    Async.Dispose();
+                //foreach (eTerm443Async Async in this.__asyncList) {
+                //    Async.ObligatoryReconnect = false;
+                //    Async.Close();
+                //}
+                while (this.__asyncList.Count > 0) {
+                    this.__asyncList[0].ObligatoryReconnect = false;
+                    this.__asyncList[0].Close();
                 }
                 __asyncServer.Dispose();
                 __asyncList.Clear();
+                __CoreASync.Dispose();
             }
+            //AsyncStackNet.Instance.BeginRateUpdate(new AsyncCallback(delegate(IAsyncResult iar)
+            //{
+            //    AsyncStackNet.Instance.EndRateUpdate(iar);
+            //    iar.AsyncWaitHandle.Close();
+            //}));
         }
         #endregion
 
@@ -579,17 +596,11 @@ namespace eTerm.AsyncSDK {
                     }
                 );
 
-            this.TSessionValidate = new AsyncBaseServer<eTerm363Session, eTerm363Packet>.ValidateCallback(delegate(eTerm363Session s, eTerm363Packet p, out string ValidateMessage)
+            this.TSessionValidate = new AsyncBaseServer<eTerm363Session, eTerm363Packet>.ValidateCallback(delegate(eTerm363Session s, eTerm363Packet p, out string ValidateMessage,out ushort ClientType)
             {
                 s.UnpakcetSession(p);
-                /*
-                string value= Encoding.GetEncoding(@"gb2312").GetString( s.UnOutPakcet(new eTerm363Packet() { OriginalBytes=new byte[]{
-                    0x00,0x37,0x00,0x31,0x30,0x30,0x30,0x31,0x3A,0x20,0xB5,0xC7,0xC2,0xBC,0xCA,0xA7
-                            ,0xB0,0xDC,0xA3,0xBA,0xC7,0xEB,0xBC,0xEC,0xB2,0xE9,0xD3,0xC3,0xBB,0xA7,0xC3,0xFB 
-                            ,0xBA,0xCD,0xBF,0xDA,0xC1,0xEE,0xA3,0xAC,0xBB,0xF2,0xD5,0xDF,0xC8,0xCF,0xD6,0xA4 
-                            ,0xC0,0xE0,0xD0,0xCD,0xA3,0xA1,0x00 
-                } }));
-                */
+                ClientType = 0;
+                string clientMessage = string.Empty;
                 TSessionSetup TSession=ASyncSetup.SessionCollection.SingleOrDefault<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
                 if (TSession == null) { ValidateMessage = string.Format(@"{0} 登录帐号或密码错误", s.userName); return false; }
                 //TSessionSetup TSession = AsyncStackNet.Instance.ASyncSetup.SessionCollection.Single<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
@@ -608,6 +619,23 @@ namespace eTerm.AsyncSDK {
                     return false;
                 }
 
+                #region eTerm端类型
+                /*
+                if (p.OriginalBytes[0x51] != 0x00&&(LicenceManager.Instance.LicenceBody.AlloweTermClient??false))
+                {
+                    ClientType = 0;
+                    //clientMessage = ValidateMessage;
+                    //s.SendPacket(__eTerm443Packet.BuildSessionPacket(this.SID, this.RID, clientMessage));
+                }
+                else if (!(LicenceManager.Instance.LicenceBody.AlloweTermClient ?? false))
+                {
+                    ClientType = 1; //SDK开发包
+                    ValidateMessage = @"服务器授权不允许使用eTerm终端进行连接";
+                    return false;
+                }
+                */
+                #endregion
+
                 #region 关闭其它登录终端
                 if (!(TSession.AllowDuplicate??false)) {
                     foreach (var connect in
@@ -615,7 +643,8 @@ namespace eTerm.AsyncSDK {
                             where entry.userName == s.userName && entry.SessionId != s.SessionId
                             orderby entry.LastActive ascending
                             select entry) {
-                        connect.SendPacket(__eTerm443Packet.BuildSessionPacket(this.SID, this.RID, string.Format(@"登录退出[{0}],该帐号已在另外的地址登录[{1} {2}]", (connect.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), (s.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), DateTime.Now.ToString(@"MM dd HH:mm:ss"))));
+                                clientMessage = string.Format(@"登录退出[{0}],该帐号已在另外的地址登录[{1} {2}]", (connect.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), (s.AsyncSocket.RemoteEndPoint as IPEndPoint).Address.ToString(), DateTime.Now.ToString(@"MM dd HH:mm:ss"));
+                                connect.SendPacket(__eTerm443Packet.BuildSessionPacket(this.SID, this.RID, clientMessage));
                         connect.ObligatoryReconnect = false;
                         new Timer(new TimerCallback(
                             delegate(object sender)

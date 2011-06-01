@@ -49,7 +49,9 @@ namespace eTerm.AsyncSDK.Core {
                 e.Session.RID = RID;
                 e.Session.SID = SID;
                 string ValidateMessage = string.Empty;
-                if (base.TSessionValidate != null && base.TSessionValidate(e.Session, e.InPacket, out ValidateMessage)) {
+                ushort ClientType = 0;//eTerm终端
+                if (base.TSessionValidate != null && base.TSessionValidate(e.Session, e.InPacket, out ValidateMessage, out ClientType))
+                {
                     e.Session.SendPacket(new byte[] { 
                             0x00,0x14,0x01,0x00,0x03,0x00,0x00,0x00,this.SID,this.RID,0x0C,0x00,0x00,0x8C,0x8C,0x29,
                             0x00,0x00,0xA9,0xA9 
@@ -62,8 +64,10 @@ namespace eTerm.AsyncSDK.Core {
                     */
                 }
                 else {
+                    //e.Session.SendPacket(__eTerm443Packet.BuildSessionPacket(e.Session.SID, e.Session.RID, ValidateMessage));
+                    //byte[] bufferError = __eTerm443Packet.BuildSessionPacket(e.Session.SID, e.Session.RID, ValidateMessage);
                     e.Session.SendPacket(new byte[] { 
-                            0x00,0x37,0x00,0x31,0x30,0x30,0x30,0x31,0x3A,0x20,0xB5,0xC7,0xC2,0xBC,0xCA,0xA7
+                             0x00,0x37,0x00,0x31,0x30,0x30,0x30,0x31,0x3A,0x20,0xB5,0xC7,0xC2,0xBC,0xCA,0xA7
                             ,0xB0,0xDC,0xA3,0xBA,0xC7,0xEB,0xBC,0xEC,0xB2,0xE9,0xD3,0xC3,0xBB,0xA7,0xC3,0xFB 
                             ,0xBA,0xCD,0xBF,0xDA,0xC1,0xEE,0xA3,0xAC,0xBB,0xF2,0xD5,0xDF,0xC8,0xCF,0xD6,0xA4 
                             ,0xC0,0xE0,0xD0,0xCD,0xA3,0xA1,0x00 
@@ -89,6 +93,10 @@ namespace eTerm.AsyncSDK.Core {
 #endif
             }
         }
+        #endregion
+
+        #region 生成提示数据包
+        
         #endregion
 
         #region 重写
