@@ -2,70 +2,82 @@
 using System.Collections.Generic;
 using System.Text;
 using eTerm.ASynClientSDK;
+using System.Runtime.Serialization;
 
 namespace eTerm.ASynClientSDK {
     /// <summary>
     /// 运价条目
     /// </summary>
+    [DataContract]
     public class FDItem:ASyncResult {
         /// <summary>
         /// 获取对应纪录的航空公司代码.
         /// </summary>
         /// <value>The get airline.</value>
+        [DataMember]
         public string getAirline { get; set; }
 
         /// <summary>
         ///  获取基础舱位类型 .
         /// </summary>
         /// <value>The type of the get basic cabin.</value>
+        [DataMember]
         public string getBasicCabinType { get; set; }
 
         /// <summary>
         /// 获取舱位描述.
         /// </summary>
         /// <value>The get cabin desc.</value>
+        [DataMember]
         public string getCabinDesc { get; set; }
 
         /// <summary>
         /// 获取舱位类型.
         /// </summary>
         /// <value>The type of the get cabin.</value>
+        [DataMember]
         public string getCabinType { get; set; }
 
         /// <summary>
         /// 获取舱位折扣率.
         /// </summary>
         /// <value>The get discount rate.</value>
+        [DataMember]
         public string getDiscountRate { get; set; }
 
         /// <summary>
         /// 获取生效日期.
         /// </summary>
         /// <value>The get start date.</value>
+        [DataMember]
         public string getStartDate { get; set; }
 
         /// <summary>
         /// 获取截止日期.
         /// </summary>
         /// <value>The get end date.</value>
+        [DataMember]
         public string getEndDate { get; set; }
 
         /// <summary>
         /// 获取单程票价.
         /// </summary>
         /// <value>The get single price.</value>
+        [DataMember]
         public string getSinglePrice { get; set; }
 
         /// <summary>
         /// 获取往返票价.
         /// </summary>
         /// <value>The get round price.</value>
+        [DataMember]
         public string getRoundPrice { get; set; }
 
         /// <summary>
         /// 获取对应纪录的运价规则代码.
         /// </summary>
         /// <value>The get rule.</value>
+        [DataMember]
         public string getRule { get; set; }
 
         #region 重写

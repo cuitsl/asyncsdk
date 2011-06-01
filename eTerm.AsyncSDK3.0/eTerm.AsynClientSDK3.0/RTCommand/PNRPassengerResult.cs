@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using eTerm.ASynClientSDK;
+using System.Runtime.Serialization;
 
 namespace eTerm.ASynClientSDK {
     /// <summary>
     /// 本类包含一个PNR旅客组的信息。旅客有成人、儿童和无陪伴儿童三种类别。 对于不同类别的旅客，该类中的有效字段个数会有所区别。比如，成人旅客 和儿童旅客没有年龄信息，这时相应的提取函数返回空值或者0值。
     /// </summary>
+    [DataContract]
     public class PNRPassengerResult:ASyncResult {
 
         /// <summary>

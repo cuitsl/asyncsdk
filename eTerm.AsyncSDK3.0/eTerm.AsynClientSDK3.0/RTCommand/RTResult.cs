@@ -4,33 +4,39 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using eTerm.ASynClientSDK;
+using System.Runtime.Serialization;
 namespace eTerm.ASynClientSDK {
     /// <summary>
     /// RT指令结果结构
     /// </summary>
+    [DataContract]
     public class RTResult:ASyncResult {
         /// <summary>
         /// PNR航段集合.
         /// </summary>
         /// <value>The get air seg at.</value>
+        [DataMember]
         public List<PNRAirSegResult> getAirSegs { get; set; }
 
         /// <summary>
         /// 记录编号.
         /// </summary>
         /// <value>The PNR code.</value>
+        [DataMember]
         public string PnrCode { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance is cancel.
         /// </summary>
         /// <value><c>true</c> if this instance is cancel; otherwise, <c>false</c>.</value>
+        [DataMember]
         public bool IsCancel { get; set; }
 
         /// <summary>
         /// 获取所有联系组 .
         /// </summary>
         /// <value>The get contacts.</value>
+        [DataMember]
         public List<PNRContactResult> getContacts { get; set; }
 
         /// <summary>
@@ -44,36 +50,42 @@ namespace eTerm.ASynClientSDK {
         /// 判断PNR是否为团体票
         /// </summary>
         /// <value><c>true</c> if this instance is group; otherwise, <c>false</c>.</value>
+        [DataMember]
         public bool isGroup { get; set; }
 
         /// <summary>
         /// 获取团体票名称.
         /// </summary>
         /// <value>The get groupname.</value>
+        [DataMember]
         public string getGroupname { get; set; }
 
         /// <summary>
         /// 获取团体票总人数.
         /// </summary>
         /// <value>The get group number.</value>
+        [DataMember]
         public int getGroupNumber { get; set; }
 
         /// <summary>
         /// 出票时限.
         /// </summary>
         /// <value>The tk tl.</value>
+        [DataMember]
         public string TKTL { get; set; }
 
         /// <summary>
-        /// 出票时限.
+        /// Office号.
         /// </summary>
         /// <value>The office code.</value>
+        [DataMember]
         public string OfficeCode { get; set; }
 
         /// <summary>
         /// 获取所有婴儿组.
         /// </summary>
         /// <value>The get infants.</value>
+        [DataMember]
         public List<PNRInfantResult> getInfants { get; set; }
 
         /// <summary>
@@ -87,6 +99,7 @@ namespace eTerm.ASynClientSDK {
         /// 获取所有姓名组 .
         /// </summary>
         /// <value>The get passengers.</value>
+        [DataMember]
         public List<PNRPassengerResult> getPassengers { get; set; }
 
         /// <summary>

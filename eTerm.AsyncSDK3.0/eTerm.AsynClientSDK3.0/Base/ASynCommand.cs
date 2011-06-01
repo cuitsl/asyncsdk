@@ -160,11 +160,11 @@ namespace eTerm.ASynClientSDK.Base {
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x20, 0x20, 0x20, 0x20, 0x33, 0x36, 0x33,
-                0x31 , 0x33 , 0x31 , 0x30 , 0x00 , 0x30 , 0x30 , 0x30 , 0x30 , 0x30 , 0x30 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00,
+                0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 , 0x00,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x01, 0, 0
              };
             Buffer.BlockCopy(Encoding.Default.GetBytes(userName.PadRight(16, '\0').ToCharArray()), 0, buffer, 0, 16);
             Buffer.BlockCopy(Encoding.Default.GetBytes(userPass.PadRight(16, '\0').ToCharArray()), 0, buffer, 16, 16);

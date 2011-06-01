@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using eTerm.ASynClientSDK;
+using System.Runtime.Serialization;
 
 namespace eTerm.ASynClientSDK {
     /// <summary>
@@ -10,6 +11,7 @@ namespace eTerm.ASynClientSDK {
     /// 联系组的功能是记录各种联系信息，方便查询代理人及旅客信息
     /// </remarks>
     /// </summary>
+    [DataContract]
     public class BookContact:ASyncResult {
 
         /// <summary>
@@ -48,18 +50,21 @@ namespace eTerm.ASynClientSDK {
         /// Gets or sets the getcity.
         /// </summary>
         /// <value>The getcity.</value>
+        [DataMember]
         public string getcity { get; set; }
 
         /// <summary>
         /// 联系信息.
         /// </summary>
         /// <value>The getcontact.</value>
+        [DataMember]
         public string getcontact { get; set; }
 
         /// <summary>
         /// 旅客姓名.
         /// </summary>
         /// <value>The name of the PSGR.</value>
+        [DataMember]
         public string psgrName { get; set; }
 
         #region 重写

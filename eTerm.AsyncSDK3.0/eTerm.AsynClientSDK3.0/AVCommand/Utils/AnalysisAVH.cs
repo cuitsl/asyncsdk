@@ -11,12 +11,18 @@ namespace eTerm.ASynClientSDK
         private FlightCarbin[] ParseCarbin(string szInfo)
         {
             FlightCarbin[] fcs = new FlightCarbin[] { };
-            MatchCollection M = Regex.Matches(szInfo, @"[A-Z]\w\s");
+            szInfo = Regex.Replace(szInfo, @"[A-Z][#|*!]", string.Empty, RegexOptions.IgnoreCase | RegexOptions.Multiline);
+            szInfo = Regex.Replace(szInfo, @"\s[A-Z0-9]{3,6}\s", string.Empty, RegexOptions.Multiline | RegexOptions.IgnoreCase);
+            szInfo = Regex.Replace(szInfo, @"\s{2,}(T[0-9]\s+)+", string.Empty, RegexOptions.IgnoreCase | RegexOptions.Multiline);
+            szInfo = Regex.Replace(szInfo, @"\s{2,}\-\-(T[0-9]\s+)+", string.Empty, RegexOptions.IgnoreCase | RegexOptions.Multiline);
+            szInfo = Regex.Replace(szInfo, @"\s{2,}(T[0-9]\s+)\-\-", string.Empty, RegexOptions.IgnoreCase | RegexOptions.Multiline);
+
+            MatchCollection M = Regex.Matches(szInfo, @"\s([A-Z])([A-Z0-9])");
             foreach (Match _m in M)
             {
                 FlightCarbin fc = new FlightCarbin();
-                fc.Carbin = _m.Value.Trim().Substring(0, 1);
-                fc.Number = _m.Value.Trim().Substring(1);
+                fc.Carbin = _m.Groups[1].Value;
+                fc.Number = _m.Groups[2].Value;
                 Array.Resize(ref fcs, fcs.Length + 1);
                 fcs[fcs.Length - 1] = fc;
             }
