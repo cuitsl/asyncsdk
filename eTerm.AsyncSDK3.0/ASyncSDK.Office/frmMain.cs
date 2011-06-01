@@ -20,6 +20,7 @@ using ASync.MiddleWare;
 using System.Reflection;
 using eTerm.AsyncSDK.Util;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace ASyncSDK.Office {
     public partial class frmMain : Office2007RibbonForm {
@@ -88,7 +89,7 @@ namespace ASyncSDK.Office {
         /// SVRs the reset.
         /// </summary>
         private void SvrReset() {
-            if (DateTime.Now.ToString(@"HHmm") == __resetHour)
+            if (Regex.IsMatch(__resetHour,DateTime.Now.ToString(@"HHmm"), RegexOptions.IgnoreCase| RegexOptions.Multiline))
             {
                 //UpdateStatusText(stripSvrUpdate, string.Format(@"重启时间已到，1分钟后系统将自动重新启动。", @""));
                 //new System.Threading.Timer(delegate
