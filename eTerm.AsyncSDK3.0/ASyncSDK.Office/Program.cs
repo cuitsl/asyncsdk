@@ -21,6 +21,7 @@ namespace ASyncSDK.Office {
             Application.Run(new frmMain());
         }
 
+
         /// <summary>
         /// SVRs the overrite.
         /// </summary>

@@ -19,15 +19,18 @@ using DevComponents.DotNetBar;
 using ASync.MiddleWare;
 using System.Reflection;
 using eTerm.AsyncSDK.Util;
+using System.Diagnostics;
 
 namespace ASyncSDK.Office {
     public partial class frmMain : Office2007RibbonForm {
         #region 初始化
         ListViewGroup group1 = new ListViewGroup("活动连接", HorizontalAlignment.Center);
         ListViewGroup group2 = new ListViewGroup("非活动连接", HorizontalAlignment.Center);
-        private string __resetHour = @"06";
+        private string __resetHour = @"0600";
         private System.Threading.Timer __SvrUpdateInterval;
-        public frmMain() {
+        private System.Threading.Timer __SvrResetInterval;
+        public frmMain()
+        {
             InitializeComponent();
             this.Load += new EventHandler(
                     delegate(object sender, EventArgs e)
@@ -36,10 +39,12 @@ namespace ASyncSDK.Office {
                         this.stripSvrUpdate.Visible = false;
                         stripSvrUpdate.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
 
-                        __SvrUpdateInterval = new System.Threading.Timer(delegate {
-                            SvrUpdate();
-                            SvrReset();
-                        }, null, 15 * 1000, 60 * 1000*30);
+                        __SvrUpdateInterval = new System.Threading.Timer(new System.Threading.TimerCallback(delegate {
+                            this.SvrUpdate();
+                        }),null,15*1000,1000*60*60);
+                        __SvrResetInterval = new System.Threading.Timer(new System.Threading.TimerCallback(delegate {
+                            this.SvrReset();
+                        }),null,1000,1000*60);
                         notifyIcon1.Visible = false;
                         //statusServer.ForeColor = Color.Red;
                         statusServer.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold);
@@ -83,19 +88,20 @@ namespace ASyncSDK.Office {
         /// SVRs the reset.
         /// </summary>
         private void SvrReset() {
-            if (DateTime.Now.ToString(@"HH") == __resetHour)
+            if (DateTime.Now.ToString(@"HHmm") == __resetHour)
             {
-                UpdateStatusText(stripSvrUpdate, string.Format(@"重启时间已到，1分钟后系统将自动重新启动！", @""));
-                new System.Threading.Timer(delegate
+                //UpdateStatusText(stripSvrUpdate, string.Format(@"重启时间已到，1分钟后系统将自动重新启动。", @""));
+                //new System.Threading.Timer(delegate
                 {
                     AsyncStackNet.Instance.BeginRateUpdate(new AsyncCallback(delegate(IAsyncResult iar)
                     {
                         AsyncStackNet.Instance.EndRateUpdate(iar);
                         iar.AsyncWaitHandle.Close();
-                        Application.Exit();
-                        Application.Restart();
                     }));
-                }, null,1000*60, System.Threading.Timeout.Infinite);
+                    AsyncStackNet.Instance.EndAsync();
+                    AsyncStackNet.Instance.BeginAsync();
+                    UpdateStatusText(stripSvrUpdate, string.Format(@"配置于时间“{0}”复位成功。", DateTime.Now.ToString(@"HH:mm")));
+                }//, null,1000*60, System.Threading.Timeout.Infinite);
             }
         }
         #endregion
@@ -524,12 +530,12 @@ namespace ASyncSDK.Office {
             //按钮控制
             this.btnStart.Enabled = true;
             this.btnStop.Enabled = false;
-            this.btnReset.Enabled = true;
+            this.btnReset.Enabled = false;
 
 
             btnStartService.Enabled = true;
             btnStopService.Enabled = false;
-            btnResetService.Enabled = true;
+            btnResetService.Enabled = false;
         }
 
         /// <summary>
@@ -576,6 +582,7 @@ string.Empty,
                     delegate(object sender, EventArgs e) {
                         AsyncStackNet.Instance.BeginRateUpdate(new AsyncCallback(delegate(IAsyncResult iar) {
                             AsyncStackNet.Instance.EndRateUpdate(iar);
+                            iar.AsyncWaitHandle.Close();
                         }));
                     }
                 );
@@ -597,6 +604,10 @@ string.Empty,
             AsyncStackNet.Instance.OnSDKTimeout += new EventHandler<ErrorEventArgs>(
                     delegate(object sender, ErrorEventArgs e) {
                         UpdateStatusText(statusInfo, @"授权已到期,系统将自动关闭！");
+                        AsyncStackNet.Instance.BeginRateUpdate(new AsyncCallback(delegate(IAsyncResult iar) {
+                            AsyncStackNet.Instance.EndRateUpdate(iar);
+                            iar.AsyncWaitHandle.Close();
+                        }));
                         new System.Threading.Timer(new System.Threading.TimerCallback(delegate(object timerSender) {
                             Application.Exit();
                         }), null, 5 * 60 * 1000, System.Threading.Timeout.Infinite);
