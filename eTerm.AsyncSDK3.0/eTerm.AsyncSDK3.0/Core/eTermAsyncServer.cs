@@ -49,7 +49,7 @@ namespace eTerm.AsyncSDK.Core {
                 e.Session.RID = RID;
                 e.Session.SID = SID;
                 string ValidateMessage = string.Empty;
-                ushort ClientType = 0;//eTerm终端
+                int ClientType = 0;//eTerm终端
                 if (base.TSessionValidate != null && base.TSessionValidate(e.Session, e.InPacket, out ValidateMessage, out ClientType))
                 {
                     e.Session.SendPacket(new byte[] { 
