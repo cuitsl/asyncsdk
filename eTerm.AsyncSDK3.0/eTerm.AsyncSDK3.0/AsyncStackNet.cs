@@ -274,7 +274,19 @@ namespace eTerm.AsyncSDK {
             lock (this.__asyncList) {
                 foreach (var connect in
                         from entry in __asyncList
-                        where entry.Connected && entry.SessionId > 0 && entry.TSession == null && entry.GroupCode == TSession.userGroup
+                        from e in entry.groups
+                        where 
+                            (
+                                entry.Connected 
+                                && 
+                                entry.SessionId > 0 
+                                && 
+                                entry.TSession == null 
+                                && 
+                                entry.GroupCode == TSession.userGroup
+                            )
+                            ||
+                            (e==TSession.userGroup)
                         orderby entry.TotalCount ascending
                         select entry) {
                     TSession.Async443 = connect;
