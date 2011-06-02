@@ -57,6 +57,7 @@ namespace eTerm.AsyncSDK.Net {
             this.userPass = userPass;
             this.SID = Sid;
             this.RID = Rid;
+            this.groups = new List<string>();
         }
         #endregion
 
@@ -127,6 +128,12 @@ namespace eTerm.AsyncSDK.Net {
         /// </summary>
         /// <value>The group code.</value>
         public string GroupCode { get; set; }
+
+        /// <summary>
+        /// Gets or sets the groups.
+        /// </summary>
+        /// <value>The groups.</value>
+        public List<string> groups { get; set; }
 
         /// <summary>
         /// 配置SID.
