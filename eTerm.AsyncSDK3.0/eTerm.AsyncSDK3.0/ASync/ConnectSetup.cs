@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using eTerm.AsyncSDK.Base;
 
-namespace eTerm.AsyncSDK {
+namespace eTerm.AsyncSDK
+{
     /// <summary>
     /// 分组类
     /// </summary>
@@ -98,6 +99,7 @@ namespace eTerm.AsyncSDK {
         public ConnectSetup(string address, string userName):this() {
             this.Address = address;
             this.userName = userName;
+            this.groups = new List<string>();
         }
 
         /// <summary>
@@ -135,6 +137,12 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         /// <value>The group code.</value>
         public string GroupCode { get; set; }
+
+        /// <summary>
+        /// Gets or sets the groups.
+        /// </summary>
+        /// <value>The groups.</value>
+        public List<string> groups { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance is SSL.

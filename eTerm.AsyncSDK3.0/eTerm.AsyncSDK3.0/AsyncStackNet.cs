@@ -292,8 +292,23 @@ namespace eTerm.AsyncSDK {
         private void AppendAsync() {
             foreach (ConnectSetup T in ASyncSetup.AsynCollection) {
                 if (!T.IsOpen) continue;
-                AppendAsync(
-                    new eTerm443Async(T.Address, T.Port, T.userName, T.userPass, (byte)T.SID, (byte)T.RID) { LocalEP= (T.TSessionType??CertificationType.Address)== CertificationType.Address?new IPEndPoint(IPAddress.Parse(T.LocalIp),0):null,  SiText = T.SiText, IsSsl = T.IsSsl, OfficeCode = T.OfficeCode, GroupCode = T.GroupCode, AutoSi=T.AutoSi??false });
+                eTerm443Async async = new eTerm443Async(
+                        T.Address,
+                        T.Port,
+                        T.userName,
+                        T.userPass,
+                        (byte)T.SID,
+                        (byte)T.RID)
+                        {
+                            LocalEP = (T.TSessionType ?? CertificationType.Address) == CertificationType.Address ? new IPEndPoint(IPAddress.Parse(T.LocalIp), 0) : null,
+                            SiText = T.SiText,
+                            IsSsl = T.IsSsl,
+                            OfficeCode = T.OfficeCode,
+                            GroupCode = T.GroupCode,
+                            AutoSi = T.AutoSi ?? false,
+                            groups=T.groups==null? new List<string>():T.groups
+                        };
+                AppendAsync(async);
             }
         }
         #endregion
@@ -318,7 +333,6 @@ namespace eTerm.AsyncSDK {
                     {
                         if (OnAsyncConnect != null)
                             OnAsyncConnect(sender, e);
-                        //this.LocalEndPoint = e.Session.AsyncSocket.LocalEndPoint as IPEndPoint;
                     }
                 );
             #endregion
@@ -353,8 +367,6 @@ namespace eTerm.AsyncSDK {
                             catch { }
 
                         }
-                        //e.OutPacket.OriginalBytes = e.Session.UnInPakcet(e.OutPacket);
-                        //e.InPacket.OriginalBytes = e.Session.UnOutPakcet(e.InPacket);
                         if (this.OnAsyncReadPacket != null)
                             this.OnAsyncReadPacket(sender, e);
                     }
@@ -438,7 +450,6 @@ namespace eTerm.AsyncSDK {
             #endregion
 
             #region 调用
-            //this.__asyncList.Add(Async);
             Async.Connect(Async.Address, Async.Port, Async.IsSsl);
             #endregion
         }
@@ -559,10 +570,6 @@ namespace eTerm.AsyncSDK {
         /// </summary>
         public void EndAsync() {
             lock (this) {
-                //foreach (eTerm443Async Async in this.__asyncList) {
-                //    Async.ObligatoryReconnect = false;
-                //    Async.Close();
-                //}
                 while (this.__asyncList.Count > 0) {
                     this.__asyncList[0].ObligatoryReconnect = false;
                     this.__asyncList[0].Close();
@@ -571,11 +578,6 @@ namespace eTerm.AsyncSDK {
                 __asyncList.Clear();
                 __CoreASync.Dispose();
             }
-            //AsyncStackNet.Instance.BeginRateUpdate(new AsyncCallback(delegate(IAsyncResult iar)
-            //{
-            //    AsyncStackNet.Instance.EndRateUpdate(iar);
-            //    iar.AsyncWaitHandle.Close();
-            //}));
         }
         #endregion
 
@@ -611,8 +613,6 @@ namespace eTerm.AsyncSDK {
                     Fun.IsOpen == true
                     );
                 if (TSession == null) { ValidateMessage = string.Format(@"{0} 登录帐号或密码错误", s.userName); return false; }
-                //TSessionSetup TSession = AsyncStackNet.Instance.ASyncSetup.SessionCollection.Single<TSessionSetup>(Fun => Fun.SessionPass == s.userPass && Fun.SessionCode == s.userName && Fun.IsOpen == true);
-                //if (__asyncServer.TSessionCollection.Count<eTerm363Session>(Session => Session.userName == s.userName) > 1) { ValidateMessage = string.Format(@"{0} 已经在其它IP登录", s.userName); return false; }
 
                 s.TSessionInterval = TSession.SessionExpire;
                 s.UnallowableReg = TSession.ForbidCmdReg;
@@ -630,7 +630,7 @@ namespace eTerm.AsyncSDK {
                 #region eTerm端类型
                 ClientType = p.OriginalBytes[0x9F] == 0x00 ? 0 : 1;
                 //SDK终端
-                if (ClientType==1&&!(LicenceManager.Instance.LicenceBody.AlloweTermClient ?? false))
+                if (ClientType==0&&!(LicenceManager.Instance.LicenceBody.AlloweTermClient ?? false))
                 {
                     ValidateMessage = @"服务器授权不允许使用eTerm终端进行连接";
                     return false;
@@ -657,33 +657,11 @@ namespace eTerm.AsyncSDK {
                 }
                 #endregion
 
-                /*
-                s.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session>>(
-                        delegate(object Session, AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session> SessionArg)
-                        {
-                            if (this.OnTSessionReadPacket != null)
-                                this.OnTSessionReadPacket(Session, SessionArg);
-                        }
-                    );
-                */
                 if (this.OnTSessionValidated != null)
                     this.OnTSessionValidated(s, new AsyncEventArgs<eTerm363Session>(s));
                 return true;
             });
 
-            //__asyncServer.OnTSessionValidated += new EventHandler<AsyncEventArgs<eTerm363Session>>(
-            //        delegate(object sender, AsyncEventArgs<eTerm363Session> e) {
-            //            if (this.OnTSessionValidated != null)
-            //                this.OnTSessionValidated(sender, e);
-            //            string currentMonth = string.Format(@"{0}", DateTime.Now.ToString(@"yyyyMM"));
-            //            if (!TSession.Traffics.Contains(new SocketTraffic(currentMonth)))
-            //                TSession.Traffics.Add(new SocketTraffic() { MonthString = currentMonth, Traffic = 0.0, UpdateDate = DateTime.Now });
-            //            SocketTraffic Traffic = TSession.Traffics[TSession.Traffics.IndexOf(new SocketTraffic(currentMonth))];
-            //            if (Traffic.Traffic >= TSession.FlowRate) {
-            //                return false;
-            //            }
-            //        }
-            //    );
 
             __asyncServer.OnReadPacket += new EventHandler<AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session>>(
                     delegate(object sender, AsyncEventArgs<eTerm363Packet, eTerm363Packet, eTerm363Session> e)
@@ -765,8 +743,6 @@ namespace eTerm.AsyncSDK {
                         e.Session.OnTSessionRelease += new EventHandler<AsyncEventArgs<eTerm363Session>>(
                                 delegate(object Session, AsyncEventArgs<eTerm363Session> ie)
                                 {
-                                    //UpdateSession(e.Session);
-                                    //UpdateASyncSession(e.Session.Async443);
                                     if (OnTSessionRelease != null)
                                         OnTSessionRelease(Session, ie);
                                     ie.Session.SendPacket(__eTerm443Packet.BuildSessionPacket(ie.Session.SID, ie.Session.RID, "注意,配置已释放,指令上下文可能已经丢失."));
@@ -919,7 +895,6 @@ namespace eTerm.AsyncSDK {
                 iar.AsyncWaitHandle.Close();
             }
             catch (Exception e) {
-                // Hide inside method invoking stack 
                 throw e;
             }
         }
